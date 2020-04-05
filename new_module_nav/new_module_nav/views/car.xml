@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--Form view-->
+    <record id ="car" model="ir.ui.view">
+        <field name ="name">car.form</field>
+        <field name="model">car.car</field>
+        <field name="arch" type="xml">
+                <form>
+                    <field name="name"></field><!--should be the exact name in the model-->
+                    <field name="horse_power"></field>
+                    <field name="door_number"></field>
+                </form>
+        </field>
+    </record>
+
+    <!--Tree view-->
+    <record id="car_tree" model="ir.ui.view">
+        <field name="name">car.form</field>
+        <field name="model">car.car</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="horse_power"/>
+                <field name="door_number"/>
+            </tree>
+        </field>
+    </record>
+    <!--Action for car -->
+    <record id="car_action" model="ir.actions.act_window">
+        <field name="name">car.form</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">car.car</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="car_menu" name="Cars" sequence="200" action="car_action"/>
+
+
+</odoo>

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# from odoo import models, fields, api
+from odoo import models, fields, api
 
 
 # class new_module_nav(models.Model):
@@ -16,3 +16,12 @@
 #     def _value_pc(self):
 #         for record in self:
 #             record.value2 = float(record.value) / 100
+
+class Car(models.Model):
+    _name="car.car" #name of the model
+
+    #create the fields
+
+    name=fields.Char(string="Name")
+    horse_power=fields.Integer(string="Horse power")
+    door_number=fields.Integer(string="Doors Number")
