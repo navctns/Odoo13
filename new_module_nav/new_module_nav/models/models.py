@@ -19,6 +19,7 @@ from odoo import models, fields, api
 
 class Car(models.Model):
     _name="car.car" #name of the model
+    description = fields.Text()#newly added
 
     #create the fields
 

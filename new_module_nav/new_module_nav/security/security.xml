@@ -1,0 +1,9 @@
+<?xml version ="1.0" encoding="utf-8" ?>
+<odoo>
+    <group>
+    <record id="group_car_manager" model="res.groups">
+        <field name="name">Car/Manager/</field>
+
+    </record>
+    </group>
+</odoo>
