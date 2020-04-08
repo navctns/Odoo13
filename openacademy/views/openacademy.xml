@@ -9,7 +9,7 @@
         </p>
     </field>
 </record>
-    <!--Form view-->
+    <!--Course-Form view-->
     <record model="ir.ui.view" id="course_form_view">
         <field name="name">course.form</field>
         <field name="model">openacademy.course</field>
@@ -24,7 +24,7 @@
             </form>
         </field>
     </record>
-    <!--Tree view-->
+    <!--Course-Tree view-->
     <record model="ir.ui.view" id="course_tree_view">
         <field name="name">course.tree</field>
         <field name="model">openacademy.course</field><!--name of the model-openacademy.course-->
@@ -36,7 +36,7 @@
         </field>
     </record>
 
-    <!--Search view-->
+    <!--Course-Search view-->
     <record model="ir.ui.view" id="course_search_view">
         <field name="name">Course.search</field>
         <field name="model">openacademy.course</field>
@@ -47,6 +47,36 @@
             </search>
         </field>
     </record>
+    <!--Session -Form View -->
+    <record model="ir.ui.view" id="session_form_view">
+        <field name="name">Session.form</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+            <form string="Session Form">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="start_date"/>
+                        <field name="duration"/>
+                        <field name="seats"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Sessions Action -->
+    <record model="ir.actions.act_window" id="session_list_action">
+        <field name="name">sessions</field>
+        <field name="res_model">openacademy.session</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Session menu item -->
+    <menuitem id="session_menu" name="sessions" parent="openacademy_menu"
+              group="group_openacademy_manager"
+              action="session_list_action"/>
+
 
 <menuitem id="main_openacademy_menu" name="Open.Academy" groups="group_openacademy_manager" />
 <menuitem id="openacademy_menu" name="Open Academy" groups="group_openacademy_manager" parent="main_openacademy_menu"/>

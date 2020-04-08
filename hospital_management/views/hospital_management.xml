@@ -1,0 +1,24 @@
+<odoo>
+<record model="ir.actions.act_window" id="patientcard_list_action">
+    <field name="name">Patient Card</field>
+    <field name="res_model">patient.card</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+        <p class="o_view_noncontent_smiling_face">
+            create the first patient_record
+        </p>
+    </field>
+</record>
+
+<menuitem id="main_hospitalmanagement_menu" name="Hospital.Management"
+          groups="group_openacademy_manager" />
+    <!--menu-->
+<menuitem id="patientdetails_menu" name="Patient Details"
+          parent="main_hospitalmanagement_menu"
+          groups="group_openacademy_manager"/>
+    <!--submenu-->
+<menuitem id="patientcard_menu" name="Patient Card"
+          parent="patientdetails_menu"  action="patientcard_list_action"
+          groups="group_openacademy_manager"
+/>
+</odoo>
