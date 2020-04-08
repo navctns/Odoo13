@@ -1,5 +1,5 @@
 <odoo>
-<record model="ir.actions.act_window" id="patientcard_list_action">
+<record model="ir.actions.act_window" id="action_contacts">
     <field name="name">Patient Card</field>
     <field name="res_model">patient.card</field>
     <field name="view_mode">tree,form</field>
@@ -9,6 +9,25 @@
         </p>
     </field>
 </record>
+    <!--patient card -Form View-->
+    <record model="ir.ui.view" id="patient_card_view">
+        <field name="name">patient_card.form</field>
+        <field name="model">patient.card</field>
+        <field name="arch" type="xml">
+            <form string="Patient Card Forms">
+                <sheet>
+                    <group>
+                        <field name="name"></field>
+                        <field name="dob"></field>
+                        <field name="age"/>
+                        <field name="address"/>
+                        <field name="date"/>
+                        <!--<field name="blood_group" widget="selection" string="blood group"/>-->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
 
 <menuitem id="main_hospitalmanagement_menu" name="Hospital.Management"
           groups="group_openacademy_manager" />
@@ -18,7 +37,7 @@
           groups="group_openacademy_manager"/>
     <!--submenu-->
 <menuitem id="patientcard_menu" name="Patient Card"
-          parent="patientdetails_menu"  action="patientcard_list_action"
+          parent="patientdetails_menu"  action="action_contacts"
           groups="group_openacademy_manager"
 />
 </odoo>
