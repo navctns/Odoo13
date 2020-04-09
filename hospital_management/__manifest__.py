@@ -27,6 +27,7 @@
         'security/security.xml',
         'security/ir.model.access.csv',
         'views/hospital_management.xml',
+        'data/sequence.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

@@ -17,11 +17,24 @@
             <form string="Patient Card Forms">
                 <sheet>
                     <group>
-                        <field name="name"></field>
-                        <field name="dob"></field>
-                        <field name="age"/>
-                        <field name="address"/>
-                        <field name="date"/>
+                        <group>
+                           <!-- sequence<div class="oe_title">
+                                <h1>
+                                    <field name="seq" readonly="1"/>
+                                </h1>
+                            </div>-->
+                            <field name="patient_id"></field>
+                            <field name="dob"></field>
+                            <field name="age"/>
+                            <field name="sex"/>
+                        </group>
+                        <group>
+                            <field name="address"/>
+                            <field name="date"/>
+                            <field name="phone"/>
+                            <field name="mobile"/>
+                            <field name="bloodgroup"/>
+                        </group>
                         <!--<field name="blood_group" widget="selection" string="blood group"/>-->
                     </group>
                 </sheet>
