@@ -15,31 +15,29 @@
         <field name="model">patient.card</field>
         <field name="arch" type="xml">
             <form string="Patient Card Forms">
-
                 <sheet>
-
-                        <div class="oe_title">
+                    <group>
+                        <group>
+                            <div class="oe_title">
                                 <h1>
                                     <field name="seq" readonly="1"/>
                                 </h1>
                             </div>
-                        <group col="4" colspan="4">
-
                             <field name="patient_id"></field>
                             <field name="dob"></field>
-                            <field name="age" default=""/>
+                            <field name="age"/>
                             <field name="sex"/>
-
+                        </group>
+                        <group>
                             <field name="address" widget="pad"/>
                             <field name="date"/>
-                             <field name="mobile"/>
                             <field name="phone"/>
+                            <field name="mobile"/>
                             <field name="bloodgroup"/>
                         </group>
                         <!--<field name="blood_group" widget="selection" string="blood group"/>-->
-
+                    </group>
                 </sheet>
-
             </form>
         </field>
     </record>
