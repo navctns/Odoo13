@@ -2,6 +2,8 @@
 
 from odoo import models, fields, api
 import datetime
+from datetime import date
+from dateutil.relativedelta import relativedelta
 
 
 # class hospital_management(models.Model):
@@ -22,6 +24,7 @@ class PatientCard(models.Model):
     _name="patient.card"
     _description="Hospital management patent card"
 
+
     #name=fields.Char(string="Patient Name",required=True,help="Name of the patient")
     patient_id=fields.Many2one("res.partner",ondelete="set null",string="Patient Name",Index=True)
     dob=fields.Date(string="DOB")
@@ -37,6 +40,7 @@ class PatientCard(models.Model):
     phone=fields.Char(string="Telephone")
     mobile=fields.Char(string="Mobile")
 
+
     bloodgroup=fields.Selection([
         ('A+','A+ve'),
         ('B+','B+ve'),
@@ -48,7 +52,15 @@ class PatientCard(models.Model):
         ('AB-', 'AB-ve')
 
     ],string="Blood Group")
-    seq = fields.Char(string='Order Reference', required=True, copy=False, readonly=True, states={'draft': [('readonly', False)]}, index=True, default=lambda self: _('New'))
+    seq = fields.Char(string='Order Reference', required=True, copy=False, readonly=True, default='New')
+
+    @api.model
+    def create(self, vals):
+        if vals.get('seq', 'New') == 'New':
+            vals['seq'] = self.env['ir.sequence'].next_by_code(
+                'patient.card') or 'New'
+        result = super(PatientCard, self).create(vals)
+        return result
 
     # @api.model
     # def create(self, vals):
@@ -80,6 +92,31 @@ class PatientCard(models.Model):
 
         self.phone=self.patient_id.phone
         self.mobile=self.patient_id.mobile
+
+    @api.onchange('dob')
+    def _onchange_dob(self):
+        if self.dob:
+
+
+            year = self.dob.year
+            month = self.dob.month
+            day = self.dob.day
+
+            if len(str(month)) == 1:
+                month = "0" + str(month)
+            if len(str(day)) == 1:
+                day = "0" + str(day)
+
+
+            bday = str(year) + "-" + str(month) + "-" + str(day)
+
+            d1=datetime.datetime.strptime(bday,"%Y-%m-%d").date()
+            #d1=date(self.dob)
+            d2 = date.today()
+
+
+            self.age = relativedelta(d2,d1).years
+
 
 
 
