@@ -56,6 +56,37 @@
     </field>
     </record>
     <!--patient op record end-->
+    <!--Patient op form view-->
+    <record model="ir.ui.view" id="op_view">
+        <field name="name">op.form</field>
+        <field name="model">hospital.op</field>
+        <field name="arch" type="xml">
+            <form string="Patient Card Forms">
+
+                <sheet>
+                        <!--
+                        <div class="oe_title">
+                                <h1>
+                                    <field name="seq" readonly="1"/>
+                                </h1>
+                            </div>-->
+
+                        <group col="4" colspan="4">
+
+                            <field name="card_id"></field>
+                            <field name="patient_name"></field>
+                            <field name="patient_age" default=""/>
+                            <field name="patient_gender"/>
+                            <!--<field name="date"/>-->
+                            <field name="patient_blood"/>
+                        </group>
+                        <!--<field name="blood_group" widget="selection" string="blood group"/>-->
+
+                </sheet>
+
+            </form>
+        </field>
+    </record>
 
 
 
