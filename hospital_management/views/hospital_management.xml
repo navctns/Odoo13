@@ -34,7 +34,7 @@
                             <field name="date"/>
                              <field name="mobile"/>
                             <field name="phone"/>
-                            <field name="bloodgroup"/>
+                            <field name="blood_group"/>
                         </group>
                         <!--<field name="blood_group" widget="selection" string="blood group"/>-->
 
@@ -43,6 +43,21 @@
             </form>
         </field>
     </record>
+
+    <!--Patient op-record-->
+    <record model="ir.actions.act_window" id="action_patientcard">
+    <field name="name">Patient OP</field>
+    <field name="res_model">hospital.op</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+        <p class="o_view_noncontent_smiling_face">
+            create the first patient_record
+        </p>
+    </field>
+    </record>
+    <!--patient op record end-->
+
+
 
 <menuitem id="main_hospitalmanagement_menu" name="Hospital.Management"
           groups="group_openacademy_manager" />
@@ -55,4 +70,11 @@
           parent="patientdetails_menu"  action="action_contacts"
           groups="group_openacademy_manager"
 />
+
+    <!--op-menu-->
+    <menuitem id="op_menu" name="OP"
+              parent="main_hospitalmanagement_menu"
+              groups="group_openacademy_manager" action="action_patientcard"></menuitem>
+
+
 </odoo>

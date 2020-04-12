@@ -36,7 +36,7 @@ class PatientCard(models.Model):
     date=fields.Date(string="OP Date",default=datetime.datetime.now())
     phone=fields.Char(string="Telephone")
     mobile=fields.Char(string="Mobile")
-    bloodgroup=fields.Selection([
+    blood_group=fields.Selection([
         ('A+','A+ve'),
         ('B+','B+ve'),
         ('O+','O+ve'),
