@@ -17,7 +17,20 @@ class OP(models.Model):
     doctor_id=fields.Many2one("hr.employee",ondelete="set null",string="Doctor",Index=True)
     department_id=fields.Char(string="Department")
     date=fields.Date(string="Date",default=date.today())
+    token_no = fields.Char(string='Token No', required=True, copy=False, readonly=True,
+                      default='New')
+
+    @api.model
+
+    def create(self, vals):
+        if vals.get('token_no', 'New') == 'New':
+            vals['token_no'] = self.env['ir.sequence'].next_by_code(
+                'op.card') or 'New'
+        result = super(OP, self).create(vals)
+        return result
+
     @api.onchange('card_id')
+
     def _onchange_card_id(self):
 
         for r in self:

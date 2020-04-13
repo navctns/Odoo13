@@ -64,12 +64,12 @@
             <form string="Patient Card Forms">
 
                 <sheet>
-                        <!--
+
                         <div class="oe_title">
                                 <h1>
-                                    <field name="seq" readonly="1"/>
+                                    <field name="token_no" readonly="1"/>
                                 </h1>
-                            </div>-->
+                            </div>
 
                         <group col="4" colspan="4">
 
@@ -79,7 +79,7 @@
                             <field name="patient_gender"/>
                             <!--<field name="date"/>-->
                             <field name="patient_blood"/>
-                            <field name="doctor_id"/>
+                            <field name="doctor_id">[("job_id","like","Doctor"]]</field>
                             <field name="department_id"/>
                             <field name="date"/>
                         </group>
