@@ -79,6 +79,9 @@
                             <field name="patient_gender"/>
                             <!--<field name="date"/>-->
                             <field name="patient_blood"/>
+                            <field name="doctor_id"/>
+                            <field name="department_id"/>
+                            <field name="date"/>
                         </group>
                         <!--<field name="blood_group" widget="selection" string="blood group"/>-->
 

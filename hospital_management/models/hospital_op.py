@@ -14,6 +14,9 @@ class OP(models.Model):
     patient_age=fields.Integer(string="Age")
     patient_gender=fields.Char("Gender")
     patient_blood=fields.Char("Blood Group")
+    doctor_id=fields.Many2one("hr.employee",ondelete="set null",string="Doctor",Index=True)
+    department_id=fields.Char(string="Department")
+    date=fields.Date(string="Date",default=date.today())
     @api.onchange('card_id')
     def _onchange_card_id(self):
 
@@ -25,3 +28,8 @@ class OP(models.Model):
             r.patient_blood=self.card_id.blood_group
 
             print(r.dob)
+
+    @api.onchange('doctor_id')
+    def _onchange_doctor_id(self):
+
+        self.department_id=self.doctor_id.department_id.name
