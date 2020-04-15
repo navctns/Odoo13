@@ -79,7 +79,7 @@
                             <field name="patient_gender"/>
                             <!--<field name="date"/>-->
                             <field name="patient_blood"/>
-                            <field name="doctor_id" domain="[('hr.employee.job_id','like','Doctor')]"/>
+                            <field name="doctor_id">[("job_id","like","Doctor"]]</field>
                             <field name="department_id"/>
                             <field name="date"/>
                         </group>

@@ -8,13 +8,13 @@ class OP(models.Model):
     _name="hospital.op"
     _description="Hospital OP"
 
-    card_id = fields.Many2one("patient.card", ondelete ="set null", string="Patient Card", Index=True)
+    card_id=fields.Many2one("patient.card",ondelete="set null",string="Patient Card",Index=True)
     dob=fields.Date(string="DOB")
     patient_name=fields.Char(string="Patient Name")
     patient_age=fields.Integer(string="Age")
     patient_gender=fields.Char("Gender")
     patient_blood=fields.Char("Blood Group")
-    doctor_id=fields.Many2one("hr.employee",ondelete="set null",string="Doctor",Index=True, domain=[('valid', '=', True)])
+    doctor_id=fields.Many2one("hr.employee",ondelete="set null",string="Doctor",Index=True)
     department_id=fields.Char(string="Department")
     date=fields.Date(string="Date",default=date.today())
     token_no = fields.Char(string='Token No', required=True, copy=False, readonly=True,
@@ -28,15 +28,6 @@ class OP(models.Model):
                 'op.card') or 'New'
         result = super(OP, self).create(vals)
         return result
-
-    # @api.model
-    # def create(self, vals):
-    #     if vals.get('token_no', 'New') == 'New':
-    #         vals['token_no'] = self.env['ir.sequence'].next_by_id(
-    #             self,sequence_date=datetime.date.today()) or 'New'
-    #     result = super(OP, self).create(vals)
-    #     print('result',result)
-    #     return result
 
     @api.onchange('card_id')
 
