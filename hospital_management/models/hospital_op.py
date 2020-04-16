@@ -20,6 +20,11 @@ class OP(models.Model):
     token_no = fields.Char(string='Token No', required=True, copy=False, readonly=True,
                       default='New')
 
+    consultation_type = fields.Selection([
+        ('OP', 'OP'),
+        ('IP', 'IP')
+    ], string = "Consultation Type", realated_field = 'hospital.consult.type')
+
     @api.model
 
     def create(self, vals):

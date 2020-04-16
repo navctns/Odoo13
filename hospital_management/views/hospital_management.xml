@@ -86,8 +86,9 @@
                     <notebook colspan="4">
                         <page name="op_history"
                               string="OP History">
-
-
+                                <group col="4" colspan="4">
+                                <field name = "consultation_type"/>
+                                </group>
 
 
                         </page>
@@ -121,7 +122,7 @@
     <record model="ir.actions.act_window" id="action_consultation">
     <field name="name">Consultation</field>
     <field name="res_model">hospital.consult</field>
-    <field name="view_mode">page</field>
+    <field name="view_mode">form,tree</field>
     <field name="help" type="html">
         <p class="o_view_noncontent_smiling_face">
             create the first patient_record
@@ -144,9 +145,15 @@
           groups="group_openacademy_manager"
 />
 
+    <menuitem id="consultation_menu" name="Consultation"
+          parent="patientdetails_menu"  action="action_consultation"
+          groups="group_openacademy_manager"/>
+
     <!--op-menu-->
     <menuitem id="op_menu" name="OP"
               parent="main_hospitalmanagement_menu"
               groups="group_openacademy_manager" action="action_patientcard"></menuitem>
+
+
 
 </odoo>

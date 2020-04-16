@@ -50,6 +50,9 @@ class PatientCard(models.Model):
     seq = fields.Char(string='Patient Reference', required=True, copy=False, readonly=True,
                       default='New')
 
+
+
+
     @api.model
     def create(self, vals):
         if vals.get('seq', 'New') == 'New':
