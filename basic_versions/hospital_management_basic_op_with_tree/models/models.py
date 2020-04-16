@@ -85,43 +85,16 @@ class PatientCard(models.Model):
 class Consultation(models.Model):
 
     _name = "hospital.consult"
-    _description = "Hospital management patent consultation"
+    _description = "Hospital management patent card"
 
     card_id = fields.Many2one('patient.card',string="Patient Card")
     type = fields.Selection([
         ('OP','OP'),
         ('IP','IP')
-    ],string = "Consultation Type")
+    ],string="Consultation Type")
     doctor_id = fields.Many2one('hr.employee')
     date= fields.Date(string = "Date", default = datetime.date.today())
-    disease_id = fields.Many2one("hospital.disease", string = "Disease")
-    diagnose = fields.Text(string = "Diagnose")
-    treatement = fields.Many2one("consult.line")
-
-
-
-class Disease(models.Model):
-
-    _name = "hospital.disease"
-    _description = "Disease"
-
-    #desease_id = fields.One2many(string="Disease")
-    disease_id = fields.Char(string="Disease")
-
-class ConsultLine(models.Model):
-
-    _name = "consult.line"
-    _description = "Disease"
-
-    consult_id = fields.Char(string = "Consult Line")
-    medicine = fields.Char(string = "Medicine")
-    dose = fields.Char(string = "Dose")
-    days = fields.Integer(string = "Days")
-
-
-
-
-
+    
 
 
 

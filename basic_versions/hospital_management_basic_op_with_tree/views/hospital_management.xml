@@ -87,9 +87,6 @@
                         <page name="op_history"
                               string="OP History">
 
-
-
-
                         </page>
                     </notebook>
 
@@ -115,20 +112,6 @@
             </tree>
         </field>
     </record>
-    <!--op tree view end -->
-
-    <!--consultation-record-->
-    <record model="ir.actions.act_window" id="action_consultation">
-    <field name="name">Consultation</field>
-    <field name="res_model">hospital.consult</field>
-    <field name="view_mode">page</field>
-    <field name="help" type="html">
-        <p class="o_view_noncontent_smiling_face">
-            create the first patient_record
-        </p>
-    </field>
-    </record>
-    <!--patient op record end-->
 
 
 
@@ -148,5 +131,6 @@
     <menuitem id="op_menu" name="OP"
               parent="main_hospitalmanagement_menu"
               groups="group_openacademy_manager" action="action_patientcard"></menuitem>
+
 
 </odoo>

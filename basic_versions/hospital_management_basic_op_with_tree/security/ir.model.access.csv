@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+patient_card_manager,patient_card_manager,model_patient_card,group_openacademy_manager,1,1,1,1
+hospital_op_manager,hospital_op_manager,model_hospital_op,group_openacademy_manager,1,1,1,1
