@@ -50,7 +50,22 @@
             </form>
         </field>
     </record>
-
+<!-- Patient Card Tree View -->
+<record model="ir.ui.view" id="patient_card_tree_view">
+        <field name="name">patientcard.tree</field>
+        <field name="model">patient.card</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="seq"/>
+                <field name="patient_id"/>
+                <field name="age"/>
+                <field name="sex"/>
+                <field name="blood_group"/>
+                <field name="mobile"/>
+            </tree>
+        </field>
+    </record>
+    <!-- Patient card tree view end -->
     <!--Patient op-record-->
     <record model="ir.actions.act_window" id="action_patientcard">
     <field name="name">Patient OP</field>
