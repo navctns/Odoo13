@@ -2,6 +2,7 @@
 <record model="ir.actions.act_window" id="action_contacts">
     <field name="name">Patient Card</field>
     <field name="res_model">patient.card</field>
+
     <field name="view_mode">tree,form</field>
     <field name="help" type="html">
         <p class="o_view_noncontent_smiling_face">
@@ -13,6 +14,7 @@
     <record model="ir.ui.view" id="patient_card_view">
         <field name="name">patient_card.form</field>
         <field name="model">patient.card</field>
+
         <field name="arch" type="xml">
             <form string="Patient Card Forms">
 
@@ -24,17 +26,22 @@
                                 </h1>
                             </div>
                         <group col="4" colspan="4">
-
-                            <field name="patient_id"></field>
-                            <field name="dob"></field>
+                            <group col="4" colspan="4">
+                            <!--<field name="patient_id"/>-->
+                                <field name="patient_id" widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer', 'show_address': 1, 'show_vat': True}" options='{"always_reload": True}'/>
+                                <field name="blood_group"/>
+                            <field name="dob"/>
+                                <field name="mobile"/>
                             <field name="age" default=""/>
-                            <field name="sex"/>
+                                  <field name="phone"/>
+                            <field name="sex" widget = 'radio'/>
+                            </group>
+                            <group col="4" colspan="4">
 
-                            <field name="address" widget="pad"/>
-                            <field name="date"/>
-                             <field name="mobile"/>
-                            <field name="phone"/>
-                            <field name="blood_group"/>
+
+
+
+                            </group>
                         </group>
                         <!--<field name="blood_group" widget="selection" string="blood group"/>-->
 

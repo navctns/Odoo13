@@ -23,19 +23,20 @@ from dateutil.relativedelta import relativedelta
 class PatientCard(models.Model):
     _name="patient.card"
     _description="Hospital management patent card"
+    _rec_name ="seq"
 
-    patient_id=fields.Many2one("res.partner",ondelete="set null",string="Patient Name",Index=True)
-    dob=fields.Date(string="DOB")
-    age=fields.Integer(string="Age")
+    patient_id=fields.Many2one("res.partner",ondelete="cascade",string="Patient Name",Index=True, required=True)
+    dob=fields.Date(string="DOB", required=True)
+    age=fields.Integer(string="Age", required=True)
     sex=fields.Selection([
         ('male','Male'),
         ('female','Female'),
         ('other','Other')
-    ],string="Sex")
-    address=fields.Text(required=True,string="Address")
+    ],string="Sex", required=True)
+    #address=fields.Text(required=True,string="Address")
     date=fields.Date(string="OP Date",default=datetime.datetime.now())
     phone=fields.Char(string="Telephone")
-    mobile=fields.Char(string="Mobile")
+    mobile=fields.Char(string="Mobile", required=True)
     blood_group=fields.Selection([
         ('A+','A+ve'),
         ('B+','B+ve'),
@@ -46,7 +47,7 @@ class PatientCard(models.Model):
         ('O-', 'O-ve'),
         ('AB-', 'AB-ve')
 
-    ],string="Blood Group")
+    ],string="Blood Group", required=True)
     seq = fields.Char(string='Patient Reference', required=True, copy=False, readonly=True,
                       default='New')
 
