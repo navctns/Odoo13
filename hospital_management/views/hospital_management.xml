@@ -155,7 +155,7 @@
 
 
 
-<menuitem id="main_hospitalmanagement_menu" name="Hospital.Management"
+<menuitem id="main_hospitalmanagement_menu" name="Hospital Management"
           groups="group_openacademy_manager" />
     <!--menu-->
 <menuitem id="patientdetails_menu" name="Patient Details"
