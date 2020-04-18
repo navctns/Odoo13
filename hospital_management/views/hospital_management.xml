@@ -44,6 +44,27 @@
                             </group>
                         </group>
                         <!--<field name="blood_group" widget="selection" string="blood group"/>-->
+                        <notebook colspan="4">
+                        <page name="op_history"
+                              string="OP History">
+
+                                    <field name ="op_history_ids">
+                                        <tree>
+
+                                            <field name="date"/>
+                                            <field name="op_number"/>
+                                            <field name="doctor_id" />
+                                            <field name="department_id"/>
+
+                                        </tree>
+
+                                    </field>
+
+
+
+
+                        </page>
+                    </notebook>
 
                 </sheet>
 
@@ -89,7 +110,7 @@
 
                         <div class="oe_title">
                                 <h1>
-                                    <field name="token_no" readonly="1"/>
+                                    <field name="op_number" readonly="1"/>
                                 </h1>
                             </div>
 
@@ -104,17 +125,9 @@
                             <field name="doctor_id"/>
                             <field name="department_id"/>
                             <field name="date"/>
+                            <field name="token_no"/>
                         </group>
-                    <notebook colspan="4">
-                        <page name="op_history"
-                              string="OP History">
-                                <group col="4" colspan="4">
-                                <field name = "consultation_type"/>
-                                </group>
 
-
-                        </page>
-                    </notebook>
 
 
 
@@ -132,7 +145,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="date"/>
-                <field name="token_no"/>
+                <field name="op_number"/>
                 <field name="doctor_id"/>
                 <field name="department_id"/>
             </tree>

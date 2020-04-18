@@ -27,7 +27,7 @@ class PatientCard(models.Model):
 
     patient_id=fields.Many2one("res.partner",ondelete="cascade",string="Patient Name",Index=True, required=True)
     dob=fields.Date(string="DOB", required=True)
-    age=fields.Integer(string="Age", required=True)
+    age=fields.Integer(string="Age")
     sex=fields.Selection([
         ('male','Male'),
         ('female','Female'),
@@ -50,6 +50,12 @@ class PatientCard(models.Model):
     ],string="Blood Group", required=True)
     seq = fields.Char(string='Patient Reference', required=True, copy=False, readonly=True,
                       default='New')
+    doctor_id = fields.Char(string ='Doctor')
+    department_id = fields.Char(string ="Department" )
+    op_number = fields.Many2one(string ="OP No")
+    op_date = fields.Date(string = "Date", realated_field ="hospital.op.date")
+    op_history_ids = fields.One2many('hospital.op','card_id', string = "OP History")
+
 
 
 

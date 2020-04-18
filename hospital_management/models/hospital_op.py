@@ -14,11 +14,13 @@ class OP(models.Model):
     patient_age = fields.Integer(string = "Age")
     patient_gender = fields.Char("Gender")
     patient_blood = fields.Char("Blood Group")
-    doctor_id = fields.Many2one("hr.employee", ondelete="set null", string = "Doctor", Index=True)
+    doctor_id = fields.Many2one("hr.employee", ondelete="set null", string = "Doctor", Index=True,
+                            )
     department_id = fields.Char(string = "Department")
     date= fields.Date(string = "Date", default = datetime.date.today())
-    token_no = fields.Char(string='Token No', required=True, copy=False, readonly=True,
+    op_number = fields.Char(string='OP Number', required=True, copy=False, readonly=True,
                       default='New')
+    token_no = fields.Integer(string = 'Token No', default = 1)
 
     consultation_type = fields.Selection([
         ('OP', 'OP'),
@@ -28,8 +30,8 @@ class OP(models.Model):
     @api.model
 
     def create(self, vals):
-        if vals.get('token_no', 'New') == 'New':
-            vals['token_no'] = self.env['ir.sequence'].next_by_code(
+        if vals.get('op_number', 'New') == 'New':
+            vals['op_number'] = self.env['ir.sequence'].next_by_code(
                 'op.card') or 'New'
         result = super(OP, self).create(vals)
         return result
@@ -47,6 +49,8 @@ class OP(models.Model):
 
     def _onchange_card_id(self):
 
+        self.token_no += self.token_no + 1
+
         for r in self:
             r.dob = self.card_id.dob
             r.patient_name = self.card_id.patient_id.name
@@ -55,8 +59,37 @@ class OP(models.Model):
             r.patient_blood = self.card_id.blood_group
 
             print(r.dob)
+        for r in self:
+            # if r.token_no == self.token_no:
+            #     print('same')
+            # else:
+            #     print('no duplicate')
+            print(r)
 
     @api.onchange('doctor_id')
     def _onchange_doctor_id(self):
 
         self.department_id = self.doctor_id.department_id.name
+
+    # @api.onchange('card_id')
+    # def _onchange_card_id(self):
+    #
+    #      td = datetime.date.today() #today
+    #      mon = td.month
+    #      day = td.day
+    #
+    #      if len(str(mon)) == 1 :
+    #          mon = '0' + str(mon)
+    #      if len(str(day)) == 1 :
+    #          day = '0' + str(day)
+    #
+    #      td_str = str(td.year)[2:4] + '/' + str(mon) + '/' + str(day)
+    #      #print(OP.objects.filter(token_no = 1))
+    #      # if td_str == self.op_number[3:11] :
+    #      #
+    #      #     self.token_no += 1
+    #      # else:
+    #      #     self.token_no = 1
+    #
+
+
