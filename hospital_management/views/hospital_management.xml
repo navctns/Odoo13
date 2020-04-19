@@ -122,7 +122,7 @@
                             <field name="patient_gender"/>
                             <!--<field name="date"/>-->
                             <field name="patient_blood"/>
-                            <field name="doctor_id"/>
+                            <field name="doctor_id" filter_domain ="['invisible',('doctor_id.job_id.name','like','Doctor')]"/>
                             <field name="department_id"/>
                             <field name="date"/>
                             <field name="token_no"/>
