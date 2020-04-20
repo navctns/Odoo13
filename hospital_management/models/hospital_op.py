@@ -14,8 +14,8 @@ class OP(models.Model):
     patient_age = fields.Integer(string = "Age")
     patient_gender = fields.Char("Gender")
     patient_blood = fields.Char("Blood Group")
-    doctor_id = fields.Many2one("hr.employee", ondelete="set null", string = "Doctor", Index=True,
-                            )
+    doctor_id = fields.Many2one("hr.employee", ondelete="cascade", string = "Doctor", Index=True
+                                , required=True)
     department_id = fields.Char(string = "Department")
     date= fields.Date(string = "Date", default = datetime.date.today())
     op_number = fields.Char(string='OP Number', required=True, copy=False, readonly=True,
@@ -65,11 +65,14 @@ class OP(models.Model):
             # else:
             #     print('no duplicate')
             print(r)
+        #return {'domain': {'doctor_id': [('job_id', 'like', 'Doctor')]}}
 
     @api.onchange('doctor_id')
     def _onchange_doctor_id(self):
 
+        # self.department_id = self.doctor_id.department_id.name
         self.department_id = self.doctor_id.department_id.name
+        return {'domain': {'doctor_id': [('job_id', 'like', 'Doctor')]}}
 
     # @api.onchange('card_id')
     # def _onchange_card_id(self):
@@ -92,4 +95,9 @@ class OP(models.Model):
     #      #     self.token_no = 1
     #
 
+    @api.model
+    def _search_doctor_id(self):
 
+        if self.doctor_id.job_id == "Doctor":
+
+            return self.doctor_id

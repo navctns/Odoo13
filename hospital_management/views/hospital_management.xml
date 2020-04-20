@@ -122,7 +122,9 @@
                             <field name="patient_gender"/>
                             <!--<field name="date"/>-->
                             <field name="patient_blood"/>
-                            <field name="doctor_id" filter_domain ="['invisible',('doctor_id.job_id.name','like','Doctor')]"/>
+                            <field name="doctor_id"/>
+<!--                            <field name="doctor_id" filter_domain ="['invisible',('doctor_id.job_id.name','like','Doctor')]"/>-->
+<!--                            <field name="doctor_id" widget="res_partner_many2one" context="{'res_partner_search_mode': doctor_id.job_id == 'Doctor'}"/>-->
                             <field name="department_id"/>
                             <field name="date"/>
                             <field name="token_no"/>
