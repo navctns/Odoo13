@@ -131,7 +131,7 @@ class ConsultLine(models.Model):
     _description = "Disease"
 
     consult_id = fields.Char(string = "Consult Line")
-    medicine = fields.Char(string = "Medicine")
+    medicine = fields.Many2one('product.template', string = "Medicine")
     dose = fields.Char(string = "Dose")
     days = fields.Integer(string = "Days")
 

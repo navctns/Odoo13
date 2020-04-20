@@ -8,6 +8,7 @@ from dateutil.relativedelta import relativedelta
 class OP(models.Model):
     _name="hospital.op"
     _description="Hospital OP"
+    _rec_name = "op_number"
 
     card_id = fields.Many2one("patient.card", ondelete ="set null", string="Patient Card", Index=True)
     dob = fields.Date(string = "DOB")
