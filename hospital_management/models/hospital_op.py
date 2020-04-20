@@ -4,6 +4,7 @@ from datetime import date
 from dateutil.relativedelta import relativedelta
 
 
+
 class OP(models.Model):
     _name="hospital.op"
     _description="Hospital OP"
@@ -20,7 +21,9 @@ class OP(models.Model):
     date= fields.Date(string = "Date", default = datetime.date.today())
     op_number = fields.Char(string='OP Number', required=True, copy=False, readonly=True,
                       default='New')
-    token_no = fields.Integer(string = 'Token No', default = 1)
+    # token_no = fields.Integer(string = 'Token No', default =+1)
+    token_no = fields.Integer(string="Token No",
+                               default=lambda self: self.env['ir.sequence'].next_by_code('increment_token_no'))
 
     consultation_type = fields.Selection([
         ('OP', 'OP'),
@@ -38,6 +41,13 @@ class OP(models.Model):
 
     # @api.model
     # def create(self, vals):
+    #     if vals.get('token_no', 'New') == 0:
+    #         vals['token_no'] = self.token_no +1 or 0
+    #     result = super(OP, self).create(vals)
+    #     return result
+
+    # @api.model
+    # def create(self, vals):
     #     if vals.get('token_no', 'New') == 'New':
     #         vals['token_no'] = self.env['ir.sequence'].next_by_id(
     #             self,sequence_date=datetime.date.today()) or 'New'
@@ -49,7 +59,7 @@ class OP(models.Model):
 
     def _onchange_card_id(self):
 
-        self.token_no += self.token_no + 1
+        # self.token_no += self.token_no + 1
 
         for r in self:
             r.dob = self.card_id.dob
@@ -74,6 +84,40 @@ class OP(models.Model):
         self.department_id = self.doctor_id.department_id.name
         return {'domain': {'doctor_id': [('job_id', 'like', 'Doctor')]}}
 
+
+    # @api.onchange('op_number')
+    #
+    # def _onchange_op_number(self):
+
+        # print("lenth of self",len(self))
+        # total_rec = sum(self.mapped('op_number'))
+        # print("toal rec :",total_rec)
+
+
+
+    #         pStart = 1
+    #         pInterval = 1
+    #         if rec == 0:
+    #             rec = pStart
+    #         else:
+    #             rec += pInterval
+    #          rec
+    #         self.token_no = rec
+    #
+    #         # self.token_no = self.token_no + 1
+
+
+
+    # def autoIncrement():
+    #     global rec
+    #     pStart = 1
+    #     pInterval = 1
+    #     if rec == 0:
+    #         rec = pStart
+    #     else:
+    #         rec += pInterval
+    #     return rec
+
     # @api.onchange('card_id')
     # def _onchange_card_id(self):
     #
@@ -95,9 +139,23 @@ class OP(models.Model):
     #      #     self.token_no = 1
     #
 
-    @api.model
-    def _search_doctor_id(self):
+    # def token_number_update(self, cr, uid, ids=None, context=None):
+    #     sequence_obj = self.pool.get('hospital.op')
+    #     seq_id = sequence_obj.search(cr, uid, [('code', '=', 'sale.order')])
+    #     if seq_id:
+    #         value = sequence_obj.browse(cr, uid, seq_id[0])
+    #         number_next = value.number_next
+    #         sequence_obj.write(cr, uid, seq_id, {'number_next': 1})
+    #     return None
 
-        if self.doctor_id.job_id == "Doctor":
-
-            return self.doctor_id
+    @api.onchange('token_no')
+    def _onchange_token_no(self):
+        # record_ids = self.search([('op_number', '=', self.op_number.id)], order='id desc', limit=1)
+        # last_id = record_ids.id
+        # print(self.last_id.op_number)
+        latest_rec = self.env['hospital.op'].search([], limit=1, order='create_date desc')
+        print(latest_rec.op_number)
+        print(self.op_number)
+        #compare todays date with last sequence and set token according to it
+        if str(latest_rec.op_number)[2:12] != str(self.op_number)[2:12]:
+            self.token_no = 1
