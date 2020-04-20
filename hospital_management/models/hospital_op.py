@@ -21,14 +21,19 @@ class OP(models.Model):
     date= fields.Date(string = "Date", default = datetime.date.today())
     op_number = fields.Char(string='OP Number', required=True, copy=False, readonly=True,
                       default='New')
-    # token_no = fields.Integer(string = 'Token No', default =+1)
-    token_no = fields.Integer(string="Token No",
-                               default=lambda self: self.env['ir.sequence'].next_by_code('increment_token_no'))
+    token_no = fields.Integer(string = 'Token No')
+    # token_no = fields.Integer(string="Token No", unique = True,
+    #                            default=lambda self: self.env['ir.sequence'].next_by_code('increment_token_no'))
 
     consultation_type = fields.Selection([
         ('OP', 'OP'),
         ('IP', 'IP')
     ], string = "Consultation Type", realated_field = 'hospital.consult.type')
+
+    _sql_constraints = [
+        # Partial constraint, complemented by a python constraint (see below).
+        ('unique_token', 'unique (token_no)', 'You can not have two users with the same login!'),
+    ]
 
     @api.model
 
@@ -39,21 +44,7 @@ class OP(models.Model):
         result = super(OP, self).create(vals)
         return result
 
-    # @api.model
-    # def create(self, vals):
-    #     if vals.get('token_no', 'New') == 0:
-    #         vals['token_no'] = self.token_no +1 or 0
-    #     result = super(OP, self).create(vals)
-    #     return result
 
-    # @api.model
-    # def create(self, vals):
-    #     if vals.get('token_no', 'New') == 'New':
-    #         vals['token_no'] = self.env['ir.sequence'].next_by_id(
-    #             self,sequence_date=datetime.date.today()) or 'New'
-    #     result = super(OP, self).create(vals)
-    #     print('result',result)
-    #     return result
 
     @api.onchange('card_id')
 
@@ -156,6 +147,31 @@ class OP(models.Model):
         latest_rec = self.env['hospital.op'].search([], limit=1, order='create_date desc')
         print(latest_rec.op_number)
         print(self.op_number)
+        tokens = [] #for checking duplicate token
+        for r in self.env['hospital.op'].search([], order='create_date desc'):
+            #print('openv :', r.op_number)
+            if self.token_no == r.token_no:
+                tokens.append(r.token_no)
+                print('token repats',r.token_no)
+
         #compare todays date with last sequence and set token according to it
-        if str(latest_rec.op_number)[2:12] != str(self.op_number)[2:12]:
+
+
+        td = datetime.date.today()  # today
+        mon = td.month
+        day = td.day
+
+        if len(str(mon)) == 1 :
+             mon = '0' + str(mon)
+        if len(str(day)) == 1 :
+             day = '0' + str(day)
+        #today string
+        td_str = '/'+str(td.year)[2:4] + '/' + str(mon) + '/' + str(day)+'/'
+        if str(latest_rec.op_number)[2:12] != td_str:#compare wiht last sequence
             self.token_no = 1
+
+    # _sql_constraints = [
+    #     ('token_no_unique', 'UNIQUE(token_no)',
+    #      'You can not have two users with the same token_no !')
+    # ]
+

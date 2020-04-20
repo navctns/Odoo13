@@ -102,12 +102,19 @@ class Consultation(models.Model):
         ('OP','OP'),
         ('IP','IP')
     ],string = "Consultation Type")
+    op_no = fields.Many2one('hospital.op', string = "OP No")
     doctor_id = fields.Many2one('hr.employee')
     date= fields.Date(string = "Date", default = datetime.date.today())
     disease_id = fields.Many2one("hospital.disease", string = "Disease")
     diagnose = fields.Text(string = "Diagnose")
     treatement = fields.Many2one("consult.line")
 
+    @api.onchange('type')
+    def _onchange_type(self):
+        for rec in self:
+
+            if rec.type == 'OP' :
+                return {'domain': {'op_no': [('card_id', '=', rec.card_id.id)]}}
 
 
 class Disease(models.Model):
