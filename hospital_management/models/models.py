@@ -97,17 +97,17 @@ class Consultation(models.Model):
     _name = "hospital.consult"
     _description = "Hospital management patent consultation"
 
-    card_id = fields.Many2one('patient.card',string="Patient Card")
+    card_id = fields.Many2one('patient.card',string="Patient Card", required = True)
     type = fields.Selection([
         ('OP','OP'),
         ('IP','IP')
-    ],string = "Consultation Type")
+    ],string = "Consultation Type", required = True)
     op_no = fields.Many2one('hospital.op', string = "OP No")
-    doctor_id = fields.Many2one('hr.employee')
+    doctor_id = fields.Many2one('hr.employee', required = True)
     date= fields.Date(string = "Date", default = datetime.date.today())
-    disease_id = fields.Many2one("hospital.disease", string = "Disease")
-    diagnose = fields.Text(string = "Diagnose")
-    treatement = fields.Many2one("consult.line")
+    disease_id = fields.Many2one("hospital.disease", string = "Disease", required = True)
+    diagnose = fields.Text(string = "Diagnose", required = True)
+    consult_line_ids = fields.One2many("consult.line", 'consult_id', string = "Treatment")
 
     @api.onchange('type')
     def _onchange_type(self):
@@ -130,10 +130,11 @@ class ConsultLine(models.Model):
     _name = "consult.line"
     _description = "Disease"
 
-    consult_id = fields.Char(string = "Consult Line")
+    consult_id = fields.Many2one('hospital.consult', string = "Consult Line")
     medicine = fields.Many2one('product.template', string = "Medicine")
     dose = fields.Char(string = "Dose")
     days = fields.Integer(string = "Days")
+    description = fields.Char(string = "Description")
 
 
 

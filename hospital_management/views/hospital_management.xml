@@ -167,29 +167,89 @@
     </field>
     </record>
     <!--patient op record end-->
+    <!-- Consultation form view -->
 
+    <record model="ir.ui.view" id="consultation_form_view">
+        <field name="name">consultation.form</field>
+        <field name="model">hospital.consult</field>
+
+        <field name="arch" type="xml">
+            <form string="Patient Card Forms">
+
+                <sheet>
+                    <group col="4" colspan="4">
+                            <group col="4" colspan="4">
+                            <!--<field name="patient_id"/>-->
+                                <field name="card_id" widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer', 'show_address': 1, 'show_vat': True}" options='{"always_reload": True}'/>
+                                <field name="type"  widget = 'radio'/>
+                                <field name="doctor_id"/>
+                                <field name="op_no"/>
+                                <field name="disease_id"/>
+                                <field name="date" default=""/>
+                                <field name="diagnose"/>
+                            </group>
+                            <group col="4" colspan="4">
+
+
+
+
+                            </group>
+                        </group>
+                        <!--<field name="blood_group" widget="selection" string="blood group"/>-->
+                        <notebook colspan="4">
+                        <page name="consultline_ids"
+                              string="Treatement">
+
+                                    <field name ="consult_line_ids" widget="section_and_note_one2many"
+                                        mode="tree,kanban">
+                                        <tree editable="bottom" string="Consult lines" default_order="sequence, date desc, move_name desc, id">
+                                            <control>
+                                                <create name="add_line_control" string="Add a line"/>
+                                                <create name="add_section_control" string="Add a section" context="{'default_display_type':'line_section'}"/>
+                                                 <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>
+                                            </control>
+
+
+
+                                            <field name="medicine"/>
+                                            <field name="description"/>
+                                            <field name="dose"/>
+                                            <field name="days"/>
+
+                                        </tree>
+
+                                    </field>
+
+                        </page>
+                    </notebook>
+
+                </sheet>
+
+            </form>
+        </field>
+    </record>
 
 
 <menuitem id="main_hospitalmanagement_menu" name="Hospital Management"
-          groups="group_openacademy_manager" />
+          groups="base.group_user" />
     <!--menu-->
 <menuitem id="patientdetails_menu" name="Patient Details"
           parent="main_hospitalmanagement_menu"
-          groups="group_openacademy_manager"/>
+          groups="base.group_user"/>
     <!--submenu-->
 <menuitem id="patientcard_menu" name="Patient Card"
           parent="patientdetails_menu"  action="action_contacts"
-          groups="group_openacademy_manager"
+          groups="base.group_user"
 />
 
     <menuitem id="consultation_menu" name="Consultation"
           parent="patientdetails_menu"  action="action_consultation"
-          groups="group_openacademy_manager"/>
+          groups="base.group_user"/>
 
     <!--op-menu-->
     <menuitem id="op_menu" name="OP"
               parent="main_hospitalmanagement_menu"
-              groups="group_openacademy_manager" action="action_patientcard"></menuitem>
+              groups="base.group_user" action="action_patientcard"/>
 
 
 

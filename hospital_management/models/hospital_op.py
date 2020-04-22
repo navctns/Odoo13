@@ -20,6 +20,7 @@ class OP(models.Model):
                                 , required=True)
     department_id = fields.Char(string = "Department")
     date= fields.Date(string = "Date", default = fields.Date.today())
+    active = fields.Boolean('Active', default = True)
     op_number = fields.Char(string='OP Number', required=True, copy=False, readonly=True,
                       default='New')
     # token_no = fields.Integer(string = 'Token No', default = lambda self: self.env['hospital.op'].search([], limit=1, order='create_date desc').token_no + 1)
@@ -34,7 +35,7 @@ class OP(models.Model):
 
     _sql_constraints = [
         # Partial constraint, complemented by a python constraint (see below).
-        ('token_no_uniq', 'UNIQUE(token_no)', 'You can not have two users with the same token!'),
+        ('token_no_uniq', 'UNIQUE(token_no)', 'You can not have two patients with the same token!'),
     ]
 
     @api.model
