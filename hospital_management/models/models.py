@@ -102,7 +102,7 @@ class Consultation(models.Model):
         ('OP','OP'),
         ('IP','IP')
     ],string = "Consultation Type", required = True)
-    op_no = fields.Many2one('hospital.op', string = "OP No")
+    op_no = fields.Many2one('hospital.op', string = "OP No", attrs = {'invisible': [('type', 'like', 'IP')]})
     doctor_id = fields.Many2one('hr.employee', required = True)
     date= fields.Date(string = "Date", default = datetime.date.today())
     disease_id = fields.Many2one("hospital.disease", string = "Disease", required = True)
@@ -111,10 +111,39 @@ class Consultation(models.Model):
 
     @api.onchange('type')
     def _onchange_type(self):
-        for rec in self:
+    #     # for rec in self:
+    #
+        if self.type == 'OP' :
+    #         # status = 1
+            return {'domain': {'op_no': [('card_id', '=', self.card_id.id)]}}
+    #         # else return {'domain': {'op_no':[]}}
+        elif self.type == 'IP' :
+            # self.op_no = 0
+            self.op_no = 0
+            # self.Hide_product = True
+        # if status == 1:
+        #     return {'domain': {'op_no': [('card_id', '=', rec.card_id.id)]}}
+        # else:
+        #     self.op_no = None
 
-            if rec.type == 'OP' :
-                return {'domain': {'op_no': [('card_id', '=', rec.card_id.id)]}}
+    @api.onchange('card_id')
+    def _onchange_card_id(self):
+        if self.type == 'OP':
+            return {'domain': {'op_no': [('card_id', '=', self.card_id.id)]}}
+        #         # else return {'domain': {'op_no':[]}}
+        elif self.type == 'IP':
+            # self.op_no = 0
+            self.op_no = 0
+
+    # @api.depends('op_no', 'type')
+    # def _compute_op_no(self):
+    #     if self.type == 'OP' :
+    #         # status = 1
+    #         return {'domain': {'op_no': [('card_id', '=', self.card_id.id)]}}
+    #     else :
+    #         self.op_no = False
+
+
 
 
 class Disease(models.Model):
