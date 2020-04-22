@@ -19,9 +19,10 @@ class OP(models.Model):
     doctor_id = fields.Many2one("hr.employee", ondelete="cascade", string = "Doctor", Index=True
                                 , required=True)
     department_id = fields.Char(string = "Department")
-    date= fields.Date(string = "Date", default = datetime.date.today())
+    date= fields.Date(string = "Date", default = fields.Date.today())
     op_number = fields.Char(string='OP Number', required=True, copy=False, readonly=True,
                       default='New')
+    # token_no = fields.Integer(string = 'Token No', default = lambda self: self.env['hospital.op'].search([], limit=1, order='create_date desc').token_no + 1)
     token_no = fields.Integer(string = 'Token No')
     # token_no = fields.Integer(string="Token No", unique = True,
     #                            default=lambda self: self.env['ir.sequence'].next_by_code('increment_token_no'))
@@ -33,7 +34,7 @@ class OP(models.Model):
 
     _sql_constraints = [
         # Partial constraint, complemented by a python constraint (see below).
-        ('unique_token', 'unique (token_no)', 'You can not have two users with the same login!'),
+        ('token_no_uniq', 'UNIQUE(token_no)', 'You can not have two users with the same token!'),
     ]
 
     @api.model
@@ -145,15 +146,19 @@ class OP(models.Model):
         # record_ids = self.search([('op_number', '=', self.op_number.id)], order='id desc', limit=1)
         # last_id = record_ids.id
         # print(self.last_id.op_number)
+        print('token_no',self.token_no)
         latest_rec = self.env['hospital.op'].search([], limit=1, order='create_date desc')
         print(latest_rec.op_number)
         print(self.op_number)
         tokens = [] #for checking duplicate token
-        for r in self.env['hospital.op'].search([], order='create_date desc'):
+
             #print('openv :', r.op_number)
-            if self.token_no == r.token_no:
-                tokens.append(r.token_no)
-                print('token repats',r.token_no)
+            # if self.token_no == r.token_no:
+            #     tokens.append(r.token_no)
+            #     print('token repats',r.token_no)
+
+
+        print('token after clear',self.token_no)
 
         #compare todays date with last sequence and set token according to it
 
@@ -169,10 +174,42 @@ class OP(models.Model):
         #today string
         td_str = '/'+str(td.year)[2:4] + '/' + str(mon) + '/' + str(day)+'/'
         if str(latest_rec.op_number)[2:12] != td_str:#compare wiht last sequence
+            #remove previous entries
+            for r in self.env['hospital.op'].search([], order='create_date desc'):
+                r.token_no = None
             self.token_no = 1
+
+
 
     # _sql_constraints = [
     #     ('token_no_unique', 'UNIQUE(token_no)',
     #      'You can not have two users with the same token_no !')
     # ]
+    # @api.onchange('token_no')
+    # def _onchange_token_no(self):
+    #
+    #     tokens = []
+    #     for r in self.env['hospital.op'].search([]):
+    #         tokens.append(r.token_no)
+    #     print(tokens)
 
+    @api.onchange('op_number')
+    def _onchange_op_number(self):
+
+
+        #get number of records today
+        r = self.env['hospital.op'].search([('date','=',fields.Date.today())])
+        print('today count',len(r))
+        if len(r) == 0 :
+            self.token = 1 #set initial token of the day
+        else:
+            existing_tokens = []
+
+            for r in self.env['hospital.op'].search([('date','=',fields.Date.today())]) :
+                existing_tokens.append(r.token_no)
+            for i in sorted(existing_tokens):
+                n = i+1
+                if n not in existing_tokens:
+                    self.token_no = i+1
+                    break
+            print('tokens ex',existing_tokens)
