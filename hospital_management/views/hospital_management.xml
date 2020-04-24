@@ -24,22 +24,19 @@
                                 <h1>
                                     <field name="seq" readonly="1"/>
                                 </h1>
-                            </div>
+                        </div>
                         <group col="4" colspan="4">
                             <group col="4" colspan="4">
                             <!--<field name="patient_id"/>-->
                                 <field name="patient_id" widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer', 'show_address': 1, 'show_vat': True}" options='{"always_reload": True}'/>
                                 <field name="blood_group"/>
-                            <field name="dob"/>
+                                <field name="dob"/>
                                 <field name="mobile"/>
-                            <field name="age" default=""/>
-                                  <field name="phone"/>
-                            <field name="sex" widget = 'radio'/>
+                                <field name="age" default=""/>
+                                <field name="phone"/>
+                                <field name="sex" widget = 'radio'/>
                             </group>
                             <group col="4" colspan="4">
-
-
-
 
                             </group>
                         </group>
@@ -48,9 +45,8 @@
                         <page name="op_history"
                               string="OP History">
 
-                                    <field name ="op_history_ids">
+                                    <field name ="op_history_ids" >
                                         <tree>
-
                                             <field name="date_op"/>
                                             <field name="op_number"/>
                                             <field name="doctor_id" />
@@ -59,9 +55,6 @@
                                         </tree>
 
                                     </field>
-
-
-
 
                         </page>
                     </notebook>
@@ -157,14 +150,14 @@
 
     <!--consultation-record-->
     <record model="ir.actions.act_window" id="action_consultation">
-    <field name="name">Consultation</field>
-    <field name="res_model">hospital.consult</field>
-    <field name="view_mode">form,tree</field>
-    <field name="help" type="html">
-        <p class="o_view_noncontent_smiling_face">
-            create the first patient_record
-        </p>
-    </field>
+        <field name="name">Consultation</field>
+        <field name="res_model">hospital.consult</field>
+        <field name="view_mode">form,tree,kanban</field>
+        <field name="help" type="html">
+            <p class="o_view_noncontent_smiling_face">
+                create the first patient_record
+            </p>
+        </field>
     </record>
     <!--patient op record end-->
     <!-- Consultation form view -->
@@ -172,9 +165,8 @@
     <record model="ir.ui.view" id="consultation_form_view">
         <field name="name">consultation.form</field>
         <field name="model">hospital.consult</field>
-
         <field name="arch" type="xml">
-            <form string="Patient Card Forms">
+            <form string="Consultation Forms">
 
                 <sheet>
                     <group col="4" colspan="4">
@@ -189,10 +181,6 @@
                                 <field name="diagnose"/>
                             </group>
                             <group col="4" colspan="4">
-
-
-
-
                             </group>
                         </group>
                         <!--<field name="blood_group" widget="selection" string="blood group"/>-->
@@ -208,8 +196,6 @@
                                                 <create name="add_section_control" string="Add a section" context="{'default_display_type':'line_section'}"/>
                                                  <create name="add_note_control" string="Add a note" context="{'default_display_type': 'line_note'}"/>
                                             </control>
-
-
 
                                             <field name="medicine"/>
                                             <field name="description"/>
@@ -229,6 +215,21 @@
         </field>
     </record>
 
+    <!--Consultation tree view -->
+    <record model="ir.ui.view" id="consultation_tree_view">
+        <field name="name">consult.tree</field>
+        <field name="model">hospital.consult</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="card_id"/>
+                <field name="type"/>
+                <field name="doctor_id"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+    <!--op tree view end -->
+
 
 <menuitem id="main_hospitalmanagement_menu" name="Hospital Management"
           groups="base.group_user" />
@@ -239,12 +240,10 @@
     <!--submenu-->
 <menuitem id="patientcard_menu" name="Patient Card"
           parent="patientdetails_menu"  action="action_contacts"
-          groups="base.group_user"
-/>
+          groups="base.group_user"/>
 
     <menuitem id="consultation_menu" name="Consultation"
-          parent="patientdetails_menu"  action="action_consultation"
-          groups="base.group_user"/>
+          parent="main_hospitalmanagement_menu" action="action_consultation" groups="base.group_user"/>
 
     <!--op-menu-->
     <menuitem id="op_menu" name="OP"

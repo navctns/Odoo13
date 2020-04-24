@@ -103,7 +103,7 @@ class Consultation(models.Model):
         ('IP','IP')
     ],string = "Consultation Type", required = True)
     op_no = fields.Many2one('hospital.op', string = "OP No", attrs = {'invisible': [('type', 'like', 'IP')]})
-    doctor_id = fields.Many2one('hr.employee', required = True)
+    doctor_id = fields.Many2one('hr.employee', required = True, domain = [('job_id', 'like', 'Doctor')])
     date= fields.Date(string = "Date", default = datetime.date.today())
     disease_id = fields.Many2one("hospital.disease", string = "Disease", required = True)
     diagnose = fields.Text(string = "Diagnose", required = True)
@@ -150,9 +150,11 @@ class Disease(models.Model):
 
     _name = "hospital.disease"
     _description = "Disease"
+    _rec_name = "disease_id"
 
     #desease_id = fields.One2many(string="Disease")
     disease_id = fields.Char(string="Disease")
+    description = fields.Char()
 
 class ConsultLine(models.Model):
 
@@ -160,7 +162,7 @@ class ConsultLine(models.Model):
     _description = "Disease"
 
     consult_id = fields.Many2one('hospital.consult', string = "Consult Line")
-    medicine = fields.Many2one('product.template', string = "Medicine")
+    medicine = fields.Many2one('product.template', string = "Medicine", domain =[('categ_id','like','Medicines')])
     dose = fields.Char(string = "Dose")
     days = fields.Integer(string = "Days")
     description = fields.Char(string = "Description")

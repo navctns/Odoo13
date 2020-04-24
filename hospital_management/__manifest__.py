@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base', 'product'],
 
     # always loaded
     'data': [
@@ -29,6 +29,7 @@
         'views/hospital_management.xml',
         'data/sequence.xml',
         'data/op_sequence.xml',
+        'data/data.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

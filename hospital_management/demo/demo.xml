@@ -1,4 +1,5 @@
 <odoo>
+<!--    <data noupdate="1">-->
     <data>
 <!--
           <record id="object0" model="hospital_management.hospital_management">
@@ -26,5 +27,9 @@
             <field name="value">40</field>
           </record>
 -->
+
+        <record id="medicine_product" model="consult.line">
+            <field name="medicine.categ_id">Medic</field>
+        </record>
     </data>
 </odoo>
