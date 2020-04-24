@@ -51,7 +51,7 @@
                                     <field name ="op_history_ids">
                                         <tree>
 
-                                            <field name="date"/>
+                                            <field name="date_op"/>
                                             <field name="op_number"/>
                                             <field name="doctor_id" />
                                             <field name="department_id"/>
@@ -126,7 +126,7 @@
 <!--                            <field name="doctor_id" filter_domain ="['invisible',('doctor_id.job_id.name','like','Doctor')]"/>-->
 <!--                            <field name="doctor_id" widget="res_partner_many2one" context="{'res_partner_search_mode': doctor_id.job_id == 'Doctor'}"/>-->
                             <field name="department_id"/>
-                            <field name="date"/>
+                            <field name="date_op"/>
                             <field name="token_no"/>
                         </group>
 
@@ -146,7 +146,7 @@
         <field name="model">hospital.op</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="date"/>
+                <field name="date_op"/>
                 <field name="op_number"/>
                 <field name="doctor_id"/>
                 <field name="department_id"/>

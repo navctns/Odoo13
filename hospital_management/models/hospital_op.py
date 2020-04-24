@@ -2,6 +2,7 @@ from odoo import models, fields, api
 import datetime
 from datetime import date
 from dateutil.relativedelta import relativedelta
+from odoo.exceptions import ValidationError
 
 
 
@@ -9,6 +10,7 @@ class OP(models.Model):
     _name="hospital.op"
     _description="Hospital OP"
     _rec_name = "op_number"
+
 
     card_id = fields.Many2one("patient.card", ondelete ="set null", string="Patient Card", Index=True)
     dob = fields.Date(string = "DOB")
@@ -19,7 +21,7 @@ class OP(models.Model):
     doctor_id = fields.Many2one("hr.employee", ondelete="cascade", string = "Doctor", Index=True
                                 , required=True)
     department_id = fields.Char(string = "Department")
-    date= fields.Date(string = "Date", default = fields.Date.today())
+    date_op= fields.Date(string = "Date", default = fields.Date.today())
     active = fields.Boolean('Active', default = True)
     op_number = fields.Char(string='OP Number', required=True, copy=False, readonly=True,
                       default='New')
@@ -35,8 +37,28 @@ class OP(models.Model):
 
     _sql_constraints = [
         # Partial constraint, complemented by a python constraint (see below).
-        ('token_no_uniq', 'UNIQUE(token_no)', 'You can not have two patients with the same token!'),
+        ('token_no_uniq', 'UNIQUE(token_no,date_op)', 'You can not have two patients with the same token!'),
     ]
+
+
+    #python constraint
+    @api.constrains('token_no')
+    def _check_token_no(self):
+        tokens =[]
+        for r in self.env['hospital.op'].search([('date_op','=',fields.Date.today())]):
+            # if r.date_op == fields.Date.today():#todays tokens
+            tokens.append(r.token_no)
+        print('today tokens',tokens)
+        tokens[-1] = None #because it loads the current entry also
+        if self.token_no in tokens:
+            raise ValidationError("Token number should be unique")
+        #     return False
+        # else:
+        #     return True
+
+    # _constraints = [
+    #     ('_check_token_no', 'Token number must be unique', ['token_no'])
+    # ]
 
     @api.model
 
@@ -142,15 +164,19 @@ class OP(models.Model):
     #         sequence_obj.write(cr, uid, seq_id, {'number_next': 1})
     #     return None
 
-    @api.onchange('token_no')
-    def _onchange_token_no(self):
+    # @api.onchange('op_number')
+    # def _onchange_op_number(self):
+    #
+    #     self.token_no = self.token_no +1
         # record_ids = self.search([('op_number', '=', self.op_number.id)], order='id desc', limit=1)
         # last_id = record_ids.id
         # print(self.last_id.op_number)
-        print('token_no',self.token_no)
-        latest_rec = self.env['hospital.op'].search([], limit=1, order='create_date desc')
-        print(latest_rec.op_number)
-        print(self.op_number)
+        #code
+        # print('token_no',self.token_no)
+        # latest_rec = self.env['hospital.op'].search([], limit=1, order='create_date desc')
+        # print(latest_rec.op_number)
+        # print(self.op_number)
+        #code
         tokens = [] #for checking duplicate token
 
             #print('openv :', r.op_number)
@@ -159,27 +185,27 @@ class OP(models.Model):
             #     print('token repats',r.token_no)
 
 
-        print('token after clear',self.token_no)
+        # print('token after clear',self.token_no)
 
         #compare todays date with last sequence and set token according to it
 
-
-        td = datetime.date.today()  # today
-        mon = td.month
-        day = td.day
-
-        if len(str(mon)) == 1 :
-             mon = '0' + str(mon)
-        if len(str(day)) == 1 :
-             day = '0' + str(day)
-        #today string
-        td_str = '/'+str(td.year)[2:4] + '/' + str(mon) + '/' + str(day)+'/'
-        if str(latest_rec.op_number)[2:12] != td_str:#compare wiht last sequence
-            #remove previous entries
-            for r in self.env['hospital.op'].search([], order='create_date desc'):
-                r.token_no = None
-            self.token_no = 1
-
+        #code
+        # td = datetime.date.today()  # today
+        # mon = td.month
+        # day = td.day
+        #
+        # if len(str(mon)) == 1 :
+        #      mon = '0' + str(mon)
+        # if len(str(day)) == 1 :
+        #      day = '0' + str(day)
+        # #today string
+        # td_str = '/'+str(td.year)[2:4] + '/' + str(mon) + '/' + str(day)+'/'
+        # if str(latest_rec.op_number)[2:12] != td_str:#compare wiht last sequence
+        #     #remove previous entries
+        #     for r in self.env['hospital.op'].search([], order='create_date desc'):
+        #         r.token_no = None
+        #     self.token_no = 1
+            #code
 
 
     # _sql_constraints = [
@@ -199,18 +225,24 @@ class OP(models.Model):
 
 
         #get number of records today
-        r = self.env['hospital.op'].search([('date','=',fields.Date.today())])
+        r = self.env['hospital.op'].search([('date_op','=',fields.Date.today())])
         print('today count',len(r))
+
         if len(r) == 0 :
-            self.token = 1 #set initial token of the day
+             for i in self.env['hospital.op'].search([]):
+                 i.token_no = None#delete token numbers everyday
+             # set initial token of the day
+             self.token_no = 1
         else:
             existing_tokens = []
 
-            for r in self.env['hospital.op'].search([('date','=',fields.Date.today())]) :
+            for r in self.env['hospital.op'].search([('date_op', '=', fields.Date.today())]):
                 existing_tokens.append(r.token_no)
+                # check for duplication of token
             for i in sorted(existing_tokens):
-                n = i+1
+                n = i + 1
                 if n not in existing_tokens:
-                    self.token_no = i+1
+                    self.token_no = i + 1
                     break
-            print('tokens ex',existing_tokens)
+            print('tokens ex', existing_tokens)
+
