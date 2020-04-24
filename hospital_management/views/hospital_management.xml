@@ -176,7 +176,7 @@
                                 <field name="type"  widget = 'radio'/>
                                 <field name="doctor_id"/>
                                 <field name="op_no"/>
-                                <field name="disease_id"/>
+                                <field name="disease_id" widget="many2one"/>
                                 <field name="date" default=""/>
                                 <field name="diagnose"/>
                             </group>
