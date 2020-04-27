@@ -4,3 +4,4 @@ hospital_op_manager,hospital_op_manager,model_hospital_op,base.group_user,1,1,1,
 hospital_consult_manager,hospital_consult_manager,model_hospital_consult,base.group_user,1,1,1,1
 hospital_disease_manager,hospital_disease_manager,model_hospital_disease,base.group_user,1,1,1,1
 consult_line_manager,consult_line_manager,model_consult_line,base.group_user,1,1,1,1
+hospital_appointment_manager,hospital_appointment_manager,model_hospital_appointment,base.group_user,1,1,1,1

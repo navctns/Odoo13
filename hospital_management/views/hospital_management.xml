@@ -84,7 +84,7 @@
     <record model="ir.actions.act_window" id="action_patientcard">
     <field name="name">Patient OP</field>
     <field name="res_model">hospital.op</field>
-    <field name="view_mode">tree,form</field>
+    <field name="view_mode">form,tree</field>
     <field name="help" type="html">
         <p class="o_view_noncontent_smiling_face">
             create the first patient_record

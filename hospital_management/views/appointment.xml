@@ -1,0 +1,55 @@
+<odoo>
+    <record model="ir.actions.act_window" id="action_appointment">
+        <field name="name">Appointment</field>
+        <field name="res_model">hospital.appointment</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_noncontent_smiling_face">
+                create the first patient_record
+            </p>
+        </field>
+    </record>
+
+    <!-- Appointment form view -->
+    <record model="ir.ui.view" id="appointment_form_view">
+        <field name="name">Appointment Form</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <form string="Patient Card Forms">
+                <header>
+                    <button name="action_confirm" type="object" states="draft" string="confirm"
+                            class = "oe_highlight"/>
+                    <button name="action_redirect_to_appointment" type="object" states="appointment" string="Convert to OP"
+                            class = "oe_highlight"/>
+<!--                    <button name="%(action_patientcard)d" type="action"-->
+<!--                                    context="{'card_id': card_id, 'doctor_id': doctor_id}"-->
+<!--                                    states="appointment" string="Convert to OP"-->
+<!--                                    class = "oe_highlight"/>-->
+                    <field name ="state" widget = "statusbar"/>
+                </header>
+
+                <sheet>
+<!--                    <div class="oe_title">-->
+<!--                                <h1>-->
+<!--                                    <field name="op_number" readonly="1"/>-->
+<!--                                </h1>-->
+<!--                    </div>-->
+
+                    <group col="4" colspan="4">
+
+                        <field name="card_id"/>
+                        <field name="date"/>
+                        <field name="patient_name"/>
+                        <field name="token"/>
+                        <field name="doctor_id"/>
+                        <field name="department_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- End Appointment form view -->
+    <menuitem id="appointment_menu" name="Appointment"
+          parent="patientdetails_menu"  action="action_appointment"
+          groups="base.group_user"/>
+</odoo>
