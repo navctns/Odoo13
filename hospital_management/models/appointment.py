@@ -52,8 +52,9 @@ class Appointment(models.Model):
             'name': 'OP Form',
             'view_mode': 'form',
             'res_model': 'hospital.op',
+            'context': {'default_card_id': self.card_id.id}
              }
-
+    #method 2
     def action_redirect_to_appointment(self):
         #check for existing tokens#
         tokens = []
@@ -74,6 +75,7 @@ class Appointment(models.Model):
                                  'default_token_no':self.token}
             #write return action for appointment with context
             return action
+    #method 2
 
     # @api.constrains('token')
     # def _check_token(self):

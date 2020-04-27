@@ -19,7 +19,7 @@
                 <header>
                     <button name="action_confirm" type="object" states="draft" string="confirm"
                             class = "oe_highlight"/>
-                    <button name="action_redirect_to_appointment" type="object" states="appointment" string="Convert to OP"
+                    <button name="action_convert_to_op" type="object" states="appointment" string="Convert to OP"
                             class = "oe_highlight"/>
 <!--                    <button name="%(action_patientcard)d" type="action"-->
 <!--                                    context="{'card_id': card_id, 'doctor_id': doctor_id}"-->
