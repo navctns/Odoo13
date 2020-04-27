@@ -49,6 +49,21 @@
         </field>
     </record>
     <!-- End Appointment form view -->
+    <!--Appointment tree view -->
+    <record model="ir.ui.view" id="appointment_tree_view">
+        <field name="name">op.tree</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="card_id"/>
+                <field name="patient_name"/>
+                <field name="doctor_id"/>
+                <field name="date"/>
+                <field name="token"/>
+            </tree>
+        </field>
+    </record>
+    <!--op tree view end -->
     <menuitem id="appointment_menu" name="Appointment"
           parent="patientdetails_menu"  action="action_appointment"
           groups="base.group_user"/>
