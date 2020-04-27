@@ -31,9 +31,9 @@
                                 <field name="patient_id" widget="res_partner_many2one" context="{'res_partner_search_mode': 'customer', 'show_address': 1, 'show_vat': True}" options='{"always_reload": True}'/>
                                 <field name="blood_group"/>
                                 <field name="dob"/>
-                                <field name="mobile"/>
+                                <field name="mobile" widget = 'phone'/>
                                 <field name="age" default=""/>
-                                <field name="phone"/>
+                                <field name="phone" widget = 'phone'/>
                                 <field name="sex" widget = 'radio'/>
                             </group>
                             <group col="4" colspan="4">
@@ -152,7 +152,7 @@
     <record model="ir.actions.act_window" id="action_consultation">
         <field name="name">Consultation</field>
         <field name="res_model">hospital.consult</field>
-        <field name="view_mode">form,tree,kanban</field>
+        <field name="view_mode">tree,form,kanban</field>
         <field name="help" type="html">
             <p class="o_view_noncontent_smiling_face">
                 create the first patient_record
@@ -178,7 +178,7 @@
                                 <field name="op_no"/>
                                 <field name="disease_id" widget="many2one"/>
                                 <field name="date" default=""/>
-                                <field name="diagnose"/>
+                                <field name="diagnose" />
                             </group>
                             <group col="4" colspan="4">
                             </group>
@@ -243,7 +243,8 @@
           groups="base.group_user"/>
 
     <menuitem id="consultation_menu" name="Consultation"
-          parent="main_hospitalmanagement_menu" action="action_consultation" groups="base.group_user"/>
+              parent="main_hospitalmanagement_menu" action="action_consultation"
+              groups="base.group_user"/>
 
     <!--op-menu-->
     <menuitem id="op_menu" name="OP"

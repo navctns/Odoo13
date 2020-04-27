@@ -96,6 +96,7 @@ class Consultation(models.Model):
 
     _name = "hospital.consult"
     _description = "Hospital management patent consultation"
+    _rec_name = 'card_id'
 
     card_id = fields.Many2one('patient.card',string="Patient Card", required = True)
     type = fields.Selection([
