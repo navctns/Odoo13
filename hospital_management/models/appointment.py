@@ -55,8 +55,35 @@ class Appointment(models.Model):
              }
 
     def action_redirect_to_appointment(self):
-        action = self.env.ref('hospital_management.action_patientcard').read()[0]
-        # action['domain'] = [('campaign_id', '=', self.id)]
-        action['context'] = {'default_card_id': self.card_id.id, 'default_doctor_id': self.doctor_id.id}
-        #write return action for appointment with context
-        return action
+        #check for existing tokens#
+        tokens = []
+        for r in self.env['hospital.op'].search([('date_op', '=', fields.Date.today())]):
+            # if r.date_op == fields.Date.today():#todays tokens
+            tokens.append(r.token_no)
+        print('today tokens', tokens)
+        r = self.env['hospital.op'].search([('date_op', '=', fields.Date.today())])
+        # if len(r) != 0:
+        #     tokens[-1] = None  # because it loads the current entry also
+        if self.token in tokens:
+            raise ValidationError("Token number should be unique")
+        #end check for existing tokens
+        else:
+            action = self.env.ref('hospital_management.action_patientcard').read()[0]
+            # action['domain'] = [('campaign_id', '=', self.id)]
+            action['context'] = {'default_card_id': self.card_id.id, 'default_doctor_id': self.doctor_id.id,
+                                 'default_token_no':self.token}
+            #write return action for appointment with context
+            return action
+
+    # @api.constrains('token')
+    # def _check_token(self):
+    #     tokens = []
+    #     for r in self.env['hospital.op'].search([('date_op', '=', fields.Date.today())]):
+    #         # if r.date_op == fields.Date.today():#todays tokens
+    #         tokens.append(r.token_no)
+    #     print('today tokens', tokens)
+    #     r = self.env['hospital.op'].search([('date_op', '=', fields.Date.today())])
+    #     if len(r) != 0:
+    #         tokens[-1] = None  # because it loads the current entry also
+    #     if self.token in tokens:
+    #         raise ValidationError("Token number should be unique")
