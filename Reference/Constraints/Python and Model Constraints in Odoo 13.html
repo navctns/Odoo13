@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns# fb: http://www.facebook.com/2008/fbml" lang="en"><head id="Head1">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><style type="text/css">.swal-icon--error{border-color:#f27474;-webkit-animation:animateErrorIcon .5s;animation:animateErrorIcon .5s}.swal-icon--error__x-mark{position:relative;display:block;-webkit-animation:animateXMark .5s;animation:animateXMark .5s}.swal-icon--error__line{position:absolute;height:5px;width:47px;background-color:#f27474;display:block;top:37px;border-radius:2px}.swal-icon--error__line--left{-webkit-transform:rotate(45deg);transform:rotate(45deg);left:17px}.swal-icon--error__line--right{-webkit-transform:rotate(-45deg);transform:rotate(-45deg);right:16px}@-webkit-keyframes animateErrorIcon{0%{-webkit-transform:rotateX(100deg);transform:rotateX(100deg);opacity:0}to{-webkit-transform:rotateX(0deg);transform:rotateX(0deg);opacity:1}}@keyframes animateErrorIcon{0%{-webkit-transform:rotateX(100deg);transform:rotateX(100deg);opacity:0}to{-webkit-transform:rotateX(0deg);transform:rotateX(0deg);opacity:1}}@-webkit-keyframes animateXMark{0%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}50%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}80%{-webkit-transform:scale(1.15);transform:scale(1.15);margin-top:-6px}to{-webkit-transform:scale(1);transform:scale(1);margin-top:0;opacity:1}}@keyframes animateXMark{0%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}50%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}80%{-webkit-transform:scale(1.15);transform:scale(1.15);margin-top:-6px}to{-webkit-transform:scale(1);transform:scale(1);margin-top:0;opacity:1}}.swal-icon--warning{border-color:#f8bb86;-webkit-animation:pulseWarning .75s infinite alternate;animation:pulseWarning .75s infinite alternate}.swal-icon--warning__body{width:5px;height:47px;top:10px;border-radius:2px;margin-left:-2px}.swal-icon--warning__body,.swal-icon--warning__dot{position:absolute;left:50%;background-color:#f8bb86}.swal-icon--warning__dot{width:7px;height:7px;border-radius:50%;margin-left:-4px;bottom:-11px}@-webkit-keyframes pulseWarning{0%{border-color:#f8d486}to{border-color:#f8bb86}}@keyframes pulseWarning{0%{border-color:#f8d486}to{border-color:#f8bb86}}.swal-icon--success{border-color:#a5dc86}.swal-icon--success:after,.swal-icon--success:before{content:"";border-radius:50%;position:absolute;width:60px;height:120px;background:#fff;-webkit-transform:rotate(45deg);transform:rotate(45deg)}.swal-icon--success:before{border-radius:120px 0 0 120px;top:-7px;left:-33px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-transform-origin:60px 60px;transform-origin:60px 60px}.swal-icon--success:after{border-radius:0 120px 120px 0;top:-11px;left:30px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-transform-origin:0 60px;transform-origin:0 60px;-webkit-animation:rotatePlaceholder 4.25s ease-in;animation:rotatePlaceholder 4.25s ease-in}.swal-icon--success__ring{width:80px;height:80px;border:4px solid hsla(98,55%,69%,.2);border-radius:50%;box-sizing:content-box;position:absolute;left:-4px;top:-4px;z-index:2}.swal-icon--success__hide-corners{width:5px;height:90px;background-color:#fff;padding:1px;position:absolute;left:28px;top:8px;z-index:1;-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}.swal-icon--success__line{height:5px;background-color:#a5dc86;display:block;border-radius:2px;position:absolute;z-index:2}.swal-icon--success__line--tip{width:25px;left:14px;top:46px;-webkit-transform:rotate(45deg);transform:rotate(45deg);-webkit-animation:animateSuccessTip .75s;animation:animateSuccessTip .75s}.swal-icon--success__line--long{width:47px;right:8px;top:38px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-animation:animateSuccessLong .75s;animation:animateSuccessLong .75s}@-webkit-keyframes rotatePlaceholder{0%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}5%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}12%{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}to{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}}@keyframes rotatePlaceholder{0%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}5%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}12%{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}to{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}}@-webkit-keyframes animateSuccessTip{0%{width:0;left:1px;top:19px}54%{width:0;left:1px;top:19px}70%{width:50px;left:-8px;top:37px}84%{width:17px;left:21px;top:48px}to{width:25px;left:14px;top:45px}}@keyframes animateSuccessTip{0%{width:0;left:1px;top:19px}54%{width:0;left:1px;top:19px}70%{width:50px;left:-8px;top:37px}84%{width:17px;left:21px;top:48px}to{width:25px;left:14px;top:45px}}@-webkit-keyframes animateSuccessLong{0%{width:0;right:46px;top:54px}65%{width:0;right:46px;top:54px}84%{width:55px;right:0;top:35px}to{width:47px;right:8px;top:38px}}@keyframes animateSuccessLong{0%{width:0;right:46px;top:54px}65%{width:0;right:46px;top:54px}84%{width:55px;right:0;top:35px}to{width:47px;right:8px;top:38px}}.swal-icon--info{border-color:#c9dae1}.swal-icon--info:before{width:5px;height:29px;bottom:17px;border-radius:2px;margin-left:-2px}.swal-icon--info:after,.swal-icon--info:before{content:"";position:absolute;left:50%;background-color:#c9dae1}.swal-icon--info:after{width:7px;height:7px;border-radius:50%;margin-left:-3px;top:19px}.swal-icon{width:80px;height:80px;border-width:4px;border-style:solid;border-radius:50%;padding:0;position:relative;box-sizing:content-box;margin:20px auto}.swal-icon:first-child{margin-top:32px}.swal-icon--custom{width:auto;height:auto;max-width:100%;border:none;border-radius:0}.swal-icon img{max-width:100%;max-height:100%}.swal-title{color:rgba(0,0,0,.65);font-weight:600;text-transform:none;position:relative;display:block;padding:13px 16px;font-size:27px;line-height:normal;text-align:center;margin-bottom:0}.swal-title:first-child{margin-top:26px}.swal-title:not(:first-child){padding-bottom:0}.swal-title:not(:last-child){margin-bottom:13px}.swal-text{font-size:16px;position:relative;float:none;line-height:normal;vertical-align:top;text-align:left;display:inline-block;margin:0;padding:0 10px;font-weight:400;color:rgba(0,0,0,.64);max-width:calc(100% - 20px);overflow-wrap:break-word;box-sizing:border-box}.swal-text:first-child{margin-top:45px}.swal-text:last-child{margin-bottom:45px}.swal-footer{text-align:right;padding-top:13px;margin-top:13px;padding:13px 16px;border-radius:inherit;border-top-left-radius:0;border-top-right-radius:0}.swal-button-container{margin:5px;display:inline-block;position:relative}.swal-button{background-color:#7cd1f9;color:#fff;border:none;box-shadow:none;border-radius:5px;font-weight:600;font-size:14px;padding:10px 24px;margin:0;cursor:pointer}.swal-button:not([disabled]):hover{background-color:#78cbf2}.swal-button:active{background-color:#70bce0}.swal-button:focus{outline:none;box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(43,114,165,.29)}.swal-button[disabled]{opacity:.5;cursor:default}.swal-button::-moz-focus-inner{border:0}.swal-button--cancel{color:#555;background-color:#efefef}.swal-button--cancel:not([disabled]):hover{background-color:#e8e8e8}.swal-button--cancel:active{background-color:#d7d7d7}.swal-button--cancel:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(116,136,150,.29)}.swal-button--danger{background-color:#e64942}.swal-button--danger:not([disabled]):hover{background-color:#df4740}.swal-button--danger:active{background-color:#cf423b}.swal-button--danger:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(165,43,43,.29)}.swal-content{padding:0 20px;margin-top:20px;font-size:medium}.swal-content:last-child{margin-bottom:20px}.swal-content__input,.swal-content__textarea{-webkit-appearance:none;background-color:#fff;border:none;font-size:14px;display:block;box-sizing:border-box;width:100%;border:1px solid rgba(0,0,0,.14);padding:10px 13px;border-radius:2px;transition:border-color .2s}.swal-content__input:focus,.swal-content__textarea:focus{outline:none;border-color:#6db8ff}.swal-content__textarea{resize:vertical}.swal-button--loading{color:transparent}.swal-button--loading~.swal-button__loader{opacity:1}.swal-button__loader{position:absolute;height:auto;width:43px;z-index:2;left:50%;top:50%;-webkit-transform:translateX(-50%) translateY(-50%);transform:translateX(-50%) translateY(-50%);text-align:center;pointer-events:none;opacity:0}.swal-button__loader div{display:inline-block;float:none;vertical-align:baseline;width:9px;height:9px;padding:0;border:none;margin:2px;opacity:.4;border-radius:7px;background-color:hsla(0,0%,100%,.9);transition:background .2s;-webkit-animation:swal-loading-anim 1s infinite;animation:swal-loading-anim 1s infinite}.swal-button__loader div:nth-child(3n+2){-webkit-animation-delay:.15s;animation-delay:.15s}.swal-button__loader div:nth-child(3n+3){-webkit-animation-delay:.3s;animation-delay:.3s}@-webkit-keyframes swal-loading-anim{0%{opacity:.4}20%{opacity:.4}50%{opacity:1}to{opacity:.4}}@keyframes swal-loading-anim{0%{opacity:.4}20%{opacity:.4}50%{opacity:1}to{opacity:.4}}.swal-overlay{position:fixed;top:0;bottom:0;left:0;right:0;text-align:center;font-size:0;overflow-y:auto;background-color:rgba(0,0,0,.4);z-index:10000;pointer-events:none;opacity:0;transition:opacity .3s}.swal-overlay:before{content:" ";display:inline-block;vertical-align:middle;height:100%}.swal-overlay--show-modal{opacity:1;pointer-events:auto}.swal-overlay--show-modal .swal-modal{opacity:1;pointer-events:auto;box-sizing:border-box;-webkit-animation:showSweetAlert .3s;animation:showSweetAlert .3s;will-change:transform}.swal-modal{width:478px;opacity:0;pointer-events:none;background-color:#fff;text-align:center;border-radius:5px;position:static;margin:20px auto;display:inline-block;vertical-align:middle;-webkit-transform:scale(1);transform:scale(1);-webkit-transform-origin:50% 50%;transform-origin:50% 50%;z-index:10001;transition:opacity .2s,-webkit-transform .3s;transition:transform .3s,opacity .2s;transition:transform .3s,opacity .2s,-webkit-transform .3s}@media (max-width:500px){.swal-modal{width:calc(100% - 20px)}}@-webkit-keyframes showSweetAlert{0%{-webkit-transform:scale(1);transform:scale(1)}1%{-webkit-transform:scale(.5);transform:scale(.5)}45%{-webkit-transform:scale(1.05);transform:scale(1.05)}80%{-webkit-transform:scale(.95);transform:scale(.95)}to{-webkit-transform:scale(1);transform:scale(1)}}@keyframes showSweetAlert{0%{-webkit-transform:scale(1);transform:scale(1)}1%{-webkit-transform:scale(.5);transform:scale(.5)}45%{-webkit-transform:scale(1.05);transform:scale(1.05)}80%{-webkit-transform:scale(.95);transform:scale(.95)}to{-webkit-transform:scale(1);transform:scale(1)}}</style><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="Theme Version" content="1.0"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="INDEX, FOLLOW"><title>Python and Model Constraints in Odoo 13</title><link rel="shortcut icon" type="image/x-icon" href="https://www.cybrosys.com/images/favicon.ico"><link rel="stylesheet" href="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/jquery.css"><link rel="Stylesheet" type="text/css" href="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/blog.css" media="screen">
+    <style>span#footer_RequiredFieldValidator10,span#footer_RequiredFieldValidator11,span#footer_RequiredFieldValidator12,span#footer_RequiredFieldValidator13{float:right;font-size:12px;font-weight:100!important}</style>
+    <style>.post-updates{margin-left:30px}.stick{position:fixed;top:45px;margin:6% -20px;padding:0 147px 0 20px}.recent-posts{padding-top:5%;padding-bottom:5%;border:1px solid #e7e7e7}.recent-posts img{position:relative;width:50px;height:50px;border:3px solid #e7e7e7}.recent-posts h4{position:relative;margin:0 0 5px 0;text-transform:lowercase;font-size:15px}.recent-posts h4:first-letter{text-transform:uppercase}.recent-posts p{position:relative;text-transform:lowercase}.recent-posts p:first-letter{text-transform:uppercase}textarea#txtComment{background:#F1F3F4!important}@media (max-width:1199px){.stick{width:31%}.post-updates{margin:0 18px!important}.recent-posts p{padding:0 10px 0 25px!important}.recent-posts h4{padding:0 10px 0 25px!important}}@media (max-width:991px){.post-updates{border:none!important;margin:0 -6px!important}.stick{width:100%!important}}@media (max-width:480px){.newrf{width:45%!important}.newrt{width:45%!important}.newri{width:45%!important}.newrg{width:45%!important}}.navigation a:link,.navigation a:visited{color:#fff;font-family:'Roboto',sans-serif;font-size:14px;font-weight:400;text-decoration:none;padding:9px}.previous{background-color:#000;color:white}.next{background-color:#000;color:white}.next:hover{background-color:#ddd!important;color:#f1f1f1!important}#tagdiv span {
+    background: #f1f1f1;
+    color: #4e4e4e;
+    padding: 3px 8px;
+    border-radius: 3px;
+    box-shadow: none;
+    margin-left: 5px;
+    font-size: 11px !important;
+}
+#tagdiv{margin-bottom:20px;margin-left:-9px}</style> 
+    <!-- Load Twitter JS-API asynchronously -->
+    <script async="" src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/async-ads.js"></script><script async="" src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/default" charset="UTF-8" crossorigin="*"></script><script type="text/javascript" async="" src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/analytics.js"></script><script async="" src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/gtm.js"></script><script type="text/javascript">        (function () { var twitterWidgets = document.createElement('script'); twitterWidgets.type = 'text/javascript'; twitterWidgets.async = !0; twitterWidgets.src = 'https://platform.twitter.com/widgets.js'; document.getElementsByTagName('head')[0].appendChild(twitterWidgets) })();</script><script type="text/javascript" async="" src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/widgets.js"></script>
+    <!-- Breadcrumbs Schema  -->
+    <script type="application/ld+json">{"@context":"https://schema.org/","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"cybrosys.com","item":"https://www.cybrosys.com/"},{"@type":"ListItem","position":2,"name":"blog","item":"https://www.cybrosys.com/blog/"}]}</script>
+    <!-- Google Tag Manager -->
+    <script>        (function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = !0; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f) })(window, document, 'script', 'dataLayer', 'GTM-54BSZHH');</script>
+    <!-- End Google Tag Manager -->    
+    <script src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/sweetalert_002.js"></script>
+<script type="application/ld+json" src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/Schema.js"></script><meta name="keywords" content="odoo erp, cybrosys, odoo 13, constraints odoo 13, python constraints"><meta name="description" content="Odoo helps you to set constraints to variants. In odoo, we can perform this using python and model constraints."><link rel="canonical" href="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/python-model-constraints-odoo-13_004.html"><meta property="fb:app_id" content="1220643824631920"><meta property="og:image" content="https://www.cybrosys.com/blog/Uploads/BlogImage/python-model-constraints-odoo-13.png"><meta property="og:title" content="Python and Model Constraints in Odoo 13"><meta property="og:description" content="Odoo helps you to set constraints to variants. In odoo, we can perform this using python and model constraints. "><meta property="og:type" content="article"><meta property="og:site_name" content="Cybrosys"><meta property="og:url" content="https://www.cybrosys.com/blog/python-model-constraints-odoo-13"><meta name="twitter:card" content="summary"><meta name="twitter:site" content="@Cybrosys"><meta name="twitter:title" content="Python and Model Constraints in Odoo 13"><meta name="twitter:description" content="Odoo helps you to set constraints to variants. In odoo, we can perform this using python and model constraints. "><meta name="twitter:image" content="https://www.cybrosys.com/blog/Uploads/BlogImage/python-model-constraints-odoo-13.png"><meta property="og:schema"><script src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/OneSignalPageSDKES6.js" async=""></script><style type="text/css">@keyframes tawkMaxOpen{0%{opacity:0;transform:translate(0, 30px);;}to{opacity:1;transform:translate(0, 0px);}}@-moz-keyframes tawkMaxOpen{0%{opacity:0;transform:translate(0, 30px);;}to{opacity:1;transform:translate(0, 0px);}}@-webkit-keyframes tawkMaxOpen{0%{opacity:0;transform:translate(0, 30px);;}to{opacity:1;transform:translate(0, 0px);}}#HmxvBAP-1587712045614{outline:none!important;visibility:visible!important;resize:none!important;box-shadow:none!important;overflow:visible!important;background:none!important;opacity:1!important;filter:alpha(opacity=100)!important;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity1)!important;-moz-opacity:1!important;-khtml-opacity:1!important;top:auto!important;right:10px!important;bottom:0px!important;left:auto!important;position:fixed!important;border:0!important;min-height:0!important;min-width:0!important;max-height:none!important;max-width:none!important;padding:0!important;margin:0!important;-moz-transition-property:none!important;-webkit-transition-property:none!important;-o-transition-property:none!important;transition-property:none!important;transform:none!important;-webkit-transform:none!important;-ms-transform:none!important;width:auto!important;height:auto!important;display:none!important;z-index:2000000000!important;background-color:transparent!important;cursor:auto!important;float:none!important;border-radius:unset!important;pointer-events:auto!important}#hAm87dv-1587712045619.open{animation : tawkMaxOpen .25s ease!important;}</style><script src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/cse_element__en.js" type="text/javascript"></script><link type="text/css" rel="stylesheet" href="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/defaulten.css"><link type="text/css" rel="stylesheet" href="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/default.css"><style></style><style type="text/css">.gsc-control-cse{font-family:arial, sans-serif}.gsc-control-cse .gsc-table-result{font-family:arial, sans-serif}.gsc-refinementsGradient{background:linear-gradient(to left,rgba(255,255,255,1),rgba(255,255,255,0))}.gsc-control-cse{border-color:#FFFFFF;background-color:#FFFFFF}input.gsc-input,.gsc-input-box,.gsc-input-box-hover,.gsc-input-box-focus{border-color:#DBE3E3}.gsc-search-button-v2,.gsc-search-button-v2:hover,.gsc-search-button-v2:focus{border-color:#BC0202;background-color:#BC0202;background-image:none;filter:none}.gsc-search-button-v2 svg{fill:#FFFFFF}.gsc-tabHeader.gsc-tabhActive,.gsc-refinementHeader.gsc-refinementhActive{color:#1A73E8;border-color:#1A73E8;background-color:#FFFFFF}.gsc-tabHeader.gsc-tabhInactive,.gsc-refinementHeader.gsc-refinementhInactive{color:#666666;border-color:#666666;background-color:#FFFFFF}.gsc-webResult.gsc-result,.gsc-results .gsc-imageResult{border-color:#FFFFFF;background-color:#FFFFFF}.gsc-webResult.gsc-result:hover,.gsc-imageResult:hover{border-color:#FFFFFF;background-color:#FFFFFF}.gs-webResult.gs-result a.gs-title:link,.gs-webResult.gs-result a.gs-title:link b,.gs-imageResult a.gs-title:link,.gs-imageResult a.gs-title:link b{color:#1155CC}.gs-webResult.gs-result a.gs-title:visited,.gs-webResult.gs-result a.gs-title:visited b,.gs-imageResult a.gs-title:visited,.gs-imageResult a.gs-title:visited b{color:#1155CC}.gs-webResult.gs-result a.gs-title:hover,.gs-webResult.gs-result a.gs-title:hover b,.gs-imageResult a.gs-title:hover,.gs-imageResult a.gs-title:hover b{color:#1155CC}.gs-webResult.gs-result a.gs-title:active,.gs-webResult.gs-result a.gs-title:active b,.gs-imageResult a.gs-title:active,.gs-imageResult a.gs-title:active b{color:#1155CC}.gsc-cursor-page{color:#1155CC}a.gsc-trailing-more-results:link{color:#1155CC}.gs-webResult .gs-snippet,.gs-imageResult .gs-snippet,.gs-fileFormatType{color:#333333}.gs-webResult div.gs-visibleUrl,.gs-imageResult div.gs-visibleUrl{color:#009933}.gs-webResult div.gs-visibleUrl-short{color:#009933}.gs-webResult div.gs-visibleUrl-short{display:none}.gs-webResult div.gs-visibleUrl-long{display:block}.gs-promotion div.gs-visibleUrl-short{display:none}.gs-promotion div.gs-visibleUrl-long{display:block}.gsc-cursor-box{border-color:#FFFFFF}.gsc-results .gsc-cursor-box .gsc-cursor-page{border-color:#666666;background-color:#FFFFFF;color:#666666}.gsc-results .gsc-cursor-box .gsc-cursor-current-page{border-color:#1A73E8;background-color:#FFFFFF;color:#1A73E8}.gsc-webResult.gsc-result.gsc-promotion{border-color:#FFFFFF;background-color:#F6F6F6}.gsc-completion-title{color:#1155CC}.gsc-completion-snippet{color:#333333}.gs-promotion a.gs-title:link,.gs-promotion a.gs-title:link *,.gs-promotion .gs-snippet a:link{color:#1155CC}.gs-promotion a.gs-title:visited,.gs-promotion a.gs-title:visited *,.gs-promotion .gs-snippet a:visited{color:#1155CC}.gs-promotion a.gs-title:hover,.gs-promotion a.gs-title:hover *,.gs-promotion .gs-snippet a:hover{color:#1155CC}.gs-promotion a.gs-title:active,.gs-promotion a.gs-title:active *,.gs-promotion .gs-snippet a:active{color:#1155CC}.gs-promotion .gs-snippet,.gs-promotion .gs-title .gs-promotion-title-right,.gs-promotion .gs-title .gs-promotion-title-right *{color:#333333}.gs-promotion .gs-visibleUrl,.gs-promotion .gs-visibleUrl-short{color:#009933}.gcsc-find-more-on-google{color:#1155CC}.gcsc-find-more-on-google-magnifier{fill:#1155CC}</style><style type="text/css">.gscb_a{display:inline-block;font:27px/13px arial,sans-serif}.gsst_a .gscb_a{color:#a1b9ed;cursor:pointer}.gsst_a:hover .gscb_a,.gsst_a:focus .gscb_a{color:#36c}.gsst_a{display:inline-block}.gsst_a{cursor:pointer;padding:0 4px}.gsst_a:hover{text-decoration:none!important}.gsst_b{font-size:16px;padding:0 2px;position:relative;user-select:none;-moz-user-select:none;white-space:nowrap}.gsst_e{vertical-align:middle;opacity:0.55;}.gsst_a:hover .gsst_e,.gsst_a:focus .gsst_e{opacity:0.72;}.gsst_a:active .gsst_e{opacity:1;}.gsst_f{background:white;text-align:left}.gsst_g{background-color:white;border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);margin:-1px -3px;padding:0 6px}.gsst_h{background-color:white;height:1px;margin-bottom:-1px;position:relative;top:-1px}.gsib_a{width:100%;padding:4px 6px 0}.gsib_a,.gsib_b{vertical-align:top}.gssb_c{border:0;position:absolute;z-index:989}.gssb_e{border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);cursor:default}.gssb_f{visibility:hidden;white-space:nowrap}.gssb_k{border:0;display:block;position:absolute;top:0;z-index:988}.gsdd_a{border:none!important}.gsq_a{padding:0}.gssb_a{padding:0 7px}.gssb_a,.gssb_a td{white-space:nowrap;overflow:hidden;line-height:22px}#gssb_b{font-size:11px;color:#36c;text-decoration:none}#gssb_b:hover{font-size:11px;color:#36c;text-decoration:underline}.gssb_g{text-align:center;padding:8px 0 7px;position:relative}.gssb_h{font-size:15px;height:28px;margin:0.2em}.gssb_i{background:#eee}.gss_ifl{visibility:hidden;padding-left:5px}.gssb_i .gss_ifl{visibility:visible}a.gssb_j{font-size:13px;color:#36c;text-decoration:none;line-height:100%}a.gssb_j:hover{text-decoration:underline}.gssb_l{height:1px;background-color:#e5e5e5}.gssb_m{color:#000;background:#fff}.gssb_a{padding:0 9px}.gsib_a{padding:5px 9px 4px 9px}.gscb_a{line-height:27px}.gssb_e{border:0}.gssb_l{margin:5px 0}input.gsc-input::-webkit-input-placeholder{font-size:14px}input.gsc-input:-moz-placeholder{font-size:14px}input.gsc-input::-moz-placeholder{font-size:14px}input.gsc-input:-ms-input-placeholder{font-size:14px}input.gsc-input:focus::-webkit-input-placeholder{color:transparent}input.gsc-input:focus:-moz-placeholder{color:transparent}input.gsc-input:focus::-moz-placeholder{color:transparent}input.gsc-input:focus:-ms-input-placeholder{color:transparent}.gssb_c .gsc-completion-container{position:static}.gssb_c{z-index:5000}.gsc-completion-container table{background:transparent;font-size:inherit;font-family:inherit}.gssb_c > tbody > tr,.gssb_c > tbody > tr > td,.gssb_d,.gssb_d > tbody > tr,.gssb_d > tbody > tr > td,.gssb_e,.gssb_e > tbody > tr,.gssb_e > tbody > tr > td{padding:0;margin:0;border:0}.gssb_a table,.gssb_a table tr,.gssb_a table tr td{padding:0;margin:0;border:0}</style><link rel="stylesheet" href="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/OneSignalSDKStyles.css"></head>
+<body><div role="dialog" aria-live="polite" aria-label="cookieconsent" aria-describedby="cookieconsent:desc" class="cc-window cc-banner cc-type-info cc-theme-block cc-bottom cc-color-override--767653650 cc-invisible" style="display: none;"><!--googleoff: all--><span id="cookieconsent:desc" class="cc-message">Our
+ website is made agreeable with the GDPR requirements. Click to view the
+ refreshed privacy policy of ours. According to our privacy policy, we 
+use cookies for different highlights. We trust that is alright, If you 
+disagree, disable the cookies. <a aria-label="learn more about cookies" role="button" tabindex="0" class="cc-link" href="https://www.cybrosys.com/privacy-policy/" rel="noopener noreferrer nofollow" target="_blank">Privacy policy</a></span><div class="cc-compliance"><a aria-label="dismiss cookie message" role="button" tabindex="0" class="cc-btn cc-dismiss">Accept</a></div><!--googleon: all--></div> 
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-54BSZHH" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->  
+<form name="form1" method="post" action="./blogView.aspx?title=python-model-constraints-odoo-13" onsubmit="javascript:return WebForm_OnSubmit();" id="form1">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMjEwMTkyMTUxNQ8WBB4FdGl0bGUFIHB5dGhvbi1tb2RlbC1jb25zdHJhaW50cy1vZG9vLTEzHgdlbnRyeWlkBQQ1OTYxFgICAw9kFhYCAw8PFgQeCEltYWdlVXJsBVRodHRwczovL3d3dy5jeWJyb3N5cy5jb20vYmxvZy9VcGxvYWRzL0Jsb2dJbWFnZS9weXRob24tbW9kZWwtY29uc3RyYWludHMtb2Rvby0xMy5wbmceDUFsdGVybmF0ZVRleHQFJHB5dGhvbi1tb2RlbC1jb25zdHJhaW50cy1vZG9vLTEzLnBuZ2RkAgUPDxYEHwIFVWh0dHBzOi8vd3d3LmN5YnJvc3lzLmNvbS9ibG9nL1VwbG9hZHMvQmxvZ2dlci9VcGxvYWRlZC9CbG9nZ2VyXzYzNzAwMzE2MjE1NzAyNDQ4MS5wbmcfAwUeQmxvZ2dlcl82MzcwMDMxNjIxNTcwMjQ0ODEucG5nZGQCBw8PFgIeBFRleHQFDVZpbmF5YSBTdXJlc2hkZAIJDw8WAh8EBQoyMi8wNC8yMDIwZGQCCw8PFgIfBAUnUHl0aG9uIGFuZCBNb2RlbCBDb25zdHJhaW50cyBpbiBPZG9vIDEzZGQCDw8PFgIfBAWgXzxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7ICI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBmb250LXNpemU6IDE0cHg7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij5PZG9vIGhlbHBzIHlvdSB0byBzZXQgY29uc3RyYWludHMgdG8gdmFyaWFudHMuIEluIG9kb28sIHdlIGNhbiBwZXJmb3JtIHRoaXMgdXNpbmcgcHl0aG9uIGFuZCBtb2RlbCBjb25zdHJhaW50cy4gSW4gb2RvbyBweXRob24gY29uc3RyYWludHMgYXJlIHNwZWNpZmllZCBhbG9uZyB3aXRoIG1ldGhvZHMuIExldCB1cyBzZWUgaG93IGl0IGNhbiBiZSBkZWZpbmVkIGluIG9kb28uPC9zcGFuPjwvZGl2PjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7ICI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PGJyPjwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyAiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC1zaXplOiAxNHB4OyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+SW4gcHl0aG9uIGNvbnN0cmFpbnQgaXMgZGVmaW5lZCBhbG9uZyB3aXRoIGEgbWV0aG9kIGRlY29yYXRlZCB3aXRoIGNvbnN0cmFpbnMoKTwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyAiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC1zaXplOiAxNHB4OyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PGJyPjwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyAiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC1zaXplOiAxNHB4OyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+U3VwcG9zZSBJIG5lZWQgdG8gYWRkIGEgY29uc3RyYWludCB3aGlsZSBzYXZpbmcgYSByZWNvcmQgSSBjYW4gc2ltcGx5IGFkZCB0aGUgYmVsb3cgY29kZS48L3NwYW4+PC9kaXY+PGRpdiBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgIj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGZvbnQtc2l6ZTogMTRweDsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPjxicj48L3NwYW4+PC9kaXY+PGRpdiBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgIj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGZvbnQtc2l6ZTogMTRweDsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPlRoZSBiZWxvdyBjb2RlIHJlc3RyaWN0cyB0aGUgdXNlciBmcm9tIGVudGVyaW5nIGEgbmVnYXRpdmUgdmFsdWUgZm9yIHRoZSBhbW91bnQuPC9zcGFuPjwvZGl2PjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7ICI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PGJyPjwvc3Bhbj48L2Rpdj48cHJlPjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7Ij48c3BhbiBzdHlsZT0iZm9udC1zaXplOiAxNHB4OyBmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPmZyb20gb2Rvby5leGNlcHRpb25zIGltcG9ydCBWYWxpZGF0aW9uRXJyb3I8L3NwYW4+PC9kaXY+PHNwYW4gc3R5bGU9ImNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyI+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZTogMTRweDsgZm9udC1mYW1pbHk6IFZlcmRhbmE7Ij5AYXBpLmNvbnN0cmFpbnMo4oCYYW1vdW504oCZKTwvc3Bhbj48L2Rpdj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGZvbnQtc2l6ZTogMTRweDsiPjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7Ij5kZWYgX2NoZWNrX3NvbWV0aGluZyhzZWxmKTo8L2Rpdj48L3NwYW4+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBmb250LXNpemU6IDE0cHg7Ij48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyI+Jm5ic3A7ICZuYnNwOyBmb3IgcmVjb3JkIGluIHNlbGY6PC9kaXY+PC9zcGFuPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC1zaXplOiAxNHB4OyI+PGRpdiBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsiPiZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyBpZiByZWNvcmQuYW1vdW50ICZsdDsgMDo8L2Rpdj48L3NwYW4+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBmb250LXNpemU6IDE0cHg7Ij48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyI+Jm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgcmFpc2UgVmFsaWRhdGlvbkVycm9yKOKAnEFtb3VudCBjYW5ub3QgYmUgbmVnYXRpdmXigJ0pPC9kaXY+PC9zcGFuPjwvc3Bhbj48L3ByZT48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyAiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPjxicj48L3NwYW4+PC9kaXY+PGRpdiBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgIj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGZvbnQtc2l6ZTogMTRweDsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPlRoZSBmaWVsZCBmb3Igd2hpY2ggY29uc3RyYWludCBpcyB0byBiZSBhcHBsaWVkIGlzIHNwZWNpZmllZCBhbG9uZyB3aXRoIHRoZSBkZWNvcmF0b3IgY29uc3RyYWlucygpLiZuYnNwOzwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyAiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC1zaXplOiAxNHB4OyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PGJyPjwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyAiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC1zaXplOiAxNHB4OyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+WW91IGNhbiBwcm92aWRlIG11bHRpcGxlIGZpZWxkIHZhbHVlcyBhcyBhcmd1bWVudHMgaW4gdGhlIGZ1bmN0aW9uLiBTbyB0aGF0IHRoZSBmdW5jdGlvbiBnZXRzIGludm9rZWQgZWFjaCB0aW1lIHRoZSB2YWx1ZSBpbiB0aGUgZmllbGQgZ2V0cyBtb2RpZmllZC9jaGFuZ2VkLjwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyAiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPjxicj48L3NwYW4+PC9kaXY+PHByZT48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyI+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZTogMTRweDsgZm9udC1mYW1pbHk6IFZlcmRhbmE7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij5AYXBpLmNvbnN0cmFpbnMoZmllbGQxLCBmaWVsZDIpPC9zcGFuPjwvZGl2PjxzcGFuIHN0eWxlPSJjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PGRpdiBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsiPjxzcGFuIHN0eWxlPSJmb250LXNpemU6IDE0cHg7IGZvbnQtZmFtaWx5OiBWZXJkYW5hOyI+ZGVmIF9jaGVja192YWx1ZXMoc2VsZik6PC9zcGFuPjwvZGl2PjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC1zaXplOiAxNHB4OyI+PGRpdiBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsiPiZuYnNwOyAmbmJzcDsgZm9yIHJlY29yZCBpbiBzZWxmOjwvZGl2Pjwvc3Bhbj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGZvbnQtc2l6ZTogMTRweDsiPjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7Ij4mbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgaWYgcmVjb3JkLmZpZWxkMSA9PSByZWNvcmQuZmllbGQyOjwvZGl2Pjwvc3Bhbj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGZvbnQtc2l6ZTogMTRweDsiPjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7Ij4mbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICZuYnNwOyByYWlzZSBWYWxpZGF0aW9uRXJyb3IoIkZpZWxkcyBmaWVsZDEgYW5kIGZpZWxkMiBtdXN0IGJlIG5vdCBiZSBzYW1lIik8L2Rpdj48L3NwYW4+PC9zcGFuPjwvcHJlPjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7ICI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PGJyPjwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyAiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC1zaXplOiAxNHB4OyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+QnV0IHRoZXJlIGFyZSBjZXJ0YWluIGxpbWl0YXRpb25zIGZvciB1c2luZyBjb25zdHJhaW5zKCk6PC9zcGFuPjwvZGl2PjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7ICI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBmb250LXNpemU6IDE0cHg7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij48c3BhbiBzdHlsZT0iZm9udC13ZWlnaHQ6IGJvbGQ7IGZvbnQtc2l6ZTogMTRweDsiPjEuIDwvc3Bhbj48c3BhbiBzdHlsZT0iZm9udC1zaXplOiAxNHB4OyI+Y29uc3RyYWlucygpIGFyZSBub3Qgc3VwcG9ydGVkIGFsb25nIHdpdGggcmVsYXRlZCBmaWVsZHMuIFRoZXkgY2FuIG9ubHkgYmUgYXBwbGllZCB0byBzaW1wbGUgZmllbGRzLiBGb3IgZXhhbXBsZSByZWxhdGVkIGZpZWxkcyBsaWtlIHBhcnRuZXJfaWQucGhvbmUuPC9zcGFuPjwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyAiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC1zaXplOiAxNHB4OyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PHNwYW4gc3R5bGU9ImZvbnQtd2VpZ2h0OiBib2xkOyBmb250LXNpemU6IDE0cHg7Ij4yLiA8L3NwYW4+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZTogMTRweDsiPmNvbnN0cmFpbnMoKSBjYW4gb25seSBiZSBhcHBsaWVkIHRvIGZpZWxkcyB0aGF0IGFyZSBpbmNsdWRlZCBpbiB0aGUgY3JlYXRlIGFuZCB3cml0ZSBjYWxsIGJlY2F1c2UgaWYgdGhlIGZpZWxkIGlzIHdoaWNoIGlzIG5vdCBjb250YWluZWQgaW4gdGhlIHZpZXcgd2lsbCBub3QgdHJpZ2dlciBhIGNhbGwgdG8gcHl0aG9uIGZ1bmN0aW9uLjwvc3Bhbj48L3NwYW4+PC9kaXY+PGRpdiBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgIj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij48YnI+PC9zcGFuPjwvZGl2PjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7ICI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBmb250LXNpemU6IDE0cHg7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij5TZWNvbmRseSwgd2UgaGF2ZSBTUUwgY29uc3RyYWludHMuIFRoZSBTUUwgY29uc3RyYWludHMgYXJlIGFwcGxpZWQgb24gbW9kZWxzIHVzaW5nIF9zcWxfY29uc3RyYWludHMuPC9zcGFuPjwvZGl2PjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7ICI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBmb250LXNpemU6IDE0cHg7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij48YnI+PC9zcGFuPjwvZGl2PjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7ICI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBmb250LXNpemU6IDE0cHg7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij5JbiBvZG9vIF9zcWxfY29uc3RyYWludHMgY29uc2lzdCBvZiB0aHJlZSBwYXJ0cyB0aGV5IGFyZSBuYW1lLCBkZWZpbml0aW9uLCBhbmQgbWVzc2FnZS48L3NwYW4+PC9kaXY+PGRpdiBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgIj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij48YnI+PC9zcGFuPjwvZGl2PjxwcmU+PGRpdiBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsiPjxzcGFuIHN0eWxlPSJmb250LXNpemU6IDE0cHg7IGZvbnQtZmFtaWx5OiBWZXJkYW5hOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+X3NxbF9jb25zdHJhaW50cyA9IFs8L3NwYW4+PC9kaXY+PHNwYW4gc3R5bGU9ImNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyI+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZTogMTRweDsgZm9udC1mYW1pbHk6IFZlcmRhbmE7Ij4mbmJzcDsgJm5ic3A7ICZuYnNwOyAmbmJzcDsgKCd1bmlxdWVfZW1haWwnLCAndW5pcXVlIChlbWFpbCknLCAnRW1haWwgYWRkcmVzcyBhbHJlYWR5IGV4aXN0cyEnKTwvc3Bhbj48L2Rpdj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGZvbnQtc2l6ZTogMTRweDsiPjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7Ij4mbmJzcDsgJm5ic3A7IF08L2Rpdj48L3NwYW4+PC9zcGFuPjwvcHJlPjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7ICI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PGJyPjwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyAiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC1zaXplOiAxNHB4OyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+VGhlIGFib3ZlIGNvZGUgaXMgdXNlZCB0byBwcmV2ZW50IHRoZSBhZGRpdGlvbiBvZiByZWNvcmRzIHdpdGggdGhlIHNhbWUgZW1haWwuIEJlY2F1c2UgaXQgaXMgaXJyZWxldmFudCB0byBhZGQgdGhlIHNhbWUgZW1haWwgdG8gYmxhY2tsaXN0IHR3aWNlLiBTbyBmb3Igc2l0dWF0aW9ucyBsaWtlIHRoaXMgd2hlcmUgeW91IG5lZWQgdG8gYXBwbHkgY29uc3RyYWludHMgb2YgdGhpcyB0eXBlIHRoZSBfc3FsX2NvbnN0cmFpbnRzIGNvbWVzIGludG8gYWN0aW9uLjwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyAiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC1zaXplOiAxNHB4OyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PHNwYW4gc3R5bGU9ImZvbnQtd2VpZ2h0OiBib2xkOyBmb250LXNpemU6IDE0cHg7Ij5uYW1lIC0mbmJzcDs8L3NwYW4+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZTogMTRweDsiPiBOYW1lIGZvciB0aGUgc3FsIGNvbnN0cmFpbnQoZWc6J3VuaXF1ZV9lbWFpbCcpPC9zcGFuPjwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyAiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC1zaXplOiAxNHB4OyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PHNwYW4gc3R5bGU9ImZvbnQtd2VpZ2h0OiBib2xkOyBmb250LXNpemU6IDE0cHg7Ij5kZWZpbml0aW9uIC0gPC9zcGFuPjxzcGFuIHN0eWxlPSJmb250LXNpemU6IDE0cHg7Ij5Db25zdHJhaW50IHRvIGJlIGFwcGxpZWQgb24gdGhlIHRhYmxlLihlZzp1bmlxdWUgKGVtYWlsKSk8L3NwYW4+PC9zcGFuPjwvZGl2PjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7ICI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBmb250LXNpemU6IDE0cHg7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij48c3BhbiBzdHlsZT0iZm9udC13ZWlnaHQ6IGJvbGQ7IGZvbnQtc2l6ZTogMTRweDsiPm1lc3NhZ2UgLSA8L3NwYW4+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZTogMTRweDsiPlZhbGlkYXRpb24gbWVzc2FnZSB0byBiZSBkaXNwbGF5ZWQuIChlZzogRW1haWwgYWRkcmVzcyBhbHJlYWR5IGV4aXN0cyEpPC9zcGFuPjwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyAiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPjxicj48L3NwYW4+PC9kaXY+PGRpdiBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgIj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGZvbnQtc2l6ZTogMTRweDsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPlNvbWUgb2YgdGhlIHVzZWZ1bCBjb25zdHJhaW50IHR5cGVzIGFyZSBzaG93biBiZWxvdzo8L3NwYW4+PC9kaXY+PGRpdiBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgIj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGZvbnQtc2l6ZTogMTRweDsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPjxzcGFuIHN0eWxlPSJmb250LXdlaWdodDogYm9sZDsgZm9udC1zaXplOiAxNHB4OyI+Q2hlY2sgY29uc3RyYWludDo8L3NwYW4+PHNwYW4gc3R5bGU9ImZvbnQtc2l6ZTogMTRweDsiPiBBIGNoZWNrIGNvbnN0cmFpbnQgaXMgZGVmaW5lZCB1c2luZyB0aGUgQ0hFQ0sga2V5d29yZC5BcyB0aGUgbmFtZSBzdWdnZXN0cyBpdCBpcyB1c2VkIHRvIGNoZWNrIHdoZXRoZXIgaXQgc2F0aXNmaWVzIGEgY2VydGFpbiBjb25kaXRpb24uPC9zcGFuPjwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyAiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC1zaXplOiAxNHB4OyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PGJyPjwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyAiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC1zaXplOiAxNHB4OyBmb250LXdlaWdodDogYm9sZDsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPkVnOjwvc3Bhbj48L2Rpdj48cHJlPjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7Ij48c3BhbiBzdHlsZT0iZm9udC1zaXplOiAxNHB4OyBmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPiZuYnNwO19zcWxfY29uc3RyYWludHMgPSBbPC9zcGFuPjwvZGl2PjxzcGFuIHN0eWxlPSJjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PGRpdiBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC1zaXplOiAxNHB4OyI+Jm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICgnYm9tX3F0eV96ZXJvJywgJ0NIRUNLIChwcm9kdWN0X3F0eSZndDs9MCknLCAnQWxsIHByb2R1Y3QgcXVhbnRpdGllcyBtdXN0IGJlIGdyZWF0ZXIgb3IgZXF1YWwgdG8gMC7igJkpXTwvc3Bhbj48L2Rpdj48L3NwYW4+PC9wcmU+PGRpdiBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgIj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij48YnI+PC9zcGFuPjwvZGl2PjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7ICI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBmb250LXNpemU6IDE0cHg7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij5Ob3QtTnVsbCBDb25zdHJhaW50czogTk9UIE5VTEwga2V5d29yZCBpcyB1c2VkIHRvIHNwZWNpZnkgbm90IG51bGwgY29uc3RyYWluLCB3aGljaCBtZWFucyZuYnNwOzwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyAiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC1zaXplOiAxNHB4OyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+Y2VydGFpbiB2YWx1ZXMgb3IgZmllbGRzIGNhbm5vdCBiZSBOVUxMLjwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyAiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC1zaXplOiAxNHB4OyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PGJyPjwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyAiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC1zaXplOiAxNHB4OyBmb250LXdlaWdodDogYm9sZDsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPkVnOjwvc3Bhbj48L2Rpdj48cHJlPjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7Ij48c3BhbiBzdHlsZT0iZm9udC1zaXplOiAxNHB4OyBmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPl9zcWxfY29uc3RyYWludHMgPSBbPC9zcGFuPjwvZGl2PjxzcGFuIHN0eWxlPSJjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PGRpdiBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsiPjxzcGFuIHN0eWxlPSJmb250LXNpemU6IDE0cHg7IGZvbnQtZmFtaWx5OiBWZXJkYW5hOyI+Jm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICgnc2FsZV9vcmRlcl9yZXF1aXJlZF9pZl9zYWxlX2xpbmUnLCAiQ0hFQ0soKHNhbGVfbGluZV9pZCBJUyBOT1QgTlVMTCBBTkQgc2FsZV9vcmRlcl9pZCBJUyBOT1QgTlVMTCkgT1IgKHNhbGVfbGluZV9pZCBJUyBOVUxMKSkiLCAnVGhlIFByb2plY3Qgc2hvdWxkIGJlIGxpbmtlZCB0byBhIFNhbGUgT3JkZXIgdG8gc2VsZWN0IGFuIFNhbGUgT3JkZXIgSXRlbXMuJyksPC9zcGFuPjwvZGl2PjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC1zaXplOiAxNHB4OyI+PGRpdiBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsiPiZuYnNwOyAmbmJzcDsgXTwvZGl2Pjwvc3Bhbj48L3NwYW4+PC9wcmU+PGRpdiBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgIj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGZvbnQtc2l6ZTogMTRweDsgZm9udC13ZWlnaHQ6IGJvbGQ7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij48YnI+PC9zcGFuPjwvZGl2PjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7ICI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBmb250LXNpemU6IDE0cHg7IGZvbnQtd2VpZ2h0OiBib2xkOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+VW5pcXVlIENvbnN0cmFpbnQ6PC9zcGFuPjwvZGl2PjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7ICI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBmb250LXNpemU6IDE0cHg7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij5JdCBpcyB1c2VkIGFsb25nIHdpdGggYSDigJh1bmlxdWXigJkga2V5d29yZC48L3NwYW4+PC9kaXY+PGRpdiBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgIj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGZvbnQtc2l6ZTogMTRweDsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPlRoZSB1bmlxdWUgY29uc3RyYWludCBoZWxwcyB5b3UgdG8gY2hlY2sgd2hldGhlciBhIHNwZWNpZmllZCBjb2x1bW4gaW4gcm93cyBzYXRpc2ZpZXMgdGhlIHVuaXF1ZSBjb25zdHJhaW50Ljwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyAiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC1zaXplOiAxNHB4OyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PGJyPjwvc3Bhbj48L2Rpdj48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyAiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC1zaXplOiAxNHB4OyBmb250LXdlaWdodDogYm9sZDsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPkVnOjwvc3Bhbj48L2Rpdj48cHJlPjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7Ij48c3BhbiBzdHlsZT0iZm9udC1zaXplOiAxNHB4OyBmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPl9zcWxfY29uc3RyYWludHMgPSBbPC9zcGFuPjwvZGl2PjxzcGFuIHN0eWxlPSJjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PGRpdiBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsiPjxzcGFuIHN0eWxlPSJmb250LXNpemU6IDE0cHg7IGZvbnQtZmFtaWx5OiBWZXJkYW5hOyI+Jm5ic3A7ICZuYnNwOyAmbmJzcDsgJm5ic3A7ICgna2V5X3VuaXEnLCAndW5pcXVlIChrZXkpJywgJ0tleSBtdXN0IGJlIHVuaXF1ZS4nKTwvc3Bhbj48L2Rpdj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGZvbnQtc2l6ZTogMTRweDsiPjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7Ij4mbmJzcDsgJm5ic3A7IF08L2Rpdj48L3NwYW4+PC9zcGFuPjwvcHJlPjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7ICI+PGJyPjwvZGl2PmRkAhEPDxYCHgdWaXNpYmxlaGRkAhMPDxYCHgtOYXZpZ2F0ZVVybAU2fi9ibG9nL2hvdy10by1sb2FkLWpzLWZ1bmN0aW9uLW1lbnUtaXRlbS1jbGljay1vZG9vLTEzZGQCFQ8PFgIfBAUBMGRkAhcPFgIeC18hSXRlbUNvdW50ZmQCMQ8WAh8HAgUWCmYPZBYEZg8VAidQeXRob24gYW5kIE1vZGVsIENvbnN0cmFpbnRzIGluIE9kb28gMTMkcHl0aG9uLW1vZGVsLWNvbnN0cmFpbnRzLW9kb28tMTMucG5nZAIBDw8WBB8EBSBQeXRob24gYW5kIE1vZGVsIENvbnN0cmFpbnRzIC4uLh8GBSd+L2Jsb2cvcHl0aG9uLW1vZGVsLWNvbnN0cmFpbnRzLW9kb28tMTNkZAIBD2QWBGYPFQI3SG93IHRvIExvYWQgSlMgRnVuY3Rpb24gaW4gYSBNZW51IEl0ZW0gQ2xpY2sgaW4gT2RvbyAxMzNob3ctdG8tbG9hZC1qcy1mdW5jdGlvbi1tZW51LWl0ZW0tY2xpY2stb2Rvby0xMy5wbmdkAgEPDxYEHwQFHkhvdyB0byBMb2FkIEpTIEZ1bmN0aW9uIGluIC4uLh8GBTZ+L2Jsb2cvaG93LXRvLWxvYWQtanMtZnVuY3Rpb24tbWVudS1pdGVtLWNsaWNrLW9kb28tMTNkZAICD2QWBGYPFQIWT2RvbyAxMyBQT1MgUHJpY2UgTGlzdBpvZG9vLTEzLXBvcy1wcmljZS1saXN0LnBuZ2QCAQ8PFgQfBAUWT2RvbyAxMyBQT1MgUHJpY2UgTGlzdB8GBR1+L2Jsb2cvb2Rvby0xMy1wb3MtcHJpY2UtbGlzdGRkAgMPZBYEZg8VAh9QeXRob24gUGFja2FnZXMgVXNlZCBpbiBPZG9vIDEzIHB5dGhvbi1wYWNrYWdlcy11c2VkLW9kb28tMTMucG5nZAIBDw8WBB8EBSBQeXRob24gUGFja2FnZXMgVXNlZCBpbiBPZG9vIC4uLh8GBSN+L2Jsb2cvcHl0aG9uLXBhY2thZ2VzLXVzZWQtb2Rvby0xM2RkAgQPZBYEZg8VAiVIb3cgdG8gQ3JlYXRlIGEgUGRmIFJlcG9ydCBpbiBPZG9vIDEzJGhvdy10by1jcmVhdGUtcGRmLXJlcG9ydC1vZG9vLTEzLnBuZ2QCAQ8PFgQfBAUeSG93IHRvIENyZWF0ZSBhIFBkZiBSZXBvcnQgLi4uHwYFJ34vYmxvZy9ob3ctdG8tY3JlYXRlLXBkZi1yZXBvcnQtb2Rvby0xM2RkZJctRxhxer6B6FvSXXVSgR8/05KZyoxZ1uBcaz6lq5x3">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/WebResource_002.html" type="text/javascript"></script>
+
+
+<script src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/WebResource.html" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="62CB82F6">
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAxgmIM+IoGXfJw3/EzsigI/ozoJZpuXxkpOVJKRbHyuHkMHZh9ZuPBRie2vA/HfoRIwE2ttc+AX62xNNON5QHDPX5GAcQ015PlrjCRBov7P/uKpzeND3KbwadDhZC69DXci2Rm/WwVrcvrTW9hqOz4qgtREBg72DdyGdDiNf3LvMqdBb8x21unxLezx+ctV/tt5NIlmEr/SBwAuP9C9zW8xOhDAx/aG93y69VGTLUIbnuvfHGwc7cw789XItxZuHHzijrSs1JiVoU/tdCXGvCGGGMFgOAhEIBtCaR1EBMayGA==">
+</div>
+   
+<script src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/lazy-offscreen-image.js" async=""></script>
+ <header class="nav-down">
+<div class="menu-container mega-nav">
+  <div class="menu">
+  	<a id="header_HyperLink24" href="https://www.cybrosys.com/"><img src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/logo.png" alt="Logo" style="width:230px;"></a>
+    <a href="#" class="menu-mobile" aria-label="mobile menu">&nbsp;</a><ul class="clearfix">
+      <li><a id="header_HyperLink37" href="https://www.cybrosys.com/">Home</a></li>
+       <li class="link-none menu-dropdown-icon">Odoo
+        <ul class="menu-display">
+          <li>
+          <a id="header_HyperLink35" href="https://www.cybrosys.com/odoo/">Odoo</a>
+            <ul>
+                <li><a id="header_HyperLink58" href="https://www.cybrosys.com/odoo/">Odoo </a></li>
+                <li><a id="header_HyperLink15" href="https://www.cybrosys.com/hire-odoo-developer/">Hire Odoo Developer</a></li>
+                <li><a id="header_HyperLink31" href="https://www.cybrosys.com/odoo-customization-and-installation/">Odoo Customization</a></li>
+                <li><a id="header_HyperLink32" href="https://www.cybrosys.com/odoo-erp-implementation/">Odoo Implementation</a></li>
+                <li><a id="header_HyperLink33" href="https://www.cybrosys.com/odoo-erp-integration/">Odoo Integration</a></li>
+                <li><a id="header_HyperLink34" href="https://www.cybrosys.com/odoo-erp-support/">Support &amp; Maintenance</a></li>                                     
+            </ul>
+          </li>
+          <li>
+          <a id="header_HyperLink17" href="https://www.cybrosys.com/odoo/industries/">Industries</a>
+            <ul>
+              <li><a id="header_HyperLink3" href="https://www.cybrosys.com/odoo/industries/best-trading-erp/">Trading</a></li>
+              <li><a id="header_HyperLink4" href="https://www.cybrosys.com/odoo/industries/manufacturing-erp-software/">Manufacturing</a></li>
+              <li><a id="header_HyperLink5" href="https://www.cybrosys.com/odoo/industries/restaurant-management/">Restaurant Management</a></li>
+              <li><a id="header_HyperLink6" href="https://www.cybrosys.com/odoo/industries/pos/">POS</a></li>
+              <li><a id="header_HyperLink7" href="https://www.cybrosys.com/odoo/industries/ecommerce-website/">E-commerce Website</a></li>
+              <li><a id="header_HyperLink8" href="https://www.cybrosys.com/odoo/industries/hotel-management-erp/">Hotel Management </a></li>
+              <li><a id="header_HyperLink9" href="https://www.cybrosys.com/odoo/industries/education-erp-software/">Education</a></li>
+              <li><a id="header_HyperLink10" href="https://www.cybrosys.com/odoo/industries/service-management/">Service Management</a></li>
+            </ul>
+          </li>
+          <li>
+          <a id="header_HyperLink19" href="https://www.cybrosys.com/odoo/field-of-expertise/">Field of Expertise</a>
+            <ul>
+              <li><a id="header_HyperLink11" href="https://www.cybrosys.com/odoo/industries/accounting-and-finance/">Accounting &amp; Finance</a></li>
+              <li><a id="header_HyperLink12" href="https://www.cybrosys.com/odoo/industries/warehouse-management/">Warehouse Management</a></li>
+              <li><a id="header_HyperLink13" href="https://www.cybrosys.com/odoo/field-of-expertise/manufacturing-erp-software/">Manufacturing</a></li>
+              <li><a id="header_HyperLink20" href="https://www.cybrosys.com/odoo/industries/human-resource/">Human Resource</a></li>
+              <li><a id="header_HyperLink21" href="https://www.cybrosys.com/odoo/industries/project-management/">Project Management</a></li>
+              <li><a id="header_HyperLink16" href="https://www.cybrosys.com/odoo/field-of-expertise/pos/">Point of Sale</a></li>
+              <li><a id="header_HyperLink18" href="https://www.cybrosys.com/odoo/field-of-expertise/ecommerce-website/">E-commerce Website</a></li>
+              <li><a id="header_HyperLink22" href="https://www.cybrosys.com/odoo/industries/crm/">Customer Relationship (CRM)</a></li>
+              <li><a id="header_HyperLink23" href="https://www.cybrosys.com/odoo/industries/complete-sales-management-erp/">Sales Management</a></li>
+              <li><a id="header_HyperLink25" href="https://www.cybrosys.com/odoo/industries/purchasing-management-software/">Purchase Management</a></li>
+            </ul>
+          </li>
+           <li><p class="link-sub-none link-none">Other</p>
+            <ul>
+               
+               <li role="presentation"><a href="https://www.cybrosys.com/odoo/odoo-books/">Odoo Book <span class="odoov13new">New-V13</span> </a></li>
+               <li role="presentation"><a id="header_HyperLink30" href="https://www.cybrosys.com/odoo-apps/">Odoo Apps </a></li>
+               <li role="presentation"><a id="header_HyperLink62" href="https://www.cybrosys.com/odoo/videos/">Videos</a></li>
+               <li role="presentation"><a id="header_HyperLink2888888" href="https://www.cybrosys.com/slides/">Slides</a></li>
+               <li role="presentation"><a id="header_HyperLink1" href="https://www.cybrosys.com/faq/">FAQ</a></li>                 
+               <li><a id="header_HyperLink2" href="https://www.cybrosys.com/odoo/odoo-books/odoo-book-v13/"><img src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/odoo13-book-cover-mini.jpg" alt="odoo book v13" class="odoo-certified lazyload"></a></li>
+                
+                
+            </ul>
+          </li>
+        
+        </ul>
+      </li>
+      <li><a id="header_HyperLink52" href="https://www.cybrosys.com/buy-source-code/">Source Code</a></li>
+
+
+      
+      
+      
+
+      <li class="link-none our-company-menu menu-dropdown-icon">Our Company
+        <ul class="normal-sub">
+         
+          
+              <li><a id="header_HyperLink14" href="https://www.cybrosys.com/about-us/">About</a></li>
+                <li><a id="header_HyperLink38" href="https://www.cybrosys.com/employee-staffing/">Employee Staffing</a></li>
+                <li><a id="header_HyperLink27" href="https://www.cybrosys.com/hire-python-developer/">Hire Python Developer</a></li>
+                 <li><a id="header_HyperLink39" href="https://www.cybrosys.com/portfolio/">Portfolio</a></li>
+                <li><a id="header_HyperLink40" href="https://www.cybrosys.com/life-at-cybrosys/">Cybrosian's Life</a></li>
+                <li><a id="header_HyperLink41" href="https://www.cybrosys.com/career/">Career</a></li>
+                <li><a id="header_HyperLink42" rel="noopener" href="https://goo.gl/jn6ZZk" target="_blank">View our Company</a></li>
+                <li><a id="header_HyperLink43" href="https://www.cybrosys.com/sitemap/">Sitemap</a></li>
+         
+        </ul>
+      </li>
+      <li><a id="header_HyperLink28" href="https://www.cybrosys.com/blog/">Blog</a></li>
+      <li><a id="header_HyperLink29" href="https://www.cybrosys.com/contact/">Contact</a></li>
+      <li class="quick-btn-wrap enquiry"><a href="#contactform" class="btn btn-default quick-enquiry-btn">Quick Enquiry</a></li>
+     
+    </ul>
+  </div>
+  </div>
+  </header>
+  <script src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/jquery.js"></script>
+  <script src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/hide-nav-scroll.js" defer="defer"></script>
+<script>
+
+    $(document).ready(function () {
+        "use strict";
+        $('.menu > ul > li:has( > ul)').addClass('menu-dropdown-icon');
+        $('.menu > ul > li > ul:not(:has(ul))').addClass('normal-sub');
+        $(".menu > ul").before("<a href=\"#\" class=\"menu-mobile\" aria-label=\"mobile menu\">&nbsp;</a>");
+       
+        $(".menu > ul > li").click(function () {
+            if ($(window).width() <= 943) {
+                $(this).children("ul").fadeToggle(150);
+            }
+        });
+        $(".menu-mobile").click(function (e) {
+            $(".menu > ul").toggleClass('show-on-mobile');
+            e.preventDefault();
+        });
+    });
+    $(window).resize(function () {
+        $(".menu > ul > li").children("ul").hide();
+        $(".menu > ul").removeClass('show-on-mobile');
+
+
+    });
+
+   
+</script>
+   <div id="blogContent">
+      <div class="newblog">
+         <div class="container-fluid cebit-ban">
+         </div>
+         <div class="container newblogContent">
+            <div class="row">
+               <div class="col-md-9 col-sm-7 col-xs-12 right-cebit">
+                  <div class="row">
+                     <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="blog-titles">
+                           <img id="imgBlog" src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/python-model-constraints-odoo-13_002.png" alt="python-model-constraints-odoo-13.png" style="border-width:2px;border-style:None;">
+                           <div class="blog-view-main">
+                              <img id="imgBlogger" src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/Blogger_637003162157024481.png" alt="Blogger_637003162157024481.png" style="border-width:2px;border-style:None;">
+                              <div class="blog-view-details">
+                                 <div class="blog-view-user-name">
+                                    <span style="float: left; color: #5D6769;">By:</span>
+                                    <span id="lblbloggerName">Vinaya Suresh</span></div>
+                                 <div class="blog-view-post-date"><i class="fa fa-calendar" aria-hidden="true"></i>
+                                    <span id="lblPostedDateTime">22/04/2020</span></div>
+                              </div>
+                           </div>
+                           <h1 class="blogviewmainhead"><span id="lblHeading1">Python and Model Constraints in Odoo 13</span></h1></div>
+                        <div id="tagdiv">
+                           
+                        <span> Technical</span><span> Odoo 13</span></div>
+                        <div class="blog-body">
+                        <p>
+                           <span id="lblContents1"></span></p><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);">Odoo
+ helps you to set constraints to variants. In odoo, we can perform this 
+using python and model constraints. In odoo python constraints are 
+specified along with methods. Let us see how it can be defined in odoo.</span></div><div style="text-align: justify; "><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);">In python constraint is defined along with a method decorated with constrains()</span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);"><br></span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);">Suppose I need to add a constraint while saving a record I can simply add the below code.</span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);"><br></span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);">The below code restricts the user from entering a negative value for the amount.</span></div><div style="text-align: justify; "><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></div><pre><div style="text-align: justify;"><span style="font-size: 14px; font-family: Verdana; color: rgb(66, 66, 66);">from odoo.exceptions import ValidationError</span></div><span style="color: rgb(66, 66, 66);"><div style="text-align: justify;"><span style="font-size: 14px; font-family: Verdana;">@api.constrains(‘amount’)</span></div><span style="font-family: Verdana; font-size: 14px;"><div style="text-align: justify;">def _check_something(self):</div></span><span style="font-family: Verdana; font-size: 14px;"><div style="text-align: justify;">&nbsp; &nbsp; for record in self:</div></span><span style="font-family: Verdana; font-size: 14px;"><div style="text-align: justify;">&nbsp; &nbsp; &nbsp; &nbsp; if record.amount &lt; 0:</div></span><span style="font-family: Verdana; font-size: 14px;"><div style="text-align: justify;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; raise ValidationError(“Amount cannot be negative”)</div></span></span></pre><div style="text-align: justify; "><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);">The field for which constraint is to be applied is specified along with the decorator constrains().&nbsp;</span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);"><br></span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);">You
+ can provide multiple field values as arguments in the function. So that
+ the function gets invoked each time the value in the field gets 
+modified/changed.</span></div><div style="text-align: justify; "><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></div><pre><div style="text-align: justify;"><span style="font-size: 14px; font-family: Verdana; color: rgb(66, 66, 66);">@api.constrains(field1, field2)</span></div><span style="color: rgb(66, 66, 66);"><div style="text-align: justify;"><span style="font-size: 14px; font-family: Verdana;">def _check_values(self):</span></div><span style="font-family: Verdana; font-size: 14px;"><div style="text-align: justify;">&nbsp; &nbsp; for record in self:</div></span><span style="font-family: Verdana; font-size: 14px;"><div style="text-align: justify;">&nbsp; &nbsp; &nbsp; &nbsp; if record.field1 == record.field2:</div></span><span style="font-family: Verdana; font-size: 14px;"><div style="text-align: justify;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; raise ValidationError("Fields field1 and field2 must be not be same")</div></span></span></pre><div style="text-align: justify; "><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);">But there are certain limitations for using constrains():</span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);"><span style="font-weight: bold; font-size: 14px;">1. </span><span style="font-size: 14px;">constrains()
+ are not supported along with related fields. They can only be applied 
+to simple fields. For example related fields like partner_id.phone.</span></span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);"><span style="font-weight: bold; font-size: 14px;">2. </span><span style="font-size: 14px;">constrains()
+ can only be applied to fields that are included in the create and write
+ call because if the field is which is not contained in the view will 
+not trigger a call to python function.</span></span></div><div style="text-align: justify; "><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);">Secondly, we have SQL constraints. The SQL constraints are applied on models using _sql_constraints.</span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);"><br></span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);">In odoo _sql_constraints consist of three parts they are name, definition, and message.</span></div><div style="text-align: justify; "><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></div><pre><div style="text-align: justify;"><span style="font-size: 14px; font-family: Verdana; color: rgb(66, 66, 66);">_sql_constraints = [</span></div><span style="color: rgb(66, 66, 66);"><div style="text-align: justify;"><span style="font-size: 14px; font-family: Verdana;">&nbsp; &nbsp; &nbsp; &nbsp; ('unique_email', 'unique (email)', 'Email address already exists!')</span></div><span style="font-family: Verdana; font-size: 14px;"><div style="text-align: justify;">&nbsp; &nbsp; ]</div></span></span></pre><div style="text-align: justify; "><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);">The
+ above code is used to prevent the addition of records with the same 
+email. Because it is irrelevant to add the same email to blacklist 
+twice. So for situations like this where you need to apply constraints 
+of this type the _sql_constraints comes into action.</span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);"><span style="font-weight: bold; font-size: 14px;">name -&nbsp;</span><span style="font-size: 14px;"> Name for the sql constraint(eg:'unique_email')</span></span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);"><span style="font-weight: bold; font-size: 14px;">definition - </span><span style="font-size: 14px;">Constraint to be applied on the table.(eg:unique (email))</span></span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);"><span style="font-weight: bold; font-size: 14px;">message - </span><span style="font-size: 14px;">Validation message to be displayed. (eg: Email address already exists!)</span></span></div><div style="text-align: justify; "><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);">Some of the useful constraint types are shown below:</span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);"><span style="font-weight: bold; font-size: 14px;">Check constraint:</span><span style="font-size: 14px;">
+ A check constraint is defined using the CHECK keyword.As the name 
+suggests it is used to check whether it satisfies a certain condition.</span></span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);"><br></span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; font-weight: bold; color: rgb(66, 66, 66);">Eg:</span></div><pre><div style="text-align: justify;"><span style="font-size: 14px; font-family: Verdana; color: rgb(66, 66, 66);">&nbsp;_sql_constraints = [</span></div><span style="color: rgb(66, 66, 66);"><div style="text-align: justify;"><span style="font-family: Verdana; font-size: 14px;">&nbsp; &nbsp; &nbsp; &nbsp; ('bom_qty_zero', 'CHECK (product_qty&gt;=0)', 'All product quantities must be greater or equal to 0.’)]</span></div></span></pre><div style="text-align: justify; "><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);">Not-Null Constraints: NOT NULL keyword is used to specify not null constrain, which means&nbsp;</span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);">certain values or fields cannot be NULL.</span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);"><br></span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; font-weight: bold; color: rgb(66, 66, 66);">Eg:</span></div><pre><div style="text-align: justify;"><span style="font-size: 14px; font-family: Verdana; color: rgb(66, 66, 66);">_sql_constraints = [</span></div><span style="color: rgb(66, 66, 66);"><div style="text-align: justify;"><span style="font-size: 14px; font-family: Verdana;">&nbsp; &nbsp; &nbsp; &nbsp; ('sale_order_required_if_sale_line', "CHECK((sale_line_id IS NOT NULL AND sale_order_id IS NOT NULL) OR (sale_line_id IS NULL))", 'The Project should be linked to a Sale Order to select an Sale Order Items.'),</span></div><span style="font-family: Verdana; font-size: 14px;"><div style="text-align: justify;">&nbsp; &nbsp; ]</div></span></span></pre><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; font-weight: bold; color: rgb(66, 66, 66);"><br></span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; font-weight: bold; color: rgb(66, 66, 66);">Unique Constraint:</span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);">It is used along with a ‘unique’ keyword.</span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);">The unique constraint helps you to check whether a specified column in rows satisfies the unique constraint.</span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; color: rgb(66, 66, 66);"><br></span></div><div style="text-align: justify; "><span style="font-family: Verdana; font-size: 14px; font-weight: bold; color: rgb(66, 66, 66);">Eg:</span></div><pre><div style="text-align: justify;"><span style="font-size: 14px; font-family: Verdana; color: rgb(66, 66, 66);">_sql_constraints = [</span></div><span style="color: rgb(66, 66, 66);"><div style="text-align: justify;"><span style="font-size: 14px; font-family: Verdana;">&nbsp; &nbsp; &nbsp; &nbsp; ('key_uniq', 'unique (key)', 'Key must be unique.')</span></div><span style="font-family: Verdana; font-size: 14px;"><div style="text-align: justify;">&nbsp; &nbsp; ]</div></span></span></pre><div style="text-align: justify; "><br></div>
+                        <p></p>
+                        </div>
+                        <br>
+                     </div>
+                     <br>
+                     <a href="https://www.youtube.com/channel/UCKjWLm7iCyOYINVspCSanjg?sub_confirmation=1" target="_blank" rel="noopener"><img src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/cybrosys-youtube-ads.jpg" alt="cybrosys youtube" style="width: 100%;"></a>
+                     <br>                                 
+                      
+                     <hr>
+                     <div id="nav-below" class="navigation">
+                        <div class="nav-previous"></div>
+                        <div class="nav-next"><a id="lnkbtnForward" class="next" href="https://www.cybrosys.com/blog/how-to-load-js-function-menu-item-click-odoo-13">Next »</a></div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="streamcontent">
+                        <h2>Comments </h2>
+                        <div class="comment-count"><span id="lblCommentCount">0</span></div>
+                        <div class="col-md-12 padd0">
+                        </div>
+                        <br>
+                        <br>
+                        <div class="comment-respond">
+                           <h2>Leave a comment</h2>
+                           <div class="form-group comment-reply">
+                             <label for="txtName" style="display:none;" class="nav-down"></label>
+                              <input name="txtName" type="text" id="txtName" placeholder="Name" class="form-control comment-input form-style">
+                              <span id="RequiredFieldValidator1" style="color:Red;visibility:hidden;">*</span>
+                           </div>
+                           <div class="form-group comment-reply">
+                              <label for="txtEmail" style="display:none;" class="nav-down"></label>
+                              <input name="txtEmail" id="txtEmail" placeholder="Email" class="form-control comment-input  form-style" type="email">
+                              <span id="reqvalEmail" title="Email id required" style="color:Red;display:none;">*</span>
+                              <span id="rgvEmail" title="Invalid email id" class="Mandatory" style="color:Red;display:none;">*</span>
+                           </div>
+                           <div class="form-group comment-reply">
+                              <label for="txtWebsite" style="display:none;" class="nav-down"></label>
+                              <input name="txtWebsite" type="text" id="txtWebsite" placeholder="Website" class="form-control comment-input form-style">
+                           </div>
+                           <div class="form-group comment-reply">
+                              <label for="txtComment" style="display:none;" class="nav-down"></label>
+                              <textarea name="txtComment" rows="6" cols="20" id="txtComment" placeholder="Comment" class="form-control comment-input form-styles"></textarea>
+                           </div>
+                           <input type="submit" name="btnPublish" value="Post Comment" onclick='getDate();WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("btnPublish", "", true, "Submit", "", false, false))' id="btnPublish" class="btn btn-default post-comment">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="clear">
+                  </div>
+               </div>
+               <div class="col-md-3 col-sm-5 col-xs-12 post-updates">
+                  <div class="left-cebit" id="left-cebitz">
+                     <div class="row">
+                        <div class="agileinfo_calender" style="display:none;">
+                           <h3>SHARE SOCIALLY</h3>
+                           <div class="social-icons-1">
+                              <a id="hlfacebook" class="facebook" target="_blank">                                                      
+                                 <i class="fa fa-facebook"></i>
+                              </a>
+                              <a id="hlTwitter" class="twitter" target="_blank"> 
+                                 <i class="fa fa-twitter"></i> 
+                              </a>
+                             
+                              <a id="hlLinkedin" class="linkedin" href="#" target="_blank">
+                                 <i class="fa fa-linkedin"></i>
+                              </a>
+                           </div>
+                        </div>
+                        
+                        <script async="" src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/cse.js"></script>
+                        <div id="___gcse_0"><div class="gsc-control-searchbox-only gsc-control-searchbox-only-en" dir="ltr"><form class="gsc-search-box gsc-search-box-tools" accept-charset="utf-8"><table class="gsc-search-box" cellspacing="0" cellpadding="0"><tbody><tr><td class="gsc-input"><div class="gsc-input-box" id="gsc-iw-id1"><table style="width: 100%; padding: 0px;" id="gs_id50" class="gstl_50 gsc-input" cellspacing="0" cellpadding="0"><tbody><tr><td id="gs_tti50" class="gsib_a"><input autocomplete="off" type="text" size="10" class="gsc-input" name="search" title="search" style="width: 100%; padding: 0px; border: medium none; margin: 0px; height: auto; outline: currentcolor none medium;" id="gsc-i-id1" dir="ltr" spellcheck="false"></td><td class="gsib_b"><div class="gsst_b" id="gs_st50" dir="ltr"><a class="gsst_a" href="javascript:void(0)" style="display: none;" title="Clear search box" role="button"><span class="gscb_a" id="gs_cb50" aria-hidden="true">×</span></a></div></td></tr></tbody></table></div></td><td class="gsc-search-button"><button class="gsc-search-button gsc-search-button-v2"><svg width="13" height="13" viewBox="0 0 13 13"><title>search</title><path d="m4.8495 7.8226c0.82666 0 1.5262-0.29146 2.0985-0.87438 0.57232-0.58292 0.86378-1.2877 0.87438-2.1144 0.010599-0.82666-0.28086-1.5262-0.87438-2.0985-0.59352-0.57232-1.293-0.86378-2.0985-0.87438-0.8055-0.010599-1.5103 0.28086-2.1144 0.87438-0.60414 0.59352-0.8956 1.293-0.87438 2.0985 0.021197 0.8055 0.31266 1.5103 0.87438 2.1144 0.56172 0.60414 1.2665 0.8956 2.1144 0.87438zm4.4695 0.2115 3.681 3.6819-1.259 1.284-3.6817-3.7 0.0019784-0.69479-0.090043-0.098846c-0.87973 0.76087-1.92 1.1413-3.1207 1.1413-1.3553 0-2.5025-0.46363-3.4417-1.3909s-1.4088-2.0686-1.4088-3.4239c0-1.3553 0.4696-2.4966 1.4088-3.4239 0.9392-0.92727 2.0864-1.3969 3.4417-1.4088 1.3553-0.011889 2.4906 0.45771 3.406 1.4088 0.9154 0.95107 1.379 2.0924 1.3909 3.4239 0 1.2126-0.38043 2.2588-1.1413 3.1385l0.098834 0.090049z"></path></svg></button></td><td class="gsc-clear-button"><div class="gsc-clear-button" title="clear results">&nbsp;</div></td></tr></tbody></table></form></div></div>
+                        <div class="recent_posts">                        
+                        
+                        <!-- <div class="agileinfo_calender" style="padding-bottom: 0%;">
+                           <h3>Odoo Webinar</h3>
+                           <div class="social-icons-1">                              
+                                 <a href="https://zoom.us/j/242843878" target="_blank"><img data-src="../images/odoo-functional-training-webinar.png" alt="Open HRMS Webinar" class="img-responsive lazyload" />
+                             </a>
+                           </div>
+                        </div>  -->
+                        <div class="agileinfo_calender" style="padding-bottom: 0%;">
+                           <h3>#FightBackCorona</h3>
+                           <a data-fancybox="" href="https://youtu.be/FqTdilLFn5E">
+                              <img src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/cybrosys-thumnail-small.jpg" alt="cybrosys" style="width: 100%;">
+                              <div class="video-play-button">
+                                  <span></span>
+                              </div>
+                          </a>
+                           <!-- <div class="social-icons-1">
+                              <a id="HyperLink1" href="../life-at-cybrosys/">
+                                 <img data-src="../images/gallery/life-at-cybrosys.gif" alt="Cybrosian's Life" class="img-responsive lazyload" />
+                              </a>
+                           </div> -->
+                        </div>
+
+                        <!-- <div class="agileinfo_calender" style="padding-bottom: 0%;">
+                           <h3>Odoo Functional Training</h3>
+                           <div class="social-icons-1">                              
+                                 <a href="https://zoom.us/j/97094966706" target="_blank"><img data-src="../images/odoo-functional-training-webinar.jpg" alt="Odoo Functional Training" class="img-responsive lazyload" />
+                             </a>
+                           </div>
+                        </div> -->
+                           <h3>Recent Posts</h3>
+                           
+                                 <div class="agileits_recent_posts_grid">
+                                    <div class="agileits_recent_posts_gridl">
+                                       <div class="special_deals_grid_left_grid">
+                                          <img id="" alt=" Python and Model Constraints in Odoo 13" data-src="https://www.cybrosys.com/blog/Uploads/BlogImageMini/python-model-constraints-odoo-13.png" class=" lazyloaded" src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/python-model-constraints-odoo-13.png">
+                                       </div>
+                                    </div>
+                                    <div class="agileits_recent_posts_gridr">
+                                       <h4>
+                                          <a id="rptBlogs_ctl00_hlTitle" href="https://www.cybrosys.com/blog/python-model-constraints-odoo-13">Python and Model Constraints ...</a>
+                                       </h4>
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                 </div>
+                              
+                                 <div class="agileits_recent_posts_grid">
+                                    <div class="agileits_recent_posts_gridl">
+                                       <div class="special_deals_grid_left_grid">
+                                          <img id="" alt=" How to Load JS Function in a Menu Item Click in Odoo 13" data-src="https://www.cybrosys.com/blog/Uploads/BlogImageMini/how-to-load-js-function-menu-item-click-odoo-13.png" class=" lazyloaded" src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/how-to-load-js-function-menu-item-click-odoo-13.png">
+                                       </div>
+                                    </div>
+                                    <div class="agileits_recent_posts_gridr">
+                                       <h4>
+                                          <a id="rptBlogs_ctl01_hlTitle" href="https://www.cybrosys.com/blog/how-to-load-js-function-menu-item-click-odoo-13">How to Load JS Function in ...</a>
+                                       </h4>
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                 </div>
+                              
+                                 <div class="agileits_recent_posts_grid">
+                                    <div class="agileits_recent_posts_gridl">
+                                       <div class="special_deals_grid_left_grid">
+                                          <img id="" alt=" Odoo 13 POS Price List" data-src="https://www.cybrosys.com/blog/Uploads/BlogImageMini/odoo-13-pos-price-list.png" class=" lazyloaded" src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/odoo-13-pos-price-list.png">
+                                       </div>
+                                    </div>
+                                    <div class="agileits_recent_posts_gridr">
+                                       <h4>
+                                          <a id="rptBlogs_ctl02_hlTitle" href="https://www.cybrosys.com/blog/odoo-13-pos-price-list">Odoo 13 POS Price List</a>
+                                       </h4>
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                 </div>
+                              
+                                 <div class="agileits_recent_posts_grid">
+                                    <div class="agileits_recent_posts_gridl">
+                                       <div class="special_deals_grid_left_grid">
+                                          <img id="" alt=" Python Packages Used in Odoo 13" data-src="https://www.cybrosys.com/blog/Uploads/BlogImageMini/python-packages-used-odoo-13.png" class=" lazyloaded" src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/python-packages-used-odoo-13.png">
+                                       </div>
+                                    </div>
+                                    <div class="agileits_recent_posts_gridr">
+                                       <h4>
+                                          <a id="rptBlogs_ctl03_hlTitle" href="https://www.cybrosys.com/blog/python-packages-used-odoo-13">Python Packages Used in Odoo ...</a>
+                                       </h4>
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                 </div>
+                              
+                                 <div class="agileits_recent_posts_grid">
+                                    <div class="agileits_recent_posts_gridl">
+                                       <div class="special_deals_grid_left_grid">
+                                          <img id="" alt=" How to Create a Pdf Report in Odoo 13" data-src="https://www.cybrosys.com/blog/Uploads/BlogImageMini/how-to-create-pdf-report-odoo-13.png" class=" lazyloaded" src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/how-to-create-pdf-report-odoo-13.png">
+                                       </div>
+                                    </div>
+                                    <div class="agileits_recent_posts_gridr">
+                                       <h4>
+                                          <a id="rptBlogs_ctl04_hlTitle" href="https://www.cybrosys.com/blog/how-to-create-pdf-report-odoo-13">How to Create a Pdf Report ...</a>
+                                       </h4>
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                 </div>
+                              
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <input type="hidden" name="hfDate" id="hfDate">
+            
+         </div>
+      </div>
+   </div>
+   
+<link href="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/cookieconsent.css" rel="stylesheet" type="text/css">
+
+
+<link rel="stylesheet" href="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/jquery.css">
+    <style>.video-play-button1 {
+      position: absolute;
+      z-index: 10;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      box-sizing: content-box;
+      display: block;
+      width: 32px;
+      height: 44px;
+      /* background: #fa183d; */
+      border-radius: 50%;
+      padding: 18px 20px 18px 28px;
+    }
+    
+    .video-play-button1:before {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      display: block;
+      width: 40px;
+      height: 40px;
+      background: #ba1f24;
+      border-radius: 50%;
+      animation: pulse-border 1500ms ease-out infinite;
+    }
+    
+    .video-play-button1:after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      display: block;
+      width: 40px;
+      height: 40px;
+      background: #fa183d;
+      border-radius: 50%;
+      transition: all 200ms;
+    }
+    
+    .video-play-button1:hover:after {
+      background-color: darken(#fa183d, 10%);
+    }
+    
+    .video-play-button1 img {
+      position: relative;
+      z-index: 3;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+    }
+    
+    .video-play-button1 span {
+      display: block;
+      position: relative;
+      z-index: 3;
+      width: 0;
+      height: 0;
+      border-left: 15px solid #fff;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      margin-top: 10px;
+     margin-left: 7px;
+
+    }
+    
+    .modelBox {
+    width: 300px;
+    background-color: #fff;
+    position: fixed;
+    opacity: 1;
+    bottom: -13px;
+    box-shadow: 4px 5px 6px 3px #00000045;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    margin-left: 10px;
+      }
+      .modelBox a.close {
+        padding: 2px;
+    color: #a1a1a1;
+    font-size:10px;
+}
+    
+    @keyframes pulse-border {
+      0% {
+        transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+        opacity: 0;
+      }
+    }
+    @media(max-width:767px) {
+    .cybro-fight{flex-basis:100% !important;}
+    .video-play-button1 span {
+        border-left: 17px solid #fff;
+        border-top: 12px solid transparent;
+        border-bottom: 12px solid transparent;
+    }
+    .video-play-button1:before {
+        width: 50px;
+        height: 50px;
+    }
+    .video-play-button1:after {
+        width: 50px;
+        height: 50px;
+    }
+    .video-play-button1 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    }
+    @media(max-width:480px) {
+    .cybro-fight{flex-basis:100% !important;}
+    .video-play-button1 span {
+        border-left: 15px solid #fff;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        top: -4px;
+    left: -3px;
+    }
+    .video-play-button1:before {
+        width: 40px;
+        height: 40px;
+    }
+    .video-play-button1:after {
+        width: 40px;
+        height: 40px;
+    }
+    .video-play-button1 {
+        padding: 18px 20px 18px 22px;
+    }
+    .gallery-container .Grid {
+        width: 92%;
+        margin: 5rem auto;
+    }
+    }
+    @media(max-width:380px) {
+    .gallery-container .Card-image, .gallery-container .Card-shadow {
+        min-height: 12rem;
+    }
+    }
+    
+    </style>
+
+
+
+
+<div class="whatapposition"><a href="https://api.whatsapp.com/send?phone=918606827707" target="_blank" rel="noopener"><i class="fa fa-whatsapp"></i></a> </div>
+<div id="contactform" class="container-fluid home-contact-wrapper">    
+    <div class="row" style="margin: 0px;">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 home-contact-details">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 address-wrap border-bottom-right">
+                <div class="icon-box-wrap">
+                    <div class="icon-box">
+                        <i class="fa fa-map-marker"></i>
+                    </div>
+                </div>
+                <h5>Calicut</h5>
+                 <p>Cybrosys Technologies Pvt. Ltd.<br>
+                    Neospace, Kinfra Techno Park<br> Kakkancherry, Calicut<br> Kerala, India - 673635</p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 address-wrap border-bottom-right">
+                <div class="icon-box-wrap">
+                    <div class="icon-box">
+                        <i class="fa fa-map-marker"></i>
+                    </div>
+                </div>
+                <h5>London</h5>
+                <p>Cybrosys Limited<br>
+                   Alpha House, <br>100 Borough High Street, London,<br> SE1 1LB, United Kingdom</p> </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 address-wrap border-bottom-right">
+                <div class="icon-box-wrap">
+                    <div class="icon-box"> <i class="fa fa-map-marker"></i> </div>
+                </div>
+                <h5>Kochi</h5>
+                <p>Cybrosys Technologies Pvt. Ltd.<br>
+                    1st Floor, Thapasya Building,<br>
+                    Infopark, Kakkanad,<br> Kochi, India - 682030.</p> </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 address-wrap border-bottom-right">
+                <div class="icon-box-wrap">
+                    <div class="icon-box">
+                        <i class="fa fa-map-marker"></i>
+                    </div>
+                </div>
+                <h5>Bangalore</h5>
+                <p>Cybrosys Techno Solutions<br>
+                    The Estate, 8th Floor,<br>  Dickenson Road,<br>
+                    Bangalore, India - 560042</p>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 home-contact-form">
+            <div class="container-contact100">
+                <div class="wrap-contact100">
+                    
+                    <span class="contact100-form-title">Send Us A Message </span>
+                    <div class="wrap-input100 validate-input" data-validate="Please enter your name">
+                        <input name="footer$txtName" type="text" id="footer_txtName" placeholder="Full Name" class="input100">
+                        <span id="footer_RequiredFieldValidator10" style="color:Red;visibility:hidden;">Please fill out this field.</span>                       
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Please enter your email: e@a.x">
+                        <input name="footer$txtMail" id="footer_txtMail" placeholder="E-mail" class="input100" type="email">
+                        <span id="footer_RequiredFieldValidator11" style="color:Red;visibility:hidden;">Please fill out this field.</span>                        
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Please enter your phone">
+                        <input name="footer$txtPhone" type="text" id="footer_txtPhone" placeholder="Phone" class="input100">
+                        <span id="footer_RequiredFieldValidator12" style="color:Red;visibility:hidden;">Please fill out this field.</span>                       
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Please enter your message">
+                        <textarea name="footer$txtComment" rows="2" cols="20" id="footer_txtComment" placeholder="Your Message" class="input100"></textarea>
+                        <span id="footer_RequiredFieldValidator13" style="color:Red;visibility:hidden;">Please fill out this field.</span>                        
+                    </div>
+                    <div class="container-contact100-form-btn">
+                        <input type="submit" name="footer$submit_footer_contact_click" value="Send" onclick='javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("footer$submit_footer_contact_click", "", true, "ContactInfoGroup", "", false, false))' id="footer_submit_footer_contact_click" class="contact100-form-btn">                       
+                        <div id="msg" class="message">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            
+                        </div>
+                    </div>
+                    
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div></form>
+<script type="text/javascript" id="">var Tawk_API=Tawk_API||{},Tawk_LoadStart=new Date;(function(){var a=document.createElement("script"),b=document.getElementsByTagName("script")[0];a.async=!0;a.src="https://embed.tawk.to/5667c9cdc9d916010fae50f7/default";a.charset="UTF-8";a.setAttribute("crossorigin","*");b.parentNode.insertBefore(a,b)})();</script>
+<link rel="manifest" href="https://www.cybrosys.com/manifest.json">
+<script type="text/javascript" id="" src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/OneSignalSDK.js"></script><script type="text/javascript" id="">Tawk_API.onChatStarted=function(){Tawk_API.isVisitorEngaged()&&(window.dataLayer=window.dataLayer||[],window.dataLayer.push({event:"chat-started"}))};</script>
+<script type="text/javascript" id="">var OneSignal=window.OneSignal||[];OneSignal.push(function(){OneSignal.init({appId:"ffe0cb7a-e6a6-45ce-85b4-6a87acaacd88"})});</script>
+<div class="container-fluid home-footer">
+    <div class="">
+        <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+            <h5>Quick Links</h5>
+            <div class="quick-links-wrap">
+            <div class="col-sm-12 col-xs-12 padd0" style="padding: 0px;">
+            <ul>
+            <li><a id="footer_HyperLink8" class="footer-quick-link" href="https://www.cybrosys.com/odoo/">Odoo</a></li>
+            <li><a id="footer_HyperLink9" class="footer-quick-link" href="https://www.cybrosys.com/odoo-apps/">Odoo Apps</a></li>
+            <li><a id="footer_HyperLink10" class="footer-quick-link" href="https://www.cybrosys.com/buy-source-code/">Buy Source code</a></li>
+            <li><a id="footer_HyperLink11" class="footer-quick-link" href="https://www.cybrosys.com/sitemap/">Sitemap</a></li>
+            <li><a id="footer_HyperLink12" class="footer-quick-link" href="https://www.cybrosys.com/contact/">Contact us</a></li>
+            </ul>
+            </div>           
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+            <h5>Services</h5>
+            <div class="quick-links-wrap">
+            <div class="col-sm-12 col-xs-12 padd0" style="padding: 0px;">
+            <ul>
+            <li><a id="footer_HyperLink1" class="footer-quick-link" href="https://www.cybrosys.com/odoo-customization-and-installation/">Odoo Customization</a></li>
+            <li><a id="footer_HyperLink2" class="footer-quick-link" href="https://www.cybrosys.com/hire-odoo-developer/">Hire Odoo Developer</a></li>
+            <li><a id="footer_HyperLink3" class="footer-quick-link" href="https://www.cybrosys.com/odoo-erp-implementation/">Odoo Implementation</a></li>
+            <li><a id="footer_HyperLink4" class="footer-quick-link" href="https://www.cybrosys.com/odoo-erp-integration/">Odoo Integration</a></li>
+            <li><a id="footer_HyperLink5" class="footer-quick-link" href="https://www.cybrosys.com/odoo-erp-support/">Odoo Support</a></li>
+            </ul>
+            </div>
+            
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12">
+            <h5>STAY IN TOUCH</h5>
+            <p><i class="fa fa-phone"></i>+91 8606827707</p>
+            <p><i class="fa fa-envelope"></i>info@cybrosys.com</p>
+            <p><i class="fa fa-whatsapp"></i>+91 8606827707</p>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <h5>Connect socially</h5>
+            <div class="row">
+                <a href="https://www.facebook.com/cybrosystechnologies" target="_blank" rel="noopener" aria-label="Connect with Facebook"><i class="fa fa-facebook-f"></i></a>
+                <a href="https://twitter.com/cybrosys" target="_blank" rel="noopener" aria-label="Connect with Twitter"><i class="fa fa-twitter"></i></a>
+                <a href="https://www.pinterest.com/cybrosys/" target="_blank" rel="noopener" aria-label="Connect with Pinterest"><i class="fa fa-pinterest-p"></i></a>
+                <a href="https://www.linkedin.com/company/cybrosys-technologies-pvt-ltd" target="_blank" rel="noopener" aria-label="Connect with linkedin"><i class="fa fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/cybrosystech/" target="_blank" rel="noopener" aria-label="Connect with Instagram"><i class="fa fa-instagram"></i></a>
+                <a href="https://www.youtube.com/channel/UCKjWLm7iCyOYINVspCSanjg" target="_blank" rel="noopener" aria-label="Connect with Youtube"><i class="fa fa-youtube"></i></a>
+                
+            </div>
+        </div>
+    </div>
+    <div class="clear-fix">
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <p class="text-center copyright">
+            Copyright <i class="fa fa-copyright"></i>2020 Cybrosys Technologies. All Rights
+            Reserved. <a href="https://www.cybrosys.com/privacy-policy/">Privacy Policy</a></p>
+    </div>
+</div>
+
+
+
+
+
+
+  <div class="overlay " style="display: none;">
+      <div class="modelBox animated swing">
+        <div align="right"><a href="#" class="close">Close</a></div>
+        <div>
+
+        <a data-fancybox="" class="Card cybro-fight" href="https://youtu.be/FqTdilLFn5E" style=" flex-basis: 66%; padding-bottom: 0; ">
+                <div class="Card-thumb" style=" margin-bottom: 0; ">                    
+                    <div class="Card-image">
+                    <img src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/cybromain.jpg" alt="cybrosys" style="width: 100%;">
+                    
+                    <div class="video-play-button1">
+                        <span></span>
+                    </div>
+                </div>
+                </div>
+        </a>
+
+        </div>
+      </div>
+    </div>
+
+<script src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/cookieconsent.js" data-cfasync="false"></script>
+<script>
+    window.cookieconsent.initialise({
+        "palette": {
+            "popup": {
+                "background": "#ffffff",
+                "text": "#5f727f"
+            },
+            "button": {
+                "background": "#b22126",
+                "text": "#ffffff"
+            }
+        },
+        "content": {
+            "message": "Our website is made agreeable with the GDPR requirements. Click to view the refreshed privacy policy of ours. According to our privacy policy, we use cookies for different highlights. We trust that is alright, If you disagree, disable the cookies.",
+            "dismiss": "Accept",
+            "link": "Privacy policy",
+            "href": "https://www.cybrosys.com/privacy-policy/"
+        }
+    });
+</script>
+
+<link rel="stylesheet" href="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/sweetalert.css">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" defer="defer"></script>
+<script src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/sweetalert.js" defer="defer"></script>
+    <script type="text/javascript">
+        function successalert() {
+            swal({
+                title: 'Your message has been succesfully sent!',
+                text: 'We will get back to you soon',
+                type: 'success'
+            });
+        }
+    </script>
+
+
+<style>
+    .whatapposition {
+    z-index: 9999999999 !important;
+}
+</style>
+
+
+
+
+
+
+
+<script>
+
+    function model(mContent) {
+        $(".overlay").fadeIn();
+        $('.mText').html(mContent);
+        $(".close").on('click', function () {
+            $(".overlay").hide();
+        });
+    }
+    var bac = "heading"
+    var abc = '<div class="well"><h2>' + bac + '<h2></div>'
+    $(document).ready(function () {
+        model(abc);
+    });
+    setTimeout(function () {
+        $('.overlay').hide()
+    }, 60000); 
+
+
+   
+</script>
+
+<script src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/jquery_003.js"></script>
+
+
+    <script src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/jquery_004.js"></script>  
+
+
+
+
+
+
+   <script src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/jquery_004.js"></script>
+   <script type="text/javascript" src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/jquery_002.js" defer="defer"></script>
+   <script type="text/javascript" src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/bootstrap.js" defer="defer"></script>
+   <script type="text/javascript"></script>    
+   <script type="text/javascript">
+       $(document).ready(function () {
+           var s = window.location.href;
+           $("#Script1").attr("data-url", s);
+           $("#fbShare").attr("href", s);
+           $("#twitterShare").attr("href", s);
+           $("#dvGooglePlus").attr("data-href", s);
+       }
+      );   
+   </script>
+   <script type="text/javascript">
+       function getDate() {
+           var currentTime = new Date();
+           document.getElementById("hfDate").value = currentTime;
+       }
+   </script>
+   <script>
+       function goBack() {
+           window.history.back();
+       }
+   </script>
+
+<script type="text/javascript">
+//<![CDATA[
+var Page_Validators =  new Array(document.getElementById("RequiredFieldValidator1"), document.getElementById("reqvalEmail"), document.getElementById("rgvEmail"), document.getElementById("footer_RequiredFieldValidator10"), document.getElementById("footer_RequiredFieldValidator11"), document.getElementById("footer_RequiredFieldValidator12"), document.getElementById("footer_RequiredFieldValidator13"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var RequiredFieldValidator1 = document.all ? document.all["RequiredFieldValidator1"] : document.getElementById("RequiredFieldValidator1");
+RequiredFieldValidator1.controltovalidate = "txtName";
+RequiredFieldValidator1.focusOnError = "t";
+RequiredFieldValidator1.errormessage = "Enter the Post title";
+RequiredFieldValidator1.validationGroup = "Submit";
+RequiredFieldValidator1.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+RequiredFieldValidator1.initialvalue = "";
+var reqvalEmail = document.all ? document.all["reqvalEmail"] : document.getElementById("reqvalEmail");
+reqvalEmail.controltovalidate = "txtEmail";
+reqvalEmail.focusOnError = "t";
+reqvalEmail.errormessage = "Email id required";
+reqvalEmail.display = "Dynamic";
+reqvalEmail.validationGroup = "Submit";
+reqvalEmail.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+reqvalEmail.initialvalue = "";
+var rgvEmail = document.all ? document.all["rgvEmail"] : document.getElementById("rgvEmail");
+rgvEmail.controltovalidate = "txtEmail";
+rgvEmail.focusOnError = "t";
+rgvEmail.errormessage = "Invalid email id";
+rgvEmail.display = "Dynamic";
+rgvEmail.validationGroup = "Submit";
+rgvEmail.evaluationfunction = "RegularExpressionValidatorEvaluateIsValid";
+rgvEmail.validationexpression = "\\w+([-+.\']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+var footer_RequiredFieldValidator10 = document.all ? document.all["footer_RequiredFieldValidator10"] : document.getElementById("footer_RequiredFieldValidator10");
+footer_RequiredFieldValidator10.controltovalidate = "footer_txtName";
+footer_RequiredFieldValidator10.errormessage = "Please fill out this field.";
+footer_RequiredFieldValidator10.validationGroup = "ContactInfoGroup";
+footer_RequiredFieldValidator10.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+footer_RequiredFieldValidator10.initialvalue = "";
+var footer_RequiredFieldValidator11 = document.all ? document.all["footer_RequiredFieldValidator11"] : document.getElementById("footer_RequiredFieldValidator11");
+footer_RequiredFieldValidator11.controltovalidate = "footer_txtMail";
+footer_RequiredFieldValidator11.errormessage = "Please fill out this field.";
+footer_RequiredFieldValidator11.validationGroup = "ContactInfoGroup";
+footer_RequiredFieldValidator11.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+footer_RequiredFieldValidator11.initialvalue = "";
+var footer_RequiredFieldValidator12 = document.all ? document.all["footer_RequiredFieldValidator12"] : document.getElementById("footer_RequiredFieldValidator12");
+footer_RequiredFieldValidator12.controltovalidate = "footer_txtPhone";
+footer_RequiredFieldValidator12.errormessage = "Please fill out this field.";
+footer_RequiredFieldValidator12.validationGroup = "ContactInfoGroup";
+footer_RequiredFieldValidator12.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+footer_RequiredFieldValidator12.initialvalue = "";
+var footer_RequiredFieldValidator13 = document.all ? document.all["footer_RequiredFieldValidator13"] : document.getElementById("footer_RequiredFieldValidator13");
+footer_RequiredFieldValidator13.controltovalidate = "footer_txtComment";
+footer_RequiredFieldValidator13.errormessage = "Please fill out this field.";
+footer_RequiredFieldValidator13.validationGroup = "ContactInfoGroup";
+footer_RequiredFieldValidator13.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+footer_RequiredFieldValidator13.initialvalue = "";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        //]]>
+</script>
+
+
+
+<table style="width: 178px; display: none; top: 152px; left: 910px; position: absolute;" class="gstl_50 gssb_c" cellspacing="0" cellpadding="0"><tbody><tr><td class="gssb_f"></td><td class="gssb_e" style="width: 100%;"></td></tr></tbody></table><iframe scrolling="no" allowtransparency="true" src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/widget_iframe.html" title="Twitter settings iframe" style="display: none;" frameborder="0"></iframe><div id="HmxvBAP-1587712045614" class="" style="display: block !important;"><iframe id="hAm87dv-1587712045619" src="about:blank" scrolling="no" title="chat widget" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: auto !important; position: static !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 350px !important; height: 420px !important; z-index: 999999 !important; cursor: auto !important; float: none !important; border-radius: unset !important; pointer-events: auto !important; display: none !important;" class="" frameborder="0"></iframe><iframe id="TGiWVLi-1587712045621" src="about:blank" scrolling="no" title="chat widget" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: auto 10px 0px auto !important; position: fixed !important; border: 0px none !important; padding: 0px !important; transition-property: none !important; z-index: 1000001 !important; cursor: auto !important; float: none !important; pointer-events: auto !important; height: 40px !important; min-height: 40px !important; max-height: 40px !important; width: 320px !important; min-width: 320px !important; max-width: 320px !important; border-radius: 0px !important; transform: rotate(0deg) translateZ(0px) !important; transform-origin: 0px center 0px !important; margin: 0px !important; display: block !important;" class="" frameborder="0"></iframe><iframe id="RhPfObP-1587712045622" src="about:blank" scrolling="no" title="chat widget" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: auto 1px 25px auto !important; position: fixed !important; border: 0px none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; z-index: 1000003 !important; cursor: auto !important; float: none !important; border-radius: unset !important; pointer-events: auto !important; width: 21px !important; max-width: 21px !important; min-width: 21px !important; height: 21px !important; max-height: 21px !important; min-height: 21px !important; display: block !important;" class="" frameborder="0"></iframe><div style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: 0px auto auto 0px !important; position: absolute !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 100% !important; height: 100% !important; display: none !important; z-index: 1000001 !important; cursor: move !important; float: left !important; border-radius: unset !important; pointer-events: auto !important;" class=""></div><div id="HqCLJcL-1587712045614" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: 0px auto auto 0px !important; position: absolute !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 6px !important; height: 100% !important; display: block !important; z-index: 999998 !important; cursor: w-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;" class=""></div><div id="s7V5rl4-1587712045615" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: 0px 0px auto auto !important; position: absolute !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 6px !important; height: 100% !important; display: block !important; z-index: 999998 !important; cursor: e-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;" class=""></div><div id="LzEadIs-1587712045615" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: 0px 0px auto auto !important; position: absolute !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 100% !important; height: 6px !important; display: block !important; z-index: 999998 !important; cursor: n-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;" class=""></div><div id="orDUV1y-1587712045615" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: auto 0px 0px auto !important; position: absolute !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 100% !important; height: 6px !important; display: block !important; z-index: 999998 !important; cursor: s-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;" class=""></div><div id="NHqY7Dt-1587712045617" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: 0px auto auto 0px !important; position: absolute !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 12px !important; height: 12px !important; display: block !important; z-index: 999998 !important; cursor: nw-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;" class=""></div><div id="cWkwbeC-1587712045617" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: 0px 0px auto auto !important; position: absolute !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 12px !important; height: 12px !important; display: block !important; z-index: 999998 !important; cursor: ne-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;" class=""></div><div id="v1eummz-1587712045617" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: auto auto 0px 0px !important; position: absolute !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 12px !important; height: 12px !important; display: block !important; z-index: 999998 !important; cursor: sw-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;" class=""></div><div id="ysrtj4V-1587712045619" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: auto 0px 0px auto !important; position: absolute !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 12px !important; height: 12px !important; display: block !important; z-index: 999999 !important; cursor: se-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;" class=""></div><iframe id="ktKFel9-1587712047931" src="about:blank" scrolling="no" title="chat widget" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: auto 10px 50px auto !important; position: fixed !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 378px !important; height: 582px !important; display: none !important; z-index: 999999 !important; cursor: auto !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;" class="" frameborder="0"></iframe></div><iframe style="display: none;" src="Python%20and%20Model%20Constraints%20in%20Odoo%2013_files/webPushAnalytics.html"></iframe><div id="onesignal-bell-container" class="onesignal-bell-container onesignal-reset onesignal-bell-container-bottom-left"><div id="onesignal-bell-launcher" class="onesignal-bell-launcher onesignal-bell-launcher-md onesignal-bell-launcher-bottom-left onesignal-bell-launcher-theme-default onesignal-bell-launcher-active" style="bottom: 19px; left: 15px;"><div class="onesignal-bell-launcher-button"><svg class="onesignal-bell-svg" xmlns="http://www.w3.org/2000/svg" width="99.7" height="99.7" viewBox="0 0 99.7 99.7" style="filter: drop-shadow(0 2px 4px rgba(34,36,38,0.35));; -webkit-filter: drop-shadow(0 2px 4px rgba(34,36,38,0.35));;"><circle class="background" cx="49.9" cy="49.9" r="49.9" style="fill: rgb(208, 2, 27);"></circle><path class="foreground" d="M50.1 66.2H27.7s-2-.2-2-2.1c0-1.9 1.7-2 1.7-2s6.7-3.2 6.7-5.5S33 52.7 33 43.3s6-16.6 13.2-16.6c0 0 1-2.4 3.9-2.4 2.8 0 3.8 2.4 3.8 2.4 7.2 0 13.2 7.2 13.2 16.6s-1 11-1 13.3c0 2.3 6.7 5.5 6.7 5.5s1.7.1 1.7 2c0 1.8-2.1 2.1-2.1 2.1H50.1zm-7.2 2.3h14.5s-1 6.3-7.2 6.3-7.3-6.3-7.3-6.3z" style="fill: rgb(255, 255, 255);"></path><ellipse class="stroke" cx="49.9" cy="49.9" rx="37.4" ry="36.9" style="stroke: rgb(255, 255, 255);"></ellipse></svg></div><div class="onesignal-bell-launcher-badge" style="filter: drop-shadow(0 2px 4px rgba(34,36,38,0));; -webkit-filter: drop-shadow(0 2px 4px rgba(34,36,38,0));;"></div><div class="onesignal-bell-launcher-message"><div class="onesignal-bell-launcher-message-body"></div></div><div class="onesignal-bell-launcher-dialog" style="filter: drop-shadow(0px 2px 2px rgba(34,36,38,.15));; -webkit-filter: drop-shadow(0px 2px 2px rgba(34,36,38,.15));;"><div class="onesignal-bell-launcher-dialog-body"></div></div></div></div></body></html>

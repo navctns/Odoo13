@@ -1,0 +1,7 @@
+info
+
+* adds github_link(mode) context variable: provides URL (in relevant mode) of
+  current document on github
+* if sphinx.ext.linkcode is enabled, automatically generates github linkcode
+  links (by setting config.linkcode_resolve)
+

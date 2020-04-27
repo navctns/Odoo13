@@ -1,0 +1,47 @@
+Example _sql_constraints:-
+
+_sql_constraints = [
+        ('name_uniq', 'UNIQUE (name)',  'You can not have two users with the same name !')
+    ]
+
+'name_uniq' is constraint name give any name.(no need to define)
+
+Example _constraints:-
+
+    def _check_name(self, cr, uid, ids, context=None):
+        for val in self.read(cr, uid, ids, ['name'], context=context):
+            if val['name']:
+                if len(val['name']) < 6:
+                    return False
+        return True
+
+    _constraints = [
+        (_check_name, 'Name must have at least 6 characters.', ['name'])
+    ]
+
+
+
+date_order
+
+class sale_order(osv.osv):
+
+    _name = "sale.order"
+    _inherit = "sale.order"
+
+    _sql_constraints = [('name_uniq', 'unique(name, date_order)', 'Order Reference must be unique per Date!'),]
+
+sale_order()
+
+
+Creating a UNIQUE constraint on multiple columns
+
+PostgreSQL allows you to create a UNIQUE constraint to a group of columns using the following syntax:
+
+CREATE TABLE table (
+    c1 data_type,
+    c2 data_type,
+    c3 data_type,
+    UNIQUE (c2, c3)
+);
+
+The combination of values in column c2 and c3 will be unique across the whole table. The value of the column c2 or c3 needs not to be unique.

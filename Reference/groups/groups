@@ -1,0 +1,4 @@
+groups defined in model
+
+    employee_ids = fields.One2many('hr.employee', 'job_id', string='Employees', groups='base.group_user')
+

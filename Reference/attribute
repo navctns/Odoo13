@@ -1,0 +1,8 @@
+attribute
+attrs="{'invisible': [('invoice_status', '!=', 'to invoice')]}"
+
+eg
+
+<button name="%(sale.action_view_sale_advance_payment_inv)d" string="Create Invoice"
+                        type="action" class="btn-primary"
+                        attrs="{'invisible': [('invoice_status', '!=', 'to invoice')]}"/>

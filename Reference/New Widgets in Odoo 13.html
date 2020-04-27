@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns# fb: http://www.facebook.com/2008/fbml" lang="en"><head id="Head1">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><style type="text/css">.swal-icon--error{border-color:#f27474;-webkit-animation:animateErrorIcon .5s;animation:animateErrorIcon .5s}.swal-icon--error__x-mark{position:relative;display:block;-webkit-animation:animateXMark .5s;animation:animateXMark .5s}.swal-icon--error__line{position:absolute;height:5px;width:47px;background-color:#f27474;display:block;top:37px;border-radius:2px}.swal-icon--error__line--left{-webkit-transform:rotate(45deg);transform:rotate(45deg);left:17px}.swal-icon--error__line--right{-webkit-transform:rotate(-45deg);transform:rotate(-45deg);right:16px}@-webkit-keyframes animateErrorIcon{0%{-webkit-transform:rotateX(100deg);transform:rotateX(100deg);opacity:0}to{-webkit-transform:rotateX(0deg);transform:rotateX(0deg);opacity:1}}@keyframes animateErrorIcon{0%{-webkit-transform:rotateX(100deg);transform:rotateX(100deg);opacity:0}to{-webkit-transform:rotateX(0deg);transform:rotateX(0deg);opacity:1}}@-webkit-keyframes animateXMark{0%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}50%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}80%{-webkit-transform:scale(1.15);transform:scale(1.15);margin-top:-6px}to{-webkit-transform:scale(1);transform:scale(1);margin-top:0;opacity:1}}@keyframes animateXMark{0%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}50%{-webkit-transform:scale(.4);transform:scale(.4);margin-top:26px;opacity:0}80%{-webkit-transform:scale(1.15);transform:scale(1.15);margin-top:-6px}to{-webkit-transform:scale(1);transform:scale(1);margin-top:0;opacity:1}}.swal-icon--warning{border-color:#f8bb86;-webkit-animation:pulseWarning .75s infinite alternate;animation:pulseWarning .75s infinite alternate}.swal-icon--warning__body{width:5px;height:47px;top:10px;border-radius:2px;margin-left:-2px}.swal-icon--warning__body,.swal-icon--warning__dot{position:absolute;left:50%;background-color:#f8bb86}.swal-icon--warning__dot{width:7px;height:7px;border-radius:50%;margin-left:-4px;bottom:-11px}@-webkit-keyframes pulseWarning{0%{border-color:#f8d486}to{border-color:#f8bb86}}@keyframes pulseWarning{0%{border-color:#f8d486}to{border-color:#f8bb86}}.swal-icon--success{border-color:#a5dc86}.swal-icon--success:after,.swal-icon--success:before{content:"";border-radius:50%;position:absolute;width:60px;height:120px;background:#fff;-webkit-transform:rotate(45deg);transform:rotate(45deg)}.swal-icon--success:before{border-radius:120px 0 0 120px;top:-7px;left:-33px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-transform-origin:60px 60px;transform-origin:60px 60px}.swal-icon--success:after{border-radius:0 120px 120px 0;top:-11px;left:30px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-transform-origin:0 60px;transform-origin:0 60px;-webkit-animation:rotatePlaceholder 4.25s ease-in;animation:rotatePlaceholder 4.25s ease-in}.swal-icon--success__ring{width:80px;height:80px;border:4px solid hsla(98,55%,69%,.2);border-radius:50%;box-sizing:content-box;position:absolute;left:-4px;top:-4px;z-index:2}.swal-icon--success__hide-corners{width:5px;height:90px;background-color:#fff;padding:1px;position:absolute;left:28px;top:8px;z-index:1;-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}.swal-icon--success__line{height:5px;background-color:#a5dc86;display:block;border-radius:2px;position:absolute;z-index:2}.swal-icon--success__line--tip{width:25px;left:14px;top:46px;-webkit-transform:rotate(45deg);transform:rotate(45deg);-webkit-animation:animateSuccessTip .75s;animation:animateSuccessTip .75s}.swal-icon--success__line--long{width:47px;right:8px;top:38px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);-webkit-animation:animateSuccessLong .75s;animation:animateSuccessLong .75s}@-webkit-keyframes rotatePlaceholder{0%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}5%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}12%{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}to{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}}@keyframes rotatePlaceholder{0%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}5%{-webkit-transform:rotate(-45deg);transform:rotate(-45deg)}12%{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}to{-webkit-transform:rotate(-405deg);transform:rotate(-405deg)}}@-webkit-keyframes animateSuccessTip{0%{width:0;left:1px;top:19px}54%{width:0;left:1px;top:19px}70%{width:50px;left:-8px;top:37px}84%{width:17px;left:21px;top:48px}to{width:25px;left:14px;top:45px}}@keyframes animateSuccessTip{0%{width:0;left:1px;top:19px}54%{width:0;left:1px;top:19px}70%{width:50px;left:-8px;top:37px}84%{width:17px;left:21px;top:48px}to{width:25px;left:14px;top:45px}}@-webkit-keyframes animateSuccessLong{0%{width:0;right:46px;top:54px}65%{width:0;right:46px;top:54px}84%{width:55px;right:0;top:35px}to{width:47px;right:8px;top:38px}}@keyframes animateSuccessLong{0%{width:0;right:46px;top:54px}65%{width:0;right:46px;top:54px}84%{width:55px;right:0;top:35px}to{width:47px;right:8px;top:38px}}.swal-icon--info{border-color:#c9dae1}.swal-icon--info:before{width:5px;height:29px;bottom:17px;border-radius:2px;margin-left:-2px}.swal-icon--info:after,.swal-icon--info:before{content:"";position:absolute;left:50%;background-color:#c9dae1}.swal-icon--info:after{width:7px;height:7px;border-radius:50%;margin-left:-3px;top:19px}.swal-icon{width:80px;height:80px;border-width:4px;border-style:solid;border-radius:50%;padding:0;position:relative;box-sizing:content-box;margin:20px auto}.swal-icon:first-child{margin-top:32px}.swal-icon--custom{width:auto;height:auto;max-width:100%;border:none;border-radius:0}.swal-icon img{max-width:100%;max-height:100%}.swal-title{color:rgba(0,0,0,.65);font-weight:600;text-transform:none;position:relative;display:block;padding:13px 16px;font-size:27px;line-height:normal;text-align:center;margin-bottom:0}.swal-title:first-child{margin-top:26px}.swal-title:not(:first-child){padding-bottom:0}.swal-title:not(:last-child){margin-bottom:13px}.swal-text{font-size:16px;position:relative;float:none;line-height:normal;vertical-align:top;text-align:left;display:inline-block;margin:0;padding:0 10px;font-weight:400;color:rgba(0,0,0,.64);max-width:calc(100% - 20px);overflow-wrap:break-word;box-sizing:border-box}.swal-text:first-child{margin-top:45px}.swal-text:last-child{margin-bottom:45px}.swal-footer{text-align:right;padding-top:13px;margin-top:13px;padding:13px 16px;border-radius:inherit;border-top-left-radius:0;border-top-right-radius:0}.swal-button-container{margin:5px;display:inline-block;position:relative}.swal-button{background-color:#7cd1f9;color:#fff;border:none;box-shadow:none;border-radius:5px;font-weight:600;font-size:14px;padding:10px 24px;margin:0;cursor:pointer}.swal-button:not([disabled]):hover{background-color:#78cbf2}.swal-button:active{background-color:#70bce0}.swal-button:focus{outline:none;box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(43,114,165,.29)}.swal-button[disabled]{opacity:.5;cursor:default}.swal-button::-moz-focus-inner{border:0}.swal-button--cancel{color:#555;background-color:#efefef}.swal-button--cancel:not([disabled]):hover{background-color:#e8e8e8}.swal-button--cancel:active{background-color:#d7d7d7}.swal-button--cancel:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(116,136,150,.29)}.swal-button--danger{background-color:#e64942}.swal-button--danger:not([disabled]):hover{background-color:#df4740}.swal-button--danger:active{background-color:#cf423b}.swal-button--danger:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(165,43,43,.29)}.swal-content{padding:0 20px;margin-top:20px;font-size:medium}.swal-content:last-child{margin-bottom:20px}.swal-content__input,.swal-content__textarea{-webkit-appearance:none;background-color:#fff;border:none;font-size:14px;display:block;box-sizing:border-box;width:100%;border:1px solid rgba(0,0,0,.14);padding:10px 13px;border-radius:2px;transition:border-color .2s}.swal-content__input:focus,.swal-content__textarea:focus{outline:none;border-color:#6db8ff}.swal-content__textarea{resize:vertical}.swal-button--loading{color:transparent}.swal-button--loading~.swal-button__loader{opacity:1}.swal-button__loader{position:absolute;height:auto;width:43px;z-index:2;left:50%;top:50%;-webkit-transform:translateX(-50%) translateY(-50%);transform:translateX(-50%) translateY(-50%);text-align:center;pointer-events:none;opacity:0}.swal-button__loader div{display:inline-block;float:none;vertical-align:baseline;width:9px;height:9px;padding:0;border:none;margin:2px;opacity:.4;border-radius:7px;background-color:hsla(0,0%,100%,.9);transition:background .2s;-webkit-animation:swal-loading-anim 1s infinite;animation:swal-loading-anim 1s infinite}.swal-button__loader div:nth-child(3n+2){-webkit-animation-delay:.15s;animation-delay:.15s}.swal-button__loader div:nth-child(3n+3){-webkit-animation-delay:.3s;animation-delay:.3s}@-webkit-keyframes swal-loading-anim{0%{opacity:.4}20%{opacity:.4}50%{opacity:1}to{opacity:.4}}@keyframes swal-loading-anim{0%{opacity:.4}20%{opacity:.4}50%{opacity:1}to{opacity:.4}}.swal-overlay{position:fixed;top:0;bottom:0;left:0;right:0;text-align:center;font-size:0;overflow-y:auto;background-color:rgba(0,0,0,.4);z-index:10000;pointer-events:none;opacity:0;transition:opacity .3s}.swal-overlay:before{content:" ";display:inline-block;vertical-align:middle;height:100%}.swal-overlay--show-modal{opacity:1;pointer-events:auto}.swal-overlay--show-modal .swal-modal{opacity:1;pointer-events:auto;box-sizing:border-box;-webkit-animation:showSweetAlert .3s;animation:showSweetAlert .3s;will-change:transform}.swal-modal{width:478px;opacity:0;pointer-events:none;background-color:#fff;text-align:center;border-radius:5px;position:static;margin:20px auto;display:inline-block;vertical-align:middle;-webkit-transform:scale(1);transform:scale(1);-webkit-transform-origin:50% 50%;transform-origin:50% 50%;z-index:10001;transition:opacity .2s,-webkit-transform .3s;transition:transform .3s,opacity .2s;transition:transform .3s,opacity .2s,-webkit-transform .3s}@media (max-width:500px){.swal-modal{width:calc(100% - 20px)}}@-webkit-keyframes showSweetAlert{0%{-webkit-transform:scale(1);transform:scale(1)}1%{-webkit-transform:scale(.5);transform:scale(.5)}45%{-webkit-transform:scale(1.05);transform:scale(1.05)}80%{-webkit-transform:scale(.95);transform:scale(.95)}to{-webkit-transform:scale(1);transform:scale(1)}}@keyframes showSweetAlert{0%{-webkit-transform:scale(1);transform:scale(1)}1%{-webkit-transform:scale(.5);transform:scale(.5)}45%{-webkit-transform:scale(1.05);transform:scale(1.05)}80%{-webkit-transform:scale(.95);transform:scale(.95)}to{-webkit-transform:scale(1);transform:scale(1)}}</style><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="Theme Version" content="1.0"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="INDEX, FOLLOW"><title>New Widgets in Odoo 13</title><link rel="shortcut icon" type="image/x-icon" href="https://www.cybrosys.com/images/favicon.ico"><link rel="stylesheet" href="New%20Widgets%20in%20Odoo%2013_files/jquery.css"><link rel="Stylesheet" type="text/css" href="New%20Widgets%20in%20Odoo%2013_files/blog.css" media="screen">
+    <style>span#footer_RequiredFieldValidator10,span#footer_RequiredFieldValidator11,span#footer_RequiredFieldValidator12,span#footer_RequiredFieldValidator13{float:right;font-size:12px;font-weight:100!important}</style>
+    <style>.post-updates{margin-left:30px}.stick{position:fixed;top:45px;margin:6% -20px;padding:0 147px 0 20px}.recent-posts{padding-top:5%;padding-bottom:5%;border:1px solid #e7e7e7}.recent-posts img{position:relative;width:50px;height:50px;border:3px solid #e7e7e7}.recent-posts h4{position:relative;margin:0 0 5px 0;text-transform:lowercase;font-size:15px}.recent-posts h4:first-letter{text-transform:uppercase}.recent-posts p{position:relative;text-transform:lowercase}.recent-posts p:first-letter{text-transform:uppercase}textarea#txtComment{background:#F1F3F4!important}@media (max-width:1199px){.stick{width:31%}.post-updates{margin:0 18px!important}.recent-posts p{padding:0 10px 0 25px!important}.recent-posts h4{padding:0 10px 0 25px!important}}@media (max-width:991px){.post-updates{border:none!important;margin:0 -6px!important}.stick{width:100%!important}}@media (max-width:480px){.newrf{width:45%!important}.newrt{width:45%!important}.newri{width:45%!important}.newrg{width:45%!important}}.navigation a:link,.navigation a:visited{color:#fff;font-family:'Roboto',sans-serif;font-size:14px;font-weight:400;text-decoration:none;padding:9px}.previous{background-color:#000;color:white}.next{background-color:#000;color:white}.next:hover{background-color:#ddd!important;color:#f1f1f1!important}#tagdiv span {
+    background: #f1f1f1;
+    color: #4e4e4e;
+    padding: 3px 8px;
+    border-radius: 3px;
+    box-shadow: none;
+    margin-left: 5px;
+    font-size: 11px !important;
+}
+#tagdiv{margin-bottom:20px;margin-left:-9px}</style> 
+    <!-- Load Twitter JS-API asynchronously -->
+    <script async="" src="New%20Widgets%20in%20Odoo%2013_files/async-ads.js"></script><script async="" src="New%20Widgets%20in%20Odoo%2013_files/default" charset="UTF-8" crossorigin="*"></script><script type="text/javascript" async="" src="New%20Widgets%20in%20Odoo%2013_files/analytics.js"></script><script async="" src="New%20Widgets%20in%20Odoo%2013_files/gtm.js"></script><script type="text/javascript">        (function () { var twitterWidgets = document.createElement('script'); twitterWidgets.type = 'text/javascript'; twitterWidgets.async = !0; twitterWidgets.src = 'https://platform.twitter.com/widgets.js'; document.getElementsByTagName('head')[0].appendChild(twitterWidgets) })();</script><script type="text/javascript" async="" src="New%20Widgets%20in%20Odoo%2013_files/widgets.js"></script>
+    <!-- Breadcrumbs Schema  -->
+    <script type="application/ld+json">{"@context":"https://schema.org/","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"cybrosys.com","item":"https://www.cybrosys.com/"},{"@type":"ListItem","position":2,"name":"blog","item":"https://www.cybrosys.com/blog/"}]}</script>
+    <!-- Google Tag Manager -->
+    <script>        (function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = !0; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f) })(window, document, 'script', 'dataLayer', 'GTM-54BSZHH');</script>
+    <!-- End Google Tag Manager -->    
+    <script src="New%20Widgets%20in%20Odoo%2013_files/sweetalert_002.js"></script>
+<script type="application/ld+json" src="New%20Widgets%20in%20Odoo%2013_files/Schema.js"></script><meta name="keywords" content="widgets odoo 13, widgets in odoo, cybrosys, odoo 13, odoo 13 features"><meta name="description" content="Widget is a representation of display screens, fields, and attributes in odoo. This blog introduces you to the new widgets introduced in Odoo 13."><link rel="canonical" href="New%20Widgets%20in%20Odoo%2013_files/new-widgets-odoo-13_004.html"><meta property="fb:app_id" content="1220643824631920"><meta property="og:image" content="https://www.cybrosys.com/blog/Uploads/BlogImage/new-widgets-odoo-13.png"><meta property="og:title" content="New Widgets in Odoo 13"><meta property="og:description" content="Widget is a representation of display screens, fields, and attributes in odoo. This blog introduces you to the new widgets introduced in Odoo 13."><meta property="og:type" content="article"><meta property="og:site_name" content="Cybrosys"><meta property="og:url" content="https://www.cybrosys.com/blog/new-widgets-odoo-13"><meta name="twitter:card" content="summary"><meta name="twitter:site" content="@Cybrosys"><meta name="twitter:title" content="New Widgets in Odoo 13"><meta name="twitter:description" content="Widget is a representation of display screens, fields, and attributes in odoo. This blog introduces you to the new widgets introduced in Odoo 13."><meta name="twitter:image" content="https://www.cybrosys.com/blog/Uploads/BlogImage/new-widgets-odoo-13.png"><meta property="og:schema"><script src="New%20Widgets%20in%20Odoo%2013_files/OneSignalPageSDKES6.js" async=""></script><style type="text/css">@keyframes tawkMaxOpen{0%{opacity:0;transform:translate(0, 30px);;}to{opacity:1;transform:translate(0, 0px);}}@-moz-keyframes tawkMaxOpen{0%{opacity:0;transform:translate(0, 30px);;}to{opacity:1;transform:translate(0, 0px);}}@-webkit-keyframes tawkMaxOpen{0%{opacity:0;transform:translate(0, 30px);;}to{opacity:1;transform:translate(0, 0px);}}#HbtFBUJ-1586527625370{outline:none!important;visibility:visible!important;resize:none!important;box-shadow:none!important;overflow:visible!important;background:none!important;opacity:1!important;filter:alpha(opacity=100)!important;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity1)!important;-moz-opacity:1!important;-khtml-opacity:1!important;top:auto!important;right:10px!important;bottom:0px!important;left:auto!important;position:fixed!important;border:0!important;min-height:0!important;min-width:0!important;max-height:none!important;max-width:none!important;padding:0!important;margin:0!important;-moz-transition-property:none!important;-webkit-transition-property:none!important;-o-transition-property:none!important;transition-property:none!important;transform:none!important;-webkit-transform:none!important;-ms-transform:none!important;width:auto!important;height:auto!important;display:none!important;z-index:2000000000!important;background-color:transparent!important;cursor:auto!important;float:none!important;border-radius:unset!important;pointer-events:auto!important}#nDVjHVi-1586527625373.open{animation : tawkMaxOpen .25s ease!important;}</style><script src="New%20Widgets%20in%20Odoo%2013_files/cse_element__en.js" type="text/javascript"></script><link type="text/css" rel="stylesheet" href="New%20Widgets%20in%20Odoo%2013_files/defaulten.css"><link type="text/css" rel="stylesheet" href="New%20Widgets%20in%20Odoo%2013_files/default.css"><style></style><style type="text/css">.gsc-control-cse{font-family:arial, sans-serif}.gsc-control-cse .gsc-table-result{font-family:arial, sans-serif}.gsc-refinementsGradient{background:linear-gradient(to left,rgba(255,255,255,1),rgba(255,255,255,0))}.gsc-control-cse{border-color:#FFFFFF;background-color:#FFFFFF}input.gsc-input,.gsc-input-box,.gsc-input-box-hover,.gsc-input-box-focus{border-color:#DBE3E3}.gsc-search-button-v2,.gsc-search-button-v2:hover,.gsc-search-button-v2:focus{border-color:#BC0202;background-color:#BC0202;background-image:none;filter:none}.gsc-search-button-v2 svg{fill:#FFFFFF}.gsc-tabHeader.gsc-tabhActive,.gsc-refinementHeader.gsc-refinementhActive{color:#1A73E8;border-color:#1A73E8;background-color:#FFFFFF}.gsc-tabHeader.gsc-tabhInactive,.gsc-refinementHeader.gsc-refinementhInactive{color:#666666;border-color:#666666;background-color:#FFFFFF}.gsc-webResult.gsc-result,.gsc-results .gsc-imageResult{border-color:#FFFFFF;background-color:#FFFFFF}.gsc-webResult.gsc-result:hover,.gsc-imageResult:hover{border-color:#FFFFFF;background-color:#FFFFFF}.gs-webResult.gs-result a.gs-title:link,.gs-webResult.gs-result a.gs-title:link b,.gs-imageResult a.gs-title:link,.gs-imageResult a.gs-title:link b{color:#1155CC}.gs-webResult.gs-result a.gs-title:visited,.gs-webResult.gs-result a.gs-title:visited b,.gs-imageResult a.gs-title:visited,.gs-imageResult a.gs-title:visited b{color:#1155CC}.gs-webResult.gs-result a.gs-title:hover,.gs-webResult.gs-result a.gs-title:hover b,.gs-imageResult a.gs-title:hover,.gs-imageResult a.gs-title:hover b{color:#1155CC}.gs-webResult.gs-result a.gs-title:active,.gs-webResult.gs-result a.gs-title:active b,.gs-imageResult a.gs-title:active,.gs-imageResult a.gs-title:active b{color:#1155CC}.gsc-cursor-page{color:#1155CC}a.gsc-trailing-more-results:link{color:#1155CC}.gs-webResult .gs-snippet,.gs-imageResult .gs-snippet,.gs-fileFormatType{color:#333333}.gs-webResult div.gs-visibleUrl,.gs-imageResult div.gs-visibleUrl{color:#009933}.gs-webResult div.gs-visibleUrl-short{color:#009933}.gs-webResult div.gs-visibleUrl-short{display:none}.gs-webResult div.gs-visibleUrl-long{display:block}.gs-promotion div.gs-visibleUrl-short{display:none}.gs-promotion div.gs-visibleUrl-long{display:block}.gsc-cursor-box{border-color:#FFFFFF}.gsc-results .gsc-cursor-box .gsc-cursor-page{border-color:#666666;background-color:#FFFFFF;color:#666666}.gsc-results .gsc-cursor-box .gsc-cursor-current-page{border-color:#1A73E8;background-color:#FFFFFF;color:#1A73E8}.gsc-webResult.gsc-result.gsc-promotion{border-color:#FFFFFF;background-color:#F6F6F6}.gsc-completion-title{color:#1155CC}.gsc-completion-snippet{color:#333333}.gs-promotion a.gs-title:link,.gs-promotion a.gs-title:link *,.gs-promotion .gs-snippet a:link{color:#1155CC}.gs-promotion a.gs-title:visited,.gs-promotion a.gs-title:visited *,.gs-promotion .gs-snippet a:visited{color:#1155CC}.gs-promotion a.gs-title:hover,.gs-promotion a.gs-title:hover *,.gs-promotion .gs-snippet a:hover{color:#1155CC}.gs-promotion a.gs-title:active,.gs-promotion a.gs-title:active *,.gs-promotion .gs-snippet a:active{color:#1155CC}.gs-promotion .gs-snippet,.gs-promotion .gs-title .gs-promotion-title-right,.gs-promotion .gs-title .gs-promotion-title-right *{color:#333333}.gs-promotion .gs-visibleUrl,.gs-promotion .gs-visibleUrl-short{color:#009933}.gcsc-find-more-on-google{color:#1155CC}.gcsc-find-more-on-google-magnifier{fill:#1155CC}</style><style type="text/css">.gscb_a{display:inline-block;font:27px/13px arial,sans-serif}.gsst_a .gscb_a{color:#a1b9ed;cursor:pointer}.gsst_a:hover .gscb_a,.gsst_a:focus .gscb_a{color:#36c}.gsst_a{display:inline-block}.gsst_a{cursor:pointer;padding:0 4px}.gsst_a:hover{text-decoration:none!important}.gsst_b{font-size:16px;padding:0 2px;position:relative;user-select:none;-moz-user-select:none;white-space:nowrap}.gsst_e{vertical-align:middle;opacity:0.55;}.gsst_a:hover .gsst_e,.gsst_a:focus .gsst_e{opacity:0.72;}.gsst_a:active .gsst_e{opacity:1;}.gsst_f{background:white;text-align:left}.gsst_g{background-color:white;border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);margin:-1px -3px;padding:0 6px}.gsst_h{background-color:white;height:1px;margin-bottom:-1px;position:relative;top:-1px}.gsib_a{width:100%;padding:4px 6px 0}.gsib_a,.gsib_b{vertical-align:top}.gssb_c{border:0;position:absolute;z-index:989}.gssb_e{border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);cursor:default}.gssb_f{visibility:hidden;white-space:nowrap}.gssb_k{border:0;display:block;position:absolute;top:0;z-index:988}.gsdd_a{border:none!important}.gsq_a{padding:0}.gssb_a{padding:0 7px}.gssb_a,.gssb_a td{white-space:nowrap;overflow:hidden;line-height:22px}#gssb_b{font-size:11px;color:#36c;text-decoration:none}#gssb_b:hover{font-size:11px;color:#36c;text-decoration:underline}.gssb_g{text-align:center;padding:8px 0 7px;position:relative}.gssb_h{font-size:15px;height:28px;margin:0.2em}.gssb_i{background:#eee}.gss_ifl{visibility:hidden;padding-left:5px}.gssb_i .gss_ifl{visibility:visible}a.gssb_j{font-size:13px;color:#36c;text-decoration:none;line-height:100%}a.gssb_j:hover{text-decoration:underline}.gssb_l{height:1px;background-color:#e5e5e5}.gssb_m{color:#000;background:#fff}.gssb_a{padding:0 9px}.gsib_a{padding:5px 9px 4px 9px}.gscb_a{line-height:27px}.gssb_e{border:0}.gssb_l{margin:5px 0}input.gsc-input::-webkit-input-placeholder{font-size:14px}input.gsc-input:-moz-placeholder{font-size:14px}input.gsc-input::-moz-placeholder{font-size:14px}input.gsc-input:-ms-input-placeholder{font-size:14px}input.gsc-input:focus::-webkit-input-placeholder{color:transparent}input.gsc-input:focus:-moz-placeholder{color:transparent}input.gsc-input:focus::-moz-placeholder{color:transparent}input.gsc-input:focus:-ms-input-placeholder{color:transparent}.gssb_c .gsc-completion-container{position:static}.gssb_c{z-index:5000}.gsc-completion-container table{background:transparent;font-size:inherit;font-family:inherit}.gssb_c > tbody > tr,.gssb_c > tbody > tr > td,.gssb_d,.gssb_d > tbody > tr,.gssb_d > tbody > tr > td,.gssb_e,.gssb_e > tbody > tr,.gssb_e > tbody > tr > td{padding:0;margin:0;border:0}.gssb_a table,.gssb_a table tr,.gssb_a table tr td{padding:0;margin:0;border:0}</style><link rel="stylesheet" href="New%20Widgets%20in%20Odoo%2013_files/OneSignalSDKStyles.css"></head>
+<body><div role="dialog" aria-live="polite" aria-label="cookieconsent" aria-describedby="cookieconsent:desc" class="cc-window cc-banner cc-type-info cc-theme-block cc-bottom cc-color-override--767653650 cc-invisible" style="display: none;"><!--googleoff: all--><span id="cookieconsent:desc" class="cc-message">Our
+ website is made agreeable with the GDPR requirements. Click to view the
+ refreshed privacy policy of ours. According to our privacy policy, we 
+use cookies for different highlights. We trust that is alright, If you 
+disagree, disable the cookies. <a aria-label="learn more about cookies" role="button" tabindex="0" class="cc-link" href="https://www.cybrosys.com/privacy-policy/" rel="noopener noreferrer nofollow" target="_blank">Privacy policy</a></span><div class="cc-compliance"><a aria-label="dismiss cookie message" role="button" tabindex="0" class="cc-btn cc-dismiss">Accept</a></div><!--googleon: all--></div> 
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-54BSZHH" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->  
+<form name="form1" method="post" action="./blogView.aspx?title=new-widgets-odoo-13" onsubmit="javascript:return WebForm_OnSubmit();" id="form1">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMjEwMTkyMTUxNQ8WBB4FdGl0bGUFE25ldy13aWRnZXRzLW9kb28tMTMeB2VudHJ5aWQFBDQ3MTYWAgIDD2QWFgIDDw8WBB4ISW1hZ2VVcmwFR2h0dHBzOi8vd3d3LmN5YnJvc3lzLmNvbS9ibG9nL1VwbG9hZHMvQmxvZ0ltYWdlL25ldy13aWRnZXRzLW9kb28tMTMucG5nHg1BbHRlcm5hdGVUZXh0BRduZXctd2lkZ2V0cy1vZG9vLTEzLnBuZ2RkAgUPDxYEHwIFVWh0dHBzOi8vd3d3LmN5YnJvc3lzLmNvbS9ibG9nL1VwbG9hZHMvQmxvZ2dlci9VcGxvYWRlZC9CbG9nZ2VyXzYzNjg5NDIxMjU0MjI1OTQ3NC5wbmcfAwUeQmxvZ2dlcl82MzY4OTQyMTI1NDIyNTk0NzQucG5nZGQCBw8PFgIeBFRleHQFEk5pbWlzaGEgTXVyYWxpZGhhcmRkAgkPDxYCHwQFCjAzLzEyLzIwMTlkZAILDw8WAh8EBRZOZXcgV2lkZ2V0cyBpbiBPZG9vIDEzZGQCDw8PFgIfBAWjeDxwIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+T2RvbyBpcyBrbm93biBmb3IgaXRzIHNpbXBsaWNpdHkgYW5kIHVzYWJpbGl0eS4gVGhlIG9wZW4tc291cmNlIHJpZ2h0IGZyb20gaXRzIGluY2VwdGlvbiBoYXMgYmVlbiBpbiBkaXNjdXNzaW9uIGZvciBpdHMgZWZmaWNpZW50IG1hbmFnZW1lbnQgb2YgZGlmZmVyZW50IGJ1c2luZXNzIG1vZHVsZXMgYW5kIGVuaGFuY2VkIGNvbGxhYm9yYXRpdmUgd29yayBlbnZpcm9ubWVudC4gV2l0aCBlYWNoIHZlcnNpb24gcmVsZWFzZSwgT2RvbyBpcyBiZWNvbWluZyBtb3JlIHN0cm9uZ2VyIGFuZCBoaWdobHkgY29tcGV0aXRpdmUgd2l0aCBvdGhlciBFUlAgc29sdXRpb25zIGluIHRoZSBtYXJrZXQuJm5ic3A7PC9zcGFuPjwvcD48cCBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPjxicj48L3NwYW4+PC9wPjxwIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+VGhlIHJlY2VudCB2ZXJzaW9uLCBPZG9vIDEzIGhhcyBpbnRyb2R1Y2VkIHNldmVyYWwgbmV3IG1vZHVsZXMgbGlrZSBFbXBsb3llZSBTa2lsbCBNYW5hZ2VtZW50LCBSZW50YWwgTWFuYWdlbWVudCwgcHJvbWlzaW5nIHRoZSBtb3N0IGludHJpbnNpYyBtYW5hZ2VtZW50IG9mIHRoZSBidXNpbmVzcy4gVGhpcyBibG9nIGludHJvZHVjZXMgeW91IHRvIHRoZSBuZXcgd2lkZ2V0cyBpbnRyb2R1Y2VkIGluIE9kb28gMTMuPC9zcGFuPjwvcD48cCBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPjxicj48L3NwYW4+PC9wPjxwIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+V2lkZ2V0IGlzIGEgcmVwcmVzZW50YXRpb24gb2YgZGlzcGxheSBzY3JlZW5zLCBmaWVsZHMsIGFuZCBhdHRyaWJ1dGVzIGluIG9kb28uIEl0IGFsbG93cyB1cyB0byBjaGFuZ2UgdGhlIHZpZXcgdXNpbmcgZGlmZmVyZW50IHJlbmRlcmluZyB0ZW1wbGF0ZXMgYW5kIGFsc28gYWxsb3dzIHRvIGRlc2lnbiBhcyBwZXIgcmVxdWlyZW1lbnQuIEFkZGl0aW9uYWwgd2lkZ2V0cyBhcmUgaW50cm9kdWNlZCBpbiB2ZXJzaW9uIDEzIHNvIHRoYXQgaXQgY2FuIGJlIGVhc2lseSBhcHBsaWVkLjwvc3Bhbj48L3A+PHAgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij48YnI+PC9zcGFuPjwvcD48cCBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC13ZWlnaHQ6IGJvbGQ7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij4xLiBTaWduYXR1cmUgd2lkZ2V0ICh3aWRnZXQ9InNpZ25hdHVyZSIgKTxzcGFuIHN0eWxlPSJ3aGl0ZS1zcGFjZTpwcmUiPgk8L3NwYW4+PC9zcGFuPjwvcD48cCBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPkEgd2lkZ2V0IGlzIGRlZmluZWQgZm9yIHNpZ25hdHVyZSwgb24gdXNpbmcgdGhpcyB3aWRnZXQgb25lIGNhbiBlYXNpbHkgZHJhdyB0aGUgc2lnbmF0dXJlLiZuYnNwOzwvc3Bhbj48L3A+PHAgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij48YnI+PC9zcGFuPjwvcD48cCBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC13ZWlnaHQ6IGJvbGQ7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij5QeXRob246IDwvc3Bhbj48L3A+PHByZSBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPnVzZXJfc2lnbmF0dXJlID0gZmllbGRzLkJpbmFyeShzdHJpbmc9J1NpZ25hdHVyZScpJm5ic3A7PC9zcGFuPjwvcHJlPjxwIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PGJyPjwvc3Bhbj48L3A+PHAgc3R5bGU9ImxpbmUtaGVpZ2h0OiAxLjQ7Ij48L3A+PHAgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGZvbnQtd2VpZ2h0OiBib2xkOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+WE1MOiA8L3NwYW4+PC9wPjxwcmUgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij4mbHQ7ZmllbGQgbmFtZT0idXNlcl9zaWduYXR1cmUiIHdpZGdldD0ic2lnbmF0dXJlIi8mZ3Q7PC9zcGFuPjwvcHJlPjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPjxicj48L3NwYW4+PC9kaXY+PHAgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7Ij48aW1nIHNyYz0iaHR0cHM6Ly93d3cuY3licm9zeXMuY29tL2Jsb2cvVXBsb2Fkcy9CbG9nSW1hZ2UvbmV3LXdpZGdldHMtb2Rvby0xMy0xLnBuZyIgYWx0PSJuZXctd2lkZ2V0cy1vZG9vLTEzLWN5YnJvc3lzIiBjbGFzcz0iaW1nLXRodW1ibmFpbCIgc3R5bGU9IndpZHRoOiAxMDAlOyI+PC9zcGFuPjwvcD48cCBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPjxicj48L3NwYW4+PC9wPjxwIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PGJyPjwvc3Bhbj48L3A+PHAgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGZvbnQtd2VpZ2h0OiBib2xkOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+Mi4gUmliYm9uIHdpZGdldCZuYnNwOyAoJmx0O3dpZGdldCBuYW1lPSJ3ZWJfcmliYm9uIiB0ZXh0PSJQYWlkIi8mZ3Q7KTwvc3Bhbj48L3A+PHAgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij5XaWRnZXQgd2ViX3JpYmJvbiBjYW4gYmUgdXNlZCBpbiBhIGZvcm0uIEl0IGRpc3BsYXlzIGEgcmliYm9uIG9uIHRoZSB0b3AgcmlnaHQgcGFydCBvZiB0aGUgZm9ybS4gT25lIGNhbiBzcGVjaWZ5IHRleHQgaW4gdGV4dCBhdHRyaWJ1dGUgYW5kIGJhY2tncm91bmQgY29sb3IgaW4gdGhlIGJnX2NvbG9yIGF0dHJpYnV0ZS48L3NwYW4+PC9wPjxwIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PGJyPjwvc3Bhbj48L3A+PHByZSBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPiZsdDt3aWRnZXQgbmFtZT0id2ViX3JpYmJvbiIgdGV4dD0iQXJjaGl2ZWQiIGJnX2NvbG9yPSJiZy1kYW5nZXIiIC8mZ3Q7PC9zcGFuPjwvcHJlPjxwIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PGJyPjwvc3Bhbj48L3A+PHAgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij5MZXQncyB0YWtlIGFuIGV4YW1wbGUgb2YgaW52b2ljZSBwYXltZW50LDwvc3Bhbj48L3A+PHAgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij48YnI+PC9zcGFuPjwvcD48cCBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPndoZW4gYSBjdXN0b21lciBwYXlzIHRoZSBpbnZvaWNlLCBhIGdyZWVuIGNvbG9yIHJpYmJvbiBpcyB0aWVkIGluIHRoZSBjb3JyZXNwb25kaW5nIGludm9pY2Ugd2l0aCB0aGUgc3RhdHVzIOKAnTxzcGFuIHN0eWxlPSJmb250LXdlaWdodDogYm9sZDsiPnBhaWQ8L3NwYW4+4oCdPC9zcGFuPjwvcD48cCBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPjxicj48L3NwYW4+PC9wPjxwcmUgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij4mbHQ7d2lkZ2V0IG5hbWU9IndlYl9yaWJib24iIHRleHQ9IlBhaWQiLyZndDs8L3NwYW4+PC9wcmU+PHAgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij48YnI+PC9zcGFuPjwvcD48cCBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPklmIHlvdSBkb27igJl0IHNwZWNpZnkgYmdfY29sb3IsIGJ5IGRlZmF1bHQgYmdfY29sb3Igd2lsbCBiZSBiZy1zdWNjZXNzLjwvc3Bhbj48L3A+PGRpdiBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PGJyPjwvc3Bhbj48L2Rpdj48cCBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyI+PC9zcGFuPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsiPjxpbWcgc3JjPSJodHRwczovL3d3dy5jeWJyb3N5cy5jb20vYmxvZy9VcGxvYWRzL0Jsb2dJbWFnZS9uZXctd2lkZ2V0cy1vZG9vLTEzLTIucG5nIiBhbHQ9Im5ldy13aWRnZXRzLW9kb28tMTMtY3licm9zeXMiIGNsYXNzPSJpbWctdGh1bWJuYWlsIiBzdHlsZT0id2lkdGg6IDEwMCU7Ij48L3NwYW4+PC9zcGFuPjwvcD48cCBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPjxicj48L3NwYW4+PC9wPjxwIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBmb250LXdlaWdodDogYm9sZDsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPjMuIGRhdGUgcmFuZ2Ugd2lkZ2V0ICh3aWRnZXQ9ImRhdGVyYW5nZSIgKTwvc3Bhbj48L3A+PHAgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij48YnI+PC9zcGFuPjwvcD48cHJlIHN0eWxlPSJsaW5lLWhlaWdodDogMS40OyI+PGRpdiBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPmRhdGVfYmVnaW4gPSBmaWVsZHMuRGF0ZXRpbWUoIHN0cmluZz0nU3RhcnQgRGF0ZScpPC9zcGFuPjwvZGl2PjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7Ij4mbHQ7ZmllbGQgbmFtZT0iZGF0ZV9iZWdpbiIgd2lkZ2V0PSJkYXRlcmFuZ2UiLyZndDs8L2Rpdj48L3NwYW4+PC9wcmU+PHAgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij48YnI+PC9zcGFuPjwvcD48cCBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyI+VGhlIHdpZGdldCBkYXRlIHJhbmdlIGNhbiBiZSB1c2VkIGZvciBkaXNwbGF5aW5nIGRhdGUsIG1vbnRoIGFuZCB0aW1lIGluIGEgbm90YWJsZSZuYnNwOzwvc3Bhbj48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7Ij5mb3JtYXQganVzdCBhcyBzaG93biBiZWxvdzo8L3NwYW4+PC9zcGFuPjwvcD48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij48YnI+PC9zcGFuPjwvZGl2PjxwIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyI+PGltZyBzcmM9Imh0dHBzOi8vd3d3LmN5YnJvc3lzLmNvbS9ibG9nL1VwbG9hZHMvQmxvZ0ltYWdlL25ldy13aWRnZXRzLW9kb28tMTMtMy5wbmciIGFsdD0ibmV3LXdpZGdldHMtb2Rvby0xMy1jeWJyb3N5cyIgY2xhc3M9ImltZy10aHVtYm5haWwiIHN0eWxlPSJ3aWR0aDogNTAlOyI+PC9zcGFuPjwvcD48cCBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPjxicj48L3NwYW4+PC9wPjxwIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBmb250LXdlaWdodDogYm9sZDsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPjQuIE1hbnkybWFueSBhdmF0YXIgd2lkZ2V0Jm5ic3A7ICh3aWRnZXQ9Im1hbnkybWFueV90YWdzX2F2YXRhciIgKTo8L3NwYW4+PC9wPjxwIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+V2lkZ2V0IG1hbnkybWFueV90YWdzX2F2YXRhciZuYnNwOyBjYW4gYmUgdXNlZCBpbiBhIE1hbnkybWFueSBmaWVsZC4gSXQgaXMgc2ltaWxhciB0byBtYW55Mm1hbnlfdGFncywgY2hhbmdlIGlzIHRoZSBhZGRpdGlvbiBvZiBhdmF0YXIuPC9zcGFuPjwvcD48cCBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPjxicj48L3NwYW4+PC9wPjxwIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBmb250LXdlaWdodDogYm9sZDsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPlB5dGhvbjo8L3NwYW4+PC9wPjxwcmUgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij5wYXJ0bmVyX2lkcyA9IGZpZWxkcy5NYW55Mm1hbnkoJ3Jlcy5wYXJ0bmVyJywgJ2NhbGVuZGFyX2V2ZW50X3Jlc19wYXJ0bmVyX3JlbCcsIHN0cmluZz0nQXR0ZW5kZWVzJyk8L3NwYW4+PC9wcmU+PHAgc3R5bGU9ImxpbmUtaGVpZ2h0OiAxLjQ7Ij48L3A+PHAgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGZvbnQtd2VpZ2h0OiBib2xkOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+WE1MOjxzcGFuIHN0eWxlPSJ3aGl0ZS1zcGFjZTpwcmUiPgk8L3NwYW4+PC9zcGFuPjwvcD48cHJlIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+Jmx0O2ZpZWxkIG5hbWU9InBhcnRuZXJfaWRzIiB3aWRnZXQ9Im1hbnkybWFueV90YWdzX2F2YXRhciIgd3JpdGVfbW9kZWw9ImNhbGVuZGFyLmNvbnRhY3RzIiB3cml0ZV9maWVsZD0icGFydG5lcl9pZCIgYXZhdGFyX2ZpZWxkPSJpbWFnZV8xMjgiLyZndDs8L3NwYW4+PC9wcmU+PHAgc3R5bGU9ImxpbmUtaGVpZ2h0OiAxLjQ7Ij48L3A+PGRpdiBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPjxicj48L3NwYW4+PC9kaXY+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyI+PGRpdiBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsiPjxpbWcgc3JjPSJodHRwczovL3d3dy5jeWJyb3N5cy5jb20vYmxvZy9VcGxvYWRzL0Jsb2dJbWFnZS9uZXctd2lkZ2V0cy1vZG9vLTEzLTQucG5nIiBhbHQ9Im5ldy13aWRnZXRzLW9kb28tMTMtY3licm9zeXMiIGNsYXNzPSJpbWctdGh1bWJuYWlsIiBzdHlsZT0id2lkdGg6IDUwJTsiPjwvZGl2Pjwvc3Bhbj48cD48L3A+PHAgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij48YnI+PC9zcGFuPjwvcD48cCBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC13ZWlnaHQ6IGJvbGQ7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij41LiBGbG9hdCBSYXRpbmcgd2lkZ2V0Jm5ic3A7ICh3aWRnZXQ9ImZpZWxkX2Zsb2F0X3JhdGluZyIgKTombmJzcDsgJm5ic3A7Jm5ic3A7PC9zcGFuPjwvcD48cCBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPldpZGdldCBmaWVsZF9mbG9hdF9yYXRpbmcgY2FuIGJlIHVzZWQgZm9yIGRpc3BsYXlpbmcgcmF0aW5nIG9mIGEgZmxvYXQgZmllbGQuPC9zcGFuPjwvcD48cCBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPjxicj48L3NwYW4+PC9wPjxwIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBmb250LXdlaWdodDogYm9sZDsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPlB5dGhvbjo8L3NwYW4+PC9wPjxwcmUgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij5yYXRpbmdfYXZnID0gZmllbGRzLkZsb2F0KCJSYXRpbmcgQXZlcmFnZSIsIGNvbXB1dGU9J19jb21wdXRlX3JhdGluZ19zdGF0cycpPC9zcGFuPjwvcHJlPjxwIHN0eWxlPSJsaW5lLWhlaWdodDogMS40OyI+PC9wPjxwIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBmb250LXdlaWdodDogYm9sZDsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPlhNTDo8L3NwYW4+PC9wPjxwcmUgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij4mbHQ7ZmllbGQgc3RyaW5nPSJSYXRpbmciIG5hbWU9InJhdGluZ19hdmciIHdpZGdldD0iZmllbGRfZmxvYXRfcmF0aW5nIi8mZ3Q7PC9zcGFuPjwvcHJlPjxkaXYgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPjxicj48L3NwYW4+PC9kaXY+PHAgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7Ij48aW1nIHNyYz0iaHR0cHM6Ly93d3cuY3licm9zeXMuY29tL2Jsb2cvVXBsb2Fkcy9CbG9nSW1hZ2UvbmV3LXdpZGdldHMtb2Rvby0xMy01LnBuZyIgYWx0PSJuZXctd2lkZ2V0cy1vZG9vLTEzLWN5YnJvc3lzIiBjbGFzcz0iaW1nLXRodW1ibmFpbCIgc3R5bGU9IndpZHRoOiA1MCU7Ij48L3NwYW4+PC9wPjxwIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PGJyPjwvc3Bhbj48L3A+PHAgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGZvbnQtd2VpZ2h0OiBib2xkOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+Ni4gV2Vic2l0ZSBwdWJsaXNoIGJ1dHRvbiB3aWRnZXQmbmJzcDsgKHdpZGdldD0id2Vic2l0ZV9wdWJsaXNoX2J1dHRvbiIgKTo8L3NwYW4+PC9wPjxwIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+V2lkZ2V0IHdlYnNpdGVfcHVibGlzaF9idXR0b24gY2FuIGJlIHVzZWQgZm9yIHNob3dpbmcgd2hldGhlciBpdCBpcyBwdWJsaXNoZWQgb3Igbm90IG9uIHRoZSB3ZWJzaXRlLjwvc3Bhbj48L3A+PHAgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij48YnI+PC9zcGFuPjwvcD48cCBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC13ZWlnaHQ6IGJvbGQ7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij5QeXRob246PC9zcGFuPjwvcD48cHJlIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+aXNfcHVibGlzaGVkID0gZmllbGRzLkJvb2xlYW4oJ0lzIFB1Ymxpc2hlZCcsIGNvcHk9RmFsc2UpPC9zcGFuPjwvcHJlPjxwIHN0eWxlPSJsaW5lLWhlaWdodDogMS40OyI+PC9wPjxwIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBmb250LXdlaWdodDogYm9sZDsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPlhNTDo8c3BhbiBzdHlsZT0id2hpdGUtc3BhY2U6cHJlIj4JPC9zcGFuPjwvc3Bhbj48L3A+PHAgc3R5bGU9ImxpbmUtaGVpZ2h0OiAxLjQ7Ij48L3A+PHByZSBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPiZsdDtmaWVsZCBuYW1lPSJpc19wdWJsaXNoZWQiIHdpZGdldD0id2Vic2l0ZV9wdWJsaXNoX2J1dHRvbiIvJmd0Ozwvc3Bhbj48L3ByZT48cCBzdHlsZT0ibGluZS1oZWlnaHQ6IDEuNDsiPjwvcD48ZGl2IHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij48YnI+PC9zcGFuPjwvZGl2PjxwIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyI+PGltZyBzcmM9Imh0dHBzOi8vd3d3LmN5YnJvc3lzLmNvbS9ibG9nL1VwbG9hZHMvQmxvZ0ltYWdlL25ldy13aWRnZXRzLW9kb28tMTMtNi5wbmciIGFsdD0ibmV3LXdpZGdldHMtb2Rvby0xMy1jeWJyb3N5cyIgY2xhc3M9ImltZy10aHVtYm5haWwiIHN0eWxlPSJ3aWR0aDogNTAlOyI+PC9zcGFuPjwvcD48cCBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPjxicj48L3NwYW4+PC9wPjxwIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+PHNwYW4gc3R5bGU9ImZvbnQtd2VpZ2h0OiBib2xkOyI+Ny48L3NwYW4+IFdlYnNpdGUgcmVkaXJlY3QgYnV0dG9uIHdpZGdldCAod2lkZ2V0PSJ3ZWJzaXRlX3JlZGlyZWN0X2J1dHRvbiIgKTombmJzcDsgJm5ic3A7PC9zcGFuPjwvcD48cCBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPldpZGdldCB3ZWJzaXRlX3JlZGlyZWN0X2J1dHRvbiBjYW4gYmUgdXNlZCBmb3IgdGhlIGJ1dHRvbiB3aGVyZSBpdCByZWRpcmVjdCB0byB3ZWJzaXRlLjwvc3Bhbj48L3A+PHAgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iZm9udC1mYW1pbHk6IFZlcmRhbmE7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij48YnI+PC9zcGFuPjwvcD48cCBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgZm9udC13ZWlnaHQ6IGJvbGQ7IGNvbG9yOiByZ2IoNjYsIDY2LCA2Nik7Ij5QeXRob246PC9zcGFuPjwvcD48cHJlIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBjb2xvcjogcmdiKDY2LCA2NiwgNjYpOyI+aXNfcHVibGlzaGVkID0gZmllbGRzLkJvb2xlYW4oJ0lzIFB1Ymxpc2hlZCcsIGNvcHk9RmFsc2UpPC9zcGFuPjwvcHJlPjxwIHN0eWxlPSJsaW5lLWhlaWdodDogMS40OyI+PC9wPjxwIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBmb250LXdlaWdodDogYm9sZDsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPjxicj48L3NwYW4+PC9wPjxwIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyBmb250LXdlaWdodDogYm9sZDsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPlhNTDo8c3BhbiBzdHlsZT0id2hpdGUtc3BhY2U6cHJlIj4JPC9zcGFuPjwvc3Bhbj48L3A+PHAgc3R5bGU9ImxpbmUtaGVpZ2h0OiAxLjQ7Ij48L3A+PHByZSBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxzcGFuIHN0eWxlPSJmb250LWZhbWlseTogVmVyZGFuYTsgY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPiZsdDtmaWVsZCBuYW1lPSJpc19wdWJsaXNoZWQiIHdpZGdldD0id2Vic2l0ZV9yZWRpcmVjdF9idXR0b24iLyZndDs8L3NwYW4+PC9wcmU+PHAgc3R5bGU9ImxpbmUtaGVpZ2h0OiAxLjQ7Ij48L3A+PHAgc3R5bGU9InRleHQtYWxpZ246IGp1c3RpZnk7IGxpbmUtaGVpZ2h0OiAxLjQ7Ij48c3BhbiBzdHlsZT0iY29sb3I6IHJnYig2NiwgNjYsIDY2KTsiPjxicj48L3NwYW4+PC9wPjxwIHN0eWxlPSJ0ZXh0LWFsaWduOiBqdXN0aWZ5OyBsaW5lLWhlaWdodDogMS40OyI+PHNwYW4gc3R5bGU9ImZvbnQtZmFtaWx5OiBWZXJkYW5hOyI+PGltZyBzcmM9Imh0dHBzOi8vd3d3LmN5YnJvc3lzLmNvbS9ibG9nL1VwbG9hZHMvQmxvZ0ltYWdlL25ldy13aWRnZXRzLW9kb28tMTMtNy5wbmciIGFsdD0ibmV3LXdpZGdldHMtb2Rvby0xMy1jeWJyb3N5cyIgY2xhc3M9ImltZy10aHVtYm5haWwiIHN0eWxlPSJ3aWR0aDogNTAlOyI+PC9zcGFuPjwvcD48cCBzdHlsZT0idGV4dC1hbGlnbjoganVzdGlmeTsgbGluZS1oZWlnaHQ6IDEuNDsiPjxicj48L3A+ZGQCEQ8PFgIeC05hdmlnYXRlVXJsBTF+L2Jsb2cvaG93LXRvLWNhbGwtcHl0aG9uLWZ1bmN0aW9uLWZyb20tbWVudS1pdGVtZGQCEw8PFgIfBQUjfi9ibG9nL2VycC1pbXBsZW1lbnRhdGlvbi1jaGVja2xpc3RkZAIVDw8WAh8EBQEwZGQCFw8WAh4LXyFJdGVtQ291bnRmZAIxDxYCHwYCBRYKZg9kFgRmDxUCLEhvdyB0byBVcGxvYWQgRmlsZXMgZnJvbSBXZWIgRm9ybSBpbiBPZG9vIDEzLWhvdy10by11cGxvYWQtZmlsZXMtZnJvbS13ZWItZm9ybS1vZG9vLTEzLnBuZ2QCAQ8PFgQfBAUgSG93IHRvIFVwbG9hZCBGaWxlcyBmcm9tIFdlYiAuLi4fBQUwfi9ibG9nL2hvdy10by11cGxvYWQtZmlsZXMtZnJvbS13ZWItZm9ybS1vZG9vLTEzZGQCAQ9kFgRmDxUCN0VSUCBJbXBsZW1lbnRhdGlvbiBhbmQgT3JnYW5pemF0aW9uYWwgQ2hhbmdlIE1hbmFnZW1lbnQ3ZXJwLWltcGxlbWVudGF0aW9uLW9yZ2FuaXphdGlvbmFsLWNoYW5nZS1tYW5hZ2VtZW50LnBuZ2QCAQ8PFgQfBAUpRVJQIEltcGxlbWVudGF0aW9uIGFuZCBPcmdhbml6YXRpb25hbCAuLi4fBQU6fi9ibG9nL2VycC1pbXBsZW1lbnRhdGlvbi1vcmdhbml6YXRpb25hbC1jaGFuZ2UtbWFuYWdlbWVudGRkAgIPZBYEZg8VAjZIb3cgdG8gQWRkIEZpbHRlcnMgdG8gdGhlIEV4aXN0aW5nIFNlYXJjaCBWaWV3IGluIE9kb282aG93LXRvLWFkZC1maWx0ZXJzLXRvLWV4aXN0aW5nLXNlYXJjaC12aWV3LWluLW9kb28ucG5nZAIBDw8WBB8EBR1Ib3cgdG8gQWRkIEZpbHRlcnMgdG8gdGhlIC4uLh8FBTl+L2Jsb2cvaG93LXRvLWFkZC1maWx0ZXJzLXRvLWV4aXN0aW5nLXNlYXJjaC12aWV3LWluLW9kb29kZAIDD2QWBGYPFQIvRGlzY291bnQgb24gU2FsZSBPcmRlcnMgYW5kIEludm9pY2VzIGluIE9kb28gMTMsZGlzY291bnQtb24tc2FsZS1vcmRlcnMtaW52b2ljZXMtb2Rvby0xMy5wbmdkAgEPDxYEHwQFH0Rpc2NvdW50IG9uIFNhbGUgT3JkZXJzIGFuZCAuLi4fBQUsfi9ibG9nL2Rpc2NvdW50LW9uLXNhbGUtb3JkZXJzLWludm9pY2VzLW9kb29kZAIED2QWBGYPFQIeVXNlIG9mIEJlYXV0aWZ1bFNvdXAgaW4gUHl0aG9uI3VzZS1vZi1iZWF1dGlmdWwtc291cC1pbi1weXRob24ucG5nZAIBDw8WBB8EBRlVc2Ugb2YgQmVhdXRpZnVsU291cCBpbiBQHwUFJX4vYmxvZy91c2Utb2YtYmVhdXRpZnVsc291cC1pbi1weXRob25kZGRmg9Z9jvQq1pJojTN1Vz2ScGQxTBQkoIwqSct//7T5YQ==">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="New%20Widgets%20in%20Odoo%2013_files/WebResource.html" type="text/javascript"></script>
+
+
+<script src="New%20Widgets%20in%20Odoo%2013_files/WebResource_002.html" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="62CB82F6">
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAxuTGendaLY0yjVKDxZHZilozoJZpuXxkpOVJKRbHyuHkMHZh9ZuPBRie2vA/HfoRIwE2ttc+AX62xNNON5QHDPX5GAcQ015PlrjCRBov7P/uKpzeND3KbwadDhZC69DXci2Rm/WwVrcvrTW9hqOz4qgtREBg72DdyGdDiNf3LvMqdBb8x21unxLezx+ctV/tt5NIlmEr/SBwAuP9C9zW8xOhDAx/aG93y69VGTLUIbnuvfHGwc7cw789XItxZuHHz2xQViByt4kVvKJkyY0Z/Wg9XLwc5lRWp4c2w0OrcRGQ==">
+</div>
+   
+<script src="New%20Widgets%20in%20Odoo%2013_files/lazy-offscreen-image.js" async=""></script>
+ <header class="nav-up">
+<div class="menu-container mega-nav">
+  <div class="menu">
+  	<a id="header_HyperLink24" href="https://www.cybrosys.com/"><img src="New%20Widgets%20in%20Odoo%2013_files/logo.png" alt="Logo" style="width:230px;"></a>
+    <a href="#" class="menu-mobile" aria-label="mobile menu">&nbsp;</a><ul class="clearfix">
+      <li><a id="header_HyperLink37" href="https://www.cybrosys.com/">Home</a></li>
+       <li class="link-none menu-dropdown-icon">Odoo
+        <ul class="menu-display">
+          <li>
+          <a id="header_HyperLink35" href="https://www.cybrosys.com/odoo/">Odoo</a>
+            <ul>
+                <li><a id="header_HyperLink58" href="https://www.cybrosys.com/odoo/">Odoo </a></li>
+                <li><a id="header_HyperLink15" href="https://www.cybrosys.com/hire-odoo-developer/">Hire Odoo Developer</a></li>
+                <li><a id="header_HyperLink31" href="https://www.cybrosys.com/odoo-customization-and-installation/">Odoo Customization</a></li>
+                <li><a id="header_HyperLink32" href="https://www.cybrosys.com/odoo-erp-implementation/">Odoo Implementation</a></li>
+                <li><a id="header_HyperLink33" href="https://www.cybrosys.com/odoo-erp-integration/">Odoo Integration</a></li>
+                <li><a id="header_HyperLink34" href="https://www.cybrosys.com/odoo-erp-support/">Support &amp; Maintenance</a></li>                                     
+            </ul>
+          </li>
+          <li>
+          <a id="header_HyperLink17" href="https://www.cybrosys.com/odoo/industries/">Industries</a>
+            <ul>
+              <li><a id="header_HyperLink3" href="https://www.cybrosys.com/odoo/industries/best-trading-erp/">Trading</a></li>
+              <li><a id="header_HyperLink4" href="https://www.cybrosys.com/odoo/industries/manufacturing-erp-software/">Manufacturing</a></li>
+              <li><a id="header_HyperLink5" href="https://www.cybrosys.com/odoo/industries/restaurant-management/">Restaurant Management</a></li>
+              <li><a id="header_HyperLink6" href="https://www.cybrosys.com/odoo/industries/pos/">POS</a></li>
+              <li><a id="header_HyperLink7" href="https://www.cybrosys.com/odoo/industries/ecommerce-website/">E-commerce Website</a></li>
+              <li><a id="header_HyperLink8" href="https://www.cybrosys.com/odoo/industries/hotel-management-erp/">Hotel Management </a></li>
+              <li><a id="header_HyperLink9" href="https://www.cybrosys.com/odoo/industries/education-erp-software/">Education</a></li>
+              <li><a id="header_HyperLink10" href="https://www.cybrosys.com/odoo/industries/service-management/">Service Management</a></li>
+            </ul>
+          </li>
+          <li>
+          <a id="header_HyperLink19" href="https://www.cybrosys.com/odoo/field-of-expertise/">Field of Expertise</a>
+            <ul>
+              <li><a id="header_HyperLink11" href="https://www.cybrosys.com/odoo/industries/accounting-and-finance/">Accounting &amp; Finance</a></li>
+              <li><a id="header_HyperLink12" href="https://www.cybrosys.com/odoo/industries/warehouse-management/">Warehouse Management</a></li>
+              <li><a id="header_HyperLink13" href="https://www.cybrosys.com/odoo/field-of-expertise/manufacturing-erp-software/">Manufacturing</a></li>
+              <li><a id="header_HyperLink20" href="https://www.cybrosys.com/odoo/industries/human-resource/">Human Resource</a></li>
+              <li><a id="header_HyperLink21" href="https://www.cybrosys.com/odoo/industries/project-management/">Project Management</a></li>
+              <li><a id="header_HyperLink16" href="https://www.cybrosys.com/odoo/field-of-expertise/pos/">Point of Sale</a></li>
+              <li><a id="header_HyperLink18" href="https://www.cybrosys.com/odoo/field-of-expertise/ecommerce-website/">E-commerce Website</a></li>
+              <li><a id="header_HyperLink22" href="https://www.cybrosys.com/odoo/industries/crm/">Customer Relationship (CRM)</a></li>
+              <li><a id="header_HyperLink23" href="https://www.cybrosys.com/odoo/industries/complete-sales-management-erp/">Sales Management</a></li>
+              <li><a id="header_HyperLink25" href="https://www.cybrosys.com/odoo/industries/purchasing-management-software/">Purchase Management</a></li>
+            </ul>
+          </li>
+           <li><p class="link-sub-none link-none">Other</p>
+            <ul>
+               
+               <li role="presentation"><a href="https://www.cybrosys.com/odoo/odoo-books/">Odoo Book <span class="odoov13new">New-V13</span> </a></li>
+               <li role="presentation"><a id="header_HyperLink30" href="https://www.cybrosys.com/odoo-apps/">Odoo Apps </a></li>
+               <li role="presentation"><a id="header_HyperLink62" href="https://www.cybrosys.com/odoo/videos/">Videos</a></li>
+               <li role="presentation"><a id="header_HyperLink2888888" href="https://www.cybrosys.com/slides/">Slides</a></li>
+               <li role="presentation"><a id="header_HyperLink1" href="https://www.cybrosys.com/faq/">FAQ</a></li>                 
+               <li><a id="header_HyperLink2" href="https://www.cybrosys.com/odoo/odoo-books/odoo-book-v13/"><img src="New%20Widgets%20in%20Odoo%2013_files/odoo13-book-cover-mini.jpg" alt="odoo book v13" class="odoo-certified lazyload"></a></li>
+                
+                
+            </ul>
+          </li>
+        
+        </ul>
+      </li>
+      <li><a id="header_HyperLink52" href="https://www.cybrosys.com/buy-source-code/">Source Code</a></li>
+
+
+      
+      
+      
+
+      <li class="link-none our-company-menu menu-dropdown-icon">Our Company
+        <ul class="normal-sub">
+         
+          
+              <li><a id="header_HyperLink14" href="https://www.cybrosys.com/about-us/">About</a></li>
+                <li><a id="header_HyperLink38" href="https://www.cybrosys.com/employee-staffing/">Employee Staffing</a></li>
+                <li><a id="header_HyperLink27" href="https://www.cybrosys.com/hire-python-developer/">Hire Python Developer</a></li>
+                 <li><a id="header_HyperLink39" href="https://www.cybrosys.com/portfolio/">Portfolio</a></li>
+                <li><a id="header_HyperLink40" href="https://www.cybrosys.com/life-at-cybrosys/">Cybrosian's Life</a></li>
+                <li><a id="header_HyperLink41" href="https://www.cybrosys.com/career/">Career</a></li>
+                <li><a id="header_HyperLink42" rel="noopener" href="https://goo.gl/jn6ZZk" target="_blank">View our Company</a></li>
+                <li><a id="header_HyperLink43" href="https://www.cybrosys.com/sitemap/">Sitemap</a></li>
+         
+        </ul>
+      </li>
+      <li><a id="header_HyperLink28" href="https://www.cybrosys.com/blog/">Blog</a></li>
+      <li><a id="header_HyperLink29" href="https://www.cybrosys.com/contact/">Contact</a></li>
+      <li class="quick-btn-wrap enquiry"><a href="#contactform" class="btn btn-default quick-enquiry-btn">Quick Enquiry</a></li>
+     
+    </ul>
+  </div>
+  </div>
+  </header>
+  <script src="New%20Widgets%20in%20Odoo%2013_files/jquery_004.js"></script>
+  <script src="New%20Widgets%20in%20Odoo%2013_files/hide-nav-scroll.js" defer="defer"></script>
+<script>
+
+    $(document).ready(function () {
+        "use strict";
+        $('.menu > ul > li:has( > ul)').addClass('menu-dropdown-icon');
+        $('.menu > ul > li > ul:not(:has(ul))').addClass('normal-sub');
+        $(".menu > ul").before("<a href=\"#\" class=\"menu-mobile\" aria-label=\"mobile menu\">&nbsp;</a>");
+       
+        $(".menu > ul > li").click(function () {
+            if ($(window).width() <= 943) {
+                $(this).children("ul").fadeToggle(150);
+            }
+        });
+        $(".menu-mobile").click(function (e) {
+            $(".menu > ul").toggleClass('show-on-mobile');
+            e.preventDefault();
+        });
+    });
+    $(window).resize(function () {
+        $(".menu > ul > li").children("ul").hide();
+        $(".menu > ul").removeClass('show-on-mobile');
+
+
+    });
+
+   
+</script>
+   <div id="blogContent">
+      <div class="newblog">
+         <div class="container-fluid cebit-ban">
+         </div>
+         <div class="container newblogContent">
+            <div class="row">
+               <div class="col-md-9 col-sm-7 col-xs-12 right-cebit">
+                  <div class="row">
+                     <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="blog-titles">
+                           <img id="imgBlog" src="New%20Widgets%20in%20Odoo%2013_files/new-widgets-odoo-13.png" alt="new-widgets-odoo-13.png" style="border-width:2px;border-style:None;">
+                           <div class="blog-view-main">
+                              <img id="imgBlogger" src="New%20Widgets%20in%20Odoo%2013_files/Blogger_636894212542259474.png" alt="Blogger_636894212542259474.png" style="border-width:2px;border-style:None;">
+                              <div class="blog-view-details">
+                                 <div class="blog-view-user-name">
+                                    <span style="float: left; color: #5D6769;">By:</span>
+                                    <span id="lblbloggerName">Nimisha Muralidhar</span></div>
+                                 <div class="blog-view-post-date"><i class="fa fa-calendar" aria-hidden="true"></i>
+                                    <span id="lblPostedDateTime">03/12/2019</span></div>
+                              </div>
+                           </div>
+                           <h1 class="blogviewmainhead"><span id="lblHeading1">New Widgets in Odoo 13</span></h1></div>
+                        <div id="tagdiv">
+                           
+                        <span> Technical</span><span> Odoo 13</span></div>
+                        <div class="blog-body">
+                        <p>
+                           <span id="lblContents1"></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">Odoo
+ is known for its simplicity and usability. The open-source right from 
+its inception has been in discussion for its efficient management of 
+different business modules and enhanced collaborative work environment. 
+With each version release, Odoo is becoming more stronger and highly 
+competitive with other ERP solutions in the market.&nbsp;</span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">The
+ recent version, Odoo 13 has introduced several new modules like 
+Employee Skill Management, Rental Management, promising the most 
+intrinsic management of the business. This blog introduces you to the 
+new widgets introduced in Odoo 13.</span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">Widget
+ is a representation of display screens, fields, and attributes in odoo.
+ It allows us to change the view using different rendering templates and
+ also allows to design as per requirement. Additional widgets are 
+introduced in version 13 so that it can be easily applied.</span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; font-weight: bold; color: rgb(66, 66, 66);">1. Signature widget (widget="signature" )<span style="white-space:pre">	</span></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">A widget is defined for signature, on using this widget one can easily draw the signature.&nbsp;</span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; font-weight: bold; color: rgb(66, 66, 66);">Python: </span></p><pre style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">user_signature = fields.Binary(string='Signature')&nbsp;</span></pre><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></p><p style="line-height: 1.4;"></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; font-weight: bold; color: rgb(66, 66, 66);">XML: </span></p><pre style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">&lt;field name="user_signature" widget="signature"/&gt;</span></pre><div style="text-align: justify; line-height: 1.4;"><span style="color: rgb(66, 66, 66);"><br></span></div><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana;"><img src="New%20Widgets%20in%20Odoo%2013_files/new-widgets-odoo-13-1.png" alt="new-widgets-odoo-13-cybrosys" class="img-thumbnail" style="width: 100%;"></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; font-weight: bold; color: rgb(66, 66, 66);">2. Ribbon widget&nbsp; (&lt;widget name="web_ribbon" text="Paid"/&gt;)</span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">Widget
+ web_ribbon can be used in a form. It displays a ribbon on the top right
+ part of the form. One can specify text in text attribute and background
+ color in the bg_color attribute.</span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></p><pre style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">&lt;widget name="web_ribbon" text="Archived" bg_color="bg-danger" /&gt;</span></pre><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">Let's take an example of invoice payment,</span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">when a customer pays the invoice, a green color ribbon is tied in the corresponding invoice with the status ”<span style="font-weight: bold;">paid</span>”</span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></p><pre style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">&lt;widget name="web_ribbon" text="Paid"/&gt;</span></pre><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">If you don’t specify bg_color, by default bg_color will be bg-success.</span></p><div style="text-align: justify; line-height: 1.4;"><span style="color: rgb(66, 66, 66);"><br></span></div><p style="text-align: justify; line-height: 1.4;"><span style="color: rgb(66, 66, 66);"><span style="font-family: Verdana;"></span><span style="font-family: Verdana;"><img src="New%20Widgets%20in%20Odoo%2013_files/new-widgets-odoo-13-2.png" alt="new-widgets-odoo-13-cybrosys" class="img-thumbnail" style="width: 100%;"></span></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; font-weight: bold; color: rgb(66, 66, 66);">3. date range widget (widget="daterange" )</span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></p><pre style="line-height: 1.4;"><div style="text-align: justify;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">date_begin = fields.Datetime( string='Start Date')</span></div><span style="font-family: Verdana; color: rgb(66, 66, 66);"><div style="text-align: justify;">&lt;field name="date_begin" widget="daterange"/&gt;</div></span></pre><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></p><p style="text-align: justify; line-height: 1.4;"><span style="color: rgb(66, 66, 66);"><span style="font-family: Verdana;">The widget date range can be used for displaying date, month and time in a notable&nbsp;</span><span style="font-family: Verdana;">format just as shown below:</span></span></p><div style="text-align: justify; line-height: 1.4;"><span style="color: rgb(66, 66, 66);"><br></span></div><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana;"><img src="New%20Widgets%20in%20Odoo%2013_files/new-widgets-odoo-13-3.png" alt="new-widgets-odoo-13-cybrosys" class="img-thumbnail" style="width: 50%;"></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; font-weight: bold; color: rgb(66, 66, 66);">4. Many2many avatar widget&nbsp; (widget="many2many_tags_avatar" ):</span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">Widget
+ many2many_tags_avatar&nbsp; can be used in a Many2many field. It is 
+similar to many2many_tags, change is the addition of avatar.</span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; font-weight: bold; color: rgb(66, 66, 66);">Python:</span></p><pre style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">partner_ids = fields.Many2many('res.partner', 'calendar_event_res_partner_rel', string='Attendees')</span></pre><p style="line-height: 1.4;"></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; font-weight: bold; color: rgb(66, 66, 66);">XML:<span style="white-space:pre">	</span></span></p><pre style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">&lt;field name="partner_ids" widget="many2many_tags_avatar" write_model="calendar.contacts" write_field="partner_id" avatar_field="image_128"/&gt;</span></pre><p style="line-height: 1.4;"></p><div style="text-align: justify;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></div><span style="font-family: Verdana;"><div style="text-align: justify;"><img src="New%20Widgets%20in%20Odoo%2013_files/new-widgets-odoo-13-4.png" alt="new-widgets-odoo-13-cybrosys" class="img-thumbnail" style="width: 50%;"></div></span><p></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; font-weight: bold; color: rgb(66, 66, 66);">5. Float Rating widget&nbsp; (widget="field_float_rating" ):&nbsp; &nbsp;&nbsp;</span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">Widget field_float_rating can be used for displaying rating of a float field.</span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; font-weight: bold; color: rgb(66, 66, 66);">Python:</span></p><pre style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">rating_avg = fields.Float("Rating Average", compute='_compute_rating_stats')</span></pre><p style="line-height: 1.4;"></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; font-weight: bold; color: rgb(66, 66, 66);">XML:</span></p><pre style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">&lt;field string="Rating" name="rating_avg" widget="field_float_rating"/&gt;</span></pre><div style="text-align: justify; line-height: 1.4;"><span style="color: rgb(66, 66, 66);"><br></span></div><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana;"><img src="New%20Widgets%20in%20Odoo%2013_files/new-widgets-odoo-13-5.png" alt="new-widgets-odoo-13-cybrosys" class="img-thumbnail" style="width: 50%;"></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; font-weight: bold; color: rgb(66, 66, 66);">6. Website publish button widget&nbsp; (widget="website_publish_button" ):</span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">Widget website_publish_button can be used for showing whether it is published or not on the website.</span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; font-weight: bold; color: rgb(66, 66, 66);">Python:</span></p><pre style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">is_published = fields.Boolean('Is Published', copy=False)</span></pre><p style="line-height: 1.4;"></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; font-weight: bold; color: rgb(66, 66, 66);">XML:<span style="white-space:pre">	</span></span></p><p style="line-height: 1.4;"></p><pre style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">&lt;field name="is_published" widget="website_publish_button"/&gt;</span></pre><p style="line-height: 1.4;"></p><div style="text-align: justify; line-height: 1.4;"><span style="color: rgb(66, 66, 66);"><br></span></div><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana;"><img src="New%20Widgets%20in%20Odoo%2013_files/new-widgets-odoo-13-6.png" alt="new-widgets-odoo-13-cybrosys" class="img-thumbnail" style="width: 50%;"></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><span style="font-weight: bold;">7.</span> Website redirect button widget (widget="website_redirect_button" ):&nbsp; &nbsp;</span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">Widget website_redirect_button can be used for the button where it redirect to website.</span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);"><br></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; font-weight: bold; color: rgb(66, 66, 66);">Python:</span></p><pre style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">is_published = fields.Boolean('Is Published', copy=False)</span></pre><p style="line-height: 1.4;"></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; font-weight: bold; color: rgb(66, 66, 66);"><br></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; font-weight: bold; color: rgb(66, 66, 66);">XML:<span style="white-space:pre">	</span></span></p><p style="line-height: 1.4;"></p><pre style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana; color: rgb(66, 66, 66);">&lt;field name="is_published" widget="website_redirect_button"/&gt;</span></pre><p style="line-height: 1.4;"></p><p style="text-align: justify; line-height: 1.4;"><span style="color: rgb(66, 66, 66);"><br></span></p><p style="text-align: justify; line-height: 1.4;"><span style="font-family: Verdana;"><img src="New%20Widgets%20in%20Odoo%2013_files/new-widgets-odoo-13-7.png" alt="new-widgets-odoo-13-cybrosys" class="img-thumbnail" style="width: 50%;"></span></p><p style="text-align: justify; line-height: 1.4;"><br></p>
+                        <p></p>
+                        </div>
+                        <br>
+                     </div>
+                     <br>
+                     <a href="https://www.youtube.com/channel/UCKjWLm7iCyOYINVspCSanjg?sub_confirmation=1" target="_blank" rel="noopener"><img src="New%20Widgets%20in%20Odoo%2013_files/cybrosys-youtube-ads.jpg" alt="cybrosys youtube" style="width: 100%;"></a>
+                     <br>                                 
+                      
+                     <hr>
+                     <div id="nav-below" class="navigation">
+                        <div class="nav-previous"><a id="lnkbtnBackword" class="previous" href="https://www.cybrosys.com/blog/how-to-call-python-function-from-menu-item">« Previous </a></div>
+                        <div class="nav-next"><a id="lnkbtnForward" class="next" href="https://www.cybrosys.com/blog/erp-implementation-checklist">Next »</a></div>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="streamcontent">
+                        <h2>Comments </h2>
+                        <div class="comment-count"><span id="lblCommentCount">0</span></div>
+                        <div class="col-md-12 padd0">
+                        </div>
+                        <br>
+                        <br>
+                        <div class="comment-respond">
+                           <h2>Leave a comment</h2>
+                           <div class="form-group comment-reply">
+                             <label for="txtName" style="display:none;" class="nav-up"></label>
+                              <input name="txtName" type="text" id="txtName" placeholder="Name" class="form-control comment-input form-style">
+                              <span id="RequiredFieldValidator1" style="color:Red;visibility:hidden;">*</span>
+                           </div>
+                           <div class="form-group comment-reply">
+                              <label for="txtEmail" style="display:none;" class="nav-up"></label>
+                              <input name="txtEmail" id="txtEmail" placeholder="Email" class="form-control comment-input  form-style" type="email">
+                              <span id="reqvalEmail" title="Email id required" style="color:Red;display:none;">*</span>
+                              <span id="rgvEmail" title="Invalid email id" class="Mandatory" style="color:Red;display:none;">*</span>
+                           </div>
+                           <div class="form-group comment-reply">
+                              <label for="txtWebsite" style="display:none;" class="nav-up"></label>
+                              <input name="txtWebsite" type="text" id="txtWebsite" placeholder="Website" class="form-control comment-input form-style">
+                           </div>
+                           <div class="form-group comment-reply">
+                              <label for="txtComment" style="display:none;" class="nav-up"></label>
+                              <textarea name="txtComment" rows="6" cols="20" id="txtComment" placeholder="Comment" class="form-control comment-input form-styles"></textarea>
+                           </div>
+                           <input type="submit" name="btnPublish" value="Post Comment" onclick='getDate();WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("btnPublish", "", true, "Submit", "", false, false))' id="btnPublish" class="btn btn-default post-comment">
+                        </div>
+                     </div>
+                  </div>
+                  <div class="clear">
+                  </div>
+               </div>
+               <div class="col-md-3 col-sm-5 col-xs-12 post-updates">
+                  <div class="left-cebit" id="left-cebitz">
+                     <div class="row">
+                        <div class="agileinfo_calender" style="display:none;">
+                           <h3>SHARE SOCIALLY</h3>
+                           <div class="social-icons-1">
+                              <a id="hlfacebook" class="facebook" target="_blank">                                                      
+                                 <i class="fa fa-facebook"></i>
+                              </a>
+                              <a id="hlTwitter" class="twitter" target="_blank"> 
+                                 <i class="fa fa-twitter"></i> 
+                              </a>
+                             
+                              <a id="hlLinkedin" class="linkedin" href="#" target="_blank">
+                                 <i class="fa fa-linkedin"></i>
+                              </a>
+                           </div>
+                        </div>
+                        
+                        <script async="" src="New%20Widgets%20in%20Odoo%2013_files/cse.js"></script>
+                        <div id="___gcse_0"><div class="gsc-control-searchbox-only gsc-control-searchbox-only-en" dir="ltr"><form class="gsc-search-box gsc-search-box-tools" accept-charset="utf-8"><table class="gsc-search-box" cellspacing="0" cellpadding="0"><tbody><tr><td class="gsc-input"><div class="gsc-input-box" id="gsc-iw-id1"><table style="width: 100%; padding: 0px;" id="gs_id50" class="gstl_50 gsc-input" cellspacing="0" cellpadding="0"><tbody><tr><td id="gs_tti50" class="gsib_a"><input autocomplete="off" type="text" size="10" class="gsc-input" name="search" title="search" style="width: 100%; padding: 0px; border: medium none; margin: 0px; height: auto; outline: currentcolor none medium;" id="gsc-i-id1" dir="ltr" spellcheck="false"></td><td class="gsib_b"><div class="gsst_b" id="gs_st50" dir="ltr"><a class="gsst_a" href="javascript:void(0)" style="display: none;" title="Clear search box" role="button"><span class="gscb_a" id="gs_cb50" aria-hidden="true">×</span></a></div></td></tr></tbody></table></div></td><td class="gsc-search-button"><button class="gsc-search-button gsc-search-button-v2"><svg width="13" height="13" viewBox="0 0 13 13"><title>search</title><path d="m4.8495 7.8226c0.82666 0 1.5262-0.29146 2.0985-0.87438 0.57232-0.58292 0.86378-1.2877 0.87438-2.1144 0.010599-0.82666-0.28086-1.5262-0.87438-2.0985-0.59352-0.57232-1.293-0.86378-2.0985-0.87438-0.8055-0.010599-1.5103 0.28086-2.1144 0.87438-0.60414 0.59352-0.8956 1.293-0.87438 2.0985 0.021197 0.8055 0.31266 1.5103 0.87438 2.1144 0.56172 0.60414 1.2665 0.8956 2.1144 0.87438zm4.4695 0.2115 3.681 3.6819-1.259 1.284-3.6817-3.7 0.0019784-0.69479-0.090043-0.098846c-0.87973 0.76087-1.92 1.1413-3.1207 1.1413-1.3553 0-2.5025-0.46363-3.4417-1.3909s-1.4088-2.0686-1.4088-3.4239c0-1.3553 0.4696-2.4966 1.4088-3.4239 0.9392-0.92727 2.0864-1.3969 3.4417-1.4088 1.3553-0.011889 2.4906 0.45771 3.406 1.4088 0.9154 0.95107 1.379 2.0924 1.3909 3.4239 0 1.2126-0.38043 2.2588-1.1413 3.1385l0.098834 0.090049z"></path></svg></button></td><td class="gsc-clear-button"><div class="gsc-clear-button" title="clear results">&nbsp;</div></td></tr></tbody></table></form></div></div>
+                        <div class="recent_posts">                        
+                        
+                        <!-- <div class="agileinfo_calender" style="padding-bottom: 0%;">
+                           <h3>Odoo Webinar</h3>
+                           <div class="social-icons-1">                              
+                                 <a href="https://zoom.us/j/242843878" target="_blank"><img data-src="../images/odoo-functional-training-webinar.png" alt="Open HRMS Webinar" class="img-responsive lazyload" />
+                             </a>
+                           </div>
+                        </div>  -->
+                        <div class="agileinfo_calender" style="padding-bottom: 0%;">
+                           <h3>#FightBackCorona</h3>
+                           <a data-fancybox="" href="https://youtu.be/FqTdilLFn5E">
+                              <img src="New%20Widgets%20in%20Odoo%2013_files/cybrosys-thumnail-small.jpg" alt="cybrosys" style="width: 100%;">
+                              <div class="video-play-button">
+                                  <span></span>
+                              </div>
+                          </a>
+                           <!-- <div class="social-icons-1">
+                              <a id="HyperLink1" href="../life-at-cybrosys/">
+                                 <img data-src="../images/gallery/life-at-cybrosys.gif" alt="Cybrosian's Life" class="img-responsive lazyload" />
+                              </a>
+                           </div> -->
+                        </div>
+                           <h3>Recent Posts</h3>
+                           
+                                 <div class="agileits_recent_posts_grid">
+                                    <div class="agileits_recent_posts_gridl">
+                                       <div class="special_deals_grid_left_grid">
+                                          <img id="" alt=" How to Upload Files from Web Form in Odoo 13" data-src="https://www.cybrosys.com/blog/Uploads/BlogImageMini/how-to-upload-files-from-web-form-odoo-13.png" class=" lazyloaded" src="New%20Widgets%20in%20Odoo%2013_files/how-to-upload-files-from-web-form-odoo-13.png">
+                                       </div>
+                                    </div>
+                                    <div class="agileits_recent_posts_gridr">
+                                       <h4>
+                                          <a id="rptBlogs_ctl00_hlTitle" href="https://www.cybrosys.com/blog/how-to-upload-files-from-web-form-odoo-13">How to Upload Files from Web ...</a>
+                                       </h4>
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                 </div>
+                              
+                                 <div class="agileits_recent_posts_grid">
+                                    <div class="agileits_recent_posts_gridl">
+                                       <div class="special_deals_grid_left_grid">
+                                          <img id="" alt=" ERP Implementation and Organizational Change Management" data-src="https://www.cybrosys.com/blog/Uploads/BlogImageMini/erp-implementation-organizational-change-management.png" class=" lazyloaded" src="New%20Widgets%20in%20Odoo%2013_files/erp-implementation-organizational-change-management.png">
+                                       </div>
+                                    </div>
+                                    <div class="agileits_recent_posts_gridr">
+                                       <h4>
+                                          <a id="rptBlogs_ctl01_hlTitle" href="https://www.cybrosys.com/blog/erp-implementation-organizational-change-management">ERP Implementation and Organizational ...</a>
+                                       </h4>
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                 </div>
+                              
+                                 <div class="agileits_recent_posts_grid">
+                                    <div class="agileits_recent_posts_gridl">
+                                       <div class="special_deals_grid_left_grid">
+                                          <img id="" alt=" How to Add Filters to the Existing Search View in Odoo" data-src="https://www.cybrosys.com/blog/Uploads/BlogImageMini/how-to-add-filters-to-existing-search-view-in-odoo.png" class=" lazyloaded" src="New%20Widgets%20in%20Odoo%2013_files/how-to-add-filters-to-existing-search-view-in-odoo.png">
+                                       </div>
+                                    </div>
+                                    <div class="agileits_recent_posts_gridr">
+                                       <h4>
+                                          <a id="rptBlogs_ctl02_hlTitle" href="https://www.cybrosys.com/blog/how-to-add-filters-to-existing-search-view-in-odoo">How to Add Filters to the ...</a>
+                                       </h4>
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                 </div>
+                              
+                                 <div class="agileits_recent_posts_grid">
+                                    <div class="agileits_recent_posts_gridl">
+                                       <div class="special_deals_grid_left_grid">
+                                          <img id="" alt=" Discount on Sale Orders and Invoices in Odoo 13" data-src="https://www.cybrosys.com/blog/Uploads/BlogImageMini/discount-on-sale-orders-invoices-odoo-13.png" class=" lazyloaded" src="New%20Widgets%20in%20Odoo%2013_files/discount-on-sale-orders-invoices-odoo-13.png">
+                                       </div>
+                                    </div>
+                                    <div class="agileits_recent_posts_gridr">
+                                       <h4>
+                                          <a id="rptBlogs_ctl03_hlTitle" href="https://www.cybrosys.com/blog/discount-on-sale-orders-invoices-odoo">Discount on Sale Orders and ...</a>
+                                       </h4>
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                 </div>
+                              
+                                 <div class="agileits_recent_posts_grid">
+                                    <div class="agileits_recent_posts_gridl">
+                                       <div class="special_deals_grid_left_grid">
+                                          <img id="" alt=" Use of BeautifulSoup in Python" data-src="https://www.cybrosys.com/blog/Uploads/BlogImageMini/use-of-beautiful-soup-in-python.png" class=" lazyloaded" src="New%20Widgets%20in%20Odoo%2013_files/use-of-beautiful-soup-in-python.png">
+                                       </div>
+                                    </div>
+                                    <div class="agileits_recent_posts_gridr">
+                                       <h4>
+                                          <a id="rptBlogs_ctl04_hlTitle" href="https://www.cybrosys.com/blog/use-of-beautifulsoup-in-python">Use of BeautifulSoup in P</a>
+                                       </h4>
+                                    </div>
+                                    <div class="clearfix">
+                                    </div>
+                                 </div>
+                              
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <input type="hidden" name="hfDate" id="hfDate">
+            
+         </div>
+      </div>
+   </div>
+   
+<link href="New%20Widgets%20in%20Odoo%2013_files/cookieconsent.css" rel="stylesheet" type="text/css">
+
+
+<link rel="stylesheet" href="New%20Widgets%20in%20Odoo%2013_files/jquery.css">
+    <style>.video-play-button1 {
+      position: absolute;
+      z-index: 10;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      box-sizing: content-box;
+      display: block;
+      width: 32px;
+      height: 44px;
+      /* background: #fa183d; */
+      border-radius: 50%;
+      padding: 18px 20px 18px 28px;
+    }
+    
+    .video-play-button1:before {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      display: block;
+      width: 40px;
+      height: 40px;
+      background: #ba1f24;
+      border-radius: 50%;
+      animation: pulse-border 1500ms ease-out infinite;
+    }
+    
+    .video-play-button1:after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      left: 50%;
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      display: block;
+      width: 40px;
+      height: 40px;
+      background: #fa183d;
+      border-radius: 50%;
+      transition: all 200ms;
+    }
+    
+    .video-play-button1:hover:after {
+      background-color: darken(#fa183d, 10%);
+    }
+    
+    .video-play-button1 img {
+      position: relative;
+      z-index: 3;
+      max-width: 100%;
+      width: auto;
+      height: auto;
+    }
+    
+    .video-play-button1 span {
+      display: block;
+      position: relative;
+      z-index: 3;
+      width: 0;
+      height: 0;
+      border-left: 15px solid #fff;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      margin-top: 10px;
+     margin-left: 7px;
+
+    }
+    
+    .modelBox {
+    width: 300px;
+    background-color: #fff;
+    position: fixed;
+    opacity: 1;
+    bottom: -13px;
+    box-shadow: 4px 5px 6px 3px #00000045;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    margin-left: 10px;
+      }
+      .modelBox a.close {
+        padding: 2px;
+    color: #a1a1a1;
+    font-size:10px;
+}
+    
+    @keyframes pulse-border {
+      0% {
+        transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1.5);
+        opacity: 0;
+      }
+    }
+    @media(max-width:767px) {
+    .cybro-fight{flex-basis:100% !important;}
+    .video-play-button1 span {
+        border-left: 17px solid #fff;
+        border-top: 12px solid transparent;
+        border-bottom: 12px solid transparent;
+    }
+    .video-play-button1:before {
+        width: 50px;
+        height: 50px;
+    }
+    .video-play-button1:after {
+        width: 50px;
+        height: 50px;
+    }
+    .video-play-button1 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    }
+    @media(max-width:480px) {
+    .cybro-fight{flex-basis:100% !important;}
+    .video-play-button1 span {
+        border-left: 15px solid #fff;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        top: -4px;
+    left: -3px;
+    }
+    .video-play-button1:before {
+        width: 40px;
+        height: 40px;
+    }
+    .video-play-button1:after {
+        width: 40px;
+        height: 40px;
+    }
+    .video-play-button1 {
+        padding: 18px 20px 18px 22px;
+    }
+    .gallery-container .Grid {
+        width: 92%;
+        margin: 5rem auto;
+    }
+    }
+    @media(max-width:380px) {
+    .gallery-container .Card-image, .gallery-container .Card-shadow {
+        min-height: 12rem;
+    }
+    }
+    
+    </style>
+
+
+
+
+<div class="whatapposition"><a href="https://api.whatsapp.com/send?phone=918606827707" target="_blank" rel="noopener"><i class="fa fa-whatsapp"></i></a> </div>
+<div id="contactform" class="container-fluid home-contact-wrapper">    
+    <div class="row" style="margin: 0px;">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 home-contact-details">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 address-wrap border-bottom-right">
+                <div class="icon-box-wrap">
+                    <div class="icon-box">
+                        <i class="fa fa-map-marker"></i>
+                    </div>
+                </div>
+                <h5>Calicut</h5>
+                 <p>Cybrosys Technologies Pvt. Ltd.<br>
+                    Neospace, Kinfra Techno Park<br> Kakkancherry, Calicut<br> Kerala, India - 673635</p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 address-wrap border-bottom-right">
+                <div class="icon-box-wrap">
+                    <div class="icon-box">
+                        <i class="fa fa-map-marker"></i>
+                    </div>
+                </div>
+                <h5>London</h5>
+                <p>Cybrosys Limited<br>
+                   Alpha House, <br>100 Borough High Street, London,<br> SE1 1LB, United Kingdom</p> </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 address-wrap border-bottom-right">
+                <div class="icon-box-wrap">
+                    <div class="icon-box"> <i class="fa fa-map-marker"></i> </div>
+                </div>
+                <h5>Kochi</h5>
+                <p>Cybrosys Technologies Pvt. Ltd.<br>
+                    1st Floor, Thapasya Building,<br>
+                    Infopark, Kakkanad,<br> Kochi, India - 682030.</p> </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 address-wrap border-bottom-right">
+                <div class="icon-box-wrap">
+                    <div class="icon-box">
+                        <i class="fa fa-map-marker"></i>
+                    </div>
+                </div>
+                <h5>Bangalore</h5>
+                <p>Cybrosys Techno Solutions<br>
+                    The Estate, 8th Floor,<br>  Dickenson Road,<br>
+                    Bangalore, India - 560042</p>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 home-contact-form">
+            <div class="container-contact100">
+                <div class="wrap-contact100">
+                    
+                    <span class="contact100-form-title">Send Us A Message </span>
+                    <div class="wrap-input100 validate-input" data-validate="Please enter your name">
+                        <input name="footer$txtName" type="text" id="footer_txtName" placeholder="Full Name" class="input100">
+                        <span id="footer_RequiredFieldValidator10" style="color:Red;visibility:hidden;">Please fill out this field.</span>                       
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Please enter your email: e@a.x">
+                        <input name="footer$txtMail" id="footer_txtMail" placeholder="E-mail" class="input100" type="email">
+                        <span id="footer_RequiredFieldValidator11" style="color:Red;visibility:hidden;">Please fill out this field.</span>                        
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Please enter your phone">
+                        <input name="footer$txtPhone" type="text" id="footer_txtPhone" placeholder="Phone" class="input100">
+                        <span id="footer_RequiredFieldValidator12" style="color:Red;visibility:hidden;">Please fill out this field.</span>                       
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Please enter your message">
+                        <textarea name="footer$txtComment" rows="2" cols="20" id="footer_txtComment" placeholder="Your Message" class="input100"></textarea>
+                        <span id="footer_RequiredFieldValidator13" style="color:Red;visibility:hidden;">Please fill out this field.</span>                        
+                    </div>
+                    <div class="container-contact100-form-btn">
+                        <input type="submit" name="footer$submit_footer_contact_click" value="Send" onclick='javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("footer$submit_footer_contact_click", "", true, "ContactInfoGroup", "", false, false))' id="footer_submit_footer_contact_click" class="contact100-form-btn">                       
+                        <div id="msg" class="message">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            
+                        </div>
+                    </div>
+                    
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div></form>
+<script type="text/javascript" id="">var Tawk_API=Tawk_API||{},Tawk_LoadStart=new Date;(function(){var a=document.createElement("script"),b=document.getElementsByTagName("script")[0];a.async=!0;a.src="https://embed.tawk.to/5667c9cdc9d916010fae50f7/default";a.charset="UTF-8";a.setAttribute("crossorigin","*");b.parentNode.insertBefore(a,b)})();</script>
+<link rel="manifest" href="https://www.cybrosys.com/manifest.json">
+<script type="text/javascript" id="" src="New%20Widgets%20in%20Odoo%2013_files/OneSignalSDK.js"></script><script type="text/javascript" id="">Tawk_API.onChatStarted=function(){Tawk_API.isVisitorEngaged()&&(window.dataLayer=window.dataLayer||[],window.dataLayer.push({event:"chat-started"}))};</script>
+<script type="text/javascript" id="">var OneSignal=window.OneSignal||[];OneSignal.push(function(){OneSignal.init({appId:"ffe0cb7a-e6a6-45ce-85b4-6a87acaacd88"})});</script>
+<div class="container-fluid home-footer">
+    <div class="">
+        <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+            <h5>Quick Links</h5>
+            <div class="quick-links-wrap">
+            <div class="col-sm-12 col-xs-12 padd0" style="padding: 0px;">
+            <ul>
+            <li><a id="footer_HyperLink8" class="footer-quick-link" href="https://www.cybrosys.com/odoo/">Odoo</a></li>
+            <li><a id="footer_HyperLink9" class="footer-quick-link" href="https://www.cybrosys.com/odoo-apps/">Odoo Apps</a></li>
+            <li><a id="footer_HyperLink10" class="footer-quick-link" href="https://www.cybrosys.com/buy-source-code/">Buy Source code</a></li>
+            <li><a id="footer_HyperLink11" class="footer-quick-link" href="https://www.cybrosys.com/sitemap/">Sitemap</a></li>
+            <li><a id="footer_HyperLink12" class="footer-quick-link" href="https://www.cybrosys.com/contact/">Contact us</a></li>
+            </ul>
+            </div>           
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+            <h5>Services</h5>
+            <div class="quick-links-wrap">
+            <div class="col-sm-12 col-xs-12 padd0" style="padding: 0px;">
+            <ul>
+            <li><a id="footer_HyperLink1" class="footer-quick-link" href="https://www.cybrosys.com/odoo-customization-and-installation/">Odoo Customization</a></li>
+            <li><a id="footer_HyperLink2" class="footer-quick-link" href="https://www.cybrosys.com/hire-odoo-developer/">Hire Odoo Developer</a></li>
+            <li><a id="footer_HyperLink3" class="footer-quick-link" href="https://www.cybrosys.com/odoo-erp-implementation/">Odoo Implementation</a></li>
+            <li><a id="footer_HyperLink4" class="footer-quick-link" href="https://www.cybrosys.com/odoo-erp-integration/">Odoo Integration</a></li>
+            <li><a id="footer_HyperLink5" class="footer-quick-link" href="https://www.cybrosys.com/odoo-erp-support/">Odoo Support</a></li>
+            </ul>
+            </div>
+            
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-2 col-sm-6 col-xs-12">
+            <h5>STAY IN TOUCH</h5>
+            <p><i class="fa fa-phone"></i>+91 (0) 4943015006 / 07</p>
+            <p><i class="fa fa-envelope"></i>info@cybrosys.com</p>
+            <p><i class="fa fa-whatsapp"></i>+91 8606827707</p>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <h5>Connect socially</h5>
+            <div class="row">
+                <a href="https://www.facebook.com/cybrosystechnologies" target="_blank" rel="noopener" aria-label="Connect with Facebook"><i class="fa fa-facebook-f"></i></a>
+                <a href="https://twitter.com/cybrosys" target="_blank" rel="noopener" aria-label="Connect with Twitter"><i class="fa fa-twitter"></i></a>
+                <a href="https://www.pinterest.com/cybrosys/" target="_blank" rel="noopener" aria-label="Connect with Pinterest"><i class="fa fa-pinterest-p"></i></a>
+                <a href="https://www.linkedin.com/company/cybrosys-technologies-pvt-ltd" target="_blank" rel="noopener" aria-label="Connect with linkedin"><i class="fa fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/cybrosystech/" target="_blank" rel="noopener" aria-label="Connect with Instagram"><i class="fa fa-instagram"></i></a>
+                <a href="https://www.youtube.com/channel/UCKjWLm7iCyOYINVspCSanjg" target="_blank" rel="noopener" aria-label="Connect with Youtube"><i class="fa fa-youtube"></i></a>
+                
+            </div>
+        </div>
+    </div>
+    <div class="clear-fix">
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <p class="text-center copyright">
+            Copyright <i class="fa fa-copyright"></i>2020 Cybrosys Technologies. All Rights
+            Reserved. <a href="https://www.cybrosys.com/privacy-policy/">Privacy Policy</a></p>
+    </div>
+</div>
+
+
+
+
+
+
+  <div class="overlay " style="display: none;">
+      <div class="modelBox animated swing">
+        <div align="right"><a href="#" class="close">Close</a></div>
+        <div>
+
+        <a data-fancybox="" class="Card cybro-fight" href="https://youtu.be/FqTdilLFn5E" style=" flex-basis: 66%; padding-bottom: 0; ">
+                <div class="Card-thumb" style=" margin-bottom: 0; ">                    
+                    <div class="Card-image">
+                    <img src="New%20Widgets%20in%20Odoo%2013_files/cybromain.html" alt="cybrosys" style="width: 100%;">
+                    
+                    <div class="video-play-button1">
+                        <span></span>
+                    </div>
+                </div>
+                </div>
+        </a>
+
+        </div>
+      </div>
+    </div>
+
+<script src="New%20Widgets%20in%20Odoo%2013_files/cookieconsent.js" data-cfasync="false"></script>
+<script>
+    window.cookieconsent.initialise({
+        "palette": {
+            "popup": {
+                "background": "#ffffff",
+                "text": "#5f727f"
+            },
+            "button": {
+                "background": "#b22126",
+                "text": "#ffffff"
+            }
+        },
+        "content": {
+            "message": "Our website is made agreeable with the GDPR requirements. Click to view the refreshed privacy policy of ours. According to our privacy policy, we use cookies for different highlights. We trust that is alright, If you disagree, disable the cookies.",
+            "dismiss": "Accept",
+            "link": "Privacy policy",
+            "href": "https://www.cybrosys.com/privacy-policy/"
+        }
+    });
+</script>
+
+<link rel="stylesheet" href="New%20Widgets%20in%20Odoo%2013_files/sweetalert.css">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" defer="defer"></script>
+<script src="New%20Widgets%20in%20Odoo%2013_files/sweetalert.js" defer="defer"></script>
+    <script type="text/javascript">
+        function successalert() {
+            swal({
+                title: 'Your message has been succesfully sent!',
+                text: 'We will get back to you soon',
+                type: 'success'
+            });
+        }
+    </script>
+
+
+<style>
+    .whatapposition {
+    z-index: 9999999999 !important;
+}
+</style>
+
+
+
+
+
+
+
+<script>
+
+    function model(mContent) {
+        $(".overlay").fadeIn();
+        $('.mText').html(mContent);
+        $(".close").on('click', function () {
+            $(".overlay").hide();
+        });
+    }
+    var bac = "heading"
+    var abc = '<div class="well"><h2>' + bac + '<h2></div>'
+    $(document).ready(function () {
+        model(abc);
+    });
+    setTimeout(function () {
+        $('.overlay').hide()
+    }, 60000); 
+
+
+   
+</script>
+
+<script src="New%20Widgets%20in%20Odoo%2013_files/jquery_003.js"></script>
+
+
+    <script src="New%20Widgets%20in%20Odoo%2013_files/jquery.js"></script>  
+
+
+
+
+
+
+   <script src="New%20Widgets%20in%20Odoo%2013_files/jquery.js"></script>
+   <script type="text/javascript" src="New%20Widgets%20in%20Odoo%2013_files/jquery_002.js" defer="defer"></script>
+   <script type="text/javascript" src="New%20Widgets%20in%20Odoo%2013_files/bootstrap.js" defer="defer"></script>
+   <script type="text/javascript"></script>    
+   <script type="text/javascript">
+       $(document).ready(function () {
+           var s = window.location.href;
+           $("#Script1").attr("data-url", s);
+           $("#fbShare").attr("href", s);
+           $("#twitterShare").attr("href", s);
+           $("#dvGooglePlus").attr("data-href", s);
+       }
+      );   
+   </script>
+   <script type="text/javascript">
+       function getDate() {
+           var currentTime = new Date();
+           document.getElementById("hfDate").value = currentTime;
+       }
+   </script>
+   <script>
+       function goBack() {
+           window.history.back();
+       }
+   </script>
+
+<script type="text/javascript">
+//<![CDATA[
+var Page_Validators =  new Array(document.getElementById("RequiredFieldValidator1"), document.getElementById("reqvalEmail"), document.getElementById("rgvEmail"), document.getElementById("footer_RequiredFieldValidator10"), document.getElementById("footer_RequiredFieldValidator11"), document.getElementById("footer_RequiredFieldValidator12"), document.getElementById("footer_RequiredFieldValidator13"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var RequiredFieldValidator1 = document.all ? document.all["RequiredFieldValidator1"] : document.getElementById("RequiredFieldValidator1");
+RequiredFieldValidator1.controltovalidate = "txtName";
+RequiredFieldValidator1.focusOnError = "t";
+RequiredFieldValidator1.errormessage = "Enter the Post title";
+RequiredFieldValidator1.validationGroup = "Submit";
+RequiredFieldValidator1.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+RequiredFieldValidator1.initialvalue = "";
+var reqvalEmail = document.all ? document.all["reqvalEmail"] : document.getElementById("reqvalEmail");
+reqvalEmail.controltovalidate = "txtEmail";
+reqvalEmail.focusOnError = "t";
+reqvalEmail.errormessage = "Email id required";
+reqvalEmail.display = "Dynamic";
+reqvalEmail.validationGroup = "Submit";
+reqvalEmail.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+reqvalEmail.initialvalue = "";
+var rgvEmail = document.all ? document.all["rgvEmail"] : document.getElementById("rgvEmail");
+rgvEmail.controltovalidate = "txtEmail";
+rgvEmail.focusOnError = "t";
+rgvEmail.errormessage = "Invalid email id";
+rgvEmail.display = "Dynamic";
+rgvEmail.validationGroup = "Submit";
+rgvEmail.evaluationfunction = "RegularExpressionValidatorEvaluateIsValid";
+rgvEmail.validationexpression = "\\w+([-+.\']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*";
+var footer_RequiredFieldValidator10 = document.all ? document.all["footer_RequiredFieldValidator10"] : document.getElementById("footer_RequiredFieldValidator10");
+footer_RequiredFieldValidator10.controltovalidate = "footer_txtName";
+footer_RequiredFieldValidator10.errormessage = "Please fill out this field.";
+footer_RequiredFieldValidator10.validationGroup = "ContactInfoGroup";
+footer_RequiredFieldValidator10.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+footer_RequiredFieldValidator10.initialvalue = "";
+var footer_RequiredFieldValidator11 = document.all ? document.all["footer_RequiredFieldValidator11"] : document.getElementById("footer_RequiredFieldValidator11");
+footer_RequiredFieldValidator11.controltovalidate = "footer_txtMail";
+footer_RequiredFieldValidator11.errormessage = "Please fill out this field.";
+footer_RequiredFieldValidator11.validationGroup = "ContactInfoGroup";
+footer_RequiredFieldValidator11.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+footer_RequiredFieldValidator11.initialvalue = "";
+var footer_RequiredFieldValidator12 = document.all ? document.all["footer_RequiredFieldValidator12"] : document.getElementById("footer_RequiredFieldValidator12");
+footer_RequiredFieldValidator12.controltovalidate = "footer_txtPhone";
+footer_RequiredFieldValidator12.errormessage = "Please fill out this field.";
+footer_RequiredFieldValidator12.validationGroup = "ContactInfoGroup";
+footer_RequiredFieldValidator12.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+footer_RequiredFieldValidator12.initialvalue = "";
+var footer_RequiredFieldValidator13 = document.all ? document.all["footer_RequiredFieldValidator13"] : document.getElementById("footer_RequiredFieldValidator13");
+footer_RequiredFieldValidator13.controltovalidate = "footer_txtComment";
+footer_RequiredFieldValidator13.errormessage = "Please fill out this field.";
+footer_RequiredFieldValidator13.validationGroup = "ContactInfoGroup";
+footer_RequiredFieldValidator13.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+footer_RequiredFieldValidator13.initialvalue = "";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        //]]>
+</script>
+
+
+
+<iframe scrolling="no" allowtransparency="true" src="New%20Widgets%20in%20Odoo%2013_files/widget_iframe.html" title="Twitter settings iframe" style="display: none;" frameborder="0"></iframe><table style="width: 178px; display: none; top: 152px; left: 910px; position: absolute;" class="gstl_50 gssb_c" cellspacing="0" cellpadding="0"><tbody><tr><td class="gssb_f"></td><td class="gssb_e" style="width: 100%;"></td></tr></tbody></table><div id="HbtFBUJ-1586527625370" class="" style="display: block !important;"><iframe id="nDVjHVi-1586527625373" src="about:blank" scrolling="no" title="chat widget" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: auto !important; position: static !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 350px !important; height: 420px !important; z-index: 999999 !important; cursor: auto !important; float: none !important; border-radius: unset !important; pointer-events: auto !important; display: none !important;" class="" frameborder="0"></iframe><iframe id="iM9Rpl0-1586527625374" src="about:blank" scrolling="no" title="chat widget" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: auto 10px 0px auto !important; position: fixed !important; border: 0px none !important; padding: 0px !important; transition-property: none !important; z-index: 1000001 !important; cursor: auto !important; float: none !important; pointer-events: auto !important; height: 40px !important; min-height: 40px !important; max-height: 40px !important; width: 320px !important; min-width: 320px !important; max-width: 320px !important; border-radius: 0px !important; transform: rotate(0deg) translateZ(0px) !important; transform-origin: 0px center 0px !important; margin: 0px !important; display: block !important;" class="" frameborder="0"></iframe><iframe id="r6KKLQe-1586527625375" src="about:blank" scrolling="no" title="chat widget" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: auto 1px 25px auto !important; position: fixed !important; border: 0px none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; z-index: 1000003 !important; cursor: auto !important; float: none !important; border-radius: unset !important; pointer-events: auto !important; width: 21px !important; max-width: 21px !important; min-width: 21px !important; height: 21px !important; max-height: 21px !important; min-height: 21px !important; display: block !important;" class="" frameborder="0"></iframe><div style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: 0px auto auto 0px !important; position: absolute !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 100% !important; height: 100% !important; display: none !important; z-index: 1000001 !important; cursor: move !important; float: left !important; border-radius: unset !important; pointer-events: auto !important;" class=""></div><div id="IAiDsP2-1586527625370" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: 0px auto auto 0px !important; position: absolute !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 6px !important; height: 100% !important; display: block !important; z-index: 999998 !important; cursor: w-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;" class=""></div><div id="PM1w6Ig-1586527625371" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: 0px 0px auto auto !important; position: absolute !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 6px !important; height: 100% !important; display: block !important; z-index: 999998 !important; cursor: e-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;" class=""></div><div id="yeeQETq-1586527625371" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: 0px 0px auto auto !important; position: absolute !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 100% !important; height: 6px !important; display: block !important; z-index: 999998 !important; cursor: n-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;" class=""></div><div id="jChPQYr-1586527625372" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: auto 0px 0px auto !important; position: absolute !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 100% !important; height: 6px !important; display: block !important; z-index: 999998 !important; cursor: s-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;" class=""></div><div id="PrVmdPj-1586527625372" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: 0px auto auto 0px !important; position: absolute !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 12px !important; height: 12px !important; display: block !important; z-index: 999998 !important; cursor: nw-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;" class=""></div><div id="YLC1Vda-1586527625372" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: 0px 0px auto auto !important; position: absolute !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 12px !important; height: 12px !important; display: block !important; z-index: 999998 !important; cursor: ne-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;" class=""></div><div id="YjQNxLr-1586527625372" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: auto auto 0px 0px !important; position: absolute !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 12px !important; height: 12px !important; display: block !important; z-index: 999998 !important; cursor: sw-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;" class=""></div><div id="kCKzk5j-1586527625372" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: auto 0px 0px auto !important; position: absolute !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 12px !important; height: 12px !important; display: block !important; z-index: 999999 !important; cursor: se-resize !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;" class=""></div><iframe id="LKu2A2c-1586527629176" src="about:blank" scrolling="no" title="chat widget" style="outline: currentcolor none medium !important; visibility: visible !important; resize: none !important; box-shadow: none !important; overflow: visible !important; background: transparent none repeat scroll 0% 0% !important; opacity: 1 !important; inset: auto 10px 50px auto !important; position: fixed !important; border: 0px none !important; min-height: auto !important; min-width: auto !important; max-height: none !important; max-width: none !important; padding: 0px !important; margin: 0px !important; transition-property: none !important; transform: none !important; width: 378px !important; height: 580px !important; display: none !important; z-index: 999999 !important; cursor: auto !important; float: none !important; border-radius: unset !important; pointer-events: auto !important;" class="" frameborder="0"></iframe></div><iframe style="display: none;" src="New%20Widgets%20in%20Odoo%2013_files/webPushAnalytics.html"></iframe><div id="onesignal-bell-container" class="onesignal-bell-container onesignal-reset onesignal-bell-container-bottom-left"><div id="onesignal-bell-launcher" class="onesignal-bell-launcher onesignal-bell-launcher-md onesignal-bell-launcher-bottom-left onesignal-bell-launcher-theme-default onesignal-bell-launcher-active" style="bottom: 19px; left: 15px;"><div class="onesignal-bell-launcher-button"><svg class="onesignal-bell-svg" xmlns="http://www.w3.org/2000/svg" width="99.7" height="99.7" viewBox="0 0 99.7 99.7" style="filter: drop-shadow(0 2px 4px rgba(34,36,38,0.35));; -webkit-filter: drop-shadow(0 2px 4px rgba(34,36,38,0.35));;"><circle class="background" cx="49.9" cy="49.9" r="49.9" style="fill: rgb(208, 2, 27);"></circle><path class="foreground" d="M50.1 66.2H27.7s-2-.2-2-2.1c0-1.9 1.7-2 1.7-2s6.7-3.2 6.7-5.5S33 52.7 33 43.3s6-16.6 13.2-16.6c0 0 1-2.4 3.9-2.4 2.8 0 3.8 2.4 3.8 2.4 7.2 0 13.2 7.2 13.2 16.6s-1 11-1 13.3c0 2.3 6.7 5.5 6.7 5.5s1.7.1 1.7 2c0 1.8-2.1 2.1-2.1 2.1H50.1zm-7.2 2.3h14.5s-1 6.3-7.2 6.3-7.3-6.3-7.3-6.3z" style="fill: rgb(255, 255, 255);"></path><ellipse class="stroke" cx="49.9" cy="49.9" rx="37.4" ry="36.9" style="stroke: rgb(255, 255, 255);"></ellipse></svg></div><div class="onesignal-bell-launcher-badge" style="filter: drop-shadow(0 2px 4px rgba(34,36,38,0));; -webkit-filter: drop-shadow(0 2px 4px rgba(34,36,38,0));;"></div><div class="onesignal-bell-launcher-message"><div class="onesignal-bell-launcher-message-body"></div></div><div class="onesignal-bell-launcher-dialog" style="filter: drop-shadow(0px 2px 2px rgba(34,36,38,.15));; -webkit-filter: drop-shadow(0px 2px 2px rgba(34,36,38,.15));;"><div class="onesignal-bell-launcher-dialog-body"></div></div></div></div></body></html>

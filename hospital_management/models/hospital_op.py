@@ -49,7 +49,9 @@ class OP(models.Model):
             # if r.date_op == fields.Date.today():#todays tokens
             tokens.append(r.token_no)
         print('today tokens',tokens)
-        tokens[-1] = None #because it loads the current entry also
+        r = self.env['hospital.op'].search([('date_op','=',fields.Date.today())])
+        if len(r) != 0:
+            tokens[-1] = None #because it loads the current entry also
         if self.token_no in tokens:
             raise ValidationError("Token number should be unique")
         #     return False

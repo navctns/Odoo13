@@ -1,0 +1,21 @@
+Last record id
+
+record_ids = self.search([('meter_no','=',self.meter_no.id)], order='id desc', limit=1)
+last_id = record_ids.id
+
+
+fetch latest record
+
+model name on place 'maintenance.equipment'
+latest_rec = self.env['maintainance.equipment '].search([], limit=1, order='create_date desc')
+
+to ger every record in a model
+
+        for r in self.env['hospital.op'].search([], order='create_date desc'):
+            print('openv :', r.op_number)
+
+
+
+
+To show a nonactiva field (eg archived)
+context="{'active_test': False}"

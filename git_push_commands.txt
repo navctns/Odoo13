@@ -1,0 +1,24 @@
+git clone https://github.com/navctns/Django-Udemy.git
+
+Add files to that local repository directory
+
+Open Terminal
+
+Change Working directory to local repository Directory 
+
+ git add .
+
+git commit -m "Add existing file"
+
+Push to the branch
+
+DJANGO-UDEMY
+
+git push  https://github.com/navctns/Django-Udemy.git     
+
+
+ODOO13
+git push  https://github.com/navctns/Odoo13.git
+
+9645192629
+fasluka
