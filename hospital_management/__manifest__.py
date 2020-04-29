@@ -28,9 +28,11 @@
         'security/ir.model.access.csv',
         'views/hospital_management.xml',
         'views/appointment.xml',
+        'views/appointment_smartbutton.xml',
         'data/sequence.xml',
         'data/op_sequence.xml',
         'data/data.xml',
+
 
     ],
     # only loaded in demonstration mode

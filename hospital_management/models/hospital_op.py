@@ -29,7 +29,7 @@ class OP(models.Model):
     token_no = fields.Integer(string = 'Token No')
     # token_no = fields.Integer(string="Token No", unique = True,
     #                            default=lambda self: self.env['ir.sequence'].next_by_code('increment_token_no'))
-
+    appointment_id = fields.Many2one('hospital.appointment')
     consultation_type = fields.Selection([
         ('OP', 'OP'),
         ('IP', 'IP')
@@ -225,26 +225,55 @@ class OP(models.Model):
     @api.onchange('op_number')
     def _onchange_op_number(self):
 
+        r_appointment = self.env['hospital.appointment'].search([('date','=',fields.Date.today())])
+        #[('card_id.id','=',self.card_id.id)]
 
-        #get number of records today
-        r = self.env['hospital.op'].search([('date_op','=',fields.Date.today())])
-        print('today count',len(r))
+        try:
 
-        if len(r) == 0 :
-             for i in self.env['hospital.op'].search([]):
-                 i.token_no = None#delete token numbers everyday
-             # set initial token of the day
-             self.token_no = 1
-        else:
-            existing_tokens = []
+            if r_appointment.token == 0: #if token not set on appointment
+                #get number of records today
+                r = self.env['hospital.op'].search([('date_op','=',fields.Date.today())])
+                print('today count',len(r))
 
-            for r in self.env['hospital.op'].search([('date_op', '=', fields.Date.today())]):
-                existing_tokens.append(r.token_no)
-                # check for duplication of token
-            for i in sorted(existing_tokens):
-                n = i + 1
-                if n not in existing_tokens:
-                    self.token_no = i + 1
-                    break
-            print('tokens ex', existing_tokens)
+                if len(r) == 0 :
+                     for i in self.env['hospital.op'].search([]):
+                         i.token_no = None#delete token numbers everyday
+                     # set initial token of the day
+                     self.token_no = 1
+                else:
+                    existing_tokens = []
+
+                    for r in self.env['hospital.op'].search([('date_op', '=', fields.Date.today())]):
+                        existing_tokens.append(r.token_no)
+                        # check for duplication of token
+                    for i in sorted(existing_tokens):
+                        n = i + 1
+                        if n not in existing_tokens:
+                            self.token_no = i + 1
+                            break
+                    print('tokens ex', existing_tokens)
+                    r_appointment.token = self.token_no
+                #write an else for setting from other
+        except :
+
+            r = self.env['hospital.op'].search([('date_op', '=', fields.Date.today())])
+            print('today count', len(r))
+
+            if len(r) == 0:
+                for i in self.env['hospital.op'].search([]):
+                    i.token_no = None  # delete token numbers everyday
+                # set initial token of the day
+                self.token_no = 1
+            else:
+                existing_tokens = []
+
+                for r in self.env['hospital.op'].search([('date_op', '=', fields.Date.today())]):
+                    existing_tokens.append(r.token_no)
+                    # check for duplication of token
+                for i in sorted(existing_tokens):
+                    n = i + 1
+                    if n not in existing_tokens:
+                        self.token_no = i + 1
+                        break
+                print('tokens ex', existing_tokens)
 
