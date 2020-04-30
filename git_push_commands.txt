@@ -20,5 +20,10 @@ git push  https://github.com/navctns/Django-Udemy.git
 ODOO13
 git push  https://github.com/navctns/Odoo13.git
 
+git clone
+git fetch
+git pull
+git push
+
 9645192629
 fasluka
