@@ -26,7 +26,8 @@ class Appointment(models.Model):
         ], default='draft', required=True, )
     op_ids = fields.One2many('hospital.op', 'appointment_id', string="OP ids")
     op_count = fields.Integer(default =0, compute = '_compute_op_count')
-
+    appointment_seq = fields.Char(string='Appointment Number', required=True, copy=False, readonly=True,
+                                  default='New')
 
     def _compute_op_count(self):
         for op in self:
@@ -37,6 +38,14 @@ class Appointment(models.Model):
     # def _onchange_op_ids(self):
     #     if self.op_ids :
     #         self.state = 'op'
+
+    @api.model
+    def create(self, vals):
+        if vals.get('appointment_seq', 'New') == 'New':
+            vals['appointment_seq'] = self.env['ir.sequence'].next_by_code(
+                'hospital.appointmentnum') or 'New'
+        result = super(Appointment, self).create(vals)
+        return result
 
     @api.onchange('op_count')
     def _onchange_op_count(self):
@@ -99,6 +108,7 @@ class Appointment(models.Model):
 
     def action_convert_to_op(self):
         self.ensure_one()
+
         action = {
 
             'type': 'ir.actions.act_window',
@@ -111,7 +121,7 @@ class Appointment(models.Model):
             'view_mode': 'form',
             'res_model': 'hospital.op',
             'context': {'default_card_id': self.card_id.id, 'default_doctor_id': self.doctor_id.id,
-                                 'default_token_no':self.token, 'default_appointment_id':self.id}
+                        'default_token_no':self.token, 'default_appointment_id':self.id}
              }
     #method 2
     def action_redirect_to_appointment(self):
@@ -133,6 +143,8 @@ class Appointment(models.Model):
             action['context'] = {'default_card_id': self.card_id.id, 'default_doctor_id': self.doctor_id.id,
                                  'default_token_no':self.token}
             #write return action for appointment with context
+            action['views'] = 'form_view'
+
             return action
     #method 2
 

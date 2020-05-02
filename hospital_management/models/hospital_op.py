@@ -35,10 +35,12 @@ class OP(models.Model):
         ('IP', 'IP')
     ], string = "Consultation Type", realated_field = 'hospital.consult.type')
 
+
     _sql_constraints = [
         # Partial constraint, complemented by a python constraint (see below).
         ('token_no_uniq', 'UNIQUE(token_no,date_op)', 'You can not have two patients with the same token!'),
     ]
+
 
 
     #python constraint

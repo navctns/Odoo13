@@ -31,6 +31,7 @@
         'views/appointment_smartbutton.xml',
         'data/sequence.xml',
         'data/op_sequence.xml',
+        'data/appointment_seq.xml',
         'data/data.xml',
 
 
