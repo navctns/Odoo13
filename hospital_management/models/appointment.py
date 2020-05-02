@@ -9,29 +9,37 @@ from odoo.exceptions import ValidationError
 class Appointment(models.Model):
     _name="hospital.appointment"
     _description="Hospital Appointment"
-    # _rec_name = "op_number"
+    _rec_name = "appointment_seq"
 
     card_id = fields.Many2one("patient.card", string = "Patient card", required = True)
     patient_name = fields.Char(string = "Patient name")
     doctor_id = fields.Many2one('hr.employee', required = True, domain = [('job_id', 'like', 'Doctor')])
     department_id = fields.Char(string = "Department")
     date = fields.Date(string = "Date", default = fields.Date.today())
-    token = fields.Integer(string = 'Token No', default = 0)
+    token = fields.Integer(string = 'Token No')
     state = fields.Selection(
         string="State",
         selection=[
             ('draft', 'Draft'),
             ('appointment', 'Appointment'),
             ('op', 'OP'),
-        ], default='draft', required=True, )
+        ], default='draft', required=True)
     op_ids = fields.One2many('hospital.op', 'appointment_id', string="OP ids")
     op_count = fields.Integer(default =0, compute = '_compute_op_count')
     appointment_seq = fields.Char(string='Appointment Number', required=True, copy=False, readonly=True,
                                   default='New')
 
+
+    @api.depends('op_ids')
     def _compute_op_count(self):
-        for op in self:
-            op.op_count = self.env['hospital.op'].search_count([('appointment_id', '=', self.id)])
+        # for op in self:
+        #     op.op_count = self.env['hospital.op'].search_count([('appointment_id', '=', self.id)])
+        # print('op count', self.op_count)
+        for r in self:
+            if r.op_ids.appointment_id.id == self.id:
+                self.op_count += 1
+        if self.op_count == 1:
+            self.state = 'op'
         print('op count', self.op_count)
 
     # @api.onchange('op_ids')
@@ -62,11 +70,29 @@ class Appointment(models.Model):
     #     if self.state == 'appointment':
     #         if self.op_count > 0:
     #             self.state = 'op'
+    @api.onchange('appointment_seq')
+    def _onchange_appointment_seq(self):
 
+        r = self.env['hospital.op'].search([('date_op', '=', fields.Date.today())])
+        print('today count', len(r))
 
+        if len(r) == 0:
+            for i in self.env['hospital.op'].search([]):
+                i.token_no = None  # delete token numbers everyday
+            # set initial token of the day
+            self.token = 1
+        else:
+            existing_tokens = []
 
-
-
+            for r in self.env['hospital.op'].search([('date_op', '=', fields.Date.today())]):
+                existing_tokens.append(r.token_no)
+                # check for duplication of token
+            for i in sorted(existing_tokens):
+                n = i + 1
+                if n not in existing_tokens:
+                    self.token = i + 1
+                    break
+            print('tokens ex', existing_tokens)
 
 
     @api.onchange('card_id')
@@ -103,8 +129,11 @@ class Appointment(models.Model):
 
 
     def action_confirm(self):
-        for rec in self:
-            rec.state = 'appointment'
+        # for rec in self:
+        #     rec.state = 'appointment'
+        self.write({
+            'state': 'appointment',
+        })
 
     def action_convert_to_op(self):
         self.ensure_one()
@@ -170,17 +199,62 @@ class Appointment(models.Model):
             'name': 'OPs',
             'view_mode': 'form',
             'res_model': 'hospital.op',
-            'domain': "[('id', 'in', " + str(self.op_ids.ids) + ")]",
-            'context': {'default_card_id': self.card_id.id, 'default_doctor_id': self.doctor_id.id,
-                                 'default_token_no':self.token},
+            # 'domain': "[('id', 'in', " + str(self.op_ids.ids) + ")]",
+            'domain': [('appointment_id', '=', self.id)]
+            # 'context': {'default_card_id': self.card_id.id, 'default_doctor_id': self.doctor_id.id,
+            #                      'default_token_no':self.token},
 
         }
 
         #method 2
-
+    def get_ops_form(self):
         # action = self.env.ref('hospital_management.action_patientcard').read()[0]
         # action['view_mode'] = 'form'
         #
         # action['domain'] = [('card_id', '=', self.card_id)]
         # return action
+        '''
+        action = self.env.ref('hospital_management.action_patientcard').read()[0]
+
+        action['views'] = [
+            (self.env.ref('hospital_management.op_form_view').id, 'form'),
+        ]
+        action['domain'] = [('appointment_id','=',self.id)]
+        action['context'] = action.context
+        '''
+        op_obj = self.env['hospital.op'].search([('appointment_id', '=', self.id)])
+        op_ids = []
+        for each in op_obj:
+            op_ids.append(each.id)
+
+        view_id = self.env.ref('hospital_management.op_form_view').id
+        ctx = dict(
+            create=False,
+
+        )
+
+        if op_ids:
+            if len(op_ids) <= 1:
+                value = {
+                    'view_mode': 'form',
+                    'res_model': 'hospital.op',
+                    'view_id': view_id,
+                    'type': 'ir.actions.act_window',
+                    'name': 'Op',
+                    'context': ctx,
+                    'res_id': op_ids and op_ids[0]
+                }
+            else:
+                value = {
+                    'domain': str([('id', 'in', op_ids)]),
+                    'view_mode': 'tree,form',
+                    'res_model': 'hospital.op',
+                    'view_id': False,
+                    'type': 'ir.actions.act_window',
+                    'context': ctx,
+                    'name': 'Op',
+                    'res_id': op_ids
+                }
+
+        return value
 
