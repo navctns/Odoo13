@@ -189,7 +189,8 @@ class Appointment(models.Model):
 
     def action_convert_to_op(self):
         self.ensure_one()
-
+        # if self.op_count == 1 :
+        #     self.state = 'op'
         action = {
 
             'type': 'ir.actions.act_window',
@@ -202,8 +203,18 @@ class Appointment(models.Model):
             'view_mode': 'form',
             'res_model': 'hospital.op',
             'context': {'default_card_id': self.card_id.id, 'default_doctor_id': self.doctor_id.id,
-                        'default_token_no':self.token, 'default_appointment_id':self.id},
+                        'default_token_no':self.token, 'default_appointment_id':self.id,
+                        'mark_app_as_op': True,
+                        },
+            # 'target': 'self',
+            # 'state': 'op',
             }
+    #when returning to appointment from op
+    @api.returns('hospital.op', lambda value: value.id)
+    def op_post(self, **kwargs):
+        if self.env.context.get('mark_app_as_op'):
+            self.filtered(lambda o: o.state == 'appointment').with_context(tracking_disable=True).write({'state': 'op'})
+        return super(Appointment, self.with_context(op_post_autofollow=True)).message_post(**kwargs)
 
 
 
