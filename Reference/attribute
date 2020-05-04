@@ -6,3 +6,10 @@ eg
 <button name="%(sale.action_view_sale_advance_payment_inv)d" string="Create Invoice"
                         type="action" class="btn-primary"
                         attrs="{'invisible': [('invoice_status', '!=', 'to invoice')]}"/>
+
+<h1>
+                            <field name="name" default_focus="1" placeholder="Name" attrs="{'required' : [('type', '=', 'contact')]}"/>
+                        </h1>
+
+                    <filter string="Sales" name="sales" domain="[('move_id.journal_id.type', '=', 'sale')]" context="{'default_journal_type': 'sale'}"/>
+

@@ -55,13 +55,43 @@ class Appointment(models.Model):
         result = super(Appointment, self).create(vals)
         return result
 
+    @api.onchange('op_ids')
+    def _onchange_op_ids(self):
+        if self.op_ids.appointment_id :
+            self.state = 'op'
+
+
+
     @api.onchange('op_count')
     def _onchange_op_count(self):
-        if self.op_count > 0 :
+        if self.op_count == 1 :
             # self.state = 'op'
             self.write({
                 'state': 'op',
             })
+
+    @api.depends('op_count')
+    def _state_change(self):
+        if self.state == 'appointment':
+            if self.op_count == 1:
+                # self.state = 'op'
+                self.write({
+                    'state': 'op',
+                })
+
+    # python constraint
+    @api.constrains('token')
+    def _check_token(self):
+        tokens = []
+        for r in self.env['hospital.op'].search([('date_op', '=', fields.Date.today())]):
+            # if r.date_op == fields.Date.today():#todays tokens
+            tokens.append(r.token_no)
+        # print('today tokens', tokens)
+        r = self.env['hospital.op'].search([('date_op', '=', fields.Date.today())])
+        # if len(r) != 0:
+        #     tokens[-1] = None  # because it loads the current entry also
+        if self.token in tokens:
+            raise ValidationError("Token number should be unique")
 
 
     # @api.depends('op_count')
@@ -76,11 +106,33 @@ class Appointment(models.Model):
         r = self.env['hospital.op'].search([('date_op', '=', fields.Date.today())])
         print('today count', len(r))
 
+        # if len(r) == 1:
+        #     # for t in self:
+        #     #     if t.token != 1 :
+        #     #         self.token = 1
+        #     tokens_1 = []
+        #
+        #     for r in self.env['hospital.op'].search([('date_op', '=', fields.Date.today())]):
+        #         tokens_1.append(r.token_no)
+        #     if 1 not in tokens_1:
+        #         self.token = 1
+
         if len(r) == 0:
             for i in self.env['hospital.op'].search([]):
                 i.token_no = None  # delete token numbers everyday
             # set initial token of the day
             self.token = 1
+
+        elif len(r) == 1:
+            # for t in self:
+            #     if t.token != 1 :
+            #         self.token = 1
+            tokens_1 = []
+
+            for r in self.env['hospital.op'].search([('date_op', '=', fields.Date.today())]):
+                tokens_1.append(r.token_no)
+            if 1 not in tokens_1:
+                self.token = 1
         else:
             existing_tokens = []
 
@@ -150,8 +202,11 @@ class Appointment(models.Model):
             'view_mode': 'form',
             'res_model': 'hospital.op',
             'context': {'default_card_id': self.card_id.id, 'default_doctor_id': self.doctor_id.id,
-                        'default_token_no':self.token, 'default_appointment_id':self.id}
-             }
+                        'default_token_no':self.token, 'default_appointment_id':self.id},
+            }
+
+
+
     #method 2
     def action_redirect_to_appointment(self):
         #check for existing tokens#
