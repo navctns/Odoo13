@@ -63,7 +63,7 @@
     </record>
 
          <menuitem id="doctors_menu" name="Doctors"
-          parent="op_menu"  action="op_doctor_list_action"
+          parent="main_hospitalmanagement_menu"  action="op_doctor_list_action"
           groups="base.group_user"/>
     </data>
 </odoo>

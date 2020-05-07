@@ -98,6 +98,9 @@
         <field name="model">hospital.op</field>
         <field name="arch" type="xml">
             <form string="Patient Card Forms">
+                <header>
+                    <button name="action_op_register_payment" id="account_op_payment_btn" type="object" class="oe_highlight" string="Register Payment" groups="account.group_account_invoice"/>
+                </header>
 
                 <sheet>
 
@@ -110,7 +113,7 @@
                         <group col="4" colspan="4">
 
                             <field name="card_id"/>
-                            <field name="patient_name"/>
+                            <field name="patient_id"/>
                             <field name="patient_age"/>
                             <field name="patient_gender"/>
                             <!--<field name="date"/>-->

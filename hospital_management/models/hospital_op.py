@@ -14,7 +14,8 @@ class OP(models.Model):
 
     card_id = fields.Many2one("patient.card", ondelete ="set null", string="Patient Card", Index=True)
     dob = fields.Date(string = "DOB")
-    patient_name = fields.Char(string = "Patient Name")
+    # patient_name = fields.Char(string = "Patient Name")
+    patient_id = fields.Many2one('res.partner')
     patient_age = fields.Integer(string = "Age")
     patient_gender = fields.Char("Gender")
     patient_blood = fields.Char("Blood Group")
@@ -83,7 +84,8 @@ class OP(models.Model):
 
         for r in self:
             r.dob = self.card_id.dob
-            r.patient_name = self.card_id.patient_id.name
+            # r.patient_name = self.card_id.patient_id.name
+            r.patient_id = self.card_id.patient_id
             r.patient_age = self.card_id.age
             r.patient_gender = self.card_id.sex
             r.patient_blood = self.card_id.blood_group
@@ -307,3 +309,13 @@ class OP(models.Model):
                         break
                 print('tokens ex', existing_tokens)
         """
+    def action_op_register_payment(self):
+        r = self.env['hr.employee'].search([('name', '=', self.doctor_id.name)])
+        r = self.env['hr.employee'].search([('id', '=', self.doctor_id.id)])
+        print("fees", r.fee)
+        fval = r.fee
+        return self.env['account.payment'] \
+            .with_context(active_ids=self.ids, active_model='hospital.op', active_id=self.id,
+                          default_amount=fval, default_payment_type='inbound',
+                          default_partner_id = self.patient_id.id) \
+            .action_register_payment()
