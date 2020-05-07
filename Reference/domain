@@ -14,3 +14,42 @@ Add domain with the record
             <field name="domain">[('payment_type', '=', 'transfer')]</field>
             <field name="view_id" ref="view_account_payment_transfer_tree"/>
         </record>
+
+
+As prakash says: The i is for case insensitive. While the "= prefix" searches for exact matching. Without the "= prefix", the orm will add % wildcards arround your search term.
+
+Examples:
+
+[('name', 'like', 'dog')]
+
+This will find recods with name 'dog', 'dogs', 'bulldog', ... but not 'Dog'.
+
+[('name', '=like', 'dog')]
+
+This will find records with name 'dog' (it's almost exactly like the '=' operator).
+
+[('name', 'ilike', 'dog')]
+
+This is the most universal search. It will find records with name 'dog', 'DOGS', 'Bulldog', etc..
+
+['name', '=ilike', 'dog')]
+
+This will find records with name 'dog', 'DOG', 'Dog', 'DOg', DoG', 'dOG', 'doG' and 'dOg'.
+
+They use '=ilike' in your crm/wizard example to match the email case insensitively, so that any capital letter is ignored in the search, since some mail clients allow capitol letters in email addresses, while others doesn't, I think.
+
+ 
+
+Honestly, I have never seen or used the '=?' operator...
+
+ 
+
+I think 'child_of' is somethink like an iterative search for child-relations:
+
+[('parent_id', 'child_of', root_id)]
+
+This will list all children and their children ... and so on for the root_id.
+
+ 
+
+Regards.

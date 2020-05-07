@@ -1,0 +1,69 @@
+<odoo>
+   <data>
+    <record id="hr_employee_view_form_add_doctor_fee" model="ir.ui.view">
+            <field name="name">hr.employee.form.inherit.add.fee</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+             <field name="arch" type="xml">
+
+
+                          <xpath expr="//field[@name='parent_id']" position="after">
+
+                            <field name="fee" />
+
+                         </xpath>
+<!--                        <xpath expr="//field[@name='fee']" position="attributes">-->
+
+<!--                        <attribute name="attrs">{'invisible':[('job_id','!=','Doctor')]}</attribute>-->
+<!--                        </xpath>-->
+
+
+<!--                 <form position="inside">-->
+<!--&lt;!&ndash;                     <field name="fee"/>&ndash;&gt;-->
+<!--                      <xpath expr="//page[@name='public']" position="inside">-->
+<!--                          <field name="fee"/>-->
+<!--                      </xpath>-->
+<!--                     -->
+<!--&lt;!&ndash;                     <sheet>&ndash;&gt;-->
+<!--&lt;!&ndash;                  <field name="fee" position="after">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <field name="parent_id"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </field>&ndash;&gt;-->
+<!--                         &lt;!&ndash; is it opposite &ndash;&gt;-->
+<!--&lt;!&ndash;                            <group>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <group>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <xpath expr="//field[@name='company_id']" position="after">&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <field name="fee"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </xpath>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </group>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </group>&ndash;&gt;-->
+<!--&lt;!&ndash;                     </sheet>&ndash;&gt;-->
+<!--                </form>-->
+<!--                 <form>-->
+<!--                     <sheet>-->
+<!--&lt;!&ndash;                <field name="fee"  attrs="{'invisible': [('job_id', '!=', 'Doctor')]}"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                         <group>&ndash;&gt;-->
+<!--&lt;!&ndash;                         <field name="fee"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                         </group>&ndash;&gt;-->
+<!--                         <field name="fee" position="after">-->
+<!--                            <field name="parent_id"/>-->
+<!--                    </field>-->
+<!--                     </sheet>-->
+<!--                 </form>-->
+<!--                 <xpath expr="//group[@name='user']" position="inside">-->
+<!--                    <field name="fee"/>-->
+<!--                </xpath>-->
+             </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="op_doctor_list_action">
+        <field name="name">Doctors</field>
+        <field name="res_model">hr.employee</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+         <menuitem id="doctors_menu" name="Doctors"
+          parent="op_menu"  action="op_doctor_list_action"
+          groups="base.group_user"/>
+    </data>
+</odoo>

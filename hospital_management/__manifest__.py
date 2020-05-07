@@ -20,7 +20,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'product'],
+    'depends': ['base', 'product', 'hr'],
 
     # always loaded
     'data': [
@@ -29,6 +29,7 @@
         'views/hospital_management.xml',
         'views/appointment.xml',
         'views/appointment_smartbutton.xml',
+        'views/doctor_fee.xml',
         'data/sequence.xml',
         'data/op_sequence.xml',
         'data/appointment_seq.xml',
