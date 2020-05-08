@@ -75,11 +75,56 @@
                 <field name="age"/>
                 <field name="sex"/>
                 <field name="blood_group"/>
-                <field name="mobile"/>
+                <field name="mobile" optional="show"/>
             </tree>
         </field>
     </record>
     <!-- Patient card tree view end -->
+    <!--Patient card search view -->
+    <record id="view_patient_filter" model="ir.ui.view">
+            <field name="name">hospital.patient.search</field>
+            <field name="model">patient.card</field>
+            <field name="arch" type="xml">
+                <search string="Patients">
+                   <field name="patient_id"/>
+                    <separator/>
+                    <filter  string="Have OP Today" name="op_today" domain="[('op_history_ids.date_op', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                    <separator/>
+                     <separator/>
+                    <filter  string="Have Appointment Today" name="appointment_today" domain="[('appointment_ids.date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                    <separator/>
+                    <separator/>
+                    <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                    <separator/>
+                    <separator/>
+                    <filter string="Create Date" name="filter_create_date" date="date"/>
+<!--                    <filter string="Create Date" name="filter_create_date" date="create_date"/>-->
+                    <separator/>
+                     <separator/>
+                    <filter string="Senior Citizen" name="senior_citizen" domain="[('age', '&gt;', 60)]"/>
+                    <separator/>
+                    <separator/>
+                    <filter string="Children" name="children" domain="[('age', '&lt;', 10)]"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter name="group_patient" string="Patient" domain="[]" context="{'group_by': 'patient_id'}"/>
+                        <filter name="group_blood" string="Blood Group" domain="[]" context="{'group_by': 'blood_group'}"/>
+                        <filter name="group_sex" string="Patient Sex" domain="[]" context="{'group_by': 'sex'}"/>
+                        <filter string="Create Date" name="create_date" domain="[]" context="{'group_by': 'date'}"/>
+
+
+
+<!--                        <filter name="group_department" string="Department" domain="[]" context="{'group_by': 'department_id'}"/>-->
+<!--                        <filter name="group_job" string="Job" domain="[]" context="{'group_by': 'job_id'}"/>-->
+                    </group>
+<!--                    <searchpanel>-->
+<!--                        <field name="company_id" groups="base.group_multi_company" icon="fa-building"/>-->
+<!--                        <field name="department_id" icon="fa-users"/>-->
+<!--                    </searchpanel>-->
+                </search>
+             </field>
+        </record>
+    <!--End Patient card search view-->
     <!--Patient op-record-->
     <record model="ir.actions.act_window" id="action_patientcard">
     <field name="name">Patient OP</field>
@@ -119,6 +164,7 @@
                             <!--<field name="date"/>-->
                             <field name="patient_blood"/>
                             <field name="doctor_id"/>
+                            <field name="doctor_fee" invisible="True"/>
 <!--                            <field name="doctor_id" filter_domain ="['invisible',('doctor_id.job_id.name','like','Doctor')]"/>-->
 <!--                            <field name="doctor_id" widget="res_partner_many2one" context="{'res_partner_search_mode': doctor_id.job_id == 'Doctor'}"/>-->
                             <field name="department_id"/>
@@ -144,8 +190,10 @@
             <tree>
                 <field name="date_op"/>
                 <field name="op_number"/>
+                <field name="patient_id"/>
                 <field name="doctor_id"/>
-                <field name="department_id"/>
+                <field name="department_id" optional="show"/>
+                <field name="token_no" optional="hide"/>
             </tree>
         </field>
     </record>

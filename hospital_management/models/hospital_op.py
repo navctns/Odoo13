@@ -21,6 +21,11 @@ class OP(models.Model):
     patient_blood = fields.Char("Blood Group")
     doctor_id = fields.Many2one("hr.employee", ondelete="cascade", string = "Doctor", Index=True
                                 , required=True)
+    doctor_fee = fields.Monetary(string = "Doctor Fee", attrs ={'invisible':[('isdoc','=', 0)]}, currency_field='company_currency')
+    company_id = fields.Many2one('res.company', string='Company', required=True)
+
+    company_currency = fields.Many2one(string='Currency', related='company_id.currency_id', readonly=True, relation="res.currency")
+
     department_id = fields.Char(string = "Department")
     date_op= fields.Date(string = "Date", default = fields.Date.today())
     active = fields.Boolean('Active', default = True)
@@ -104,6 +109,8 @@ class OP(models.Model):
 
         # self.department_id = self.doctor_id.department_id.name
         self.department_id = self.doctor_id.department_id.name
+        self.doctor_fee = self.doctor_id.fee
+        print('doc fee',self.doctor_fee)
         return {'domain': {'doctor_id': [('job_id', 'like', 'Doctor')]}}
 
 
@@ -314,8 +321,9 @@ class OP(models.Model):
         r = self.env['hr.employee'].search([('id', '=', self.doctor_id.id)])
         print("fees", r.fee)
         fval = r.fee
+        print(self.doctor_id.fee)
         return self.env['account.payment'] \
             .with_context(active_ids=self.ids, active_model='hospital.op', active_id=self.id,
-                          default_amount=fval, default_payment_type='inbound',
+                          default_amount = self.doctor_fee, default_payment_type='inbound',
                           default_partner_id = self.patient_id.id) \
             .action_register_payment()

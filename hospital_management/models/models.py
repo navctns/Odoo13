@@ -34,7 +34,7 @@ class PatientCard(models.Model):
         ('other','Other')
     ],string="Sex", required=True)
     #address=fields.Text(required=True,string="Address")
-    date=fields.Date(string="OP Date",default=datetime.datetime.now())
+    date=fields.Date(string="OP Date",default=fields.Date.today())
     phone=fields.Char(string="Telephone")
     mobile=fields.Char(string="Mobile", required=True)
     blood_group=fields.Selection([
@@ -55,6 +55,8 @@ class PatientCard(models.Model):
     op_number = fields.Many2one(string ="OP No")
     op_date = fields.Date(string = "Date", realated_field ="hospital.op.date")
     op_history_ids = fields.One2many('hospital.op','card_id', string = "OP History")
+    appointment_ids = fields.One2many('hospital.appointment','card_id', string = "Appointment")
+    active = fields.Boolean('Active', default=True)
 
 
 
@@ -109,6 +111,7 @@ class Consultation(models.Model):
     disease_id = fields.Many2one("hospital.disease", string = "Disease", required = True)
     diagnose = fields.Text(string = "Diagnose", required = True)
     consult_line_ids = fields.One2many("consult.line", 'consult_id', string = "Treatment")
+    active = fields.Boolean('Active', default=True)
 
     @api.onchange('type')
     def _onchange_type(self):

@@ -28,6 +28,7 @@ class Appointment(models.Model):
     op_count = fields.Integer(default =0, compute = '_compute_op_count')
     appointment_seq = fields.Char(string='Appointment Number', required=True, copy=False, readonly=True,
                                   default='New')
+    active = fields.Boolean('Active', default=True)
 
 
     @api.depends('op_ids')
