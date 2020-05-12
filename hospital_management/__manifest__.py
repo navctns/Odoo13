@@ -33,6 +33,7 @@
         'views/op_search_view.xml',
         'views/appointment_search_view.xml',
         'data/sequence.xml',
+        'data/invoice_seq.xml',
         'data/op_sequence.xml',
         'data/appointment_seq.xml',
         'data/data.xml',

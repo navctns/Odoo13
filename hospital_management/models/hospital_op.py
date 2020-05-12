@@ -21,11 +21,11 @@ class OP(models.Model):
     patient_blood = fields.Char("Blood Group")
     doctor_id = fields.Many2one("hr.employee", ondelete="cascade", string = "Doctor", Index=True
                                 , required=True)
-    doctor_fee = fields.Monetary(string = "Doctor Fee", attrs ={'invisible':[('isdoc','=', 0)]}, currency_field='company_currency')
+    doctor_fee = fields.Monetary(string = "Doctor Fee", currency_field='company_currency')
     company_id = fields.Many2one('res.company', string='Company', required=True)
 
     company_currency = fields.Many2one(string='Currency', related='company_id.currency_id', readonly=True, relation="res.currency")
-
+    currency_id = fields.Many2one('res.currency', string='Currency')
     department_id = fields.Char(string = "Department")
     date_op= fields.Date(string = "Date", default = fields.Date.today())
     active = fields.Boolean('Active', default = True)
@@ -41,6 +41,10 @@ class OP(models.Model):
         ('IP', 'IP')
     ], string = "Consultation Type", realated_field = 'hospital.consult.type')
 
+    journal_type = fields.Many2one('account.journal', 'Journal',
+                                   default=lambda self: self.env['account.journal'].search([('id', '=', 1)]))
+    account_type = fields.Many2one('account.account', 'Account',
+                                   default=lambda self: self.env['account.account'].search([('id', '=', 17)]))
 
     _sql_constraints = [
         # Partial constraint, complemented by a python constraint (see below).
@@ -323,7 +327,48 @@ class OP(models.Model):
         fval = r.fee
         print(self.doctor_id.fee)
         return self.env['account.payment'] \
-            .with_context(active_ids=self.ids, active_model='hospital.op', active_id=self.id,
-                          default_amount = self.doctor_fee, default_payment_type='inbound',
+            .with_context(active_ids=self.ids, active_model='hospital.op', active_id=self.id, default_amount = self.doctor_id.fee, default_payment_type='inbound',
                           default_partner_id = self.patient_id.id) \
             .action_register_payment()
+
+    def action_invoice_create(self):
+
+        inv_obj = self.env['account.move']
+        inv_line_obj = self.env['account.move.line']
+        patient = self.patient_id
+        inv_data = {
+            'name': patient.name,
+            'ref': patient.name,
+            'type': 'out_invoice',
+            # 'account_id': supplier.property_account_payable_id.id,
+            'partner_id': patient.id,
+            'currency_id': self.account_type.company_id.currency_id.id,
+            'journal_id': self.journal_type.id,
+            'invoice_origin': self.op_number,
+            'company_id': self.account_type.company_id.id,
+            # 'invoice_date_due': self.rent_end_date,
+        }
+        inv_id = inv_obj.create(inv_data)
+        # self.first_payment_inv = inv_id.id
+        # if inv_id:
+        #     list_value = [(0, 0, {
+        #         # 'name': self.vehicle_id.name,
+        #         'price_unit': self.doctor_fee,
+        #         'quantity': 1.0,
+        #         # 'account_id': income_account,
+        #         # 'product_id': product_id.id,
+        #         'move_id': inv_id.id,
+        #     })]
+        #     inv_id.write({'invoice_line_ids': list_value})
+
+        imd = self.env['ir.model.data']
+        action = imd.xmlid_to_object('account.action_move_out_invoice_type')
+        result = {
+            'name': action.name,
+            'type': 'ir.actions.act_window',
+            'views': [[False, 'form']],
+            'target': 'current',
+            'res_id': inv_id.id,
+            'res_model': 'account.move',
+        }
+        return result

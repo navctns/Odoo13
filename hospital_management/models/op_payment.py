@@ -16,20 +16,20 @@ class OpPayment(models.Model):
     #     'op_inv_id', 'invoice_id',
     #     string='Tags')
 
-    def action_register_payment(self):
-        active_ids = self.env.context.get('active_ids')
-        if not active_ids:
-            return ''
-
-        return {
-            'name': _('Register Payment'),
-            'res_model':'account.payment',
-            'view_mode': 'form',
-            'view_id': self.env.ref('account.view_account_payment_invoice_form').id,
-            'context': self.env.context,
-            'target': 'new',
-            'type': 'ir.actions.act_window',
-        }
+    # def action_register_payment(self):
+    #     active_ids = self.env.context.get('active_ids')
+    #     if not active_ids:
+    #         return ''
+    #
+    #     return {
+    #         'name': _('Register Payment'),
+    #         'res_model':'account.payment',
+    #         'view_mode': 'form',
+    #         'view_id': self.env.ref('account.view_account_payment_invoice_form').id,
+    #         'context': self.env.context,
+    #         'target': 'new',
+    #         'type': 'ir.actions.act_window',
+    #     }
 
 
 

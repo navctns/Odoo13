@@ -16,6 +16,8 @@ class DoctorFee(models.Model):
     fee = fields.Monetary(string = "Fee", attrs ={'invisible':[('isdoc','=', 0)]}, currency_field='company_currency')
     isdoc = fields.Integer(default=0, compute = '_compute_isdoc')
     company_currency = fields.Many2one(string='Currency', related='company_id.currency_id', readonly=True, relation="res.currency")
+    # currency_id = fields.Many2one('res.currency', string='Currency')
+
 
     category_ids = fields.Many2many(
         'hr.employee.category', 'op_category_rel',
