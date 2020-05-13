@@ -9,8 +9,8 @@
 
                           <xpath expr="//field[@name='parent_id']" position="after">
 
-                            <field name="fee" />
-
+                            <field name="fee" attrs="{'invisible': [('is_show_doctorfee','=', False)]}"/>
+                            <field name="is_show_doctorfee" invisible="1"/>
                          </xpath>
 <!--                        <xpath expr="//field[@name='fee']" position="attributes">-->
 

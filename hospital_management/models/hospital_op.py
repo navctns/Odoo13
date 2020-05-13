@@ -337,7 +337,7 @@ class OP(models.Model):
         inv_line_obj = self.env['account.move.line']
         patient = self.patient_id
         inv_data = {
-            'name': patient.name,
+            'name': self.op_number,
             'ref': patient.name,
             'type': 'out_invoice',
             # 'account_id': supplier.property_account_payable_id.id,
