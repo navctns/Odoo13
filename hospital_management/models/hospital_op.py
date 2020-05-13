@@ -46,13 +46,24 @@ class OP(models.Model):
     account_type = fields.Many2one('account.account', 'Account',
                                    default=lambda self: self.env['account.account'].search([('id', '=', 17)]))
     product_id = fields.Many2one('product.product',domain = [('default_code','=','HP-Consult')], default=lambda self:self.env['product.product'].search([('default_code','=','HP-Consult')]))
+    state = fields.Selection(
+        string="State",
+        selection=[
+            ('draft', 'Draft'),
+            ('posted', 'Posted'),
+        ], default='draft', required=True)
 
     _sql_constraints = [
         # Partial constraint, complemented by a python constraint (see below).
         ('token_no_uniq', 'UNIQUE(token_no,date_op)', 'You can not have two patients with the same token!'),
     ]
 
-
+    def action_confirm(self):
+        # for rec in self:
+        #     rec.state = 'appointment'
+        self.write({
+            'state': 'posted',
+        })
 
     #python constraint
     @api.constrains('token_no')

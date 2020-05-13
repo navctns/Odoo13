@@ -144,8 +144,11 @@
         <field name="arch" type="xml">
             <form string="Patient Card Forms">
                 <header>
-                    <button name="action_op_register_payment" id="account_op_payment_btn" type="object" class="oe_highlight" string="Register Payment" groups="account.group_account_invoice"/>
-                    <button name="action_invoice_create" id="account_op_invoice_btn" type="object" class="oe_highlight" string="Create Invoice" groups="account.group_account_invoice"/>
+<!--                    <button name="action_op_register_payment" id="account_op_payment_btn" type="object" class="oe_highlight" string="Register Payment" groups="account.group_account_invoice"/>-->
+                    <button name="action_confirm" type="object" states="draft" string="Confirm"
+                            class = "oe_highlight"/>
+                    <button name="action_invoice_create" id="account_op_invoice_btn" type="object" states="posted" class="oe_highlight" string="Create Invoice" groups="account.group_account_invoice"/>
+                    <field name ="state" widget = "statusbar"/>
 
                 </header>
 
