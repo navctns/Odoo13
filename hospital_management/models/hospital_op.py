@@ -22,7 +22,7 @@ class OP(models.Model):
     doctor_id = fields.Many2one("hr.employee", ondelete="cascade", string = "Doctor", Index=True
                                 , required=True)
     doctor_fee = fields.Monetary(string = "Doctor Fee", currency_field='company_currency')
-    company_id = fields.Many2one('res.company', string='Company', required=True)
+    company_id = fields.Many2one('res.company', string='Company', required=True, default=lambda self: self.env.company)
 
     company_currency = fields.Many2one(string='Currency', related='company_id.currency_id', readonly=True, relation="res.currency")
     currency_id = fields.Many2one('res.currency', string='Currency')
@@ -45,6 +45,7 @@ class OP(models.Model):
                                    default=lambda self: self.env['account.journal'].search([('id', '=', 1)]))
     account_type = fields.Many2one('account.account', 'Account',
                                    default=lambda self: self.env['account.account'].search([('id', '=', 17)]))
+    product_id = fields.Many2one('product.product',domain = [('default_code','=','HP-Consult')], default=lambda self:self.env['product.product'].search([('default_code','=','HP-Consult')]))
 
     _sql_constraints = [
         # Partial constraint, complemented by a python constraint (see below).
@@ -349,17 +350,17 @@ class OP(models.Model):
             # 'invoice_date_due': self.rent_end_date,
         }
         inv_id = inv_obj.create(inv_data)
-        # self.first_payment_inv = inv_id.id
-        # if inv_id:
-        #     list_value = [(0, 0, {
-        #         # 'name': self.vehicle_id.name,
-        #         'price_unit': self.doctor_fee,
-        #         'quantity': 1.0,
-        #         # 'account_id': income_account,
-        #         # 'product_id': product_id.id,
-        #         'move_id': inv_id.id,
-        #     })]
-        #     inv_id.write({'invoice_line_ids': list_value})
+        self.first_payment_inv = inv_id.id
+        if inv_id:
+            list_value = [(0, 0, {
+                # 'name': self.vehicle_id.name,
+                'price_unit': self.doctor_fee,
+                'quantity': 1.0,
+                # 'account_id': income_account,
+                'product_id': self.product_id.id,
+                'move_id': inv_id.id,
+            })]
+            inv_id.write({'invoice_line_ids': list_value})
 
         imd = self.env['ir.model.data']
         action = imd.xmlid_to_object('account.action_move_out_invoice_type')

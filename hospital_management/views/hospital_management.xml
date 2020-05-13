@@ -173,6 +173,7 @@
                             <field name="date_op"/>
                             <field name="token_no"/>
                             <field name="company_id"/>
+                            <field name="product_id" invisible="True"/>
                         </group>
 
 
