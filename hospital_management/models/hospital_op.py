@@ -46,6 +46,7 @@ class OP(models.Model):
     account_type = fields.Many2one('account.account', 'Account',
                                    default=lambda self: self.env['account.account'].search([('id', '=', 17)]))
     product_id = fields.Many2one('product.product',domain = [('default_code','=','HP-Consult')], default=lambda self:self.env['product.product'].search([('default_code','=','HP-Consult')]))
+    account_move = fields.Many2one('account.move', string='Invoice', readonly=True, copy=False)
     state = fields.Selection(
         string="State",
         selection=[
@@ -57,6 +58,12 @@ class OP(models.Model):
     consultation_ids = fields.One2many('hospital.consult', 'op_no', string = "Op_Consultations")
     consult_button_label = fields.Char(string = 'Consultation')
     consult_count = fields.Integer(default=0, string = 'Consult count', compute = '_compute_consult_count')
+    invoice_ids = fields.Many2many('account.move', 'op_invoice_payment_rel', 'op_number', 'invoice_id',
+                                   string="Invoices", copy=False, readonly=True,
+                                   help="""Technical field containing the invoice for which the payment has been generated.
+                                       This does not especially correspond to the invoices reconciled with the payment,
+                                       as it can have been generated first, and reconciled later""")
+
     _sql_constraints = [
         # Partial constraint, complemented by a python constraint (see below).
         ('token_no_uniq', 'UNIQUE(token_no,date_op)', 'You can not have two patients with the same token!'),
@@ -413,17 +420,64 @@ class OP(models.Model):
         }
         return result
 
-    def get_invoice(self):
+    # def get_invoice(self):
+    #     # imd = self.env['ir.model.data']
+    #     # action = imd.xmlid_to_object('account.action_move_out_invoice_type')
+    #     return {
+    #         # 'name': _('Customer Invoice'),
+    #         'view_mode': 'form',
+    #         'view_id': self.env.ref('account.view_move_form').id,
+    #         # 'view_id': action.id,
+    #         'res_model': 'account.move',
+    #         'context': "{'type':'out_invoice'}",
+    #         'type': 'ir.actions.act_window',
+    #         'res_id': self.invoice_ids.id,
+    #     }
 
-        return {
-            'name': _('Customer Invoice'),
-            'view_mode': 'form',
-            'view_id': self.env.ref('account.view_move_form').id,
-            'res_model': 'account.move',
-            'context': "{'type':'out_invoice'}",
-            'type': 'ir.actions.act_window',
-            'res_id': self.account_move.id,
-        }
+    # def action_view_invoice(self):
+    #     invoices = self.mapped('invoice_ids')
+    #     action = self.env.ref('account.action_move_out_invoice_type').read()[0]
+    #     if len(invoices) > 1:
+    #         action['domain'] = [('id', 'in', invoices.ids)]
+    #     elif len(invoices) == 1:
+    #         form_view = [(self.env.ref('account.view_move_form').id, 'form')]
+    #         if 'views' in action:
+    #             action['views'] = form_view + [(state, view) for state, view in action['views'] if view != 'form']
+    #         else:
+    #             action['views'] = form_view
+    #         action['res_id'] = invoices.id
+    #     else:
+    #         action = {'type': 'ir.actions.act_window_close'}
+    #
+    #     # context = {
+    #     #     'default_type': 'out_invoice',
+    #     # }
+    #
+    #     ctx = dict(
+    #         create=False,
+    #
+    #     )
+    #     form_view = [(self.env.ref('account.view_move_form').id, 'form')]
+    #     if len(self) == 1:
+    #         action = {
+    #             'view_mode': 'form',
+    #             'res_model': 'hospital.consult',
+    #             'view_id': form_view,
+    #             'type': 'ir.actions.act_window',
+    #             'name': 'Invoice',
+    #             'context': ctx,
+    #             'res_id': invoice_ids and invoice_ids[0]
+    #         }
+    #         # context.update({
+    #         #     'default_partner_id': self.partner_id.id,
+    #         #     'default_partner_shipping_id': self.partner_shipping_id.id,
+    #         #     'default_invoice_payment_term_id': self.payment_term_id.id,
+    #         #     'default_invoice_origin': self.mapped('name'),
+    #         #     'default_user_id': self.user_id.id,
+    #         # })
+    #
+    #     action['context'] = ctx
+    #     return action
 
     def get_consultation(self):
 
@@ -462,3 +516,43 @@ class OP(models.Model):
                 }
 
         return value
+
+
+    def get_invoices(self):
+
+        invoice_obj = self.env['account.move'].search([('invoice_id', '=', self.id)])#op_number
+        invoice_ids = []
+        for each in invoice_obj:
+            invoice_ids.append(each.id)
+
+        view_id = self.env.ref('account.view_move_form').id
+        ctx = dict(
+            create=False,
+
+        )
+
+        if invoice_ids:
+            if len(invoice_ids) <= 1:
+                value = {
+                    'view_mode': 'form',
+                    'res_model': 'account.move',
+                    'view_id': view_id,
+                    'type': 'ir.actions.act_window',
+                    'name': 'Invoice',
+                    'context': ctx,
+                    'res_id': invoice_ids and invoice_ids[0]
+                }
+            else:
+                value = {
+                    'domain': str([('id', 'in', invoice_ids)]),
+                    'view_mode': 'tree,form',
+                    'res_model': 'account.move',
+                    'view_id': False,
+                    'type': 'ir.actions.act_window',
+                    'context': ctx,
+                    'name': 'Invoice',
+                    'res_id': invoice_ids
+                }
+
+        return value
+
