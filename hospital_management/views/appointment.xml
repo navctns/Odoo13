@@ -59,7 +59,7 @@
         <field name="name">op.tree</field>
         <field name="model">hospital.appointment</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree default_order='date desc'>
                 <field name="card_id"/>
                 <field name="date"/>
                 <field name="patient_name"/>

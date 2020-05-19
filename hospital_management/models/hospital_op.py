@@ -50,13 +50,40 @@ class OP(models.Model):
         string="State",
         selection=[
             ('draft', 'Draft'),
-            ('posted', 'Posted'),
+            ('posted', 'Confirmed'),
+            ('paid','Paid')
         ], default='draft', required=True)
 
+    consultation_ids = fields.One2many('hospital.consult', 'op_no', string = "Op_Consultations")
+    consult_button_label = fields.Char(string = 'Consultation')
+    consult_count = fields.Integer(default=0, string = 'Consult count', compute = '_compute_consult_count')
     _sql_constraints = [
         # Partial constraint, complemented by a python constraint (see below).
         ('token_no_uniq', 'UNIQUE(token_no,date_op)', 'You can not have two patients with the same token!'),
     ]
+
+    @api.depends('consultation_ids')
+    def _compute_consult_count(self):
+        # for op in self:
+        #     op.op_count = self.env['hospital.op'].search_count([('appointment_id', '=', self.id)])
+        # print('op count', self.op_count)
+        if self.consultation_ids :
+
+            for r in self:
+                if r.consultation_ids.op_no.id == self.id:
+                    self.consult_count += 1
+        else :
+            self.consult_count = 0
+
+    # @api.onchange('consultation_ids')
+    # def _onchange_consultation_ids(self):
+    #     for r in self:
+    #         if r.consultation_ids.op_no.id == self.id:
+    #
+    #             self.consult_count += 1
+
+
+
 
     def action_confirm(self):
         # for rec in self:
@@ -358,6 +385,7 @@ class OP(models.Model):
             'journal_id': self.journal_type.id,
             'invoice_origin': self.op_number,
             'company_id': self.account_type.company_id.id,
+            'invoice_date': self.date_op,
             # 'invoice_date_due': self.rent_end_date,
         }
         inv_id = inv_obj.create(inv_data)
@@ -384,3 +412,53 @@ class OP(models.Model):
             'res_model': 'account.move',
         }
         return result
+
+    def get_invoice(self):
+
+        return {
+            'name': _('Customer Invoice'),
+            'view_mode': 'form',
+            'view_id': self.env.ref('account.view_move_form').id,
+            'res_model': 'account.move',
+            'context': "{'type':'out_invoice'}",
+            'type': 'ir.actions.act_window',
+            'res_id': self.account_move.id,
+        }
+
+    def get_consultation(self):
+
+        consult_obj = self.env['hospital.consult'].search([('op_no', '=', self.id)])
+        consult_ids = []
+        for each in consult_obj:
+            consult_ids.append(each.id)
+
+        view_id = self.env.ref('hospital_management.consultation_form_view').id
+        ctx = dict(
+            create=False,
+
+        )
+
+        if consult_ids:
+            if len(consult_ids) <= 1:
+                value = {
+                    'view_mode': 'form',
+                    'res_model': 'hospital.consult',
+                    'view_id': view_id,
+                    'type': 'ir.actions.act_window',
+                    'name': 'Consultation',
+                    'context': ctx,
+                    'res_id': consult_ids and consult_ids[0]
+                }
+            else:
+                value = {
+                    'domain': str([('id', 'in', consult_ids)]),
+                    'view_mode': 'tree,form',
+                    'res_model': 'hospital.consult',
+                    'view_id': False,
+                    'type': 'ir.actions.act_window',
+                    'context': ctx,
+                    'name': 'Op',
+                    'res_id': consult_ids
+                }
+
+        return value

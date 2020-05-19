@@ -29,6 +29,7 @@
         'views/hospital_management.xml',
         'views/appointment.xml',
         'views/appointment_smartbutton.xml',
+        'views/op_smartbutton.xml',
         'views/doctor_fee.xml',
         'views/op_search_view.xml',
         'views/appointment_search_view.xml',

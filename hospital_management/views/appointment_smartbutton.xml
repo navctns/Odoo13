@@ -8,7 +8,7 @@
                 <div name="button_box" position="inside">
                     <button class="oe_stat_button" type="object" name="get_ops_form"
                         icon="fa-list" attrs="{'invisible': [('op_count', '=', 0)]}">
-                        <field string="OP" name="op_count" widget="statinfo" invisible="True"/>
+                        <field string="Op" name="op_count" widget="statinfo"/>
                     </button>
                 </div>
             </field>

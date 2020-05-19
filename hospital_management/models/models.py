@@ -139,6 +139,11 @@ class Consultation(models.Model):
             # self.op_no = 0
             self.op_no = 0
 
+    @api.onchange('op_no')
+    def _onchange_op_no(self):
+        self.doctor_id = self.op_no.doctor_id
+
+
     # @api.depends('op_no', 'type')
     # def _compute_op_no(self):
     #     if self.type == 'OP' :
