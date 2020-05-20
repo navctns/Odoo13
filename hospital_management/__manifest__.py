@@ -38,6 +38,8 @@
         'data/op_sequence.xml',
         'data/appointment_seq.xml',
         'data/data.xml',
+        'reports/report.xml',
+        'reports/patient_card.xml',
 
 
     ],

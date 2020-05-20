@@ -58,7 +58,7 @@ class OP(models.Model):
     consultation_ids = fields.One2many('hospital.consult', 'op_no', string = "Op_Consultations")
     consult_button_label = fields.Char(string = 'Consultation')
     consult_count = fields.Integer(default=0, string = 'Consult count', compute = '_compute_consult_count')
-    invoice_ids = fields.Many2many('account.move', 'op_invoice_payment_rel', 'op_number', 'invoice_id',
+    invoice_ids = fields.Many2many('account.move', 'op_invoice_payment_rel', 'invoice_id', 'op_number',
                                    string="Invoices", copy=False, readonly=True,
                                    help="""Technical field containing the invoice for which the payment has been generated.
                                        This does not especially correspond to the invoices reconciled with the payment,
@@ -393,6 +393,7 @@ class OP(models.Model):
             'invoice_origin': self.op_number,
             'company_id': self.account_type.company_id.id,
             'invoice_date': self.date_op,
+            # 'op_invoice_id':self.id,
             # 'invoice_date_due': self.rent_end_date,
         }
         inv_id = inv_obj.create(inv_data)
@@ -434,50 +435,51 @@ class OP(models.Model):
     #         'res_id': self.invoice_ids.id,
     #     }
 
-    # def action_view_invoice(self):
-    #     invoices = self.mapped('invoice_ids')
-    #     action = self.env.ref('account.action_move_out_invoice_type').read()[0]
-    #     if len(invoices) > 1:
-    #         action['domain'] = [('id', 'in', invoices.ids)]
-    #     elif len(invoices) == 1:
-    #         form_view = [(self.env.ref('account.view_move_form').id, 'form')]
-    #         if 'views' in action:
-    #             action['views'] = form_view + [(state, view) for state, view in action['views'] if view != 'form']
-    #         else:
-    #             action['views'] = form_view
-    #         action['res_id'] = invoices.id
-    #     else:
-    #         action = {'type': 'ir.actions.act_window_close'}
-    #
-    #     # context = {
-    #     #     'default_type': 'out_invoice',
-    #     # }
-    #
-    #     ctx = dict(
-    #         create=False,
-    #
-    #     )
-    #     form_view = [(self.env.ref('account.view_move_form').id, 'form')]
-    #     if len(self) == 1:
-    #         action = {
-    #             'view_mode': 'form',
-    #             'res_model': 'hospital.consult',
-    #             'view_id': form_view,
-    #             'type': 'ir.actions.act_window',
-    #             'name': 'Invoice',
-    #             'context': ctx,
-    #             'res_id': invoice_ids and invoice_ids[0]
-    #         }
-    #         # context.update({
-    #         #     'default_partner_id': self.partner_id.id,
-    #         #     'default_partner_shipping_id': self.partner_shipping_id.id,
-    #         #     'default_invoice_payment_term_id': self.payment_term_id.id,
-    #         #     'default_invoice_origin': self.mapped('name'),
-    #         #     'default_user_id': self.user_id.id,
-    #         # })
-    #
-    #     action['context'] = ctx
-    #     return action
+    def action_view_invoice(self):
+        # invoices = self.mapped('invoice_ids')
+        # action = self.env.ref('account.action_move_out_invoice_type').read()[0]
+        # if len(invoices) > 1:
+        #     action['domain'] = [('id', 'in', invoices.ids)]
+        # elif len(invoices) == 1:
+        #     form_view = [(self.env.ref('account.view_move_form').id, 'form')]
+        #     if 'views' in action:
+        #         action['views'] = form_view + [(state, view) for state, view in action['views'] if view != 'form']
+        #     else:
+        #         action['views'] = form_view
+        #     action['res_id'] = invoices.id
+        # else:
+        #     action = {'type': 'ir.actions.act_window_close'}
+        #
+        # # context = {
+        # #     'default_type': 'out_invoice',
+        # # }
+        #
+        # ctx = dict(
+        #     create=False,
+        #
+        # )
+        # form_view = [(self.env.ref('account.view_move_form').id, 'form')]
+        # if len(self) == 1:
+        #     action = {
+        #         'view_mode': 'form',
+        #         'res_model': 'hospital.consult',
+        #         'view_id': form_view,
+        #         'type': 'ir.actions.act_window',
+        #         'name': 'Invoice',
+        #         'context': ctx,
+        #         'res_id': self.invoice_ids and self.invoice_ids[0]
+        #     }
+        #     # context.update({
+        #     #     'default_partner_id': self.partner_id.id,
+        #     #     'default_partner_shipping_id': self.partner_shipping_id.id,
+        #     #     'default_invoice_payment_term_id': self.payment_term_id.id,
+        #     #     'default_invoice_origin': self.mapped('name'),
+        #     #     'default_user_id': self.user_id.id,
+        #     # })
+        #
+        # action['context'] = ctx
+        # return action
+        pass
 
     def get_consultation(self):
 
@@ -556,3 +558,9 @@ class OP(models.Model):
 
         return value
 
+# class OPAccountMove(models.Model):
+#     _name = 'account.move'
+#     _inherit = ['account.move', 'utm.mixin']
+#
+#     op_invoice_id = fields.Many2one(
+#         'hospital.team', string='Op Invoice id')
