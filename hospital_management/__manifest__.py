@@ -40,6 +40,7 @@
         'data/data.xml',
         'reports/report.xml',
         'reports/patient_card.xml',
+        'reports/hospital_report_views.xml',
 
 
     ],

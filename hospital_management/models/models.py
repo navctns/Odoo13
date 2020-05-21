@@ -92,8 +92,11 @@ class PatientCard(models.Model):
             d1=datetime.datetime.strptime(bday,"%Y-%m-%d").date()
             d2 = date.today()
             self.age = relativedelta(d2,d1).years
-
-
+    def report_button(self):
+        data = {
+            'model_id': self.id,
+        }
+        return self.env.ref('hospital_management.report_hospital_patient_medical').report_action(self, data=data)
 class Consultation(models.Model):
 
     _name = "hospital.consult"

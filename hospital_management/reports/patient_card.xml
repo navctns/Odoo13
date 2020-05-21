@@ -20,33 +20,47 @@
 <!--</odoo>-->
 
 <odoo>
-<data>
-<template id="report_hospital_patient_medical">
-        	<t t-call="web.html_container">
-<!--                <t t-foreach="docs" t-as="doc">-->
-                    <t t-set="doc" t-as="doc"/>
-                <t t-call="web.external_layout">
-<!--                		<div class="page">-->
-                    			<h1 align="center">Sample Report</h1>
 
-                    <tbody>
-                            <tr t-foreach="get_patient_name" t-as="patient">
+<template id="report_hospital_management_report_hospital_patient_medical">
+     <t t-call="web.html_container">
+    <t t-call="web.external_layout">
+        <t t-set="doc"/>
+        <t t-set="address">
+            <div t-field="doc.patient_id"
+                t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+<!--            <p t-if="doc.partner_id.vat"><t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="doc.partner_id.vat"/></p>-->
+        </t>
+    </t>
+     </t>
+<!--        	<t t-call="web.html_container">-->
+<!--&lt;!&ndash;                <t t-foreach="docs" t-as="doc">&ndash;&gt;-->
+<!--                    <t t-set="doc" t-as="doc"/>-->
+<!--                <t t-call="web.external_layout">-->
+<!--&lt;!&ndash;                		<div class="page">&ndash;&gt;-->
+<!--                    			<h1 align="center">Sample Report</h1>-->
 
-                                <td><t t-esc="patient['name']"/></td>
-                            </tr>
-                        </tbody>
-<!--                    <div class="page">-->
-                <h1>Patient Medical Record</h1>
-<!--			<h3><t t-esc="doc['patient_id']"/></h3>-->
-<!--                <h3><t t-esc="doc.age"/></h3>-->
-<!--                <p>This object's name is <span t-field="doc.age"/></p>-->
-<!--			<h3><t t-esc=”date_today”</h3>-->
-<!--                    </div>-->
-                </t>
+<!--                    <tbody>-->
+<!--                            <tr t-foreach="get_patient_name" t-as="patient">-->
 
-<!--                		</div>-->
-<!--            	</t>-->
-        	</t>
+<!--                                <td><t t-esc="patient['name']"/></td>-->
+
+<!--&lt;!&ndash;                                <tr t-foreach="docs" t-as="doc">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                                <td><t t-esc="doc['patient_id']"/></td>&ndash;&gt;-->
+<!--                            </tr>-->
+<!--                        </tbody>-->
+<!--&lt;!&ndash;                    <div class="page">&ndash;&gt;-->
+<!--                <h1>Patient Medical Record</h1>-->
+<!--&lt;!&ndash;			<h3><t t-esc="doc['patient_id']"/></h3>&ndash;&gt;-->
+<!--&lt;!&ndash;                <h3><t t-esc="doc.age"/></h3>&ndash;&gt;-->
+<!--&lt;!&ndash;                <p>This object's name is <span t-field="doc.age"/></p>&ndash;&gt;-->
+<!--&lt;!&ndash;			<h3><t t-esc=”date_today”</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                </t>-->
+
+<!--&lt;!&ndash;                		</div>&ndash;&gt;-->
+<!--&lt;!&ndash;            	</t>&ndash;&gt;-->
+<!--        	</t>-->
 </template>
-	</data>
+
 </odoo>
