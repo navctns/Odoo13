@@ -8,7 +8,7 @@
 
           <t t-call="web.external_layout">
                 <div class="page">
-                    <h2>Aged Partner Balance</h2>
+                    <h2>Medical Report</h2>
 
                     <div class="row mt32">
 <!--                        <div class="col-3">-->
@@ -26,10 +26,51 @@
                                         <th style="text-align:left;">
                                             <strong>Date</strong>
                                         </th>
+                                        <th style="text-align:left;">
+                                            <strong>Patient</strong>
+                                        </th>
+                                        <th style="text-align:left;">
+                                            <strong>Disease</strong>
+                                        </th>
+                                        <th style="text-align:left;">
+                                            <strong>Doctor</strong>
+                                        </th>
+                                        <th style="text-align:left;">
+                                            <strong>Department</strong>
+                                        </th>
                                     </tr>
 
 
                                 </thead>
+                                 <tbody>
+                                    <t t-foreach="ops" t-as="o">
+                                        <tr>
+                                            <td style="background-color:#ababab">
+                                                <strong><t t-esc="o['num']"/></strong>
+                                            </td>
+                                            <td style="background-color:#ababab">
+                                                <strong><t t-esc="o['seq']"/></strong>
+                                            </td>
+
+
+                                            <td style="background-color:#ababab">
+                                                <strong><t t-esc="o['date']"/></strong>
+                                            </td>
+                                            <td style="background-color:#ababab">
+                                                <strong><t t-esc="o['patient']"/></strong>
+                                            </td>
+                                             <td style="background-color:#ababab">
+                                                <strong><t t-esc="o['disease']"/></strong>
+                                            </td>
+                                             <td style="background-color:#ababab">
+                                                <strong><t t-esc="o['doctor']"/></strong>
+                                            </td>
+                                            <td style="background-color:#ababab">
+                                                <strong><t t-esc="o['department']"/></strong>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
                             </table>
                     </div>
 <!--                        <div class="col-3">-->
