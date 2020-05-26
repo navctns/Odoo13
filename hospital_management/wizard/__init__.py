@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
 
-# from . import medical_report
+from . import create_medical_report
 # from . import op_payment

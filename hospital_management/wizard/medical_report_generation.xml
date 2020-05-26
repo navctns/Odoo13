@@ -1,0 +1,42 @@
+<odoo>
+    <record model="ir.actions.act_window" id="action_medical_report_generation">
+        <field name="name">Medical Report</field>
+        <field name="res_model">create.medical.report</field>
+        <field name="limit" eval="20"/>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+<!--        <field name="help" type="html">-->
+<!--            <p class="o_view_noncontent_smiling_face">-->
+<!--                create the first patient_record-->
+<!--            </p>-->
+<!--        </field>-->
+    </record>
+
+    <!-- Appointment form view -->
+    <record model="ir.ui.view" id="create_medical_report_form_view">
+        <field name="name">Medical Report Form</field>
+        <field name="model">create.medical.report</field>
+        <field name="arch" type="xml">
+            <form string="Create Medical Report ">
+                <group>
+                    <field name = "patient_id"/>
+                    <field name = "department_id"/>
+                    <field name = "doctor_id"/>
+                    <field name = "disease_id"/>
+                    <field name = "date_from"/>
+                    <field name = "to_date"/>
+                </group>
+                <footer>
+                    <button name="print_report" string="Print" type="object"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+     <menuitem id="report_menu" name="Report"
+          parent="main_hospitalmanagement_menu"
+          groups="base.group_user"/>
+    <menuitem id="medical_report_menu" name="Medical Report"
+          parent="report_menu" action="action_medical_report_generation"
+          groups="base.group_user"/>
+</odoo>

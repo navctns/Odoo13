@@ -38,9 +38,10 @@
         'data/op_sequence.xml',
         'data/appointment_seq.xml',
         'data/data.xml',
+        'wizard/medical_report_generation.xml',
         'reports/report.xml',
         'reports/patient_card.xml',
-        'reports/hospital_report_views.xml',
+        # 'reports/hospital_report_views.xml',
 
 
     ],

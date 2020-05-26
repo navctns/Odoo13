@@ -1,66 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--<odoo>-->
-<!--    <data>-->
-<!--        <template id="report_hospital_patient_medical">-->
-<!--            < t-call="web.html_container">-->
-<!--                <t t-call="web.external_layout">-->
-<!--                        <div class="page">-->
-<!--                            <h1 align=”center”>Sample Report</h1>-->
-<!--			                <t t-forech=”docs” t-as=”doc”>-->
-<!--                                <h3><t t-esc=”doc[‘patient_id’]”</h3>-->
-<!--&lt;!&ndash;			                    <h3><t t-esc=”date_today”</h3>&ndash;&gt;-->
-<!--                            </t>-->
-<!--&lt;!&ndash;                        <h3 class="mb32">Patient Medical Report</h3>&ndash;&gt;-->
-<!--            </>-->
-<!--            -->
-<!--                </t>-->
-<!--            </t>-->
-<!--        </template>-->
-<!--        </data>-->
-<!--</odoo>-->
+
 
 <odoo>
 
-<template id="report_hospital_management_report_hospital_patient_medical">
+<template id="hospital_patient_medical_report">
      <t t-call="web.html_container">
-    <t t-call="web.external_layout">
-        <t t-set="doc"/>
-        <t t-set="address">
-            <div t-field="doc.patient_id"
-                t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
-<!--            <p t-if="doc.partner_id.vat"><t t-esc="doc.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="doc.partner_id.vat"/></p>-->
-        </t>
-    </t>
+
+          <t t-call="web.external_layout">
+                <div class="page">
+                    <h2>Aged Partner Balance</h2>
+
+                    <div class="row mt32">
+<!--                        <div class="col-3">-->
+<!--                            <strong>Patient Name</strong>-->
+<!--                            <p t-esc="data['patient_id']"/>-->
+                            <table class="table table-bordered mb32" style="table-layout:auto">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:left;">
+                                                <strong>Serial</strong>
+                                        </th>
+                                        <th style="text-align:left;">
+                                                <strong>OP</strong>
+                                        </th>
+                                        <th style="text-align:left;">
+                                            <strong>Date</strong>
+                                        </th>
+                                    </tr>
+
+
+                                </thead>
+                            </table>
+                    </div>
+<!--                        <div class="col-3">-->
+<!--                            <strong>Period Length (days)</strong>-->
+<!--                            <p t-esc="data['period_length']"/>-->
+<!--                        </div>-->
+                </div>
+
+          </t>
      </t>
-<!--        	<t t-call="web.html_container">-->
-<!--&lt;!&ndash;                <t t-foreach="docs" t-as="doc">&ndash;&gt;-->
-<!--                    <t t-set="doc" t-as="doc"/>-->
-<!--                <t t-call="web.external_layout">-->
-<!--&lt;!&ndash;                		<div class="page">&ndash;&gt;-->
-<!--                    			<h1 align="center">Sample Report</h1>-->
 
-<!--                    <tbody>-->
-<!--                            <tr t-foreach="get_patient_name" t-as="patient">-->
-
-<!--                                <td><t t-esc="patient['name']"/></td>-->
-
-<!--&lt;!&ndash;                                <tr t-foreach="docs" t-as="doc">&ndash;&gt;-->
-
-<!--&lt;!&ndash;                                <td><t t-esc="doc['patient_id']"/></td>&ndash;&gt;-->
-<!--                            </tr>-->
-<!--                        </tbody>-->
-<!--&lt;!&ndash;                    <div class="page">&ndash;&gt;-->
-<!--                <h1>Patient Medical Record</h1>-->
-<!--&lt;!&ndash;			<h3><t t-esc="doc['patient_id']"/></h3>&ndash;&gt;-->
-<!--&lt;!&ndash;                <h3><t t-esc="doc.age"/></h3>&ndash;&gt;-->
-<!--&lt;!&ndash;                <p>This object's name is <span t-field="doc.age"/></p>&ndash;&gt;-->
-<!--&lt;!&ndash;			<h3><t t-esc=”date_today”</h3>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
-<!--                </t>-->
-
-<!--&lt;!&ndash;                		</div>&ndash;&gt;-->
-<!--&lt;!&ndash;            	</t>&ndash;&gt;-->
-<!--        	</t>-->
 </template>
 
 </odoo>
