@@ -17,13 +17,32 @@ class CreateMedicalReport(models.TransientModel):
     date_from = fields.Date('Date From')
     to_date = fields.Date('To Date')
 
+    @api.onchange('doctor_id')
+    def _onchange_doctor_id(self):
+        if not self.department_id:
+            # return {'domain': {'doctor_id': [('department_id', '=', self.department_id.id)]}}
+            self.department_id = self.doctor_id.department_id
+            return {'domain': {'doctor_id': [('job_id', '=', 'Doctor')]}}
+        # return {'domain': {'doctor_id': [('department_id', '=', self.department_id.id)]}}
+
+    @api.onchange('department_id')
+    def _onchange_department_id(self):
+        if self.doctor_id:
+            if self.doctor_id.department_id.id != self.department_id.id :
+                self.doctor_id = False
+        return {'domain': {'doctor_id': [('department_id', '=', self.department_id.id)]}}
+
+    #Report filtering
     def _get_op_data(self):
         ops = self.env['hospital.op'].search([])
         return ops
     #onchange
+    p = 0
     def _get_op_data_patient(self):
         ops = self.env['hospital.op'].search([('card_id','=',self.patient_id.id)])
+        p = 1
         return ops
+    # def _get_op_data_department(self):
     def print_report(self):
 
         data = {
@@ -32,6 +51,7 @@ class CreateMedicalReport(models.TransientModel):
         }
         if self.patient_id :
             ops = self._get_op_data_patient()
+            print(type(ops))
         else :
             ops = self._get_op_data()
 
