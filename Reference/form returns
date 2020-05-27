@@ -1,0 +1,54 @@
+@tagged('post_install', '-at_install', 'external', '-standard')
+class PaypalForm(PaypalCommon):
+
+    def test_10_paypal_form_render(self):
+        base_url = self.env['ir.config_parameter'].get_param('web.base.url')
+        # be sure not to do stupid things
+        self.paypal.write({'paypal_email_account': 'tde+paypal-facilitator@odoo.com', 'fees_active': False})
+        self.assertEqual(self.paypal.state, 'test', 'test without test environment')
+
+        # ----------------------------------------
+        # Test: button direct rendering
+        # ----------------------------------------
+
+        # render the button
+        res = self.paypal.render(
+            'test_ref0', 0.01, self.currency_euro.id,
+            values=self.buyer_values)
+
+form_values = {
+            'cmd': '_xclick',
+            'business': 'tde+paypal-facilitator@odoo.com',
+            'item_name': '%s: test_ref0' % (self.paypal.company_id.name),
+            'item_number': 'test_ref0',
+            'first_name': 'Norbert',
+            'last_name': 'Buyer',
+            'amount': '0.01',
+            'bn': 'OdooInc_SP',
+            'currency_code': 'EUR',
+            'address1': 'Huge Street 2/543',
+            'city': 'Sin City',
+            'zip': '1000',
+            'rm': '2',
+            'country': 'BE',
+            'email': 'norbert.buyer@example.com',
+            'return': urls.url_join(base_url, PaypalController._return_url),
+            'notify_url': urls.url_join(base_url, PaypalController._notify_url),
+            'cancel_return': urls.url_join(base_url, PaypalController._cancel_url),
+            'custom': '{"return_url": "/payment/process"}',
+        }
+
+
+    def get_base_url(self):
+        """
+        Returns rooturl for a specific given record.
+
+        By default, it return the ir.config.parameter of base_url
+        but it can be overidden by model.
+
+        :return: the base url for this record
+        :rtype: string
+
+        """
+        self.ensure_one()
+        return self.env['ir.config_parameter'].sudo().get_param('web.base.url')

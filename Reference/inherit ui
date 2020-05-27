@@ -1,0 +1,53 @@
+inheritance
+
+category_ids = fields.Many2many(
+          'hr.employee.category', 'employee_category_rel',
+          'emp_id', 'category_id',
+          string='Tags')
+
+
+class school_management(models.Model):
+    _name = 'school.student'
+    _inherit = 'hr.employee'
+    _description = 'student' # this will be used to log message when you create a student, so keep it simple, when you create a record message will be 'student is created' 
+
+    # define new relation name and better column names 
+    # and I think you need a new category model because this one is used for employee category, may be it's better to create hr.student.category table I don't know it's up to you
+    category_ids = fields.Many2many(
+      'hr.employee.category', 'student_category_rel',
+      'student_id', 'category_id',
+      string='Tags')
+
+
+<xpath expr="//group[@name='managers']" position="inside">
+                    <field name="expense_manager_id"/>
+                </xpath>
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>    
+    <data>    
+        <record model="ir.ui.view" id="view_partner_form_inherited">           
+           <field name="name">res.partner.form</field>         
+           <field name="model">res.partner</field> 
+           <field name="inherit_id" ref="base.view_partner_form"/>    
+           <field name="arch" type="xml">        
+             <field name="lang" position="after">  
+                <field name="trn_no"/>        
+             </field>    
+           </field>    
+       </record>   
+   </data>
+</odoo>
+
+
+ <field name="arch" type="xml">
+            <xpath expr="//field[@name='group_ids']" position="after">
+                <field name="subscription_department_ids" widget="many2many_tags"
+                    string="Auto Subscribe Departments"/>
+            </xpath>
+        </field>
+
+<xpath expr="//page[@name='validity_date']" position="attributes">
+
+<attribute name="attrs">{'required':[('demo_name','!=',False)]}</attribute>

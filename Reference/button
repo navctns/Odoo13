@@ -1,0 +1,197 @@
+button class
+
+btn-primary
+class="btn btn-primary dropdown-toggle o_we_search_icon"
+            <button class="dropdown-item o_search_an_image" type="button">
+class="btn btn-primary btn-block mt-4 save_unsplash"
+
+
+<div class="oe_button_box" name="button_box">
+                            <button name="open_document" string="Open Document"
+                                    type="object" class="oe_link"
+                                    attrs="{'invisible': ['|', ('alias_model_id', '=', False), ('alias_force_thread_id', '=', 0)]}"/>
+                            <button name="open_parent_document" string="Open Parent Document"
+                                    type="object" class="oe_link" icon="fa-sitemap"
+                                    attrs="{'invisible': ['|', ('alias_parent_model_id', '=', False), ('alias_parent_thread_id', '=', 0)]}"/>
+                        </div>
+
+
+
+
+<div class="footer">
+                    <div class="button confirm">
+                            Return
+                        </div>
+                    <div class="button cancel">
+                        Cancel
+                    </div>
+                </div>
+
+
+button with type- action
+
+ <button name="%(action_stock_report)d" icon="fa-arrow-up" class="oe_stat_button" string="Traceability" type="action"/>
+
+
+smart button
+
+eg
+<odoo>
+    <data>
+        <record id="fleet_vehicle_smart_button" model="ir.ui.view">
+            <field name="name">fleet.view.buttons</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button class="oe_stat_button" type="object" name="get_vehicles"
+                        icon="fa-car">
+                        <field string="Vehicle" name="vehicle_count" widget="statinfo"/>
+                    </button>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+class search(models.Model):
+    _inherit = 'res.partner'
+    vehicle_count = fields.Integer()
+    def get_vehicles(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Vehicles',
+            'view_mode': 'tree',
+            'res_model': 'fleet.vehicle',
+            'domain': [('driver_id', '=', self.id)],
+            'context': "{'create': False}"
+        }
+
+
+ROUGH
+
+report_action = {
+            'context': context,
+            'data': data,
+            'type': 'ir.actions.report',
+            'report_name': self.report_name,
+            'report_type': self.report_type,
+            'report_file': self.report_file,
+            'name': self.name,
+        }
+change to action
+
+
+
+Throuth xml, action
+
+<button string="New Quotation" name="%(sale_action_quotations_new)d" type="action" class="oe_highlight"
+                   
+    context="{
+        'default_service_id': service_id, 
+        'search_default_partner_id': partner_id,
+        'default_partner_id': partner_id,
+        'default_team_id': team_id}"/>
+
+
+edit 
+context="{
+        'card_id': card_id, 
+        'doctor_id': doctor_id
+        }"/>
+
+
+
+
+ def action_production_lots_form(self, cr, uid, ids, context=None):
+        if context is None: context = {}
+        if context.get('active_model') != self._name:
+            context.update(active_ids=ids, active_model=self._name)
+        partial_id = self.pool.get("stock.partial.move").create(
+            cr, uid, {}, context=context)
+        return {
+            'name':_("Products to Process"),
+            'view_mode': 'form',
+            'view_id': False,
+            'view_type': 'form',
+            'res_model': 'stock.partial.move',
+            'res_id': partial_id,
+            'type': 'ir.actions.act_window',
+            'nodestroy': True,
+            'target': 'new',
+            'domain': '[]',
+            'context': context
+        }
+
+
+action redirects
+odoo/addons/sale/models/utm.py
+
+    def action_redirect_to_quotations(self):
+        action = self.env.ref('sale.action_quotations_with_onboarding').read()[0]
+        action['domain'] = [('campaign_id', '=', self.id)]
+        action['context'] = {'default_campaign_id': self.id}
+        return action
+
+makint into our version
+
+def action_redirect_to_appointment(self):
+        action = self.env.ref('hospital_management.op_form_view').read()[0]
+        action['domain'] = [('campaign_id', '=', self.id)]
+        action['context'] = {'card_id': self.card_id}
+        return action
+
+search this sale.action_quotations_with_onboarding
+
+
+self.pool.get("stock.warehouse").browse(cr, uid, item["wh_qc_stock_loc_id"], context=context)
+
+result = {
+            'name': action.name,
+            'help': action.help,
+            'type': 'ir.actions.act_window',
+            'views': [[list_view_id, 'tree'], [form_view_id, 'form'], [False, 'graph'], [False, 'kanban'],
+                      [False, 'calendar'], [False, 'pivot']],
+            'target': action.target,
+            'context': action.context,
+            'res_model': 'account.move',
+        }
+
+
+
+SMART BUTTON GETS INVOICES
+
+    def action_view_invoice(self):
+        inv_obj = self.env['account.move'].search([('invoice_origin', '=', self.name)])
+        inv_ids = []
+        for each in inv_obj:
+            inv_ids.append(each.id)
+        view_id = self.env.ref('account.view_move_form').id
+        ctx = dict(
+            create=False,
+        )
+        if inv_ids:
+            if len(inv_ids) <= 1:
+                value = {
+                    'view_mode': 'form',
+                    'res_model': 'account.move',
+                    'view_id': view_id,
+                    'type': 'ir.actions.act_window',
+                    'name': 'Invoice',
+                    'context': ctx,
+                    'res_id': inv_ids and inv_ids[0]
+                }
+            else:
+                value = {
+                    'domain': str([('id', 'in', inv_ids)]),
+                    'view_mode': 'tree,form',
+                    'res_model': 'account.move',
+                    'view_id': False,
+                    'type': 'ir.actions.act_window',
+                    'context': ctx,
+                    'name': 'Invoice',
+                    'res_id': inv_ids
+                }
+
+            return value

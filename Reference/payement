@@ -1,0 +1,214 @@
+payment
+
+ def action_invoice_register_payment(self):
+        return self.env['account.payment']\
+            .with_context(active_ids=self.ids, active_model='account.move', active_id=self.id)\
+            .action_register_payment()
+
+                        <button name="action_invoice_register_payment" id="account_invoice_payment_btn" type="object" class="oe_highlight" attrs="{'invisible': ['|', '|', ('state', '!=', 'posted'), ('invoice_payment_state', '!=', 'not_paid'), ('type', 'not in', ('out_invoice', 'out_refund', 'in_invoice', 'in_refund', 'out_receipt', 'in_receipt'))]}" string="Register Payment" groups="account.group_account_invoice"/>
+
+
+  <button name="action_invoice_register_payment" id="account_invoice_payment_btn" type="object" class="oe_highlight" string="Register Payment" groups="account.group_account_invoice"/>
+
+ def action_register_payment(self):
+        active_ids = self.env.context.get('active_ids')
+        if not active_ids:
+            return ''
+
+        return {
+            'name': _('Register Payment'),
+            'res_model': len(active_ids) == 1 and 'account.payment' or 'account.payment.register',
+            'view_mode': 'form',
+            'view_id': len(active_ids) != 1 and self.env.ref('account.view_account_payment_form_multi').id or self.env.ref('account.view_account_payment_invoice_form').id,
+            'context': self.env.context,
+            'target': 'new',
+            'type': 'ir.actions.act_window',
+        }
+
+
+<record id="action_account_invoice_from_list" model="ir.actions.server">
+            <field name="name">Register Payment</field>
+            <field name="model_id" ref="account.model_account_payment"/>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">
+                action = model.action_register_payment()
+            </field>
+        </record>
+
+PAYMENT ACTION
+
+    def action_register_payment(self):
+        active_ids = self.env.context.get('active_ids')
+        if not active_ids:
+            return ''
+
+        return {
+            'name': _('Register Payment'),
+            'res_model': len(active_ids) == 1 and 'account.payment' or 'account.payment.register',
+            'view_mode': 'form',
+            'view_id': len(active_ids) != 1 and self.env.ref('account.view_account_payment_form_multi').id or self.env.ref('account.view_account_payment_invoice_form').id,
+            'context': self.env.context,
+            'target': 'new',
+            'type': 'ir.actions.act_window',
+        }
+
+    def button_journal_entries(self):
+        return {
+            'name': _('Journal Items'),
+            'view_mode': 'tree,form',
+            'res_model': 'account.move.line',
+            'view_id': False,
+            'type': 'ir.actions.act_window',
+            'domain': [('payment_id', 'in', self.ids)],
+        }
+
+
+invoice_ids = fields.Many2many(
+        'account.payment.invoice', 'op_invoice_rel',
+        'op_id', 'invoice_id',
+        string='Tags')
+
+/error
+TypeError: Many2many fields op.payment.invoice_ids and account.payment.invoice_ids use the same table and columns - - -
+
+
+
+NEWW
+
+class TestPayment(AccountingTestCase):
+
+	self.payment_method_manual_in = self.env.ref("account.account_payment_method_manual_in")
+        self.payment_method_manual_out = self.env.ref("account.account_payment_method_manual_out")
+
+
+    def setUp(self):
+        super(TestPayment, self).setUp()
+        self.register_payments_model = self.env['account.payment.register'].with_context(active_model='account.move')
+        self.payment_model = self.env['account.payment']
+        self.acc_bank_stmt_model = self.env['account.bank.statement']
+        self.acc_bank_stmt_line_model = self.env['account.bank.statement.line']
+
+        self.partner_agrolait = self.env.ref("base.res_partner_2")
+        self.partner_china_exp = self.env.ref("base.res_partner_3")
+        self.currency_chf_id = self.env.ref("base.CHF").id
+        self.currency_usd_id = self.env.ref("base.USD").id
+        self.currency_eur_id = self.env.ref("base.EUR").id
+
+        company = self.env.ref('base.main_company')
+        self.cr.execute("UPDATE res_company SET currency_id = %s WHERE id = %s", [self.currency_eur_id, company.id])
+        self.product = self.env.ref("product.product_product_4")
+        self.payment_method_manual_in = self.env.ref("account.account_payment_method_manual_in")
+        self.payment_method_manual_out = self.env.ref("account.account_payment_method_manual_out")
+
+        self.account_receivable = self.env['account.account'].search([('user_type_id', '=', self.env.ref('account.data_account_type_receivable').id)], limit=1)
+        self.account_payable = self.env['account.account'].search([('user_type_id', '=', self.env.ref('account.data_account_type_payable').id)], limit=1)
+        self.account_revenue = self.env['account.account'].search([('user_type_id', '=', self.env.ref('account.data_account_type_revenue').id)], limit=1)
+
+        self.bank_journal_euro = self.env['account.journal'].create({'name': 'Bank', 'type': 'bank', 'code': 'BNK67'})
+        self.account_eur = self.bank_journal_euro.default_debit_account_id
+
+        self.cash_journal_euro = self.env['account.journal'].create({'name': 'Cash', 'type': 'cash', 'code': 'CASH'})
+
+        self.bank_journal_usd = self.env['account.journal'].create({'name': 'Bank US', 'type': 'bank', 'code': 'BNK68', 'currency_id': self.currency_usd_id})
+        self.account_usd = self.bank_journal_usd.default_debit_account_id
+
+        self.transfer_account = self.env['res.users'].browse(self.env.uid).company_id.transfer_account_id
+        self.diff_income_account = self.env['res.users'].browse(self.env.uid).company_id.income_currency_exchange_account_id
+        self.diff_expense_account = self.env['res.users'].browse(self.env.uid).company_id.expense_currency_exchange_account_id
+
+        self.form_payment = Form(self.env['account.payment'])
+
+    def create_invoice(self, amount=100, type='out_invoice', currency_id=None, partner=None, account_id=None):
+        """ Returns an open invoice """
+        invoice = self.env['account.move'].create({
+            'type': type,
+            'partner_id': partner or self.partner_agrolait.id,
+            'currency_id': currency_id or self.currency_eur_id,
+            'invoice_date': time.strftime('%Y') + '-06-26',
+            'date': time.strftime('%Y') + '-06-26',
+            'invoice_line_ids': [
+                (0, 0, {'product_id': self.product.id, 'quantity': 1, 'price_unit': amount})
+            ],
+        })
+        invoice.post()
+        return invoice
+
+
+
+    def test_payment_chf_journal_usd(self):
+        payment = self.payment_model.create({
+            'payment_date': time.strftime('%Y') + '-07-15',
+            'payment_type': 'outbound',
+            'amount': 50,
+            'currency_id': self.currency_chf_id,
+            'journal_id': self.bank_journal_usd.id,
+            'partner_type': 'supplier',
+            'partner_id': self.partner_china_exp.id,
+            'payment_method_id': self.payment_method_manual_out.id,
+        })
+        payment.post()
+
+        self.assertRecordValues(payment.move_line_ids, [
+            {'account_id': self.partner_china_exp.property_account_payable_id.id, 'debit': 38.21, 'credit': 0.0, 'amount_currency': 50, 'currency_id': self.currency_chf_id},
+            {'account_id': self.account_usd.id, 'debit': 0.0, 'credit': 38.21, 'amount_currency': -58.42, 'currency_id': self.currency_usd_id},
+        ])
+
+ payment_register.amount = 550
+
+        payment = payment_register.save()
+
+INSPECT
+
+    def action_invoice_register_payment(self):
+        return self.env['account.payment']\
+            .with_context(active_ids=self.ids, active_model='account.move', active_id=self.id)\
+            .action_register_payment()
+
+
+get deliver addr
+
+ @api.onchange('partner_id')
+    def _onchange_partner_id(self):
+        # OVERRIDE
+        # Recompute 'partner_shipping_id' based on 'partner_id'.
+        addr = self.partner_id.address_get(['delivery'])
+        self.partner_shipping_id = addr and addr.get('delivery')
+
+        res = super(AccountMove, self)._onchange_partner_id()
+
+
+REPAIR ACCOUNT MOVE WITH one2 many field
+search key : _inherit = 'account.move'
+
+from odoo import models, fields
+
+
+class AccountMove(models.Model):
+    _inherit = 'account.move'
+
+    repair_ids = fields.One2many('repair.order', 'invoice_id', readonly=True, copy=False)
+
+repair/models/account_move.py
+
+class AccountMoveLine(models.Model):
+    _inherit = 'account.move.line'
+
+    repair_line_ids = fields.One2many('repair.line', 'invoice_line_id', readonly=True, copy=False)
+    repair_fee_ids = fields.One2many('repair.fee', 'invoice_line_id', readonly=True, copy=False)
+
+ invoice_id = fields.Many2one(
+        'account.move', 'Invoice',
+        copy=False, readonly=True, tracking=True,
+        domain=[('type', '=', 'out_invoice')])
+
+invoice_line_id = fields.Many2one(
+        'account.move.line', 'Invoice Line',
+        copy=False, readonly=True)
+
+other
+        invoice = self.env['account.move'].with_context(default_type='in_invoice').create({})
+
+
+

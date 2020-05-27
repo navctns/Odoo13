@@ -1,0 +1,82 @@
+domain operators
+
+
+List of Domain operators: ! (Not), | (Or), & (And)
+
+List of Term operators: '=', '!=', '<=', '<', '>', '>=', '=?', '=like', '=ilike', 'like', 'not like', 'ilike', 'not ilike', 'in', 'not in', 'child_of'
+
+
+
+
+This gives a overview:
+
+List of Domain operators: ! (Not), | (Or), & (And)
+
+List of Term operators: '=', '!=', '<=', '<', '>', '>=', '=?', '=like', '=ilike', 'like', 'not like', 'ilike', 'not ilike', 'in', 'not in', 'child_of'
+
+Usage:
+
+Input records:
+
+Record 1: Openerp
+
+Record 2: openerp
+
+Record 3: Opensource
+
+Record 4: opensource
+
+Record 5: Open
+
+Record 6: open
+
+Record 7: Odoo
+
+Record 8: odoo
+
+Record 9: Odooopenerp
+
+Record 10: OdooOpenerp
+
+'like': [('input', 'like', 'open')] - Returns case sensitive (wildcards - '%open%') search.
+
+O/p: open, opensource, openerp, Odooopenerp
+
+'not like': [('input', 'not like', 'open')] - Returns results not matched with case sensitive (wildcards - '%open%') search.
+
+O/p: Openerp, Opensource, Open, Odoo, odoo, OdooOpenerp
+
+'=like': [('name', '=like', 'open')] - Returns exact (= 'open') case sensitive search.
+
+O/p: open
+
+'ilike': [('name', 'ilike', 'open')] - Returns exact case insensitive (wildcards - '%open%') search.
+
+O/p: Openerp, openerp, Opensource, opensource, Open, open, Odooopenerp, OdooOpenerp
+
+'not ilike': [('name', 'not ilike', 'open')] - Returns results not matched with exact case insensitive (wildcards - '%open%') search. 
+
+
+=ilike': [('name', '=ilike', 'open')] - Returns exact (= 'open' or 'Open') case insensitive search.
+
+O/p: Open, open
+
+'=?':
+
+name = 'odoo' parent_id = False [('name', 'like', name), ('parent_id', '=?', parent_id)] - Returns name domain result & True
+
+name = 'odoo' parent_id = 'openerp' [('name', 'like', name), ('parent_id', '=?', parent_id)] - Returns name domain result & parent_id domain result
+
+'=?' is a short-circuit that makes the term TRUE if right is None or False, '=?' behaves like '=' in other cases
+
+'in': [('value1', 'in', ['value1', 'value2'])] - in operator will check the value1 is present or not in list of right term
+
+'not in': [('value1', 'not in', ['value2'])] - not in operator will check the value1 is not present in list of right term While these 'in' and 'not in' works with list/tuple of values, the latter '=' and '!=' works with string
+
+'=': value = 10 [('value','=',value)] - term left side has 10 in db and term right our value 10 will match
+
+'!=': value = 15 [('value','!=',value)] - term left side has 10 in db and term right our value 10 will not match
+
+'child_of': parent_id = '1' #Agrolait 'child_of': [('partner_id', 'child_of', parent_id)] - return left and right list of partner_id for given parent_id
+
+'<=', '<', '>', '>=': These operators are largely used in openerp for comparing dates - [('date', '>=', date_begin), ('date', '<=', date_end)]. You can use these operators to compare int or float also.

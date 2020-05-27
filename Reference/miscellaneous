@@ -1,0 +1,8 @@
+post_data = {
+            'res_model': invoice._name,
+            'res_id': invoice.id,
+            'message': "test message 1",
+            'attachment_ids': attachment.id,
+            'attachment_tokens': 'false',
+            'csrf_token': http.WebRequest.csrf_token(self),
+        }

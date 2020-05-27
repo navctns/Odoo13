@@ -26,7 +26,7 @@ class OP(models.Model):
 
     company_currency = fields.Many2one(string='Currency', related='company_id.currency_id', readonly=True, relation="res.currency")
     currency_id = fields.Many2one('res.currency', string='Currency')
-    department_id = fields.Char(string = "Department")
+    department_id = fields.Many2one('hr.department',string = "Department")
     date_op= fields.Date(string = "Date", default = fields.Date.today())
     active = fields.Boolean('Active', default = True)
     op_number = fields.Char(string='OP Number', required=True, copy=False, readonly=True,
@@ -63,11 +63,19 @@ class OP(models.Model):
                                    help="""Technical field containing the invoice for which the payment has been generated.
                                        This does not especially correspond to the invoices reconciled with the payment,
                                        as it can have been generated first, and reconciled later""")
+    disease_id = fields.Many2one('hospital.disease', string='Disease', compute = '_compute_disease_id')
 
     _sql_constraints = [
         # Partial constraint, complemented by a python constraint (see below).
         ('token_no_uniq', 'UNIQUE(token_no,date_op)', 'You can not have two patients with the same token!'),
     ]
+
+    @api.depends('consultation_ids')
+    def _compute_disease_id(self):
+
+        if self.consultation_ids :
+            self.disease_id = self.consultation_ids.disease_id
+            print('disease set')
 
     @api.depends('consultation_ids')
     def _compute_consult_count(self):
@@ -158,7 +166,7 @@ class OP(models.Model):
     def _onchange_doctor_id(self):
 
         # self.department_id = self.doctor_id.department_id.name
-        self.department_id = self.doctor_id.department_id.name
+        self.department_id = self.doctor_id.department_id
         self.doctor_fee = self.doctor_id.fee
         print('doc fee',self.doctor_fee)
         return {'domain': {'doctor_id': [('job_id', 'like', 'Doctor')]}}
