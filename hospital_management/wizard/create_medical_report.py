@@ -130,21 +130,56 @@ class CreateMedicalReport(models.TransientModel):
         if self.patient_id :
             ops = self._get_op_data_patient()
             print(type(ops))
-        if self.department_id and not self.doctor_id :
+        elif self.department_id and not self.doctor_id :
             ops = self._get_op_data_department()
 
-        if self.date_from or self.to_date :
+        elif self.date_from or self.to_date :
+
             ops = self._get_op_data_per_date()
+            if self.doctor_id : #doctor filter under disease filter
+                ops_doc = self._get_op_data_doctor()
+                ops = ops.env['hospital.op'].search([('doctor_id','=',self.doctor_id.id)])
 
-        if self.doctor_id :
-            ops = self._get_op_data_doctor()
+        # if self.doctor_id :
+        #     ops = self._get_op_data_doctor()
 
-        if self.disease_id :
+        elif self.disease_id :
 
             ops_disease = self._get_op_data_disease()
             ops = ''
-            if self.doctor_id :
+            if self.doctor_id : #doctor filter under disease filter
+                ops_dd = []#disease_doctor
                 ops_doc = self._get_op_data_doctor()
+                # ops_disease = ops_disease.search([('doctor_id','=',self.doctor_id.id)])
+                doc_disease_ids = []
+                num = 1
+                for ds in ops_disease :
+                    ops_doc = ops_doc.env['hospital.op'].search(['&',('op_number','=',ds['seq']),
+                                                                 ('doctor_id','=',self.doctor_id.id)])
+                    print('ops doc', ops_doc)
+                    doc_disease_ids.append(ops_doc.id)
+                    print(doc_disease_ids)
+                    ops_doc_id = ops_doc.id
+                    if ops_doc_id:
+                        doc_name = ops_doc.doctor_id.name
+                        dept = ops_doc.department_id.name
+                        patient_name = ops_doc.patient_id.name
+                        disease_name = self.disease_id.disease_id # recheck
+                        vals = {
+                            'num': num,
+                            'seq': ops_doc.op_number,
+                            'date': ops_doc.date_op,
+                            'patient': patient_name,
+                            'disease': disease_name,
+                            'doctor': doc_name,
+                            'department': dept,
+                        }
+                        num += 1
+                        ops_dd.append(vals)
+
+                ops_disease = ops_dd
+
+                # ops = ops_doc
 
         else :
             ops = self._get_op_data()
