@@ -103,10 +103,10 @@ class CreateMedicalReport(models.TransientModel):
 
 
     def _get_op_data_per_date(self):
-        if self.date_from :
+        if self.date_from and not self.to_date:
             ops = self.env['hospital.op'].search([('date_op', '>=', self.date_from)])
             return ops
-        if self.to_date :
+        if self.to_date and not self.date_from :
             ops = self.env['hospital.op'].search([('date_op', '<=', self.to_date)])
             return ops
         if self.to_date and self.date_from :
@@ -127,23 +127,9 @@ class CreateMedicalReport(models.TransientModel):
             'form': self.read()[0]
         }
         ops_disease = '' #for disease filter only
-        if self.patient_id :
-            ops = self._get_op_data_patient()
-            print(type(ops))
-        elif self.department_id and not self.doctor_id :
-            ops = self._get_op_data_department()
 
-        elif self.date_from or self.to_date :
 
-            ops = self._get_op_data_per_date()
-            if self.doctor_id : #doctor filter under disease filter
-                ops_doc = self._get_op_data_doctor()
-                ops = ops.env['hospital.op'].search([('doctor_id','=',self.doctor_id.id)])
-
-        # if self.doctor_id :
-        #     ops = self._get_op_data_doctor()
-
-        elif self.disease_id :
+        if self.disease_id :
 
             ops_disease = self._get_op_data_disease()
             ops = ''
@@ -180,6 +166,21 @@ class CreateMedicalReport(models.TransientModel):
                 ops_disease = ops_dd
 
                 # ops = ops_doc
+        elif self.patient_id :
+            ops = self._get_op_data_patient()
+            print(type(ops))
+        elif self.department_id and not self.doctor_id :
+            ops = self._get_op_data_department()
+
+        elif self.date_from or self.to_date :
+
+            ops = self._get_op_data_per_date()
+            if self.doctor_id : #doctor filter under disease filter
+                ops_doc = self._get_op_data_doctor()
+                ops = ops.env['hospital.op'].search([('doctor_id','=',self.doctor_id.id)])
+
+        # if self.doctor_id :
+        #     ops = self._get_op_data_doctor()
 
         else :
             ops = self._get_op_data()
