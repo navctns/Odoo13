@@ -216,3 +216,9 @@ class CreateMedicalReport(models.TransientModel):
 
 
         return self.env.ref('hospital_management.patient_medical_report').report_action(self,data=data)
+
+
+    def print_report_xls(self):
+
+        return self.env.ref('hospital_management.patient_medical_report_xls').report_action(self)
+

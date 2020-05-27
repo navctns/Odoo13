@@ -8,5 +8,12 @@
             report_type="qweb-pdf"
             name="hospital_management.hospital_patient_medical_report"
             file="hospital_management.hospital_patient_medical_report"/>
+        <report
+            id="patient_medical_report_xls"
+            string="Patient Medical Report Exel"
+            model="ir.actions.report"
+            report_type="xlsx"
+            name="hospital_management.hospital_patient_medical_report_xls"
+            file="hospital_management.hospital_patient_medical_report_xls"/>
     </data>
 </odoo>

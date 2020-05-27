@@ -28,6 +28,7 @@
                 </group>
                 <footer>
                     <button name="print_report" string="Print" type="object"/>
+                    <button name="print_report_xls" string="Print Xlsx" type="object"/>
                 </footer>
             </form>
         </field>
