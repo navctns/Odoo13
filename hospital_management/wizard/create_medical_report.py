@@ -16,6 +16,10 @@ class CreateMedicalReport(models.TransientModel):
     disease_id = fields.Many2one('hospital.disease', string = 'Disease')
     date_from = fields.Date('Date From')
     to_date = fields.Date('To Date')
+    report_type = fields.Selection([
+        ('pdf','PDF'),
+        ('xls','Excel')
+    ],string = "Report Type")
 
     @api.onchange('doctor_id')
     def _onchange_doctor_id(self):
@@ -117,6 +121,7 @@ class CreateMedicalReport(models.TransientModel):
             ops = self.env['hospital.op'].search([])
             return ops
 
+    data = {}
 
 
 
@@ -213,12 +218,15 @@ class CreateMedicalReport(models.TransientModel):
         else :
             data['ops'] = ops_list
         # return ops
-
-
+        if self.report_type == 'xls' :
+            return self.env.ref('hospital_management.patient_medical_report_xls').report_action(self, data=data)
         return self.env.ref('hospital_management.patient_medical_report').report_action(self,data=data)
 
 
     def print_report_xls(self):
-
+        data = data = {
+            'model': 'create.medical.report',
+            'form': self.read()[0]
+        }
         return self.env.ref('hospital_management.patient_medical_report_xls').report_action(self)
 

@@ -25,6 +25,8 @@
                     <field name = "disease_id"/>
                     <field name = "date_from"/>
                     <field name = "to_date"/>
+                    <field name = "report_type"/>
+
                 </group>
                 <footer>
                     <button name="print_report" string="Print" type="object"/>
