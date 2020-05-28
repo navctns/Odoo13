@@ -11,26 +11,31 @@ class CreateMedicalReport(models.TransientModel):
     _name = 'create.medical.report'
 
     patient_id = fields.Many2one('patient.card', string="Patient")#card id
+    doctor_id = fields.Many2one('hr.employee', string="Doctor",Index=True, domain = {'doctor_id': [('job_id', '=', 'Doctor')]})
     department_id = fields.Many2one('hr.department', string="Department")
-    doctor_id = fields.Many2one('hr.employee', string="Doctor")
     disease_id = fields.Many2one('hospital.disease', string = 'Disease')
     date_from = fields.Date('Date From')
     to_date = fields.Date('To Date')
     report_type = fields.Selection([
         ('pdf','PDF'),
         ('xls','Excel')
-    ],string = "Report Type")
+    ],string = "Report Format", default='pdf')
+
+    @api.model
+    def doctor_domain(self):
+        return {'domain': {'doctor_id': [('job_id', 'like', 'Doctor')]}}
 
     @api.onchange('doctor_id')
     def _onchange_doctor_id(self):
-        if not self.department_id:
+        # if not self.department_id:
             # return {'domain': {'doctor_id': [('department_id', '=', self.department_id.id)]}}
-            self.department_id = self.doctor_id.department_id
-            return {'domain': {'doctor_id': [('job_id', '=', 'Doctor')]}}
+        self.department_id = self.doctor_id.department_id
+        return {'domain': {'doctor_id': [('job_id', 'like', 'Doctor')]}}
         # return {'domain': {'doctor_id': [('department_id', '=', self.department_id.id)]}}
 
     @api.onchange('department_id')
     def _onchange_department_id(self):
+
         if self.doctor_id:
             if self.doctor_id.department_id.id != self.department_id.id :
                 self.doctor_id = False
@@ -107,19 +112,29 @@ class CreateMedicalReport(models.TransientModel):
 
 
     def _get_op_data_per_date(self):
+        e = False
+        s = True
+        label_dt = {
+            'date_f': e,
+            'date_t': e,
+        }
         if self.date_from and not self.to_date:
             ops = self.env['hospital.op'].search([('date_op', '>=', self.date_from)])
-            return ops
+            label_dt['date_f'] = s
+            return (ops, label_dt)
         if self.to_date and not self.date_from :
             ops = self.env['hospital.op'].search([('date_op', '<=', self.to_date)])
-            return ops
+            label_dt['date_t'] = s
+            return (ops, label_dt)
         if self.to_date and self.date_from :
             ops = self.env['hospital.op'].search(['&',('date_op', '<=', self.to_date),
                                                   ('date_op','>=', self.date_from)])
-            return ops
+            label_dt['date_f'] = s
+            label_dt['date_t'] = s
+            return (ops, label_dt)
         else :
             ops = self.env['hospital.op'].search([])
-            return ops
+            return (ops, label_dt)
 
     data = {}
 
@@ -127,6 +142,18 @@ class CreateMedicalReport(models.TransientModel):
 
     def print_report(self):
 
+        #labels for storing filter criterion in pdf report
+        e = '' #empty not selected patient, disease ...
+        s = '1'
+        label = {
+            'patient':e,
+            'disease':e,
+            'doctor':e,
+            'dept':e,
+            'date_f':e,
+            'date_t':e,
+        }
+        doc_label =''
         data = {
             'model': 'create.medical.report',
             'form': self.read()[0]
@@ -135,10 +162,11 @@ class CreateMedicalReport(models.TransientModel):
 
 
         if self.disease_id :
-
+            label['disease'] = s
             ops_disease = self._get_op_data_disease()
             ops = ''
             if self.doctor_id : #doctor filter under disease filter
+                label['doctor'] = s #doctor is selected
                 ops_dd = []#disease_doctor
                 ops_doc = self._get_op_data_doctor()
                 # ops_disease = ops_disease.search([('doctor_id','=',self.doctor_id.id)])
@@ -172,20 +200,24 @@ class CreateMedicalReport(models.TransientModel):
 
                 # ops = ops_doc
         elif self.patient_id :
+            label['patient'] = s
             ops = self._get_op_data_patient()
             print(type(ops))
         elif self.department_id and not self.doctor_id :
+            label['dept'] = s
             ops = self._get_op_data_department()
 
         elif self.date_from or self.to_date :
 
-            ops = self._get_op_data_per_date()
+            ops, label_dt = self._get_op_data_per_date()
             if self.doctor_id : #doctor filter under disease filter
                 ops_doc = self._get_op_data_doctor()
                 ops = ops.env['hospital.op'].search([('doctor_id','=',self.doctor_id.id)])
+            label['date_f'] = label_dt['date_f']
+            label['date_t'] = label_dt['date_t']
 
-        # if self.doctor_id :
-        #     ops = self._get_op_data_doctor()
+        elif self.doctor_id :
+            ops = self._get_op_data_doctor()
 
         else :
             ops = self._get_op_data()
@@ -215,8 +247,10 @@ class CreateMedicalReport(models.TransientModel):
         #
         if ops_disease != '' :
             data['ops'] = ops_disease
+            data['label'] = label
         else :
             data['ops'] = ops_list
+            data['label'] = label
         # return ops
         if self.report_type == 'xls' :
             return self.env.ref('hospital_management.patient_medical_report_xls').report_action(self, data=data)

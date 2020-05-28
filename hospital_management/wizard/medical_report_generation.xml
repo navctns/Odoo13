@@ -18,19 +18,19 @@
         <field name="model">create.medical.report</field>
         <field name="arch" type="xml">
             <form string="Create Medical Report ">
-                <group>
+                <group col="4" colspan="4">
                     <field name = "patient_id"/>
-                    <field name = "department_id"/>
-                    <field name = "doctor_id"/>
                     <field name = "disease_id"/>
+                    <field name = "doctor_id" domain="[('job_id', 'like', 'Doctor')]"/>
+                    <field name = "department_id"/>
                     <field name = "date_from"/>
                     <field name = "to_date"/>
                     <field name = "report_type"/>
 
                 </group>
                 <footer>
-                    <button name="print_report" string="Print" type="object"/>
-                    <button name="print_report_xls" string="Print Xlsx" type="object"/>
+                    <button name="print_report" string="Print" type="object" class = "oe_highlight"/>
+<!--                    <button name="print_report_xls" string="Print Xlsx" type="object"/>-->
                 </footer>
             </form>
         </field>

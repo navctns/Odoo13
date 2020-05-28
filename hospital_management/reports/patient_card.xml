@@ -14,6 +14,16 @@
 <!--                        <div class="col-3">-->
 <!--                            <strong>Patient Name</strong>-->
 <!--                            <p t-esc="data['patient_id']"/>-->
+                        <!--filter criteria-->
+                            <t t-set="label"/>
+
+
+<!--                                        <tr t-if="label['doctor'] !== false ">-->
+<!--                                            <h3 class="text-center mb32">Doctor :</h3>-->
+<!--&lt;!&ndash;                                            <td><strong><t t-esc="lb['doctor'][1]"/></strong></td>&ndash;&gt;-->
+<!--                                        </tr>-->
+
+
                             <table class="table table-bordered mb32" style="table-layout:auto">
                                 <thead>
                                     <tr>
