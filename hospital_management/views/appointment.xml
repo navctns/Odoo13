@@ -48,6 +48,7 @@
                         <field name="token"/>
                         <field name="doctor_id"/>
                         <field name="department_id"/>
+                        <field name="token_from_doc"/>
                     </group>
                 </sheet>
             </form>

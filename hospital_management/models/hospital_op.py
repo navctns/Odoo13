@@ -171,6 +171,22 @@ class OP(models.Model):
         # self.department_id = self.doctor_id.department_id.name
         self.department_id = self.doctor_id.department_id
         self.token_from_doc = self.doctor_id.count
+        #token check with appointment
+        # existing_tokens = []
+        #
+        # for r in self.env['hospital.op'].search([('date_op', '=', fields.Date.today())]):
+        #     existing_tokens.append(r.token_from_doc)
+        # existing_tokens.append(self.doctor_id.count)
+        # # new add
+        # for r in self.env['hospital.appointment'].search([('date', '=', fields.Date.today())]):
+        #     existing_tokens.append(r.token_from_doc)
+        #     # check for duplication of token
+        # for i in sorted(existing_tokens):
+        #     n = i + 1
+        #     if n not in existing_tokens:
+        #         self.token_from_doc = i + 1
+        #         break
+        # self.token_from_doc = self.doctor_id.count
         self.doctor_fee = self.doctor_id.fee
         print('doc fee',self.doctor_fee)
         op_doc_count = self.env['hr.employee'].search([('op_reference_ids','=',self.id)])

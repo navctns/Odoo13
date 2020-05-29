@@ -17,6 +17,7 @@ class Appointment(models.Model):
     department_id = fields.Char(string = "Department")
     date = fields.Date(string = "Date", default = fields.Date.today())
     token = fields.Integer(string = 'Token No')
+    token_from_doc = fields.Integer(string='Token Doc')
     state = fields.Selection(
         string="State",
         selection=[
@@ -198,6 +199,7 @@ class Appointment(models.Model):
     def _onchange_doctor_id(self):
 
         self.department_id = self.doctor_id.department_id.name
+        self.token_from_doc = self.doctor_id.count
 
 
 
