@@ -23,12 +23,13 @@ class Appointment(models.Model):
             ('draft', 'Draft'),
             ('appointment', 'Appointment'),
             ('op', 'OP'),
-        ], default='draft', required=True)
+        ], default='draft', required=True, compute = '_state_change')
     op_ids = fields.One2many('hospital.op', 'appointment_id', string="OP ids")
     op_count = fields.Integer(default =0, compute = '_compute_op_count')
     appointment_seq = fields.Char(string='Appointment Number', required=True, copy=False, readonly=True,
                                   default='New')
     active = fields.Boolean('Active', default=True)
+    confirm_op = fields.Boolean(string="Confirm op", default=False)
 
 
     @api.depends('op_ids')
@@ -71,14 +72,34 @@ class Appointment(models.Model):
                 'state': 'op',
             })
 
-    @api.depends('op_count')
+    confirm = 0
+    @api.depends('op_count', 'confirm_op')
     def _state_change(self):
-        if self.state == 'appointment':
-            if self.op_count == 1:
-                # self.state = 'op'
-                self.write({
-                    'state': 'op',
-                })
+        # if self.state != 'draft' :
+        # if self.state == 'appointment':
+        if self.op_count == 1:
+            # self.state = 'op'
+            self.write({
+                'state': 'op',
+            })
+
+
+
+        elif self.confirm_op :
+            self.write({
+                'state': 'appointment',
+            })
+            self.confirm_op = False
+
+        else :
+            self.write({
+                'state': 'draft',
+            })
+
+
+
+
+
 
     # python constraint
     @api.constrains('token')
@@ -106,6 +127,7 @@ class Appointment(models.Model):
 
         r = self.env['hospital.op'].search([('date_op', '=', fields.Date.today())])
         print('today count', len(r))
+        self.state = 'draft'
 
         # if len(r) == 1:
         #     # for t in self:
@@ -182,11 +204,13 @@ class Appointment(models.Model):
 
 
     def action_confirm(self):
+        confirm = 1
         # for rec in self:
         #     rec.state = 'appointment'
-        self.write({
-            'state': 'appointment',
-        })
+        self.confirm_op = True
+        # self.write({
+        #     'state': 'appointment',
+        # })
 
     def action_convert_to_op(self):
         self.ensure_one()

@@ -6,6 +6,7 @@
             <field name="inherit_id" ref="hospital_management.op_form_view" />
             <field name="arch" type="xml">
                 <div name="button_box_op" position="inside">
+                    Invoice
                     <button class="oe_stat_button" type="object" name="action_view_invoice"
                         icon="fa-list">
                     </button>
@@ -18,9 +19,9 @@
             <field name="inherit_id" ref="hospital_management.op_form_view" />
             <field name="arch" type="xml">
                 <div name="button_box_op" position="inside">
+                     <field string="Consultation" name="consult_button_label" widget="statinfo"/>
                     <button class="oe_stat_button" type="object" name="get_consultation"
-                        icon="fa-list" attrs="{'invisible': [('consult_count', '=', 0)]}">
-                        <field string="Consultation" name="consult_button_label" widget="statinfo"/>
+                        icon="fa-file-text-o" attrs="{'invisible': [('consult_count', '=', 0)]}">
                     </button>
                 </div>
             </field>
