@@ -185,7 +185,7 @@
                             <field name="company_id"/>
                             <field name="product_id" invisible="True"/>
                             <field name="consult_count" invisible="True"/>
-
+                            <field name="token_from_doc"/>
                         </group>
 
 

@@ -5,7 +5,6 @@ from dateutil.relativedelta import relativedelta
 from odoo.exceptions import ValidationError
 
 
-
 class OP(models.Model):
     _name="hospital.op"
     _description="Hospital OP"
@@ -33,8 +32,11 @@ class OP(models.Model):
                       default='New')
     # token_no = fields.Integer(string = 'Token No', default = lambda self: self.env['hospital.op'].search([], limit=1, order='create_date desc').token_no + 1)
     token_no = fields.Integer(string = 'Token No')
+    token_op_count = fields.Integer(string='Doctor op count')
+    token_from_doc = fields.Integer(string='Token Doc')
     # token_no = fields.Integer(string="Token No", unique = True,
     #                            default=lambda self: self.env['ir.sequence'].next_by_code('increment_token_no'))
+    op_doctor = fields.Many2many('hr.employee','employee_op_rel', 'op_number', 'op_reference_ids')
     appointment_id = fields.Many2one('hospital.appointment')
     consultation_type = fields.Selection([
         ('OP', 'OP'),
@@ -162,13 +164,29 @@ class OP(models.Model):
             print(r)
         #return {'domain': {'doctor_id': [('job_id', 'like', 'Doctor')]}}
 
+
     @api.onchange('doctor_id')
     def _onchange_doctor_id(self):
 
         # self.department_id = self.doctor_id.department_id.name
         self.department_id = self.doctor_id.department_id
+        self.token_from_doc = self.doctor_id.token_no
         self.doctor_fee = self.doctor_id.fee
         print('doc fee',self.doctor_fee)
+        op_doc_count = self.env['hr.employee'].search([('op_reference_ids','=',self.id)])
+        op_docs = self.env['hospital.op'].search([('doctor_id','=',self.doctor_id.id)])
+        #do the reverse in hr employee
+        d = 0
+        for o in op_docs :
+            d += 1
+        print('ops-doc-new',d)
+        for r in op_doc_count :
+            print('op doc ids', r.op_reference_ids)
+            print(r.op_reference_ids.id)
+            print(len(r.op_reference_ids))
+            self.token_op_count += 1
+        print(self.token_op_count)
+        print('op-doc', self.op_doctor.job_id.name)
         return {'domain': {'doctor_id': [('job_id', 'like', 'Doctor')]}}
 
 
@@ -309,6 +327,9 @@ class OP(models.Model):
 
                 for r in self.env['hospital.op'].search([('date_op', '=', fields.Date.today())]):
                     existing_tokens.append(r.token_no)
+                #new add
+                for r in self.env['hospital.appointment'].search([('date', '=', fields.Date.today())]):
+                    existing_tokens.append(r.token)
                     # check for duplication of token
                 for i in sorted(existing_tokens):
                     n = i + 1
@@ -572,3 +593,20 @@ class OP(models.Model):
 #
 #     op_invoice_id = fields.Many2one(
 #         'hospital.team', string='Op Invoice id')
+
+class DoctorTokens(models.Model) :
+
+    _inherit = 'hr.employee'
+
+    op_reference_ids = fields.Many2one('hospital.op', string = "Op reference")
+    op_ref_ids = fields.One2many('hospital.op', 'doctor_id', string="OP History")
+    token_no = fields.Integer(string = 'Doctor Token')
+
+    @api.onchange('op_ref_ids')
+    def _onchange_op_ref_ids(self):
+        c = self.env['hospital.op'].search_count(
+            [('doctor_id.id', '=', self.id)])
+        # c = self.env['hospital.op'].search_count([('doctor_id', '=', self.doctor_id.id)])
+        print('cccccccccccccc :',c)
+        self.token_no = c + 1
+

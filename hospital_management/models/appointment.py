@@ -96,11 +96,6 @@ class Appointment(models.Model):
                 'state': 'draft',
             })
 
-
-
-
-
-
     # python constraint
     @api.constrains('token')
     def _check_token(self):
@@ -161,6 +156,9 @@ class Appointment(models.Model):
 
             for r in self.env['hospital.op'].search([('date_op', '=', fields.Date.today())]):
                 existing_tokens.append(r.token_no)
+            #token check on appointment(new add)
+            for r in self.env['hospital.appointment'].search([('date', '=', fields.Date.today())]):
+                existing_tokens.append(r.token)
                 # check for duplication of token
             for i in sorted(existing_tokens):
                 n = i + 1
