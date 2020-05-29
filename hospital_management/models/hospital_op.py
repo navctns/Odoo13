@@ -170,7 +170,7 @@ class OP(models.Model):
 
         # self.department_id = self.doctor_id.department_id.name
         self.department_id = self.doctor_id.department_id
-        self.token_from_doc = self.doctor_id.token_no
+        self.token_from_doc = self.doctor_id.count
         self.doctor_fee = self.doctor_id.fee
         print('doc fee',self.doctor_fee)
         op_doc_count = self.env['hr.employee'].search([('op_reference_ids','=',self.id)])
@@ -601,6 +601,8 @@ class DoctorTokens(models.Model) :
     op_reference_ids = fields.Many2one('hospital.op', string = "Op reference")
     op_ref_ids = fields.One2many('hospital.op', 'doctor_id', string="OP History")
     token_no = fields.Integer(string = 'Doctor Token')
+    count = fields.Integer(compute='count_ops')
+
 
     @api.onchange('op_ref_ids')
     def _onchange_op_ref_ids(self):
@@ -609,4 +611,10 @@ class DoctorTokens(models.Model) :
         # c = self.env['hospital.op'].search_count([('doctor_id', '=', self.doctor_id.id)])
         print('cccccccccccccc :',c)
         self.token_no = c + 1
+        print('op from doc :', self.op_ref_ids.op_number)
+
+    def count_ops(self):
+        for ops in self:
+            ops.count = self.env['hospital.op'].search_count([('doctor_id', '=', self.id)])
+        self.count += 1
 

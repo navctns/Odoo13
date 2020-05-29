@@ -1,0 +1,60 @@
+# -*- coding: utf-8 -*-
+from datetime import timedelta
+from odoo import models, fields, api
+
+class employee(models.Model):
+    _name = 'drs2.employee'
+
+    name = fields.Char(required=True)
+    age = fields.Integer()
+    height = fields.Integer()
+    annoying = fields.Boolean()
+
+    task_id = fields.One2many(
+        'drs2.task', 'employee_id', string="Tasks")
+
+    dep_id = fields.Many2one(
+        'drs2.dep', ondelete='cascade', string="Department")
+
+
+class task(models.Model):
+    _name = 'drs2.task'
+
+    name = fields.Char(string="Task Name", required=True)
+    description = fields.Text()
+
+    employee_id = fields.Many2one('drs2.employee',
+        ondelete='cascade', string="Employee")
+
+    dep_id = fields.Many2one(
+        'drs2.dep', ondelete='cascade', string="Department")
+
+    start_date = fields.Date(default=fields.Date.today)
+
+    end_date = fields.Date(default=fields.Date.today)
+
+class department(models.Model):
+    _name = 'drs2.dep'
+
+    name = fields.Char()
+
+    employee_id = fields.One2many(
+        'drs2.employee', 'dep_id', string="Employee")
+
+    count = fields.Integer(compute='count_employees')
+
+    @api.one
+    def count_employees(self):
+        return search_count(self.employee_id)
+
+
+Try below code :-
+
+def count_employees(self):
+    for employee in self:
+        employee.count = self.env['drs2.employee'].search_count([('dep_id', '=', self.id)])
+
+
+
+
+
