@@ -74,8 +74,10 @@ class CreateMedicalReport(models.TransientModel):
         print(query_res)
         ops = []
         num = 1
+        op_disease_ids = []
         for op in query_res:
-            if str(op['disease_id']) == str(self.disease_id.id):
+            if op['disease_id'] == self.disease_id.id:
+                op_disease_ids.append(op['id'])
                 if op['doctor_id']:
                     doctor = self.env['hospital.op'].search([('doctor_id','=',op['doctor_id'])])
                     doc_name = doctor.doctor_id.name
@@ -91,6 +93,7 @@ class CreateMedicalReport(models.TransientModel):
                 if op['disease_id'] :
                     disease = self.env['hospital.disease'].search([('id', '=', op['disease_id'])])
                     disease_name = disease.disease_id
+                    op_disease_ids.append(disease.id)
                 else :
 
                     disease_name = ''
@@ -108,7 +111,7 @@ class CreateMedicalReport(models.TransientModel):
                 ops.append(vals)
 
             print(op['op_number'])
-        return ops
+        return (ops,op_disease_ids)
 
 
     def _get_op_data_per_date(self):
@@ -260,79 +263,120 @@ class CreateMedicalReport(models.TransientModel):
         ids_pool = []
         ops_dept_ids = []
         ops_patient_ids = []
+        ops_dt_ids = []
         ops_list = []
+        doc_disease_ids = []
         filter_args = 0
+        field_ptr = [0,0,0,0,0]
+        filter_var = {'disease':False, 'patient':False, 'dept':False, 'doct':False, 'dt':False}
         if self.disease_id :
             label['disease'] = s
-            ops_disease = self._get_op_data_disease()
-            ops = ''
-            if self.doctor_id : #doctor filter under disease filter
-                label['doctor'] = s #doctor is selected
-                ops_dd = []#disease_doctor
-                ops_doc = self._get_op_data_doctor()
-                # ops_disease = ops_disease.search([('doctor_id','=',self.doctor_id.id)])
-                doc_disease_ids = []
-                num = 1
-                for ds in ops_disease :
-                    ops_doc = ops_doc.env['hospital.op'].search(['&',('op_number','=',ds['seq']),
-                                                                 ('doctor_id','=',self.doctor_id.id)])
-                    print('ops doc', ops_doc)
-                    doc_disease_ids.append(ops_doc.id)
-                    ids_pool.append(ops_doc.id) # FILTERING IDS
-                    print(doc_disease_ids)
-                    ops_doc_id = ops_doc.id
-                    if ops_doc_id:
-                        doc_name = ops_doc.doctor_id.name
-                        dept = ops_doc.department_id.name
-                        patient_name = ops_doc.patient_id.name
-                        disease_name = self.disease_id.disease_id # recheck
-                        vals = {
-                            'num': num,
-                            'seq': ops_doc.op_number,
-                            'date': ops_doc.date_op,
-                            'patient': patient_name,
-                            'disease': disease_name,
-                            'doctor': doc_name,
-                            'department': dept,
-                        }
-                        num += 1
-                        ops_dd.append(vals)
+            ops_disease, doc_disease_ids = self._get_op_data_disease()
+            # for r in ops_disease :
+            #     doc_disease_ids.append(r.id)
+            #     ids_pool.append(r.id)
+            ids_pool.append(000)
+            filter_var['disease'] = doc_disease_ids
+            field_ptr[0] = 1
+            # ops = ''
+            # filter_args += 1
+            # if self.doctor_id : #doctor filter under disease filter
+            #     label['doctor'] = s #doctor is selected
+            #     ops_dd = []#disease_doctor
+            #     ops_doc = self._get_op_data_doctor()
+            #     # ops_disease = ops_disease.search([('doctor_id','=',self.doctor_id.id)])
+            #
+            #     num = 1
+            #     for ds in ops_disease :
+            #         ops_doc = ops_doc.env['hospital.op'].search(['&',('op_number','=',ds['seq']),
+            #                                                      ('doctor_id','=',self.doctor_id.id)])
+            #         print('ops doc', ops_doc)
+            #         doc_disease_ids.append(ops_doc.id)
+            #         ids_pool.append(ops_doc.id) # FILTERING IDS
+            #         print(doc_disease_ids)
+            #         ops_doc_id = ops_doc.id
+            #         if ops_doc_id:
+            #             doc_name = ops_doc.doctor_id.name
+            #             dept = ops_doc.department_id.name
+            #             patient_name = ops_doc.patient_id.name
+            #             disease_name = self.disease_id.disease_id # recheck
+            #             vals = {
+            #                 'num': num,
+            #                 'seq': ops_doc.op_number,
+            #                 'date': ops_doc.date_op,
+            #                 'patient': patient_name,
+            #                 'disease': disease_name,
+            #                 'doctor': doc_name,
+            #                 'department': dept,
+            #             }
+            #             num += 1
+            #             ops_dd.append(vals)
+            #     ops_disease = ops_dd
+            # filter_var['disease'] = doc_disease_ids
 
-                ops_disease = ops_dd
 
                 # ops = ops_doc
         if self.patient_id :
             label['patient'] = s
             ops_patient = self._get_op_data_patient()
-
+            filter_args += 1
+            field_ptr[1] = 1
             for r in ops_patient:
                 ops_patient_ids.append(r.id)
                 ids_pool.append(r.id)
+            filter_var['patient'] = ops_patient_ids
 
             # print(type(ops))
         if self.department_id and not self.doctor_id :
             label['dept'] = s
+            field_ptr[2] = 1
             ops_dept = self._get_op_data_department()
             for r in ops_dept:
                 ops_dept_ids.append(r.id)
                 ids_pool.append(r.id)
+            filter_args += 1
+            filter_var['dept'] = ops_dept_ids #for taking intersection
 
         if self.date_from or self.to_date :
-
+            field_ptr[3] = 1
             ops_date, label_dt = self._get_op_data_per_date()
             # if self.doctor_id : #doctor filter under disease filter
             #     ops_doc = self._get_op_data_doctor()
             #     ops = ops.env['hospital.op'].search([('doctor_id','=',self.doctor_id.id)])
             for r in ops_date:
+                ops_dt_ids.append(r.id)
                 ids_pool.append(r.id)
             label['date_f'] = label_dt['date_f']
             label['date_t'] = label_dt['date_t']
-
+            filter_args += 1
+            filter_var['dt'] = ops_dt_ids
         if self.doctor_id :
+            field_ptr[4] = 1
             ops_doc = self._get_op_data_doctor()
             for r in ops_doc:
                 ops_doc_ids_1.append(r.id)
                 ids_pool.append(r.id)
+            filter_args += 1
+            filter_var['doct']= ops_doc_ids_1
+
+        all_ops_ids = []
+        all_ops = self.env['hospital.op'].search([])
+        for r in all_ops :
+            all_ops_ids.append(r.id)
+            ids_pool.append(000)
+
+        # Method For calculating multiple intersections
+        # def set_intersections(fs, argv):
+        #     res_filter = []
+        #     i = 0
+        #     while True:
+        #     l = len(argv)
+        #     for i in range(l,-1) :
+        #         a = argv[i]
+        #         res_filter.append(set(arg_ref).intersection(set(arg)))
+        #     res_filter = fs.intersection(argv)
+        #     res_filter = list(res_filter)
+        #     return res_filter
 
         if len(ids_pool) != 0 :
             ids_pool_set = set(ids_pool)#unique ids in filter
@@ -342,7 +386,97 @@ class CreateMedicalReport(models.TransientModel):
             print('dept ids ', ops_dept_ids_set)
             # filtered_ids = list(ids_pool_set)
             filtered_ids = ops_patient_ids_set.intersection(ops_dept_ids_set)
-            print('filtered_ids ', filtered_ids)
+            # for val in filter_var :
+            #     if
+            # print('filtered_ids ', filtered_ids)
+            filter_arg_rd = list(filter_var.values()) #arguments and data
+
+            #make all lists to sets
+            for ls in filter_arg_rd :
+                if ls :
+                    ls = set(ls)
+            print('filter arg rd', filter_arg_rd)
+            t_pass = [] # for passing more than one field filters
+            first_set = [] #REMINDER
+            # filter_arg_rd.remove(None)#empty values not set constraint
+            if filter_arg_rd.count(False) == 5 : #no criteria selected
+                filtered_ids = all_ops_ids
+            # elif len(filter_arg_rd) == 1 :
+            elif filter_arg_rd.count(False) == 4 :
+
+                for ls in filter_arg_rd: #one is selected
+                    if ls:
+                        filtered_ids = ls
+                        break
+            elif filter_arg_rd.count(False) < 4 : #more than one is selected
+                # filter_arg_rd.remove(False)
+                # print('false removed:',filter_arg_rd)
+                #
+                # for v in filter_arg_rd:
+                #     if v :
+                #         first_set = v
+                #         break
+                #     if v :
+                #         t_pass.append(set(v))
+                # t_pass = tuple(t_pass)
+                # filtered_ids = set_intersections(set(first_set),t_pass)
+                # print('2 var filtered ids',filtered_ids)
+                f1 = []#filter 1
+                f2 = []
+                f3 = []
+                f4 = []
+                f5 = []
+                ptr_list = []
+                i_ptr = []
+                c = 0
+                for i in range(len(field_ptr)) :
+                    if field_ptr[i] == 1 :
+                        i_ptr.append(i)
+                        f1 = filter_arg_rd[i]
+                        f1 = set(f1)#filter
+                        ptr_list.append(f1)
+                        c+=1
+                # if 5 - c == 0:
+                # if c == 2 :
+                #     res_filt = ptr_list[i_ptr[0]].intersection(ptr_list[i_ptr[1]]) #change ptr_list
+                # elif c == 3 :
+                #     res_filt = ptr_list[i_ptr[0]].intersection(ptr_list[i_ptr[1]],ptr_list[i_ptr[2]])
+                #     # for pt in i_ptr :
+                # elif c == 4:
+                #     res_filt = ptr_list[i_ptr[0]].intersection(ptr_list[i_ptr[1]], ptr_list[i_ptr[2]],ptr_list[i_ptr[3]])
+                # elif c == 4:
+                #     res_filt = ptr_list[i_ptr[0]].intersection(ptr_list[i_ptr[1]], ptr_list[i_ptr[2]], ptr_list[i_ptr[3]], ptr_list[i_ptr[4]])
+                #
+                if c == 2 :
+                    res_filt = set(filter_arg_rd[i_ptr[0]]).intersection(set(filter_arg_rd[i_ptr[1]])) #change ptr_list
+                elif c == 3 :
+                    res_filt = set(filter_arg_rd[i_ptr[0]]).intersection(set(filter_arg_rd[i_ptr[1]]),set(filter_arg_rd[i_ptr[2]]))
+                    # for pt in i_ptr :
+                elif c == 4:
+                    res_filt = set(filter_arg_rd[i_ptr[0]]).intersection(set(filter_arg_rd[i_ptr[1]]), set(filter_arg_rd[i_ptr[2]]),set(filter_arg_rd[i_ptr[3]]))
+                elif c == 5:
+                    res_filt = set(filter_arg_rd[i_ptr[0]]).intersection(set(filter_arg_rd[i_ptr[1]]), set(filter_arg_rd[i_ptr[2]]), set(filter_arg_rd[i_ptr[3]]), set(filter_arg_rd[i_ptr[4]]))
+
+
+                filtered_ids = list(res_filt)
+
+                    # if field_ptr[i] == 2 :
+                    #     f2 = filter_arg_rd[i]
+                    #     ptr_list.append(f1)
+                    #     c += 1
+                    # if field_ptr[i] == 3 :
+                    #     f3 = filter_arg_rd[i]
+                    # if field_ptr[i] == 4 :
+                    #     f4 = filter_arg_rd[i]
+                    # if field_ptr[i] == 5 :
+                    #     f5 = filter_arg_rd[i]
+
+
+
+            # elif len(filter_arg_rd) > 1 :
+            #     filtered_ids = set_intersections(filter_arg_rd)
+
+
         if len(filtered_ids) != 0 :
             num = 1
             for i in filtered_ids:  # can be converted to list if wanted
