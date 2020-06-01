@@ -2,7 +2,7 @@ from odoo import models, fields, api
 import datetime
 from datetime import date
 from dateutil.relativedelta import relativedelta
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 
 
 class OP(models.Model):
@@ -130,6 +130,21 @@ class OP(models.Model):
     #     ('_check_token_no', 'Token number must be unique', ['token_no'])
     # ]
 
+    # python constraint
+    @api.constrains('token_from_doc')
+    def _check_token_from_doc(self):
+        tokens = []
+        for r in self.env['hospital.op'].search([('date_op', '=', fields.Date.today())]):
+            # if r.date_op == fields.Date.today():#todays tokens
+            tokens.append(r.token_from_doc)
+        print('today tokens', tokens)
+        r = self.env['hospital.op'].search([('date_op', '=', fields.Date.today())])
+        if len(r) != 0:
+            tokens[-1] = None  # because it loads the current entry also
+        if self.token_from_doc in tokens:
+            # raise ValidationError("Token number should be unique")
+            raise UserError('Token Number already exist')
+
     @api.model
 
     def create(self, vals):
@@ -170,7 +185,10 @@ class OP(models.Model):
 
         # self.department_id = self.doctor_id.department_id.name
         self.department_id = self.doctor_id.department_id
-        self.token_from_doc = self.doctor_id.count
+        # self.token_from_doc = self.doctor_id.count
+
+
+        self.token_from_doc = self.doctor_id.token_no
         #token check with appointment
         # existing_tokens = []
         #
@@ -204,6 +222,22 @@ class OP(models.Model):
         print(self.token_op_count)
         print('op-doc', self.op_doctor.job_id.name)
         return {'domain': {'doctor_id': [('job_id', 'like', 'Doctor')]}}
+
+    @api.onchange('token_from_doc') #recheck filter with doctor id
+    def _onchange_token_from_doc(self):
+
+        existing_tokens = []
+
+        for r in self.env['hospital.op'].search([('date_op', '=', fields.Date.today())]):
+            existing_tokens.append(r.token_from_doc)
+        # new add
+        for r in self.env['hospital.appointment'].search([('date', '=', fields.Date.today())]):
+            existing_tokens.append(r.token_from_doc)
+
+        for i in sorted(existing_tokens):
+            n = i + 1
+            if n not in existing_tokens:
+                self.token_from_doc = i + 1
 
 
     # @api.onchange('op_number')
@@ -616,7 +650,7 @@ class DoctorTokens(models.Model) :
 
     op_reference_ids = fields.Many2one('hospital.op', string = "Op reference")
     op_ref_ids = fields.One2many('hospital.op', 'doctor_id', string="OP History")
-    token_no = fields.Integer(string = 'Doctor Token')
+    token_no = fields.Integer(string = 'Doctor Token', compute= 'generate_token')
     count = fields.Integer(compute='count_ops')
 
 
@@ -630,7 +664,50 @@ class DoctorTokens(models.Model) :
         print('op from doc :', self.op_ref_ids.op_number)
 
     def count_ops(self):
+        existing_tokens_op = []
         for ops in self:
-            ops.count = self.env['hospital.op'].search_count([('doctor_id', '=', self.id)])
-        self.count += 1
+            ops.count = self.env['hospital.op'].search_count(['&',('doctor_id', '=', self.id),('date_op','=',fields.Date.today())])
+            o = self.env['hospital.op'].search(['&',('doctor_id', '=', self.id),('date_op','=',fields.Date.today())])
+            existing_tokens_op.append(o.token_from_doc)
+
+
+        # self.count += 1 #from which op calculates token
+        print('existing_tokens_op')
+        if len(existing_tokens_op) != 0 :
+            for i in sorted(existing_tokens_op):
+                n = i + 1
+                if n not in existing_tokens_op:
+                    self.token_no = i + 1
+                    break
+            print('tokens ex', existing_tokens_op)
+            # r_appointment.token = self.token_no
+        else :
+            self.token_no = self.count + 1
+
+    def generate_token(self):
+        existing_tokens_op = []
+        for ops in self:
+            ops.count = self.env['hospital.op'].search_count(['&',('doctor_id', '=', self.id),('date_op','=',fields.Date.today())])
+        op_rec = self.env['hospital.op'].search(['&',('doctor_id', '=', self.id),('date_op','=',fields.Date.today())])
+
+        for r in op_rec :
+
+            existing_tokens_op.append(r.token_from_doc)
+
+
+        # self.count += 1 #from which op calculates token
+        print('existing_tokens_op')
+        if len(existing_tokens_op) != 0 :
+            for i in sorted(existing_tokens_op):
+                n = i + 1
+                if n not in existing_tokens_op:
+                    self.token_no = i + 1
+                    break
+            print('tokens ex', existing_tokens_op)
+            # r_appointment.token = self.token_no
+        else :
+            self.token_no = self.count + 1
+
+
+
 

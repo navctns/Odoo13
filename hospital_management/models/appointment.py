@@ -199,7 +199,8 @@ class Appointment(models.Model):
     def _onchange_doctor_id(self):
 
         self.department_id = self.doctor_id.department_id.name
-        self.token_from_doc = self.doctor_id.count
+        # self.token_from_doc = self.doctor_id.count
+        self.token_from_doc = self.doctor_id.token_no
 
 
 
