@@ -689,11 +689,14 @@ class DoctorTokens(models.Model) :
         for ops in self:
             ops.count = self.env['hospital.op'].search_count(['&',('doctor_id', '=', self.id),('date_op','=',fields.Date.today())])
         op_rec = self.env['hospital.op'].search(['&',('doctor_id', '=', self.id),('date_op','=',fields.Date.today())])
+        appointment_rec = self.env['hospital.appointment'].search(['&',('doctor_id', '=', self.id),('date','=',fields.Date.today())])
 
         for r in op_rec :
 
             existing_tokens_op.append(r.token_from_doc)
 
+        for r in appointment_rec:
+            existing_tokens_op.append(r.token_from_doc)
 
         # self.count += 1 #from which op calculates token
         print('existing_tokens_op')

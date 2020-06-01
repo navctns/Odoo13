@@ -160,7 +160,108 @@ class CreateMedicalReport(models.TransientModel):
         }
         ops_disease = '' #for disease filter only
 
+        #FIRST METHOD OF FILTERING
+        # if self.disease_id :
+        #     label['disease'] = s
+        #     ops_disease = self._get_op_data_disease()
+        #     ops = ''
+        #     if self.doctor_id : #doctor filter under disease filter
+        #         label['doctor'] = s #doctor is selected
+        #         ops_dd = []#disease_doctor
+        #         ops_doc = self._get_op_data_doctor()
+        #         # ops_disease = ops_disease.search([('doctor_id','=',self.doctor_id.id)])
+        #         doc_disease_ids = []
+        #         num = 1
+        #         for ds in ops_disease :
+        #             ops_doc = ops_doc.env['hospital.op'].search(['&',('op_number','=',ds['seq']),
+        #                                                          ('doctor_id','=',self.doctor_id.id)])
+        #             print('ops doc', ops_doc)
+        #             doc_disease_ids.append(ops_doc.id)
+        #             print(doc_disease_ids)
+        #             ops_doc_id = ops_doc.id
+        #             if ops_doc_id:
+        #                 doc_name = ops_doc.doctor_id.name
+        #                 dept = ops_doc.department_id.name
+        #                 patient_name = ops_doc.patient_id.name
+        #                 disease_name = self.disease_id.disease_id # recheck
+        #                 vals = {
+        #                     'num': num,
+        #                     'seq': ops_doc.op_number,
+        #                     'date': ops_doc.date_op,
+        #                     'patient': patient_name,
+        #                     'disease': disease_name,
+        #                     'doctor': doc_name,
+        #                     'department': dept,
+        #                 }
+        #                 num += 1
+        #                 ops_dd.append(vals)
+        #
+        #         ops_disease = ops_dd
+        #
+        #         # ops = ops_doc
+        # elif self.patient_id :
+        #     label['patient'] = s
+        #     ops = self._get_op_data_patient()
+        #     print(type(ops))
+        # elif self.department_id and not self.doctor_id :
+        #     label['dept'] = s
+        #     ops = self._get_op_data_department()
+        #
+        # elif self.date_from or self.to_date :
+        #
+        #     ops, label_dt = self._get_op_data_per_date()
+        #     # if self.doctor_id : #doctor filter under disease filter
+        #     #     ops_doc = self._get_op_data_doctor()
+        #     #     ops = ops.env['hospital.op'].search([('doctor_id','=',self.doctor_id.id)])
+        #     label['date_f'] = label_dt['date_f']
+        #     label['date_t'] = label_dt['date_t']
+        #
+        # elif self.doctor_id :
+        #     ops = self._get_op_data_doctor()
+        #
+        # else :
+        #     ops = self._get_op_data()
+        #
+        #
+        # #All reports(without any filter)
+        # print("self read",self.read()[0])
+        #
+        # # ops = self._get_op_data()
+        # ops_list = []
+        # num = 1
+        # if ops != '' :
+        #     for o in ops:
+        #         vals = {
+        #             'num': num,
+        #             'seq': o.op_number,
+        #             'date': o.date_op,
+        #             'patient': o.patient_id.name,
+        #             'disease': o.consultation_ids.disease_id.disease_id,
+        #             'doctor': o.doctor_id.name,
+        #             'department': o.doctor_id.department_id.name,
+        #         }
+        #         num += 1
+        #         ops_list.append(vals)
+        #
+        #
+        # #
+        # if ops_disease != '' :
+        #     data['ops'] = ops_disease
+        #     data['label'] = label
+        # else :
+        #     data['ops'] = ops_list
+        #     data['label'] = label
+        # # return ops
 
+
+        #SECOND METHOD OF FILTERING
+
+        ops_doc_ids_1 = []
+        ids_pool = []
+        ops_dept_ids = []
+        ops_patient_ids = []
+        ops_list = []
+        filter_args = 0
         if self.disease_id :
             label['disease'] = s
             ops_disease = self._get_op_data_disease()
@@ -177,6 +278,7 @@ class CreateMedicalReport(models.TransientModel):
                                                                  ('doctor_id','=',self.doctor_id.id)])
                     print('ops doc', ops_doc)
                     doc_disease_ids.append(ops_doc.id)
+                    ids_pool.append(ops_doc.id) # FILTERING IDS
                     print(doc_disease_ids)
                     ops_doc_id = ops_doc.id
                     if ops_doc_id:
@@ -199,59 +301,72 @@ class CreateMedicalReport(models.TransientModel):
                 ops_disease = ops_dd
 
                 # ops = ops_doc
-        elif self.patient_id :
+        if self.patient_id :
             label['patient'] = s
-            ops = self._get_op_data_patient()
-            print(type(ops))
-        elif self.department_id and not self.doctor_id :
+            ops_patient = self._get_op_data_patient()
+
+            for r in ops_patient:
+                ops_patient_ids.append(r.id)
+                ids_pool.append(r.id)
+
+            # print(type(ops))
+        if self.department_id and not self.doctor_id :
             label['dept'] = s
-            ops = self._get_op_data_department()
+            ops_dept = self._get_op_data_department()
+            for r in ops_dept:
+                ops_dept_ids.append(r.id)
+                ids_pool.append(r.id)
 
-        elif self.date_from or self.to_date :
+        if self.date_from or self.to_date :
 
-            ops, label_dt = self._get_op_data_per_date()
-            if self.doctor_id : #doctor filter under disease filter
-                ops_doc = self._get_op_data_doctor()
-                ops = ops.env['hospital.op'].search([('doctor_id','=',self.doctor_id.id)])
+            ops_date, label_dt = self._get_op_data_per_date()
+            # if self.doctor_id : #doctor filter under disease filter
+            #     ops_doc = self._get_op_data_doctor()
+            #     ops = ops.env['hospital.op'].search([('doctor_id','=',self.doctor_id.id)])
+            for r in ops_date:
+                ids_pool.append(r.id)
             label['date_f'] = label_dt['date_f']
             label['date_t'] = label_dt['date_t']
 
-        elif self.doctor_id :
-            ops = self._get_op_data_doctor()
+        if self.doctor_id :
+            ops_doc = self._get_op_data_doctor()
+            for r in ops_doc:
+                ops_doc_ids_1.append(r.id)
+                ids_pool.append(r.id)
 
-        else :
-            ops = self._get_op_data()
+        if len(ids_pool) != 0 :
+            ids_pool_set = set(ids_pool)#unique ids in filter
+            ops_patient_ids_set = set( ops_patient_ids)
+            ops_dept_ids_set = set(ops_dept_ids)
+            print('patient ids ', ops_patient_ids_set)
+            print('dept ids ', ops_dept_ids_set)
+            # filtered_ids = list(ids_pool_set)
+            filtered_ids = ops_patient_ids_set.intersection(ops_dept_ids_set)
+            print('filtered_ids ', filtered_ids)
+        if len(filtered_ids) != 0 :
+            num = 1
+            for i in filtered_ids:  # can be converted to list if wanted
+                # if i in ops_dept_ids:
+                    o = self.env['hospital.op'].search([('id', '=', i)])
+                    vals = {
+                        'num': num,
+                        'seq': o.op_number,
+                        'date': o.date_op,
+                        'patient': o.patient_id.name,
+                        'disease': o.consultation_ids.disease_id.disease_id,
+                        'doctor': o.doctor_id.name,
+                        'department': o.doctor_id.department_id.name,
+                    }
+                    num += 1
+                    ops_list.append(vals)
+                # else:
+                #     continue
 
 
-        #All reports(without any filter)
-        print("self read",self.read()[0])
-
-        # ops = self._get_op_data()
-        ops_list = []
-        num = 1
-        if ops != '' :
-            for o in ops:
-                vals = {
-                    'num': num,
-                    'seq': o.op_number,
-                    'date': o.date_op,
-                    'patient': o.patient_id.name,
-                    'disease': o.consultation_ids.disease_id.disease_id,
-                    'doctor': o.doctor_id.name,
-                    'department': o.doctor_id.department_id.name,
-                }
-                num += 1
-                ops_list.append(vals)
-
-
-        #
-        if ops_disease != '' :
-            data['ops'] = ops_disease
-            data['label'] = label
-        else :
-            data['ops'] = ops_list
-            data['label'] = label
-        # return ops
+        # else :
+        #     ops = self._get_op_data()
+        data['ops'] = ops_list
+        #END SECOND METHOD
         if self.report_type == 'xls' :
             return self.env.ref('hospital_management.patient_medical_report_xls').report_action(self, data=data)
         return self.env.ref('hospital_management.patient_medical_report').report_action(self,data=data)
