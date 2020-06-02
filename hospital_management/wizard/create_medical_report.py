@@ -271,13 +271,21 @@ class CreateMedicalReport(models.TransientModel):
         filter_var = {'disease':False, 'patient':False, 'dept':False, 'doct':False, 'dt':False}
         if self.disease_id :
             label['disease'] = s
-            ops_disease, doc_disease_ids = self._get_op_data_disease()
+            # ops_disease, doc_disease_ids = self._get_op_data_disease()
             # for r in ops_disease :
             #     doc_disease_ids.append(r.id)
             #     ids_pool.append(r.id)
             ids_pool.append(000)
-            filter_var['disease'] = doc_disease_ids
+            # filter_var['disease'] = doc_disease_ids
             field_ptr[0] = 1
+            consult_op_disease_ids = []
+            disease_based_rec = self.env['hospital.op'].search([('consult_count','=', 1)])
+            for rec in disease_based_rec :
+                if rec.consultation_ids.disease_id == self.disease_id :
+                    consult_op_disease_ids.append(rec.id)
+                print(rec.id)
+
+            filter_var['disease'] = consult_op_disease_ids
             # ops = ''
             # filter_args += 1
             # if self.doctor_id : #doctor filter under disease filter
@@ -337,8 +345,16 @@ class CreateMedicalReport(models.TransientModel):
             filter_args += 1
             filter_var['dept'] = ops_dept_ids #for taking intersection
 
-        if self.date_from or self.to_date :
+        if self.doctor_id :
+            ops_doc = self._get_op_data_doctor()
+            for r in ops_doc:
+                ops_doc_ids_1.append(r.id)
+                ids_pool.append(r.id)
+            filter_args += 1
+            filter_var['doct']= ops_doc_ids_1
             field_ptr[3] = 1
+
+        if self.date_from or self.to_date :
             ops_date, label_dt = self._get_op_data_per_date()
             # if self.doctor_id : #doctor filter under disease filter
             #     ops_doc = self._get_op_data_doctor()
@@ -350,14 +366,8 @@ class CreateMedicalReport(models.TransientModel):
             label['date_t'] = label_dt['date_t']
             filter_args += 1
             filter_var['dt'] = ops_dt_ids
-        if self.doctor_id :
             field_ptr[4] = 1
-            ops_doc = self._get_op_data_doctor()
-            for r in ops_doc:
-                ops_doc_ids_1.append(r.id)
-                ids_pool.append(r.id)
-            filter_args += 1
-            filter_var['doct']= ops_doc_ids_1
+
 
         all_ops_ids = []
         all_ops = self.env['hospital.op'].search([])
@@ -429,13 +439,16 @@ class CreateMedicalReport(models.TransientModel):
                 ptr_list = []
                 i_ptr = []
                 c = 0
-                for i in range(len(field_ptr)) :
+                print('filter dict',filter_var)
+                for i in range(len(filter_arg_rd)) :
                     if field_ptr[i] == 1 :
+                        print('field ptr ', field_ptr)
                         i_ptr.append(i) #collect that i
                         f1 = filter_arg_rd[i]
                         f1 = set(f1)#filter
                         ptr_list.append(f1)
                         c += 1
+                print('field ptr ', field_ptr)
                 print('c:', c)
                 print('filter args',filter_arg_rd)
                 # if 5 - c == 0:

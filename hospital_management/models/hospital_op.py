@@ -89,6 +89,7 @@ class OP(models.Model):
             for r in self:
                 if r.consultation_ids.op_no.id == self.id:
                     self.consult_count += 1
+            # self.consult_count = 1
         else :
             self.consult_count = 0
 
