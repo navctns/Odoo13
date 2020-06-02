@@ -4,9 +4,11 @@
 <odoo>
 
 <template id="hospital_patient_medical_report">
+
      <t t-call="web.html_container">
 
           <t t-call="web.external_layout">
+
                 <header>
                     <h1 style="text-align:center; margin-top:20;">Medical Report</h1>
                 </header>
@@ -16,42 +18,42 @@
                     <tr t-if="'patient' in info">
                         <h3 class="text-left mb32">
                                 <td style="background-color:#ababab">
-                                    Patient :<strong><t t-esc="info['patient']"/></strong>
+                                    Patient : <t t-esc="info['patient']"/>
                                 </td>
                         </h3>
                     </tr>
                     <tr t-if="'disease' in info">
                         <h3 class="text-left mb32">
                                 <td style="background-color:#ababab">
-                                    Disease :<strong><t t-esc="info['disease']"/></strong>
+                                    Disease : <t t-esc="info['disease']"/>
                                 </td>
                         </h3>
                     </tr>
                     <tr t-if="'doct' in info">
                         <h3 class="text-left mb32">
                                 <td style="background-color:#ababab">
-                                    Doctor :<strong><t t-esc="info['doct']"/></strong>
+                                    Doctor : <t t-esc="info['doct']"/>
                                 </td>
                         </h3>
                     </tr>
                     <tr t-if="'dept' in info">
                         <h3 class="text-left mb32">
                                 <td style="background-color:#ababab">
-                                    Department :<strong><t t-esc="info['dept']"/></strong>
+                                    Department : <t t-esc="info['dept']"/>
                                 </td>
                         </h3>
                     </tr>
                     <tr t-if="'from_dt' in info">
                     <h3 class="text-left mb32">
                                 <td style="background-color:#ababab">
-                                    From :<strong><t t-esc="info['from_dt']"/></strong>
+                                    From : <t t-esc="info['from_dt']"/>
                                 </td>
                     </h3>
                     </tr>
                     <tr t-if="'date_to' in info">
                     <h3 class="text-left mb32">
                                 <td style="background-color:#ababab">
-                                    To :<strong><t t-esc="info['date_to']"/></strong>
+                                    To : <t t-esc="info['date_to']"/>
                                 </td>
                     </h3>
                     </tr>

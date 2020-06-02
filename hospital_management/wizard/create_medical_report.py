@@ -11,7 +11,7 @@ class CreateMedicalReport(models.TransientModel):
     _name = 'create.medical.report'
 
     patient_id = fields.Many2one('patient.card', string="Patient")#card id
-    doctor_id = fields.Many2one('hr.employee', string="Doctor",Index=True, domain = {'doctor_id': [('job_id', '=', 'Doctor')]})
+    doctor_id = fields.Many2one('hr.employee', string="Doctor",Index=True, domain = [('job_id', '=', 'Doctor')])
     department_id = fields.Many2one('hr.department', string="Department")
     disease_id = fields.Many2one('hospital.disease', string = 'Disease')
     date_from = fields.Date('Date From')
@@ -21,18 +21,19 @@ class CreateMedicalReport(models.TransientModel):
         ('xls','Excel')
     ],string = "Report Format", default='pdf')
 
-    @api.model
-    def doctor_domain(self):
-        return {'domain': {'doctor_id': [('job_id', 'like', 'Doctor')]}}
+    # @api.model
+    # def doctor_domain(self):
+    #     return {'domain': {'doctor_id': [('job_id', 'like', 'Doctor')]}}
 
     @api.onchange('doctor_id')
     def _onchange_doctor_id(self):
         # if not self.department_id:
             # return {'domain': {'doctor_id': [('department_id', '=', self.department_id.id)]}}
         # self.department_id = self.doctor_id.department_id
-        return {'domain': {'doctor_id': [('job_id', 'like', 'Doctor')]}}
+        if not self.department_id :
+            return {'domain': {'doctor_id': [('job_id', 'like', 'Doctor')]}}
         # return {'domain': {'doctor_id': [('department_id', '=', self.department_id.id)]}}
-
+        # pass
     @api.onchange('department_id')
     def _onchange_department_id(self):
 
