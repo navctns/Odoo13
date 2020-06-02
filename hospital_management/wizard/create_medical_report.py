@@ -327,7 +327,7 @@ class CreateMedicalReport(models.TransientModel):
             filter_var['patient'] = ops_patient_ids
 
             # print(type(ops))
-        if self.department_id and not self.doctor_id :
+        if self.department_id  :
             label['dept'] = s
             field_ptr[2] = 1
             ops_dept = self._get_op_data_department()
@@ -431,11 +431,13 @@ class CreateMedicalReport(models.TransientModel):
                 c = 0
                 for i in range(len(field_ptr)) :
                     if field_ptr[i] == 1 :
-                        i_ptr.append(i)
+                        i_ptr.append(i) #collect that i
                         f1 = filter_arg_rd[i]
                         f1 = set(f1)#filter
                         ptr_list.append(f1)
-                        c+=1
+                        c += 1
+                print('c:', c)
+                print('filter args',filter_arg_rd)
                 # if 5 - c == 0:
                 # if c == 2 :
                 #     res_filt = ptr_list[i_ptr[0]].intersection(ptr_list[i_ptr[1]]) #change ptr_list
