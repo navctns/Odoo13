@@ -7,12 +7,55 @@
      <t t-call="web.html_container">
 
           <t t-call="web.external_layout">
+                <header>
+                    <h1 style="text-align:center; margin-top:20;">Medical Report</h1>
+                </header>
                 <div class="page">
-                    <header>
-                        <h2 style="text-align:center;">Medical Report</h2>
-                    </header>
-
-
+                    <t t-set="info" t-value="header_vals"/>
+                    <!-- Header infos-->
+                    <tr t-if="'patient' in info">
+                        <h3 class="text-left mb32">
+                                <td style="background-color:#ababab">
+                                    Patient :<strong><t t-esc="info['patient']"/></strong>
+                                </td>
+                        </h3>
+                    </tr>
+                    <tr t-if="'disease' in info">
+                        <h3 class="text-left mb32">
+                                <td style="background-color:#ababab">
+                                    Disease :<strong><t t-esc="info['disease']"/></strong>
+                                </td>
+                        </h3>
+                    </tr>
+                    <tr t-if="'doct' in info">
+                        <h3 class="text-left mb32">
+                                <td style="background-color:#ababab">
+                                    Doctor :<strong><t t-esc="info['doct']"/></strong>
+                                </td>
+                        </h3>
+                    </tr>
+                    <tr t-if="'dept' in info">
+                        <h3 class="text-left mb32">
+                                <td style="background-color:#ababab">
+                                    Department :<strong><t t-esc="info['dept']"/></strong>
+                                </td>
+                        </h3>
+                    </tr>
+                    <tr t-if="'from_dt' in info">
+                    <h3 class="text-left mb32">
+                                <td style="background-color:#ababab">
+                                    From :<strong><t t-esc="info['from_dt']"/></strong>
+                                </td>
+                    </h3>
+                    </tr>
+                    <tr t-if="'date_to' in info">
+                    <h3 class="text-left mb32">
+                                <td style="background-color:#ababab">
+                                    To :<strong><t t-esc="info['date_to']"/></strong>
+                                </td>
+                    </h3>
+                    </tr>
+                    <!-- Header info Ended -->
                     <div class="row mt32">
 <!--                        <div class="col-3">-->
 <!--                            <strong>Patient Name</strong>-->
@@ -28,6 +71,7 @@
 
 
                             <table class="table table-bordered mb32" style="table-layout:auto">
+                                <t t-set="info" t-value="header_vals"/>
                                 <thead>
                                     <tr>
                                         <th style="text-align:left;">
@@ -39,18 +83,29 @@
                                         <th style="text-align:left;">
                                             <strong>Date</strong>
                                         </th>
-                                        <th style="text-align:left;">
-                                            <strong>Patient</strong>
-                                        </th>
-                                        <th style="text-align:left;">
-                                            <strong>Disease</strong>
-                                        </th>
-                                        <th style="text-align:left;">
-                                            <strong>Doctor</strong>
-                                        </th>
-                                        <th style="text-align:left;">
-                                            <strong>Department</strong>
-                                        </th>
+                                         <t t-if="'patient' not in info">
+                                            <th style="text-align:left;">
+                                                <strong>Patient</strong>
+                                            </th>
+                                         </t>
+                                        <t t-if="'disease' not in info">
+                                            <th style="text-align:left;">
+                                                <strong>Disease</strong>
+                                            </th>
+                                        </t>
+                                        <t t-if="'doct' not in info">
+                                            <th style="text-align:left;">
+                                                <strong>Doctor</strong>
+                                            </th>
+                                        </t>
+                                        <!--show only when department is not selected -->
+                                        <t t-if="'dept' not in info">
+                                            <th style="text-align:left;">
+
+                                                <strong>Department</strong>
+
+                                            </th>
+                                        </t>
                                     </tr>
 
 
@@ -69,18 +124,26 @@
                                             <td style="background-color:#ababab">
                                                 <strong><t t-esc="o['date']"/></strong>
                                             </td>
-                                            <td style="background-color:#ababab">
-                                                <strong><t t-esc="o['patient']"/></strong>
-                                            </td>
-                                             <td style="background-color:#ababab">
-                                                <strong><t t-esc="o['disease']"/></strong>
-                                            </td>
-                                             <td style="background-color:#ababab">
-                                                <strong><t t-esc="o['doctor']"/></strong>
-                                            </td>
-                                            <td style="background-color:#ababab">
-                                                <strong><t t-esc="o['department']"/></strong>
-                                            </td>
+                                            <t t-if="'patient' not in info">
+                                                <td style="background-color:#ababab">
+                                                    <strong><t t-esc="o['patient']"/></strong>
+                                                </td>
+                                            </t>
+                                            <t t-if="'disease' not in info">
+                                                 <td style="background-color:#ababab">
+                                                    <strong><t t-esc="o['disease']"/></strong>
+                                                </td>
+                                            </t>
+                                            <t t-if="'doct' not in info">
+                                                 <td style="background-color:#ababab">
+                                                    <strong><t t-esc="o['doctor']"/></strong>
+                                                </td>
+                                            </t>
+                                            <t t-if="'dept' not in info">
+                                                <td style="background-color:#ababab">
+                                                    <strong><t t-esc="o['department']"/></strong>
+                                                </td>
+                                            </t>
                                         </tr>
                                     </t>
                                 </tbody>

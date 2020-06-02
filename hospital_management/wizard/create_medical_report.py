@@ -29,7 +29,7 @@ class CreateMedicalReport(models.TransientModel):
     def _onchange_doctor_id(self):
         # if not self.department_id:
             # return {'domain': {'doctor_id': [('department_id', '=', self.department_id.id)]}}
-        self.department_id = self.doctor_id.department_id
+        # self.department_id = self.doctor_id.department_id
         return {'domain': {'doctor_id': [('job_id', 'like', 'Doctor')]}}
         # return {'domain': {'doctor_id': [('department_id', '=', self.department_id.id)]}}
 
@@ -114,7 +114,7 @@ class CreateMedicalReport(models.TransientModel):
         return (ops,op_disease_ids)
 
 
-    def _get_op_data_per_date(self):
+    def _get_op_data_per_date(self, header_values):
         e = False
         s = True
         label_dt = {
@@ -124,17 +124,21 @@ class CreateMedicalReport(models.TransientModel):
         if self.date_from and not self.to_date:
             ops = self.env['hospital.op'].search([('date_op', '>=', self.date_from)])
             label_dt['date_f'] = s
-            return (ops, label_dt)
+            header_values['from_dt'] = self.date_from
+            return (ops, label_dt, header_values)
         if self.to_date and not self.date_from :
             ops = self.env['hospital.op'].search([('date_op', '<=', self.to_date)])
             label_dt['date_t'] = s
-            return (ops, label_dt)
+            header_values['date_to'] = self.to_date
+            return (ops, label_dt, header_values)
         if self.to_date and self.date_from :
             ops = self.env['hospital.op'].search(['&',('date_op', '<=', self.to_date),
                                                   ('date_op','>=', self.date_from)])
             label_dt['date_f'] = s
             label_dt['date_t'] = s
-            return (ops, label_dt)
+            header_values['from_dt'] = self.date_from
+            header_values['date_to'] = self.to_date
+            return (ops, label_dt, header_values)
         else :
             ops = self.env['hospital.op'].search([])
             return (ops, label_dt)
@@ -161,7 +165,17 @@ class CreateMedicalReport(models.TransientModel):
             'model': 'create.medical.report',
             'form': self.read()[0]
         }
+        data['header_vals'] = {}
         ops_disease = '' #for disease filter only
+        # header_values =
+        #         {'patient': '',
+        #          'disease':'',
+        #          'doct':'',
+        #          'dept':'',
+        #          'from_dt':'',
+        #          'date_to':''
+        #          }
+        header_values = {} #empty start can add items
 
         #FIRST METHOD OF FILTERING
         # if self.disease_id :
@@ -270,6 +284,7 @@ class CreateMedicalReport(models.TransientModel):
         field_ptr = [0,0,0,0,0]
         filter_var = {'disease':False, 'patient':False, 'dept':False, 'doct':False, 'dt':False}
         if self.disease_id :
+            header_values['disease'] = self.disease_id.disease_id
             label['disease'] = s
             # ops_disease, doc_disease_ids = self._get_op_data_disease()
             # for r in ops_disease :
@@ -325,6 +340,7 @@ class CreateMedicalReport(models.TransientModel):
 
                 # ops = ops_doc
         if self.patient_id :
+            header_values['patient'] = self.patient_id.patient_id.name
             label['patient'] = s
             ops_patient = self._get_op_data_patient()
             filter_args += 1
@@ -335,7 +351,8 @@ class CreateMedicalReport(models.TransientModel):
             filter_var['patient'] = ops_patient_ids
 
             # print(type(ops))
-        if self.department_id  :
+        if self.department_id :
+            header_values['dept'] = self.department_id.name
             label['dept'] = s
             field_ptr[2] = 1
             ops_dept = self._get_op_data_department()
@@ -346,6 +363,7 @@ class CreateMedicalReport(models.TransientModel):
             filter_var['dept'] = ops_dept_ids #for taking intersection
 
         if self.doctor_id :
+            header_values['doct'] = self.doctor_id.name
             ops_doc = self._get_op_data_doctor()
             for r in ops_doc:
                 ops_doc_ids_1.append(r.id)
@@ -355,7 +373,7 @@ class CreateMedicalReport(models.TransientModel):
             field_ptr[3] = 1
 
         if self.date_from or self.to_date :
-            ops_date, label_dt = self._get_op_data_per_date()
+            ops_date, label_dt, header_values = self._get_op_data_per_date(header_values)
             # if self.doctor_id : #doctor filter under disease filter
             #     ops_doc = self._get_op_data_doctor()
             #     ops = ops.env['hospital.op'].search([('doctor_id','=',self.doctor_id.id)])
@@ -367,7 +385,13 @@ class CreateMedicalReport(models.TransientModel):
             filter_args += 1
             filter_var['dt'] = ops_dt_ids
             field_ptr[4] = 1
+        else :
 
+            all_recs = self.env['hospital.op'].search([])
+            l = len(all_recs)
+            header_values['from_dt'] = all_recs[0].date_op
+            header_values['date_to'] = all_recs[l-1].date_op
+            # from_dt,date_to
 
         all_ops_ids = []
         all_ops = self.env['hospital.op'].search([])
@@ -515,6 +539,9 @@ class CreateMedicalReport(models.TransientModel):
         # else :
         #     ops = self._get_op_data()
         data['ops'] = ops_list
+        data['header_vals'] = header_values
+        header_values = {}  # empty end can add items(empty the previous)
+        # data['header_vals'] = header_values
         #END SECOND METHOD
         if self.report_type == 'xls' :
             return self.env.ref('hospital_management.patient_medical_report_xls').report_action(self, data=data)
