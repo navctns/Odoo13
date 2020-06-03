@@ -55,8 +55,8 @@ class OP(models.Model):
             ('draft', 'Draft'),
             ('posted', 'Confirmed'),
             ('paid','Paid')
-        ], default='draft', required=True)
-
+        ], default='draft', required=True, compute = '_state_change')
+    confirm_op = fields.Boolean(string="Confirm op", default=False)#specially for confirm button
     consultation_ids = fields.One2many('hospital.consult', 'op_no', string = "Op_Consultations")
     consult_button_label = fields.Char(string = 'Consultation')
     consult_count = fields.Integer(default=0, string = 'Consult count', compute = '_compute_consult_count')
@@ -112,13 +112,33 @@ class OP(models.Model):
         else :
             self.invoice_count = 0
 
+    @api.depends('invoice_count', 'confirm_op')
+    def _state_change(self):
+        # if self.state != 'draft' :
+        # if self.state == 'appointment':
+        if self.invoice_count > 0:
+            # self.state = 'op'
+            self.write({
+                'state': 'paid',
+            })
+        elif self.confirm_op:
+            self.write({
+                'state': 'posted',
+            })
+            self.confirm_op = False
+
+        else:
+            self.write({
+                'state': 'draft',
+            })
 
     def action_confirm(self):
         # for rec in self:
         #     rec.state = 'appointment'
-        self.write({
-            'state': 'posted',
-        })
+        # self.write({
+        #     'state': 'posted',
+        # })
+        self.confirm_op = True
 
     #python constraint
     @api.constrains('token_no')

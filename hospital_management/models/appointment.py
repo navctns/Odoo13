@@ -83,9 +83,6 @@ class Appointment(models.Model):
             self.write({
                 'state': 'op',
             })
-
-
-
         elif self.confirm_op :
             self.write({
                 'state': 'appointment',

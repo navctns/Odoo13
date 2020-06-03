@@ -1,0 +1,5 @@
+default steps
+
+create_module
+
+/home/naveen/PycharmProject/Odoo/odoo/odoo-bin scaffold pos_add_discount /home/naveen/PycharmProject/Odoo/odoo/custom/extra_addons/Odoo13
