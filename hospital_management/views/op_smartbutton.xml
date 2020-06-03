@@ -5,11 +5,15 @@
             <field name="model">hospital.op</field>
             <field name="inherit_id" ref="hospital_management.op_form_view" />
             <field name="arch" type="xml">
-                <div name="button_box_op" position="inside">
+                <div class="oe_button_box" name="button_box_op" position="inside">
 
                     <button class="oe_stat_button" type="object" name="action_view_invoice"
-                        icon="fa-list">
-                        Invoice
+                        icon="fa-list" attrs="{'invisible': [('invoice_count', '=', 0)]}">
+                         <div class="o_field_widget o_stat_info">
+                            <field name="invoice_count" widget="statinfo"/>
+                            <span class="o_stat_text">Invoices</span>
+<!--                        Invoices-->
+                         </div>
                     </button>
                 </div>
             </field>

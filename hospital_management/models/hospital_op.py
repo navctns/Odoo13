@@ -66,7 +66,8 @@ class OP(models.Model):
                                        This does not especially correspond to the invoices reconciled with the payment,
                                        as it can have been generated first, and reconciled later""")
     disease_id = fields.Many2one('hospital.disease', string='Disease', compute = '_compute_disease_id')
-
+    op_invoice_ids = fields.One2many('account.move', 'op_id', string="Op invoice ids")
+    invoice_count = fields.Integer(string= 'invoice count', compute='_compute_invoice_count')
     _sql_constraints = [
         # Partial constraint, complemented by a python constraint (see below).
         ('token_no_uniq', 'UNIQUE(token_no,date_op)', 'You can not have two patients with the same token!'),
@@ -100,7 +101,16 @@ class OP(models.Model):
     #
     #             self.consult_count += 1
 
-
+    @api.depends('op_invoice_ids')
+    def _compute_invoice_count(self):
+        if self.op_invoice_ids :
+            # for r in self:
+            #     if r.op_invoice_ids.op_id.id == self.id:
+            #         self.invoice_count += 1
+            print('invoice_ids len', len(self.op_invoice_ids))
+            self.invoice_count = len(self.op_invoice_ids)
+        else :
+            self.invoice_count = 0
 
 
     def action_confirm(self):
@@ -490,7 +500,7 @@ class OP(models.Model):
         inv_line_obj = self.env['account.move.line']
         patient = self.patient_id
         inv_data = {
-            'name': self.op_number,
+            # 'name': self.op_number,
             'ref': patient.name,
             'type': 'out_invoice',
             # 'account_id': supplier.property_account_payable_id.id,
@@ -500,10 +510,12 @@ class OP(models.Model):
             'invoice_origin': self.op_number,
             'company_id': self.account_type.company_id.id,
             'invoice_date': self.date_op,
+            'op_id' : self.id,
             # 'op_invoice_id':self.id,
             # 'invoice_date_due': self.rent_end_date,
         }
-        inv_id = inv_obj.create(inv_data)
+        inv_id = inv_obj.create(inv_data) #creating invoice
+        #try to create seq too
         self.first_payment_inv = inv_id.id
         if inv_id:
             list_value = [(0, 0, {
@@ -586,7 +598,41 @@ class OP(models.Model):
         #
         # action['context'] = ctx
         # return action
-        pass
+        # pass
+        invoice_obj = self.env['account.move'].search([('op_id', '=', self.id)])#matching records
+        invoice_ids = []
+        for each in invoice_obj:
+            invoice_ids.append(each.id) #fetch ids
+        view_id = self.env.ref('account.view_move_form').id
+        ctx = dict(
+            create=False,
+
+        )
+        if invoice_ids:
+            if len(invoice_ids) == 1:
+                value = {
+                    'view_mode': 'form',
+                    'res_model': 'account.move',
+                    'view_id': view_id,
+                    'type': 'ir.actions.act_window',
+                    'name': 'Invoices',
+                    'context': ctx,
+                    'res_id': invoice_ids and invoice_ids[0]
+                }
+
+            elif len(invoice_ids) > 1:
+                value = {
+                    'domain': str([('id', 'in', invoice_ids)]),
+                    'view_mode': 'tree,form',
+                    'res_model': 'account.move',
+                    'view_id': False,
+                    'type': 'ir.actions.act_window',
+                    'context': ctx,
+                    'name': 'Invoice',
+                    'res_id': invoice_ids
+                }
+
+            return value
 
     def get_consultation(self):
 
@@ -740,6 +786,10 @@ class DoctorTokens(models.Model) :
         else :
             self.token_no = 1 #for the starting
 
+class OpInvoiceReference(models.Model) :
 
+    _inherit = 'account.move'
+
+    op_id = fields.Many2one('hospital.op', string='Op reference')
 
 
