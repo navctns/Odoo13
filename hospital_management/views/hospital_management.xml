@@ -181,11 +181,12 @@
 <!--                            <field name="doctor_id" widget="res_partner_many2one" context="{'res_partner_search_mode': doctor_id.job_id == 'Doctor'}"/>-->
                             <field name="department_id"/>
                             <field name="date_op"/>
-                            <field name="token_no"/>
+                            <field name="token_from_doc"/>
                             <field name="company_id"/>
                             <field name="product_id" invisible="True"/>
                             <field name="consult_count" invisible="True"/>
-                            <field name="token_from_doc"/>
+
+                            <field name="token_no" invisible="True"/>
                         </group>
 
 

@@ -45,10 +45,10 @@
                         <field name="card_id"/>
                         <field name="date"/>
                         <field name="patient_name"/>
-                        <field name="token"/>
+                        <field name="token_from_doc"/>
                         <field name="doctor_id"/>
                         <field name="department_id"/>
-                        <field name="token_from_doc"/>
+                        <field name="token" invisible="True"/>
                     </group>
                 </sheet>
             </form>

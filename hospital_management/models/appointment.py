@@ -17,7 +17,7 @@ class Appointment(models.Model):
     department_id = fields.Char(string = "Department")
     date = fields.Date(string = "Date", default = fields.Date.today())
     token = fields.Integer(string = 'Token No')
-    token_from_doc = fields.Integer(string='Token Doc')
+    token_from_doc = fields.Integer(string='Token No')
     state = fields.Selection(
         string="State",
         selection=[
@@ -110,6 +110,30 @@ class Appointment(models.Model):
         #     tokens[-1] = None  # because it loads the current entry also
         if self.token in tokens:
             raise ValidationError("Token number should be unique")
+
+    #constraint for making tokens unique for a day
+    @api.constrains('token_from_doc')
+    def _check_token(self):
+        tokens = []
+        doc_rec_op = self.env['hospital.op'].search(['&', ('doctor_id', '=', self.doctor_id.id), ('date_op', '=', fields.Date.today())])
+
+
+        for r in doc_rec_op:
+            # if r.date_op == fields.Date.today():#todays tokens
+            tokens.append(r.token_from_doc)
+        # print('today tokens', tokens)
+        # r = self.env['hospital.op'].search([('date_op', '=', fields.Date.today())])
+        doc_rec_app = self.env['hospital.appointment'].search(['&', ('doctor_id', '=', self.doctor_id.id), ('date', '=', fields.Date.today())])
+
+        for r in doc_rec_app :
+            tokens.append(r.token_from_doc)
+        tokens[-1] = None #remove the current token from the list(to allow it)
+        # if len(r) != 0:
+        #     tokens[-1] = None  # because it loads the current entry also
+        print(tokens)
+        if self.token_from_doc in tokens:
+            # self.token_from_doc = self.doctor_id.token_no  # automatically set to available token(recheck)
+            raise ValidationError("Token number Already Exist")
 
 
     # @api.depends('op_count')
