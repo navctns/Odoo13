@@ -32,4 +32,8 @@
     'demo': [
         'demo/demo.xml',
     ],
+
+    'qweb': [
+        'static/src/xml/discount_templates.xml',
+    ],
 }

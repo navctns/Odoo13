@@ -1,0 +1,104 @@
+
+Avatar
+Tintuk Tomin
+28 September 2018
+
+To create a buttton in the pos interface you need to create three files.
+
+
+1. xml file.
+
+2. js file
+
+3. xml file for template
+
+
+1. xml file
+
+    this file is used to call the js file. Also you need to set the path of this xml file in the manifest like 'data': ['view/pos_update_view.xml']
+The code of this xml file is shown below:
+
+<odoo>
+    <data>
+        <template id="assets" inherit_id="point_of_sale.assets">
+            <xpath expr="." position="inside">
+
+                <script type="text/javascript" src="/pos_update/static/src/js/cancel.js"></script>
+
+            </xpath>
+        </template>
+    </data>
+</odoo>
+
+You only need to change the path of the js file which is in the src="YOUR JS FILE PATH"
+
+2. js file
+
+    In normal situation the location of the js file will be in FOLDER_NAME/STATIC/SRC/JS/FILENAME.JS 
+
+odoo.define('clear_button_fun.pos_view',function(require){
+"use strict";
+
+var screens = require('point_of_sale.screens');
+var gui = require('point_of_sale.gui');
+var core = require('web.core');
+
+var ClearCartLine = screens.ActionButtonWidget.extend({
+    template: "ClearCartLine",
+
+    button_click: function(){
+    var self = this;
+    this.clear_button_fun();
+    },
+
+    clear_button_fun(){
+    var order = this.pos.get_order();
+    order.remove_orderline(order.get_selected_orderline())
+    },
+});
+screens.define_action_button({'name': 'clear_button_fun','widget': ClearCartLine,});
+
+});
+
+    In the above code ClearCartLine is the template name and it must be same in all places. clear_button_fun()  is the name of the function and you can add your code to tell what to do when clicking on that button.
+
+3. xml file.
+
+    This xml file is to create a button as a template.  In normal situation the location of this xml file will be in FOLDER_NAME/STATIC/SRC/XML/FILENAME.XML
+
+Also you need to set this template location in the manifest. Like 'qweb': ['static/src/xml/pos_view.xml'] 
+
+<t t-name="ClearCartLine">
+    <div class='control-button'>
+        Clear Oder Line
+    </div>
+</t>
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="LoginScreenWidget">
+        <div class="login-overlay">
+            <div class="screen-login">
+                <div class="login-title"><small>Log in to </small><t t-esc="widget.pos.config.name"/></div>
+                <div class="login-body">
+                    <span class="login-element">
+                        <img class="login-barcode-img" src="/point_of_sale/static/img/barcode.png"/>
+                        <div class="login-barcode-text">Scan your badge</div>
+                    </span>
+                    <span class="login-or">or</span>
+                    <span class="login-element">
+                        <button class="login-button select-employee">Select Cashier</button>
+                    </span>
+                </div>
+                 <div class="login-footer">
+                     <small>
+                         <button class="login-button close-session">Close session</button>
+                     </small>
+                 </div>
+            </div>
+        </div>
+    </t>
+</templates>
+
+
