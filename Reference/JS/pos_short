@@ -1,0 +1,5 @@
+pos
+
+orderlines: order.get_orderlines(),
+
+selected_orderline.price_manually_set = true;

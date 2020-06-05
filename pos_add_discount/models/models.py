@@ -23,3 +23,5 @@ class PosConfig(models.Model):
         ('perc','Percentage'),
         ('amount','Amount'),
     ])
+
+    # discount_perc = fields.Float(string='Discount Percentage', help='The Discount percentage',)
