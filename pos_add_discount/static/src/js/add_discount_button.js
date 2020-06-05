@@ -77,6 +77,11 @@ var AddDiscountButton = screens.ActionButtonWidget.extend({
                         var discount_type = this.pos.config.discount_type_perc_amount
                           if (discount_type=='perc'){
                           line.set_discount(discount)
+//                          this.pos.config.discount_perc_amount = discount_calc
+                          }
+                          else{
+//                            line.price = 10;
+                              base_to_discount = 10
                           }
                         console.log('orderline',line)
                         },

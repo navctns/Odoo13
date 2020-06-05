@@ -23,5 +23,21 @@ class PosConfig(models.Model):
         ('perc','Percentage'),
         ('amount','Amount'),
     ])
+    discount_perc_amount = fields.Float(string='Discount Percentage amount',
+                                        help='The Discount percentage amount to be subracted', )
+
+    @api.onchange('model_id')
+    def _onchange_discount_perc_amount(self):
+        print('discount percentage amount', self.discount_perc_amount)
 
     # discount_perc = fields.Float(string='Discount Percentage', help='The Discount percentage',)
+
+
+class PosOrder(models.Model):
+    _inherit = 'pos.order'
+
+    discount_perc_amount = fields.Float(string='Discount Percentage amount', help='The Discount percentage amount to be subracted',)
+
+    @api.onchange('model_id')
+    def _onchange_discount_perc_amount(self):
+        print('discount percentage amount',self.discount_perc_amount)

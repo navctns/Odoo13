@@ -25,6 +25,7 @@
                                     </div>
                                     <div class ="mt16" >
                                         <field name="discount_type_perc_amount" colspan="4" nolabel="1"  widget = 'radio' />
+                                        <field name="discount_perc_amount" invisible="True"/>
                                     </div>
                                 </div>
 <!--                                <div class="mt8">-->
