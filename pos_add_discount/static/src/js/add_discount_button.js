@@ -64,26 +64,38 @@ var AddDiscountButton = screens.ActionButtonWidget.extend({
                     'body': 'Opening popup after clicking on the button',
                     confirm: function(discount) {
 //                    line.set_note(discount);
-                      discount = Math.round(Math.max(0,Math.min(100,discount)));
+//                      discount = Math.round(Math.max(0,Math.min(100,discount)));
 //                      self.apply_discount(discount);
                         var order    = this.pos.get_order();
                         var product  = this.pos.db.get_product_by_id(this.pos.config.discount_product_id[0]);
-
+                        var price_without_tax = line.get_price_without_tax()//product_price
                         var base_to_discount = order.get_total_without_tax();
                         var discount_calc = - discount / 100.0 * base_to_discount;
                         console.log('total without tax :', base_to_discount)
                         console.log('discount calc :', discount_calc)
 //                        line.set_amount(base_to_discount+discount_calc)
-                        var discount_type = this.pos.config.discount_type_perc_amount
+                        var discount_type = this.pos.config.discount_type_perc_amount;
                           if (discount_type=='perc'){
+//                          discount = Math.round(Math.max(0,Math.min(100,discount)));
                           line.set_discount(discount)
 //                          this.pos.config.discount_perc_amount = discount_calc
-                          }
-                          else{
+                          }else if (discount_type=='amount'){
 //                            line.price = 10;
-                              base_to_discount = 10
+                              console.log('product_unit_price', line.get_unit_price())
+                              console.log('product price',line.get_price_without_tax())
+                              var unit_price = line.get_unit_price();
+//                              var price = line.price_unit
+//                              console.log('price',price)
+//                              var updated_price = unit_price-discount;
+                              var current_price = price_without_tax
+                              var updated_price = current_price-discount;
+                              line.set_unit_price(updated_price)
+//                              base_to_discount = 10
                           }
                         console.log('orderline',line)
+                        console.log('subtotal',order.price_subtotal)
+                         console.log('amount',line.amount)
+                          console.log('amount_total',line.amount_total)
                         },
                     });
           }

@@ -1,0 +1,189 @@
+var _super_orderline = models.Orderline.prototype;
+
+models.Orderline = models.Orderline.extend({
+    initialize: function(attr, options) {
+        _super_orderline.initialize.call(this,attr,options);
+        this.note = this.note || "";
+    },
+    set_note: function(note){
+        this.note = note;
+        this.trigger('change',this);
+    },
+    get_note: function(note){
+        return this.note;
+    },
+    can_be_merged_with: function(orderline) {
+        if (orderline.get_note() !== this.get_note()) {
+            return false;
+        } else {
+            return _super_orderline.can_be_merged_with.apply(this,arguments);
+        }
+    },
+    clone: function(){
+        var orderline = _super_orderline.clone.call(this);
+        orderline.note = this.note;
+        return orderline;
+    },
+    export_as_JSON: function(){
+        var json = _super_orderline.export_as_JSON.call(this);
+        json.note = this.note;
+        return json;
+    },
+    init_from_JSON: function(json){
+        _super_orderline.init_from_JSON.apply(this,arguments);
+        this.note = json.note;
+    },
+    
+});
+
+
+var OrderlineNoteButton = screens.ActionButtonWidget.extend({
+    template: 'OrderlineNoteButton',
+    button_click: function(){
+        var line = this.pos.get_order().get_selected_orderline();
+        if (line) {
+            this.gui.show_popup('textarea',{
+                title: _t('Add Note'),
+                value:   line.get_note(),
+                confirm: function(note) {
+                    line.set_note(note);
+                },
+            });
+        }
+    },
+});
+
+	
+
+MODIFY CODE
+
+var _super_orderline = models.Orderline.prototype;
+
+models.Orderline = models.Orderline.extend({
+    initialize: function(attr, options) {
+        _super_orderline.initialize.call(this,attr,options);
+        this.discount = this.discount || "";
+    },
+    set_discount: function(discount){
+        this.discount = discount;
+        this.trigger('change',this);
+    },
+    get_discount: function(discount){
+        return this.discount;
+    },
+     can_be_merged_with: function(orderline) {
+        if (orderline.get_discount() !== this.get_discount()) {
+            return false;
+        } else {
+            return _super_orderline.can_be_merged_with.apply(this,arguments);
+        }
+    },
+    clone: function(){
+        var orderline = _super_orderline.clone.call(this);
+        orderline.discount = this.discount;
+        return orderline;
+    },
+    export_as_JSON: function(){
+        var json = _super_orderline.export_as_JSON.call(this);
+        json.discount = this.discount;
+        return json;
+    },
+    init_from_JSON: function(json){
+        _super_orderline.init_from_JSON.apply(this,arguments);
+        this.discount = json.discount;
+    },
+});
+
+
+button_click: function(){
+//        var self = this;
+	  var line = this.pos.get_order().get_selected_orderline();
+//        this.gui.show_popup('textarea',{
+	if (line) {
+        this.gui.show_popup('number',{
+                'title': ('Add Discount'),
+                'value': line.get_discount(),
+                'body': 'Opening popup after clicking on the button',
+                confirm: function(discount) {
+                    line.set_note(discount);
+                },
+                });
+		}
+
+	console.log("Test order");
+    	}
+    });
+
+
+#APPLY DISCOUNT refer (pos_discount)
+
+ apply_discount: function(pc) {
+        var order    = this.pos.get_order();
+        var lines    = order.get_orderlines();
+        var product  = this.pos.db.get_product_by_id(this.pos.config.discount_product_id[0]);
+        if (product === undefined) {
+            this.gui.show_popup('error', {
+                title : _t("No discount product found"),
+                body  : _t("The discount product seems misconfigured. Make sure it is flagged as 'Can be Sold' and 'Available in Point of Sale'."),
+            });
+            return;
+        }
+
+        // Remove existing discounts
+        var i = 0;
+        while ( i < lines.length ) {
+            if (lines[i].get_product() === product) {
+                order.remove_orderline(lines[i]);
+            } else {
+                i++;
+            }
+        }
+
+        // Add discount
+        // We add the price as manually set to avoid recomputation when changing customer.
+        var base_to_discount = order.get_total_without_tax();
+        if (product.taxes_id.length){
+            var first_tax = this.pos.taxes_by_id[product.taxes_id[0]];
+            if (first_tax.price_include) {
+                base_to_discount = order.get_total_with_tax();
+            }
+        }
+
+        var discount = - pc / 100.0 * base_to_discount;
+
+        if( discount < 0 ){
+            order.add_product(product, {
+                price: discount,
+                lst_price: discount,
+                extras: {
+                    price_manually_set: true,
+                },
+            });
+        }
+    },
+
+# MODIFY
+
+this.gui.show_popup('number',{
+            'title': _t('Discount Percentage'),
+                'value': this.pos.config.discount_pc,
+            'confirm': function(val) {
+                val = Math.round(Math.max(0,Math.min(100,val)));
+                self.apply_discount(val);
+            },
+        });
+
+apply_discount: function(pc) {
+        var order    = this.pos.get_order();
+	var base_to_discount = order.get_total_without_tax();
+	var discount = - pc / 100.0 * base_to_discount;
+	if( discount < 0 ){
+            order.add_product(product, {
+                price: discount,
+                lst_price: discount,
+                extras: {
+                    price_manually_set: true,
+                },
+            });
+        }
+   },
