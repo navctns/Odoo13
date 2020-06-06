@@ -86,9 +86,9 @@ var AddDiscountButton = screens.ActionButtonWidget.extend({
                               var unit_price = line.get_unit_price();
 //                              var price = line.price_unit
 //                              console.log('price',price)
-//                              var updated_price = unit_price-discount;
-                              var current_price = price_without_tax
-                              var updated_price = current_price-discount;
+                              var updated_price = unit_price-discount;//add discount for the product
+                              var current_price = price_without_tax//defined outside
+//                              var updated_price = current_price-discount;//to apply discount subfor total
                               line.set_unit_price(updated_price)
 //                              base_to_discount = 10
                           }
