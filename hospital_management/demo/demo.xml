@@ -31,5 +31,8 @@
         <record id="medicine_product" model="consult.line">
             <field name="medicine.categ_id">Medic</field>
         </record>
+        <record id="job_doctor" model="hr.employee">
+            <field name="job_id.name">Doctor</field>
+        </record>
     </data>
 </odoo>

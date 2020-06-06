@@ -15,6 +15,8 @@
             <field name="sale_line_warn">no-message</field>
 
         </record>
-
+        <record id="job_doctor" model="hr.job">
+            <field name="name">Doctor</field>
+        </record>
     </data>
 </odoo>

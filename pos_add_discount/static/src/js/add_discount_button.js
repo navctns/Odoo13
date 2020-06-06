@@ -74,10 +74,12 @@ var AddDiscountButton = screens.ActionButtonWidget.extend({
                         console.log('total without tax :', base_to_discount)
                         console.log('discount calc :', discount_calc)
 //                        line.set_amount(base_to_discount+discount_calc)
+                        var amt_change = 0
                         var discount_type = this.pos.config.discount_type_perc_amount;
                           if (discount_type=='perc'){
 //                          discount = Math.round(Math.max(0,Math.min(100,discount)));
                           line.set_discount(discount)
+                          line.price_manually_set = true;
 //                          this.pos.config.discount_perc_amount = discount_calc
                           }else if (discount_type=='amount'){
 //                            line.price = 10;
@@ -88,9 +90,11 @@ var AddDiscountButton = screens.ActionButtonWidget.extend({
 //                              console.log('price',price)
                               var updated_price = unit_price-discount;//add discount for the product
                               var current_price = price_without_tax//defined outside
-//                              var updated_price = current_price-discount;//to apply discount subfor total
+//                              var updated_price = current_price-discount;//to apply discount for subtotal of the orderline/order
                               line.set_unit_price(updated_price)
+                              line.price_manually_set = true;
 //                              base_to_discount = 10
+//                               amt_change = 1//flag that price changed with discount can be used to limit setting discount only once
                           }
                         console.log('orderline',line)
                         console.log('subtotal',order.price_subtotal)

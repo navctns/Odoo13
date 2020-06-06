@@ -41,6 +41,7 @@
         'wizard/medical_report_generation.xml',
         'reports/report.xml',
         'reports/patient_card.xml',
+
         # 'reports/hospital_report_views.xml',
 
 
