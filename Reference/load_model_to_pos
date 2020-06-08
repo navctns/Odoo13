@@ -1,0 +1,35 @@
+If you just want to load One field from any model which is pre-loaded in POS for 'example product.product', then you can do it like this:
+
+var models = require('point_of_sale.models');
+
+models.load_fields('product.product','wk_point_for_loyalty');
+
+For loading a completly new model with fields:
+
+var models = require('point_of_sale.models');
+
+models.load_models([
+
+{
+
+model: 'custom.model',
+
+condition: function(self){ return true; },
+
+fields: ['field1','field2','field3'],
+
+domain: function(self){ return [['active','=',true]]; },
+
+loaded: function(self,result){
+
+if(result.length){
+
+# do operation as you like, here setting the value in a variable
+
+self.set('variable',result[0].field1);
+
+}
+
+},
+
+}],{'after': 'product.product'});

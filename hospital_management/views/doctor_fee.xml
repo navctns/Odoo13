@@ -7,7 +7,8 @@
              <field name="arch" type="xml">
 
 
-                          <xpath expr="//field[@name='parent_id']" position="after">
+
+                        <xpath expr="//field[@name='parent_id']" position="after">
 
                             <field name="fee" attrs="{'invisible': [('is_show_doctorfee','=', False)]}"/>
                             <field name="is_show_doctorfee" invisible="1"/>

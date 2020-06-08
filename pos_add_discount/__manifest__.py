@@ -20,13 +20,14 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','point_of_sale'],
+    'depends': ['base','point_of_sale','sale','product'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
+        'views/product_grade.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
@@ -35,5 +36,7 @@
 
     'qweb': [
         'static/src/xml/discount_templates.xml',
+        'static/src/xml/product_grade_on_ticket.xml',
+        'static/src/xml/order_reciept_inherit.xml',
     ],
 }

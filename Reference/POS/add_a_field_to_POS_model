@@ -1,0 +1,9 @@
+function pos_product_avialble(instance,module){ //where module=instance.point_of_sale
+    var models = module.PosModel.prototype.models;
+    for(var i=0; i<models.length; i++){
+        var model=models[i];
+        if(model.model === 'product.product'){
+             model.fields.push('new_field1','new_field2');
+        } 
+    }
+}
