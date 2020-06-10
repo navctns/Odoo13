@@ -878,7 +878,7 @@
 
 <!--    <t t-name="OrderReceipt">-->
     <t t-extend="OrderReceipt">
-    <t t-jquery='.pos-receipt-order-data' t-operation='inner'>
+    <t t-jquery='.pos-receipt' t-operation='replace'>
 <!--        <script type="text/javascript" src = "/pos_add_discount/static/src/js/product_grade.js"></script>-->
 
         <div class="pos-receipt">
@@ -936,12 +936,22 @@
                          <div>
                              <t t-esc='line.product_grade' />
                             <t t-esc="line.get_product().product_grade"/>
+                              <t t-esc="line.get_product().display_name"/>
+                             <t t-esc='line.product_name_wrapped[0]' />
+                             <t t-esc="line.product.product_tmpl_id.product_grade"/>
+
                         </div>
                         <t t-call="OrderReceiptWrappedProductNameLines"/>
                     </t>
                     <t t-if='!simple'>
                         <div t-esc='line.product_name_wrapped[0]'/>
-                        <t t-call="OrderReceiptWrappedProductNameLines"/>
+                        <t t-esc='line.product_name_wrapped[0]' /><!--new add-add new fild here -->
+                        <t t-esc='line.product_grade' /><!--shows false feed data-->
+<!--                        <t t-esc='orderlines.get_product().product_grade' />-->
+<!--                        <t t-esc="line.product.product_tmpl_id.product_grade"/>-->
+<!--                        <t t-esc='line.product_grade' />-->
+<!--                         <t t-esc="line.get_product().product_grade"/>-->
+<!--                        <t t-call="OrderReceiptWrappedProductNameLines"/>-->
                         <t t-if="line.display_discount_policy == 'without_discount' &amp;&amp; line.price != line.price_lst">
                             <div class="pos-receipt-left-padding">
                                 <t t-esc="widget.format_currency_no_symbol(line.price_lst)" />

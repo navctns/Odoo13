@@ -38,5 +38,7 @@
         'static/src/xml/discount_templates.xml',
         'static/src/xml/product_grade_on_ticket.xml',
         'static/src/xml/order_reciept_inherit.xml',
+        'static/src/xml/extend_reciept_fields.xml',
+
     ],
 }

@@ -1,0 +1,123 @@
+odoo.define('discount_limit.restrict', function (require) {
+"use strict";
+
+var models = require('point_of_sale.models');
+var core = require('web.core');
+var pos_screens = require('pos_discount.pos_discount');
+var _t = core._t;
+
+models.load_fields("hr.employee","has_pos_discount_control");
+
+pos_screens.DiscountButton.include({
+        button_click: function(){
+        var self=this;
+        if (this.pos.get_cashier().has_pos_discount_control===true){
+            this.gui.show_popup('error',{
+            'title': _t('Discount Restricted'),
+             'body': _t('You must be granted access to apply discount '),
+            });
+        }
+        else
+        {  this._super.apply(this);
+        }
+        },
+})
+});
+
+
+Loading on hr.employee
+
+<odoo>
+    <record id="res_users_form_view_control" model="ir.ui.view">
+        <field name="name">res.users.form.view</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='identification_group']" position="after">
+                <group string="Point Of Sale" name="identification_group">
+                <field name="has_pos_discount_control" string="Discount Control"/>
+                    </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+
+
+
+
+
+odoo.define('xn_pos_vat_enhancement_v11.pos_receipt_fields', function (require) {
+    var models = require('point_of_sale.models');    
+    var core = require('web.core');    
+    var _t = core._t;    
+    var session = require('web.session');
+    var rpc = require('web.rpc');
+
+    var _super_PosModel = models.PosModel.prototype;
+    models.PosModel = models.PosModel.extend({
+        get_model: function (_name) {
+            var _index = this.models.map(function (e) {
+                return e.model;
+            }).indexOf(_name);
+            if (_index > -1) {
+                return this.models[_index];
+            }
+            return false;
+        },
+        initialize: function (session, attributes) {
+            var self = this;            
+            var company_model = this.get_model('res.company');
+            company_model.fields.push('street','street2','state_id');            
+
+            _super_PosModel.initialize.apply(this, arguments);          
+
+        },        
+        get_config: function () {
+            return this.config;
+        },        
+
+    });
+
+});
+
+
+
+var receipt = QWeb.render('OrderReceipt', data);
+
+
+
+
+odoo.define('xn_pos_vat_enhancement_v11.pos_receipt_fields', function (require) {
+    var models = require('point_of_sale.models');    
+    var core = require('web.core');    
+    var _t = core._t;    
+    var session = require('web.session');
+    var rpc = require('web.rpc');
+
+    var _super_PosModel = models.PosModel.prototype;
+    models.PosModel = models.PosModel.extend({
+        get_model: function (_name) {
+            var _index = this.models.map(function (e) {
+                return e.model;
+            }).indexOf(_name);
+            if (_index > -1) {
+                return this.models[_index];
+            }
+            return false;
+        },
+        initialize: function (session, attributes) {
+            var self = this;            
+            var company_model = this.get_model('res.company');
+            company_model.fields.push('street','street2','state_id');            
+
+            _super_PosModel.initialize.apply(this, arguments);          
+
+        },        
+        get_config: function () {
+            return this.config;
+        },        
+
+    });
+
+});
+

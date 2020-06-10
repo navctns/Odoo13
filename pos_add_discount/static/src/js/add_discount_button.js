@@ -1,7 +1,7 @@
 //alert("Loaded")
 //console.log("loaded again")
 
-odoo.define('pos_add_discount.pos_add_discount', function (require) {
+odoo.define('pos_add_discount.discount', function (require) {
 "use strict";
 
 var core = require('web.core');

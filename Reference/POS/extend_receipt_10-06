@@ -1,0 +1,24 @@
+<t t-extend="PosTicket">
+        <t t-jquery="t[t-esc='orderline.get_product().display_name']" t-operation="after">
+                <t t-if="orderline.get_product().default_code">
+
+                 [<t t-esc="orderline.get_product().default_code"/>]
+                </t>
+        </t>
+    </t>
+
+Alter
+
+ <t t-jquery='div[t-attf-id*="notebook_page_match_rp"]' t-operation="replace"/> format
+
+
+"div[t-esc='line.product_name_wrapped[0]']"
+
+<t t-extend="OrderReceipt">
+        <t t-jquery="div[t-esc='line.product_name_wrapped[0]']" t-operation="after">
+                
+	<t t-esc='line.product_name_wrapped[0]'/>
+                 
+              
+        </t>
+    </t>

@@ -1,0 +1,205 @@
+extend this model
+
+exports.Orderline = Backbone.Model.extend({
+
+Modify and add product_price to this  function inside that model
+
+export_for_printing: function(){
+        return {
+            quantity:           this.get_quantity(),
+            unit_name:          this.get_unit().name,
+            price:              this.get_unit_display_price(),
+            discount:           this.get_discount(),
+            product_name:       this.get_product().display_name,
+            product_name_wrapped: this.generate_wrapped_product_name(),
+            price_lst:          this.get_lst_price(),
+            display_discount_policy:    this.display_discount_policy(),
+            price_display_one:  this.get_display_price_one(),
+            price_display :     this.get_display_price(),
+            price_with_tax :    this.get_price_with_tax(),
+            price_without_tax:  this.get_price_without_tax(),
+            price_with_tax_before_discount:  this.get_price_with_tax_before_discount(),
+            tax:                this.get_tax(),
+            product_description:      this.get_product().description,
+            product_description_sale: this.get_product().description_sale,
+        };
+    },
+
+
+may be it should be added to orderline xml
+
+ receipt: order.export_for_printing(),
+
+
+LIke this render function should be modified
+
+odoo.define("point_of_sale_logo.image", function (require) {
+    "use strict";
+    var PosBaseWidget = require('point_of_sale.chrome');
+    var screens = require('point_of_sale.screens');
+    var core = require('web.core');
+
+    var QWeb = core.qweb;
+    console.log("PosBaseWidget", PosBaseWidget)
+    screens.ReceiptScreenWidget.include({
+        render_receipt: function () {
+            this._super(this);
+            var order = this.pos.get_order()
+            this.$('.pos-receipt-container').html(QWeb.render('OrderReceipt',{
+                    widget:this,
+                    a2 : window.location.origin + '/web/image?model=pos.config&field=image&id='+this.pos.config.id,
+                    order: order,
+                    receipt: order.export_for_printing(),
+                    orderlines: order.get_orderlines(),
+                    paymentlines: order.get_paymentlines(),
+                }));
+        },
+    });
+    PosBaseWidget.Chrome.include({
+        renderElement:function () {
+
+            var self = this;
+            console.log("self:", self)
+
+            if(self.pos.config){
+                if(self.pos.config.image){
+                    this.flag = 1
+                    this.a3 = window.location.origin + '/web/image?model=pos.config&field=image&id='+self.pos.config.id;
+                }
+            }
+            this._super(this);
+        }
+    });
+});
+
+
+
+
+
+""""'ON screens.js
+
+
+ get_receipt_render_env: function() {
+        var order = this.pos.get_order();
+        return {
+            widget: this,
+            pos: this.pos,
+            order: order,
+            receipt: order.export_for_printing(),
+            orderlines: order.get_orderlines(),
+            paymentlines: order.get_paymentlines(),
+        };
+    },
+
+
+print_html: function () {
+        var receipt = QWeb.render('OrderReceipt', this.get_receipt_render_env());
+
+        this.pos.proxy.printer.print_receipt(receipt);
+        this.pos.get_order()._printed = true;
+    },
+
+
+gui.define_screen({name:'receipt', widget: ReceiptScreenWidget});
+
+
+Stepby Step add field to pos ticket
+
+After this
+
+ <tr t-foreach="orderlines" t-as="orderline">
+                        <td>
+                            <t t-esc="orderline.get_product().display_name"/>
+
+<t t-jquery='.pos-sale-ticket' t-operation='replace'> Change query item
+
+<t t-jquery='.receipt-orderlines' t-operation='replace'>
+receipt-orderlines
+<t t-extend="PosTicket">
+        comment<t t-jquery="t[t-esc='orderline.get_product().display_name']" t-operation="after">
+	<t t-jquery='.receipt-orderlines' t-operation='replace'>
+                
+		<table class='receipt-orderlines'>
+                    <colgroup>
+                        <col width='40%' />
+                        <col width='15%' />
+                        <col width='15%' />
+                        <col width='30%' />
+                    </colgroup>
+                    <tr style="border: 1px solid rgb(0, 0, 0);">
+                        <th>Name</th>
+			<th>Grade</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Value</th>
+                    </tr>
+                    <tr t-foreach="orderlines" t-as="orderline">
+                        <td>
+                            <t t-esc="orderline.get_product().display_name"/>
+				<t t-esc="orderline.get_product().product_grade"/>
+                             <t t-if="orderline.get_discount() > 0">
+                                <div class="pos-disc-font">
+                                    With a <t t-esc="orderline.get_discount()"/>% discount
+                                </div>
+                            </t>
+                        </td>
+                        <td>
+                            <t t-esc="orderline.get_quantity_str_with_unit()"/>
+                        </td>
+                        <td>
+                            <t t-set="a" t-value="orderline.quantityStr"></t>
+                            <t t-set="b" t-value="orderline.get_display_price()"></t>
+                            <t t-set="c" t-value="b/a"></t>
+                            <t t-esc="c"/>
+                        </td>
+                        <td style='text-align:right'>
+                            <t t-esc="widget.format_currency(orderline.get_display_price())"/>
+                        </td>
+                    </tr>
+                </table>
+
+                 
+            
+        </t>
+    </t>
+
+
+
+Feasible load methods
+
+
+You can get it using get_client() method.
+
+You will get full object of the partner of current order then you can use it as like a py file eg. partner.city etc. in the receipt template.
+
+render_receipt: function() {
+    var order = this.pos.get_order();
+    this.$('.pos-receipt-container').html(QWeb.render('PosTicket',{
+      widget:this,
+      order: order,
+      partner:this.pos.get_order().get_client(),
+      receipt: order.export_for_printing(),
+      orderlines: order.get_orderlines(),
+      paymentlines: order.get_paymentlines(),
+    }));
+  };
+
+Update:
+
+To add address fields in res.company model in js.
+
+var module = require('point_of_sale.models');
+var models = module.PosModel.prototype.models;
+for(var i=0; i<models.length; i++){
+    var model=models[i];
+    if(model.model === 'res.company'){
+         model.fields.push('street');
+         model.fields.push('city');
+         model.fields.push('state_id');
+         model.fields.push('country_id');
+
+         // other field you want to pull from the res.company table.
+
+    } 
+}
+
