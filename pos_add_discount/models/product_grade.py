@@ -12,7 +12,8 @@ class ProductGrade(models.Model):
 class ProductGradeAdd(models.Model):
     _inherit = 'product.product'
 
-    product_grade = fields.Char(string='Product Grade')
+    product_grade = fields.Char(string='Product Grade', related='product_tmpl_id.product_grade')
+
 
 
 class PosOrderLine(models.Model):

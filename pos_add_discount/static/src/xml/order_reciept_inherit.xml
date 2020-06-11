@@ -947,6 +947,8 @@
                         <div t-esc='line.product_name_wrapped[0]'/>
                         <t t-esc='line.product_name_wrapped[0]' /><!--new add-add new fild here -->
                         <t t-esc='line.product_grade' /><!--shows false feed data-->
+<!--                        <t t-esc='line.product_grade_wrapped' />-->
+<!--                         <t t-esc='orderlines.product_grade_wrapped[0]' />-->
 <!--                        <t t-esc='orderlines.get_product().product_grade' />-->
 <!--                        <t t-esc="line.product.product_tmpl_id.product_grade"/>-->
 <!--                        <t t-esc='line.product_grade' />-->
