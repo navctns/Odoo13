@@ -14,6 +14,8 @@ class PatientMedicalReportXlsx(models.AbstractModel):
         print(data)
         ops = data['ops']
         print('ops', ops)
+        header_values=data['header_vals']
+        print(header_values)
         # seq = ops['seq'] #two slices
         # for i in range(1) :
         #     seq = ops[i]['seq']
@@ -21,24 +23,53 @@ class PatientMedicalReportXlsx(models.AbstractModel):
         format1 = workbook.add_format({'font_size':16, 'align':'vcenter','bold':True})
         format2 = workbook.add_format({'font_size': 14, 'align': 'vcenter'})
         sheet = workbook.add_worksheet('Patient Report')
-        sheet.write(0, 0, 'Serial', format1)
-        sheet.write(0, 1, 'OP', format1)
-        sheet.write(0, 2, 'Date', format1)
-        sheet.write(0, 3, 'Patient', format1)
-        sheet.write(0, 4, 'Disease', format1)
-        sheet.write(0, 5, 'Doctor', format1)
-        sheet.write(0, 6, 'Department', format1)
-        # sheet.write(1, 1, seq, format1)
-        #Setting the column width
-        sheet.set_column(0, 0, 10)
-        sheet.set_column(0, 1, 30)
-        sheet.set_column(0, 2, 30)
-        sheet.set_column(0, 3, 30)
-        sheet.set_column(0, 4, 30)
-        sheet.set_column(0, 5, 30)
-        sheet.set_column(0, 6, 30)
+        # sheet.merge_range(0, 7, 'Medical Report', format1)
+        sheet.merge_range(0, 0, 1, 30, 'Medical Report', format1)
+        ##SET header values#######
+        patient = ''
+        disease = ''
+        doct = ''
+        dept = ''
+        from_dt = ''
+        date_to = ''
+        head_info = header_values.keys()
+        if 'patient' in head_info :
+            patient = 'Patient :' + str(header_values['patient']) + ', '
+        if 'disease' in head_info :
+            disease = 'Disease :' + str(header_values['disease']) + ', '
+        if 'doct' in head_info :
+            doct = 'Doctor :' + str(header_values['doct']) + ', '
+        if 'dept' in head_info :
+            dept = 'Department :' + str(header_values['dept']) + ', '
+        if 'from_dt' in head_info :
+            from_dt = 'From :' + str(header_values['from_dt']) + ', '
+        if 'date_to' in head_info :
+            date_to = 'To :' + str(header_values['date_to'])
 
-        i = 1 #for adding data in lines
+        info_str = '(' + patient + disease + doct + dept + from_dt + date_to +')'
+        sheet.merge_range(2, 0, 2, 30, info_str, format2)
+        # sheet.merge_range(3, 0, 3, 30).write(patient,format2)
+
+        # Setting the column width
+        sheet.set_column(4, 0, 10)
+        sheet.set_column(4, 1, 30)
+        sheet.set_column(4, 2, 30)
+        sheet.set_column(4, 3, 30)
+        sheet.set_column(4, 4, 30)
+        sheet.set_column(4, 5, 30)
+        sheet.set_column(4, 6, 30)
+        #write data
+        sheet.write(4, 0, 'Serial', format1)
+        sheet.write(4, 1, 'OP', format1)
+        sheet.write(4, 2, 'Date', format1)
+        sheet.write(4, 3, 'Patient', format1)
+        sheet.write(4, 4, 'Disease', format1)
+        sheet.write(4, 5, 'Doctor', format1)
+        sheet.write(4, 6, 'Department', format1)
+        # sheet.write(1, 1, seq, format1)
+
+
+        i = 5 #for adding data in lines
         for op in ops :
 
             num = op['num']
@@ -58,6 +89,7 @@ class PatientMedicalReportXlsx(models.AbstractModel):
             sheet.write(i, 6, department, format2)
 
             i += 1
+        ##############################################
         # for obj in partners:
         #     report_name = obj.name
         #     # One sheet by partner

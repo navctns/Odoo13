@@ -4,3 +4,9 @@ last_id = self.env['table.name'].search([])[-1].id
 
 change date format in report
 <sapn t-esc="datetime.datetime.strptime(your field name, '%Y-%m-%d %H:%M:%S').strftime('%d/%m/%Y')"/>
+
+load xml changes without upgrade
+
+change parameters on config
+
+-c odoo.conf --dev xml

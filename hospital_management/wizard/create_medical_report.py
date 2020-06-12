@@ -414,8 +414,14 @@ class CreateMedicalReport(models.TransientModel):
 
             all_recs = self.env['hospital.op'].search([])
             l = len(all_recs)
-            header_values['from_dt'] = all_recs[0].date_op
-            header_values['date_to'] = all_recs[l-1].date_op
+            # header_values['from_dt'] = all_recs[0].date_op
+            # header_values['date_to'] = all_recs[l-1].date_op
+            # change date format
+            from_dt = datetime.datetime.strptime(str(all_recs[0].date_op), '%Y-%m-%d').strftime('%d/%m/%Y')
+            date_to = datetime.datetime.strptime(str(all_recs[l-1].date_op), '%Y-%m-%d').strftime('%d/%m/%Y')
+            # change date format
+            header_values['from_dt'] = from_dt
+            header_values['date_to'] = date_to
             # from_dt,date_to
 
         all_ops_ids = []
