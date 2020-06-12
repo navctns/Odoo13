@@ -1,0 +1,6 @@
+Last record
+last_id = self.env['table.name'].search([])[-1].id
+0 for first record
+
+change date format in report
+<sapn t-esc="datetime.datetime.strptime(your field name, '%Y-%m-%d %H:%M:%S').strftime('%d/%m/%Y')"/>

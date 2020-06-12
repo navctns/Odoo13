@@ -10,7 +10,43 @@
           <t t-call="web.external_layout">
 
                 <header>
+                    <div>
                     <h1 style="text-align:center; margin-top:20;">Medical Report</h1>
+                    <t t-set="info" t-value="header_vals"/>
+                        <!-- Header infos-->
+<!--                        (<t t-if="'patient' in info">-->
+<!--                            <div style='text-align:center'>-->
+<!--                                <h3 class="text-align:center; margin-top:20;">-->
+
+<!--                                            Patient : <t t-esc="info['patient']"/>,-->
+
+<!--                                </h3>-->
+<!--                            </div>-->
+<!--                        </t>-->
+<!--                        <t t-if="'patient' in info">-->
+<!--                            <div style='text-align:center'>-->
+<!--                                <h3 class="text-align:center; margin-top:20;">-->
+
+<!--                                            Disease : <t t-esc="info['disease']"/>,-->
+
+<!--                                </h3>-->
+<!--                            </div>-->
+<!--                        </t>-->
+<!--                        )-->
+                        <!-- Header infos-->
+
+                            <div style='text-align:center'>
+                                <h3 class="text-align:center; margin-top:20;">
+                                        (<t t-if="'patient' in info">
+                                            Patient : <t t-esc="info['patient']"/>,
+                                        </t>
+                                        <t t-if="'disease' in info">
+                                            Disease : <t t-esc="info['disease']"/>,
+                                        </t>)
+                                </h3>
+                            </div>
+
+                    </div>
                 </header>
                 <div class="page">
                     <t t-set="info" t-value="header_vals"/>

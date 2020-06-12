@@ -116,6 +116,7 @@ class CreateMedicalReport(models.TransientModel):
 
 
     def _get_op_data_per_date(self, header_values):
+
         e = False
         s = True
         label_dt = {
@@ -125,20 +126,43 @@ class CreateMedicalReport(models.TransientModel):
         if self.date_from and not self.to_date:
             ops = self.env['hospital.op'].search([('date_op', '>=', self.date_from)])
             label_dt['date_f'] = s
-            header_values['from_dt'] = self.date_from
+            #change date format
+            from_dt = datetime.datetime.strptime(str(self.date_from), '%Y-%m-%d').strftime('%d/%m/%Y')
+            date_to = datetime.datetime.strptime(str(fields.Date.today()), '%Y-%m-%d').strftime('%d/%m/%Y')
+            #change date format
+            # header_values['from_dt'] = self.date_from
+            # header_values['date_to'] = fields.Date.today()
+            #pass to dict with changed format
+            header_values['from_dt'] = from_dt
+            header_values['date_to'] = date_to
+            ##########
             return (ops, label_dt, header_values)
         if self.to_date and not self.date_from :
             ops = self.env['hospital.op'].search([('date_op', '<=', self.to_date)])
-            label_dt['date_t'] = s
-            header_values['date_to'] = self.to_date
+
+            label_dt['date_t'] = s#not used
+            # header_values['date_to'] = self.to_date
+            first_date = self.env['hospital.op'].search([])[0].date_op#get date of first record
+            # change date format
+            from_dt = datetime.datetime.strptime(str(first_date), '%Y-%m-%d').strftime('%d/%m/%Y')
+            date_to = datetime.datetime.strptime(str(self.to_date), '%Y-%m-%d').strftime('%d/%m/%Y')
+            # change date format
+            header_values['from_dt'] = from_dt
+            header_values['date_to'] = date_to
             return (ops, label_dt, header_values)
         if self.to_date and self.date_from :
             ops = self.env['hospital.op'].search(['&',('date_op', '<=', self.to_date),
                                                   ('date_op','>=', self.date_from)])
             label_dt['date_f'] = s
             label_dt['date_t'] = s
-            header_values['from_dt'] = self.date_from
-            header_values['date_to'] = self.to_date
+            # change date format
+            from_dt = datetime.datetime.strptime(str(self.date_from), '%Y-%m-%d').strftime('%d/%m/%Y')
+            date_to = datetime.datetime.strptime(str(self.to_date), '%Y-%m-%d').strftime('%d/%m/%Y')
+            # change date format
+            # header_values['from_dt'] = self.date_from
+            # header_values['date_to'] = self.to_date
+            header_values['from_dt'] = from_dt
+            header_values['date_to'] = date_to
             return (ops, label_dt, header_values)
         else :
             ops = self.env['hospital.op'].search([])
@@ -525,7 +549,9 @@ class CreateMedicalReport(models.TransientModel):
                     vals = {
                         'num': num,
                         'seq': o.op_number,
-                        'date': o.date_op,
+                        # 'date': o.date_op,
+                        #change date format to d-m-y
+                        'date': datetime.datetime.strptime(str(o.date_op), '%Y-%m-%d').strftime('%d/%m/%Y'),
                         'patient': o.patient_id.name,
                         'disease': o.consultation_ids.disease_id.disease_id,
                         'doctor': o.doctor_id.name,
