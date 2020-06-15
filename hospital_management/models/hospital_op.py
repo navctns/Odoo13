@@ -55,7 +55,7 @@ class OP(models.Model):
             ('draft', 'Draft'),
             ('posted', 'Confirmed'),
             ('paid','Paid')
-        ], default='draft', required=True, compute = '_state_change')
+        ], default='draft', required=True, compute = '_compute_payment_total')
     confirm_op = fields.Boolean(string="Confirm op", default=False)#specially for confirm button
     consultation_ids = fields.One2many('hospital.consult', 'op_no', string = "Op_Consultations")
     consult_button_label = fields.Char(string = 'Consultation')
@@ -111,6 +111,42 @@ class OP(models.Model):
             self.invoice_count = len(self.op_invoice_ids)
         else :
             self.invoice_count = 0
+
+    @api.depends('op_invoice_ids', 'confirm_op')
+    def _compute_payment_total(self):
+        # if self.op_invoice_ids:
+        #     # for r in self:
+        #     #     if r.op_invoice_ids.op_id.id == self.id:
+        #     #         self.invoice_count += 1
+        #     print('invoice_ids len', len(self.op_invoice_ids))
+        #     self.invoice_count = len(self.op_invoice_ids)
+        # else:
+        #     self.invoice_count = 0
+        amount_paid = 0
+        if self.op_invoice_ids :
+            if self.op_invoice_ids.invoice_payment_state == 'paid':
+                self.write({
+                    'state': 'paid',
+                })
+            else :
+                self.write({
+                    'state': 'posted',
+                })
+            #     amount_paid = sum(invoice_ids.payment_ids.mapped('amount'))
+            # if amount_paid == self.doctor_fee:
+            #     self.write({
+            #         'state': 'paid',
+            #     })
+        elif self.confirm_op:
+            self.write({
+                'state': 'posted',
+            })
+            self.confirm_op = False
+
+        else:
+            self.write({
+                'state': 'draft',
+            })
 
     @api.depends('invoice_count', 'confirm_op')
     def _state_change(self):

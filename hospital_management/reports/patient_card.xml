@@ -2,70 +2,147 @@
 
 
 <odoo>
-
+    <data>
+    <!--paper format-->
+    <record id="paperformat_hospital_medical_report" model="report.paperformat">
+        <field name="name">Medical Report Matrix</field>
+        <field name="default" eval="False"/>
+        <field name="format">custom</field>
+        <field name="page_width">215</field>
+        <field name="page_height">280</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">73</field>
+        <field name="margin_bottom">23</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">10</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">68</field>
+        <field name="dpi">90</field>
+    </record>
+    <!--paper format-->
 <!--<template id="hospital_patient_medical_report" inherit_id="web.external_layout_standard">-->
 <template id="hospital_patient_medical_report">
+<!--    <header>-->
+<!--                    <div>-->
+<!--&lt;!&ndash;                        <div class="row">&ndash;&gt;-->
+<!--                            <h1 style="text-align:center; margin-top:20;">Medical Report</h1>-->
+<!--                            <t t-set="info" t-value="header_vals"/>-->
+<!--                                &lt;!&ndash; Header infos&ndash;&gt;-->
+<!--        &lt;!&ndash;                        (<t t-if="'patient' in info">&ndash;&gt;-->
+<!--        &lt;!&ndash;                            <div style='text-align:center'>&ndash;&gt;-->
+<!--        &lt;!&ndash;                                <h3 class="text-align:center; margin-top:20;">&ndash;&gt;-->
+
+<!--        &lt;!&ndash;                                            Patient : <t t-esc="info['patient']"/>,&ndash;&gt;-->
+
+<!--        &lt;!&ndash;                                </h3>&ndash;&gt;-->
+<!--        &lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--        &lt;!&ndash;                        </t>&ndash;&gt;-->
+<!--        &lt;!&ndash;                        <t t-if="'patient' in info">&ndash;&gt;-->
+<!--        &lt;!&ndash;                            <div style='text-align:center'>&ndash;&gt;-->
+<!--        &lt;!&ndash;                                <h3 class="text-align:center; margin-top:20;">&ndash;&gt;-->
+
+<!--        &lt;!&ndash;                                            Disease : <t t-esc="info['disease']"/>,&ndash;&gt;-->
+
+<!--        &lt;!&ndash;                                </h3>&ndash;&gt;-->
+<!--        &lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--        &lt;!&ndash;                        </t>&ndash;&gt;-->
+<!--        &lt;!&ndash;                        )&ndash;&gt;-->
+<!--                                &lt;!&ndash; Header infos&ndash;&gt;-->
+
+<!--                                    <div style='text-align:center; font-size: 18px;'>-->
+<!--        &lt;!&ndash;                                <h4 class="text-align:center; margin-top:20;">&ndash;&gt;-->
+<!--                                        <div>-->
+<!--                                                (<t t-if="'patient' in info">-->
+<!--                                                    Patient : <t t-esc="info['patient']"/>,-->
+<!--                                                </t>-->
+<!--                                                <t t-if="'disease' in info">-->
+<!--                                                    Disease : <t t-esc="info['disease']"/>,-->
+<!--                                                </t>-->
+<!--                                                <t t-if="'doct' in info">-->
+<!--                                                        Doctor : <t t-esc="info['doct']"/>,-->
+<!--                                                </t>-->
+<!--                                                <t t-if="'dept' in info">-->
+<!--                                                        Department : <t t-esc="info['dept']"/>,-->
+<!--                                                </t>-->
+<!--                                                <t t-if="'from_dt' in info">-->
+<!--                                                        From : <t t-esc="info['from_dt']"/>,-->
+<!--                                                </t>-->
+<!--                                                <t t-if="'date_to' in info">-->
+<!--                                                        To : <t t-esc="info['date_to']"/>-->
+<!--                                                </t>-->
+<!--                                            )-->
+<!--                                            </div>-->
+<!--        &lt;!&ndash;                                </h4>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--                    </div>-->
+<!--                </header>-->
      <t t-call="web.html_container">
 <!--        <t t-set="o" t-value="res_company"/>-->
-          <t t-call="web.external_layout">
-<!--              <t t-call="web.external_layout_standard">-->
+
+<!--          <t t-call="web.external_layout">-->
+<!--               <t t-foreach="docs" t-as="o">-->
+<!--         <t t-foreach="ops" t-as="o">-->
+              <t t-call="web.external_layout">
 
 <!--            <t t-call="web.internal_layout">-->
+<!--                  <div class="page">-->
 <!--                <header>-->
                     <div>
-                    <h1 style="text-align:center; margin-top:20;">Medical Report</h1>
-                    <t t-set="info" t-value="header_vals"/>
-                        <!-- Header infos-->
-<!--                        (<t t-if="'patient' in info">-->
-<!--                            <div style='text-align:center'>-->
-<!--                                <h3 class="text-align:center; margin-top:20;">-->
+<!--                        <div class="row">-->
+                            <h1 style="text-align:center; margin-top:20;">Medical Report</h1>
+                            <t t-set="info" t-value="header_vals"/>
+                                <!-- Header infos-->
+        <!--                        (<t t-if="'patient' in info">-->
+        <!--                            <div style='text-align:center'>-->
+        <!--                                <h3 class="text-align:center; margin-top:20;">-->
 
-<!--                                            Patient : <t t-esc="info['patient']"/>,-->
+        <!--                                            Patient : <t t-esc="info['patient']"/>,-->
 
-<!--                                </h3>-->
-<!--                            </div>-->
-<!--                        </t>-->
-<!--                        <t t-if="'patient' in info">-->
-<!--                            <div style='text-align:center'>-->
-<!--                                <h3 class="text-align:center; margin-top:20;">-->
+        <!--                                </h3>-->
+        <!--                            </div>-->
+        <!--                        </t>-->
+        <!--                        <t t-if="'patient' in info">-->
+        <!--                            <div style='text-align:center'>-->
+        <!--                                <h3 class="text-align:center; margin-top:20;">-->
 
-<!--                                            Disease : <t t-esc="info['disease']"/>,-->
+        <!--                                            Disease : <t t-esc="info['disease']"/>,-->
 
-<!--                                </h3>-->
-<!--                            </div>-->
-<!--                        </t>-->
-<!--                        )-->
-                        <!-- Header infos-->
+        <!--                                </h3>-->
+        <!--                            </div>-->
+        <!--                        </t>-->
+        <!--                        )-->
+                                <!-- Header infos-->
 
-                            <div style='text-align:center; font-size: 18px;'>
-<!--                                <h4 class="text-align:center; margin-top:20;">-->
-                                <div>
-                                        (<t t-if="'patient' in info">
-                                            Patient : <t t-esc="info['patient']"/>,
-                                        </t>
-                                        <t t-if="'disease' in info">
-                                            Disease : <t t-esc="info['disease']"/>,
-                                        </t>
-                                        <t t-if="'doct' in info">
-                                                Doctor : <t t-esc="info['doct']"/>,
-                                        </t>
-                                        <t t-if="'dept' in info">
-                                                Department : <t t-esc="info['dept']"/>,
-                                        </t>
-                                        <t t-if="'from_dt' in info">
-                                                From : <t t-esc="info['from_dt']"/>,
-                                        </t>
-                                        <t t-if="'date_to' in info">
-                                                To : <t t-esc="info['date_to']"/>
-                                        </t>
-                                    )
+                                    <div style='text-align:center; font-size: 18px;'>
+        <!--                                <h4 class="text-align:center; margin-top:20;">-->
+                                        <div>
+                                                (<t t-if="'patient' in info">
+                                                    Patient : <t t-esc="info['patient']"/>,
+                                                </t>
+                                                <t t-if="'disease' in info">
+                                                    Disease : <t t-esc="info['disease']"/>,
+                                                </t>
+                                                <t t-if="'doct' in info">
+                                                        Doctor : <t t-esc="info['doct']"/>,
+                                                </t>
+                                                <t t-if="'dept' in info">
+                                                        Department : <t t-esc="info['dept']"/>,
+                                                </t>
+                                                <t t-if="'from_dt' in info">
+                                                        From : <t t-esc="info['from_dt']"/>,
+                                                </t>
+                                                <t t-if="'date_to' in info">
+                                                        To : <t t-esc="info['date_to']"/>
+                                                </t>
+                                            )
+                                            </div>
+        <!--                                </h4>-->
                                     </div>
-<!--                                </h4>-->
-                            </div>
-
+<!--                        </div>-->
                     </div>
 <!--                </header>-->
-                <div class="page">
+<!--                <div class="page">-->
 <!--                    <t t-set="info" t-value="header_vals"/>-->
                     <!-- Header infos-->
 <!--                    <tr t-if="'patient' in info">-->
@@ -111,6 +188,7 @@
 <!--                    </h3>-->
 <!--                    </tr>-->
                     <!-- Header info Ended -->
+                  <div class="page">
                     <div class="row mt32">
 <!--                        <div class="col-3">-->
 <!--                            <strong>Patient Name</strong>-->
@@ -125,7 +203,7 @@
 <!--                                        </tr>-->
 
 
-                            <table class="table table-bordered mb32" style="table-layout:auto">
+                            <table class="table table-bordered mb32" style="table-layout:auto"><!--auto table layout -->
                                 <t t-set="info" t-value="header_vals"/>
                                 <thead>
                                     <tr>
@@ -166,37 +244,37 @@
 
                                 </thead>
                                  <tbody>
-                                    <t t-foreach="ops" t-as="o">
+                                    <t t-foreach="ops" t-as="op">
                                         <tr>
                                             <td style="background-color:#ababab">
-                                                <strong><t t-esc="o['num']"/></strong>
+                                                <strong><t t-esc="op['num']"/></strong>
                                             </td>
                                             <td style="background-color:#ababab">
-                                                <strong><t t-esc="o['seq']"/></strong>
+                                                <strong><t t-esc="op['seq']"/></strong>
                                             </td>
 
 
                                             <td style="background-color:#ababab">
-                                                <strong><t t-esc="o['date']"/></strong>
+                                                <strong><t t-esc="op['date']"/></strong>
                                             </td>
                                             <t t-if="'patient' not in info">
                                                 <td style="background-color:#ababab">
-                                                    <strong><t t-esc="o['patient']"/></strong>
+                                                    <strong><t t-esc="op['patient']"/></strong>
                                                 </td>
                                             </t>
                                             <t t-if="'disease' not in info">
                                                  <td style="background-color:#ababab">
-                                                    <strong><t t-esc="o['disease']"/></strong>
+                                                    <strong><t t-esc="op['disease']"/></strong>
                                                 </td>
                                             </t>
                                             <t t-if="'doct' not in info">
                                                  <td style="background-color:#ababab">
-                                                    <strong><t t-esc="o['doctor']"/></strong>
+                                                    <strong><t t-esc="op['doctor']"/></strong>
                                                 </td>
                                             </t>
                                             <t t-if="'dept' not in info">
                                                 <td style="background-color:#ababab">
-                                                    <strong><t t-esc="o['department']"/></strong>
+                                                    <strong><t t-esc="op['department']"/></strong>
                                                 </td>
                                             </t>
                                         </tr>
@@ -210,10 +288,11 @@
 <!--                        </div>-->
                 </div>
 
-          </t>
+<!--          </t>-->
      </t>
 
+     </t>
 
 </template>
-
+</data>
 </odoo>

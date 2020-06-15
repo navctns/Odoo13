@@ -1,0 +1,23 @@
+transaction_ids = fields.Many2many('payment.transaction', 'account_invoice_transaction_rel', 'invoice_id', 'transaction_id',
+                                       string='Transactions', copy=False, readonly=True)
+
+
+    def action_pos_order_paid(self):
+        if not float_is_zero(self.amount_total - self.amount_paid, precision_rounding=self.currency_id.rounding):
+            raise UserError(_("Order %s is not fully paid.") % self.name)
+        self.write({'state': 'paid'})
+        return self.create_picking()
+
+order.amount_paid = sum(order.payment_ids.mapped('amount'))
+
+order.amount_paid = sum(payment.amount for payment in order.payment_ids)
+
+ @api.onchange('payment_ids', 'lines')
+    def _onchange_amount_all(self):
+        for order in self:
+            currency = order.pricelist_id.currency_id
+            order.amount_paid = sum(payment.amount for payment in order.payment_ids)
+            order.amount_return = sum(payment.amount < 0 and payment.amount or 0 for payment in order.payment_ids)
+            order.amount_tax = currency.round(sum(self._amount_line_tax(line, order.fiscal_position_id) for line in order.lines))
+            amount_untaxed = currency.round(sum(line.price_subtotal for line in order.lines))
+            order.amount_total = order.amount_tax + amount_untaxed

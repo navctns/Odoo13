@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <record id="paperformat_hospital_medical_report" model="report.paperformat">
+        <field name="name">Medical Report Matrix</field>
+        <field name="default" eval="False"/>
+        <field name="format">custom</field>
+        <field name="page_width">215</field>
+        <field name="page_height">280</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">73</field>
+        <field name="margin_bottom">23</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">10</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">68</field>
+        <field name="dpi">90</field>
+    </record>
         <report
             id="patient_medical_report"
             string="Patient Medical Report"
             model="ir.actions.report"
             report_type="qweb-pdf"
             name="hospital_management.hospital_patient_medical_report"
-            file="hospital_management.hospital_patient_medical_report"/>
+            file="hospital_management.hospital_patient_medical_report" />
+<!--        paperformat="hospital_management.paperformat_hospital_medical_report"-->
+
         <report
             id="patient_medical_report_xls"
             string="Patient Medical Report Exel"
