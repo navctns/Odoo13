@@ -22,9 +22,11 @@ class PatientMedicalReportXlsx(models.AbstractModel):
         # data_1 = data['ops']
         format1 = workbook.add_format({'font_size':16, 'align':'vcenter','bold':True})
         format2 = workbook.add_format({'font_size': 14, 'align': 'vcenter'})
+        format1.set_align('center')
+        format2.set_align('center')
         sheet = workbook.add_worksheet('Patient Report')
         # sheet.merge_range(0, 7, 'Medical Report', format1)
-        sheet.merge_range(0, 0, 1, 30, 'Medical Report', format1)
+        sheet.merge_range(0, 0, 1, 16, 'Medical Report', format1)
         ##SET header values#######
         patient = ''
         disease = ''
@@ -47,7 +49,7 @@ class PatientMedicalReportXlsx(models.AbstractModel):
             date_to = 'To :' + str(header_values['date_to'])
 
         info_str = '(' + patient + disease + doct + dept + from_dt + date_to +')'
-        sheet.merge_range(2, 0, 2, 30, info_str, format2)
+        sheet.merge_range(2, 0, 3, 16, info_str, format2)
         # sheet.merge_range(3, 0, 3, 30).write(patient,format2)
 
         # Setting the column width
@@ -144,11 +146,51 @@ class PatientMedicalReportXlsx(models.AbstractModel):
             # sheet.write(i, 5, doctor, format2)
             # sheet.write(i, 6, department, format2)
             sheet.write(i, 0, num, format2)
-            sheet.merge_range(i, 1, i, 3, 'OP', format2)
-            sheet.merge_range(i,4,i, 5, 'Date', format2)
-            sheet.merge_range(i, 6, i, 8, 'Patient', format2)
-            sheet.merge_range(i, 9, i, 11, 'Disease', format2)
-            sheet.merge_range(i, 12, i, 14, 'Doctor', format2)
-            sheet.merge_range(i, 15, i, 17, 'Department', format2)
+            sheet.merge_range(i, 1, i, 3, seq, format2)
+            sheet.merge_range(i,4,i, 5, date, format2)
+            #####method 2
+
+            if patient != '':
+                if disease == '' :
+                    sheet.merge_range(i, 6, i, 8, patient, format2)
+                elif doct == '':
+                    sheet.merge_range(i, 6, i, 8, disease, format2)
+                elif dept == ''
+                    sheet.merge_range(i, 6, i, 8, department, format2)
+            else:
+                sheet.merge_range(i, 6, i, 8, patient, format2)
+
+            if disease != '' :
+                if patient!= '' :
+                    if doct == '' :
+                        sheet.merge_range(i, 6, i, 8, doctor, format2)
+                    elif dept == '' :
+                        sheet.merge_range(i, 6, i, 6, department, format2)
+                else :
+                    if doct == '' :
+                        sheet.merge_range(i, 9, i, 11, doctor, format2)
+                    elif dept == '' :
+                        sheet.merge_range(i, 9, i, 11, department, format2)
+            else :
+                if
+
+            #######3#####
+            if patient == '':
+                sheet.merge_range(i, 6, i, 8, patient, format2)
+                sheet.merge_range(i, 9, i, 11, disease, format2)
+            else :
+                sheet.merge_range(i, 6, i, 8, disease, format2)
+
+            if disease == '' :
+                if patient == '' :
+                    sheet.merge_range(i, 9, i, 11, disease, format2)
+                    sheet.merge_range(i, 12, i, 14, doctor, format2)
+                else :
+                    sheet.merge_range(i, 9, i, 11, doctor, format2)
+            else :
+
+
+            sheet.merge_range(i, 12, i, 14, doctor, format2)
+            sheet.merge_range(i, 15, i, 17, department, format2)
 
             i += 1
