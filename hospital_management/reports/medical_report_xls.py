@@ -27,6 +27,9 @@ class PatientMedicalReportXlsx(models.AbstractModel):
         sheet = workbook.add_worksheet('Patient Report')
         # sheet.merge_range(0, 7, 'Medical Report', format1)
         sheet.merge_range(0, 0, 1, 16, 'Medical Report', format1)
+        cols = {'p':0,'dis':0,'doc':0,'dep':0}
+        lcols = [0,0,0,0]#for pointing patient disease doct dept
+        lcol_label=['Patient','Disease','Doctor','Department']
         ##SET header values#######
         patient = ''
         disease = ''
@@ -37,12 +40,16 @@ class PatientMedicalReportXlsx(models.AbstractModel):
         head_info = header_values.keys()
         if 'patient' in head_info :
             patient = 'Patient :' + str(header_values['patient']) + ', '
+            lcols[0] = 1
         if 'disease' in head_info :
             disease = 'Disease :' + str(header_values['disease']) + ', '
+            lcols[1] = 1
         if 'doct' in head_info :
             doct = 'Doctor :' + str(header_values['doct']) + ', '
+            lcols[2] = 1
         if 'dept' in head_info :
             dept = 'Department :' + str(header_values['dept']) + ', '
+            lcols[3] = 1
         if 'from_dt' in head_info :
             from_dt = 'From :' + str(header_values['from_dt']) + ', '
         if 'date_to' in head_info :
@@ -106,6 +113,11 @@ class PatientMedicalReportXlsx(models.AbstractModel):
         # sheet.merge_range(4, 0, 4, 1, 'Serial', format2)
         sheet.merge_range(4, 1, 4, 3, 'OP', format2)
         sheet.merge_range(4, 4, 4, 5, 'Date', format2)
+        i = 4
+        j = 6
+        for j in range(len(lcols)) :
+            if lcols[j] == 0 :
+
         sheet.merge_range(4, 6, 4, 8, 'Patient', format2)
         sheet.merge_range(4, 9, 4, 11, 'Disease', format2)
         sheet.merge_range(4, 12, 4, 14, 'Doctor', format2)
@@ -172,7 +184,10 @@ class PatientMedicalReportXlsx(models.AbstractModel):
                     elif dept == '' :
                         sheet.merge_range(i, 9, i, 11, department, format2)
             else :
-                if
+                if patient == '' :
+                    sheet.merge_range(i, 9, i, 11, disease, format2)
+
+            if
 
             #######3#####
             if patient == '':
