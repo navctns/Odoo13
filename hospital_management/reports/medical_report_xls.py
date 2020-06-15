@@ -51,27 +51,83 @@ class PatientMedicalReportXlsx(models.AbstractModel):
         # sheet.merge_range(3, 0, 3, 30).write(patient,format2)
 
         # Setting the column width
-        sheet.set_column(4, 0, 10)
-        sheet.set_column(4, 1, 30)
-        sheet.set_column(4, 2, 30)
-        sheet.set_column(4, 3, 30)
-        sheet.set_column(4, 4, 30)
-        sheet.set_column(4, 5, 30)
-        sheet.set_column(4, 6, 30)
-        #write data
+        # sheet.set_column(4, 0, 10)
+        # sheet.set_column(4, 1, 30)
+        # sheet.set_column(4, 2, 30)
+        # sheet.set_column(4, 3, 30)
+        # sheet.set_column(4, 4, 30)
+        # sheet.set_column(4, 5, 30)
+        # sheet.set_column(4, 6, 30)
+        # #write data
+        # sheet.write(4, 0, 'Serial', format1)
+        # sheet.write(4, 1, 'OP', format1)
+        # sheet.write(4, 2, 'Date', format1)
+        # sheet.write(4, 3, 'Patient', format1)
+        # sheet.write(4, 4, 'Disease', format1)
+        # sheet.write(4, 5, 'Doctor', format1)
+        # sheet.write(4, 6, 'Department', format1)
+        # # sheet.write(1, 1, seq, format1)
+        #
+        #
+        # i = 5 #for adding data in lines
+        # for op in ops :
+        #
+        #     num = op['num']
+        #     seq = op['seq']
+        #     date = op['date']
+        #     patient = op['patient']
+        #     disease = op['disease']
+        #     doctor = op['doctor']
+        #     department = op['department']
+        #
+        #     sheet.write(i, 0, num, format2)
+        #     sheet.write(i, 1, seq, format2)
+        #     sheet.write(i, 2, date, format2)
+        #     sheet.write(i, 3, patient, format2)
+        #     sheet.write(i, 4, disease, format2)
+        #     sheet.write(i, 5, doctor, format2)
+        #     sheet.write(i, 6, department, format2)
+        #
+        #     i += 1
+        ##############################################
+        # for obj in partners:
+        #     report_name = obj.name
+        #     # One sheet by partner
+        #     sheet = workbook.add_worksheet(report_name[:31])
+        #     bold = workbook.add_format({'bold': True})
+        #     sheet.write(0, 0, obj.name, bold)
+
+        #Modifying code with merging method
+
+        #merge and write
         sheet.write(4, 0, 'Serial', format1)
-        sheet.write(4, 1, 'OP', format1)
-        sheet.write(4, 2, 'Date', format1)
-        sheet.write(4, 3, 'Patient', format1)
-        sheet.write(4, 4, 'Disease', format1)
-        sheet.write(4, 5, 'Doctor', format1)
-        sheet.write(4, 6, 'Department', format1)
-        # sheet.write(1, 1, seq, format1)
-
-
-        i = 5 #for adding data in lines
-        for op in ops :
-
+        # sheet.merge_range(4, 0, 4, 1, 'Serial', format2)
+        sheet.merge_range(4, 2, 4, 4, 'OP', format2)
+        sheet.merge_range(4, 5, 4, 6, 'Date', format2)
+        sheet.merge_range(4, 7, 4, 9, 'Patient', format2)
+        sheet.merge_range(4, 10, 4, 12, 'Disease', format2)
+        sheet.merge_range(4, 13, 4, 15, 'Doctor', format2)
+        sheet.merge_range(4, 16, 4, 18, 'Department', format2)
+        #set colum width
+        # sheet.set_column(4, 0, 10)
+        # sheet.set_column(4, 1, 30)
+        # sheet.set_column(4, 2, 30)
+        # sheet.set_column(4, 3, 30)
+        # sheet.set_column(4, 4, 30)
+        # sheet.set_column(4, 5, 30)
+        # sheet.set_column(4, 6, 30)
+        # # write data
+        # sheet.write(4, 0, 'Serial', format1)
+        # sheet.write(4, 1, 'OP', format1)
+        # sheet.write(4, 2, 'Date', format1)
+        # sheet.write(4, 3, 'Patient', format1)
+        # sheet.write(4, 4, 'Disease', format1)
+        # sheet.write(4, 5, 'Doctor', format1)
+        # sheet.write(4, 6, 'Department', format1)
+        # # sheet.write(1, 1, seq, format1)
+        #
+        i = 5  # for adding data in lines
+        for op in ops:
             num = op['num']
             seq = op['seq']
             date = op['date']
@@ -80,19 +136,18 @@ class PatientMedicalReportXlsx(models.AbstractModel):
             doctor = op['doctor']
             department = op['department']
 
-            sheet.write(i, 0, num, format2)
-            sheet.write(i, 1, seq, format2)
-            sheet.write(i, 2, date, format2)
-            sheet.write(i, 3, patient, format2)
-            sheet.write(i, 4, disease, format2)
-            sheet.write(i, 5, doctor, format2)
-            sheet.write(i, 6, department, format2)
+            # sheet.write(i, 0, num, format2)
+            # sheet.write(i, 1, seq, format2)
+            # sheet.write(i, 2, date, format2)
+            # sheet.write(i, 3, patient, format2)
+            # sheet.write(i, 4, disease, format2)
+            # sheet.write(i, 5, doctor, format2)
+            # sheet.write(i, 6, department, format2)
+            sheet.merge_range(i, 2, i, 4, 'OP', format2)
+            sheet.merge_range(i,5,i, 6, 'Date', format2)
+            sheet.merge_range(i, 7, i, 9, 'Patient', format2)
+            sheet.merge_range(i, 10, i, 12, 'Disease', format2)
+            sheet.merge_range(i, 13, i, 15, 'Doctor', format2)
+            sheet.merge_range(i, 16, i, 18, 'Department', format2)
 
             i += 1
-        ##############################################
-        # for obj in partners:
-        #     report_name = obj.name
-        #     # One sheet by partner
-        #     sheet = workbook.add_worksheet(report_name[:31])
-        #     bold = workbook.add_format({'bold': True})
-        #     sheet.write(0, 0, obj.name, bold)
