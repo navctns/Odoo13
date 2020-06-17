@@ -946,7 +946,10 @@
                     <t t-if='!simple'>
                         <div t-esc='line.product_name_wrapped[0]'/>
 <!--                        <t t-esc='line.product_name_wrapped[0]' />&lt;!&ndash;new add-add new fild here &ndash;&gt;-->
-                      <div>  (<t t-esc='line.product_grade' />)</div><!--shows false feed data-->
+
+                      <div><t t-if='line.product_grade'>
+                          (<t t-esc='line.product_grade' />)</t></div><!--shows false feed data-->
+
 <!--                        <t t-esc='line.product_grade_wrapped' />-->
 <!--                         <t t-esc='orderlines.product_grade_wrapped[0]' />-->
 <!--                        <t t-esc='orderlines.get_product().product_grade' />-->
@@ -957,7 +960,7 @@
                         <t t-if="line.display_discount_policy == 'without_discount' &amp;&amp; line.price != line.price_lst">
                             <div class="pos-receipt-left-padding">
                                 <t t-esc="widget.format_currency_no_symbol(line.price_lst)" />
-                                ->
+<!--                                ->-->
                                 <t t-esc="widget.format_currency_no_symbol(line.price)" />
                             </div>
                         </t>

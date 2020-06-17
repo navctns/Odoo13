@@ -83,11 +83,33 @@
 <!--          <t t-call="web.external_layout">-->
 <!--               <t t-foreach="docs" t-as="o">-->
 <!--         <t t-foreach="ops" t-as="o">-->
+
+<!--         <t t-foreach="docs" t-as="o">-->
+<!--              <t t-set="docs" t-as="o"/>-->
+<!--            <t t-call="report.external_layout">-->
               <t t-call="web.external_layout">
 
 <!--            <t t-call="web.internal_layout">-->
 <!--                  <div class="page">-->
 <!--                <header>-->
+<!--                  <t t-set="info" t-value="header_vals"/>-->
+<!--                  (<t t-if="'company' in info">-->
+<!--                  <t t-set=info['company']/>-->
+<!--                  <t t-set="company" t-as="company" />-->
+<!--                  <t t-set=<code>self.company_id</code>  />-->
+<!--                  <t t-set=<code>request.env['res.company'].search([('id','=',request.company_id.id)])</code> t-as="company" />-->
+<!--            <t-att-data-partner_id="request.env.user.partner_id.id"/>-->
+<!--                  <t t-set="self" t-as="self" />-->
+<!--                  <t t-set="self" t-as="self" />-->
+<!--                    </t>-->
+<!--                headers-->
+<!--                    <div class="header din">-->
+<!--&lt;!&ndash;                        <div class="float-right">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <h3 class="mt0 text-right" t-field="form['company_id'].report_header"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--                        <img t-if="doc.company_id.company.logo" t-att-src="image_data_uri(res_company.logo)" class="float-left"/>-->
+<!--                    </div>-->
+                <!--header logo-->
                     <div>
 <!--                        <div class="row">-->
                             <h1 style="text-align:center; margin-top:20;">Medical Report</h1>
@@ -281,18 +303,28 @@
                                     </t>
                                 </tbody>
                             </table>
+                        <div class="footer">
+                    <div class="row">
+                    <center><span>Page </span><span class="page" /> of <span class="topage" /></center>
+                 </div>
+                      <div class="text-muted">
+                Page: <span class="page"/> / <span class="topage"/>
+                </div>
+                </div>
                     </div>
 <!--                        <div class="col-3">-->
 <!--                            <strong>Period Length (days)</strong>-->
 <!--                            <p t-esc="data['period_length']"/>-->
 <!--                        </div>-->
+
                 </div>
+
 
 <!--          </t>-->
      </t>
 
      </t>
-
+<!--     </t>-->
 </template>
 </data>
 </odoo>

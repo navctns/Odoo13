@@ -22,8 +22,8 @@
             model="ir.actions.report"
             report_type="qweb-pdf"
             name="hospital_management.hospital_patient_medical_report"
-            file="hospital_management.hospital_patient_medical_report" />
-<!--        paperformat="hospital_management.paperformat_hospital_medical_report"-->
+            file="hospital_management.hospital_patient_medical_report"
+        paperformat="hospital_management.paperformat_hospital_medical_report"/>
 
         <report
             id="patient_medical_report_xls"

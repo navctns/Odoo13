@@ -1,0 +1,239 @@
+products_item
+
+Button on website
+
+Sample code
+<template id="product_buy_now" inherit_id="website_sale.product" active="False" customize_show="True" name="Buy Now Button">
+        <xpath expr="//a[@id='add_to_cart']" position="after">
+            <a role="button" id="buy_now" class="btn btn-outline-primary btn-lg mt16 d-block d-sm-inline-block" href="#"><i class="fa fa-bolt"/> Buy Now</a>
+        </xpath>
+    </template>
+
+Template To extend
+after  <div class="product_price"
+
+
+ <template id="products_item" name="Products item">
+        <t t-set="product_href" t-value="keep(product.website_url, page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))" />
+
+        <t t-set="combination_info" t-value="product._get_combination_info(only_template=True, add_qty=add_qty or 1, pricelist=pricelist)"/>
+
+        <form action="/shop/cart/update" method="post" class="card oe_product_cart"
+            t-att-data-publish="product.website_published and 'on' or 'off'"
+            itemscope="itemscope" itemtype="http://schema.org/Product">
+            <div class="card-body p-1 oe_product_image">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                <div class="ribbon-wrapper">
+                    <a href="#" role="button" class="ribbon btn btn-danger">Sale</a>
+                </div>
+                <a t-att-href="product_href" class="d-block h-100" itemprop="url">
+                    <span t-field="product.image_1920"
+                        t-options="{'widget': 'image', 'preview_image': 'image_1024' if product_image_big else 'image_256'}"
+                        class="d-flex h-100 justify-content-center align-items-center"/>
+                </a>
+            </div>
+            <div class="card-body p-0 text-center o_wsale_product_information">
+                <div class="p-2 o_wsale_product_information_text">
+                    <h6 class="o_wsale_products_item_title">
+                        <a itemprop="name" t-att-href="product_href" t-att-content="product.name" t-field="product.name" />
+                        <a role="button" t-if="not product.website_published" t-att-href="product_href" class="btn btn-sm btn-danger" title="This product is unpublished.">Unpublished</a>
+                    </h6>
+                    <div class="product_price" itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer">
+                        <del t-attf-class="text-danger mr-2 {{'' if combination_info['has_discounted_price'] else 'd-none'}}" style="white-space: nowrap;" t-esc="combination_info['list_price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" />
+                        <span t-if="combination_info['price']" t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                        <span itemprop="price" style="display:none;" t-esc="combination_info['price']" />
+                        <span itemprop="priceCurrency" style="display:none;" t-esc="website.currency_id.name" />
+                    </div>
+                </div>
+                <div class="o_wsale_product_btn"/>
+            </div>
+        </form>
+    </template>
+///////////////////////////////////////
+Step 1
+Inherit template
+
+<template id="products_item" inherit_id="website_sale.product" active="False" customize_show="True" name="Buy Now Button">
+        <xpath expr="//div[@class='card-body p-0 text-center o_wsale_product_information']// div[@class='p-2 o_wsale_product_information_text']//div[@class='product_price']" position="after">
+            <a role="button" id="buy_now" class="btn btn-outline-primary btn-lg mt16 d-block d-sm-inline-block" href="#"><i class="fa fa-bolt"/> Buy Now</a>
+        </xpath>
+    </template>
+
+//////////////////////////////////////
+
+<a role="button" id="add_to_cart" class="btn btn-primary btn-lg mt16 js_check_product a-submit d-block d-sm-inline-block" href="#" data-oe-model="ir.ui.view" data-oe-id="1373" data-oe-field="arch" data-oe-xpath="/t[1]/t[4]/div[1]/section[1]/div[2]/div[2]/form[1]/div[1]/a[1]"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+
+inherit code in website_sale_stock/views/websites_sale_stock_templates
+
+<template id="website_sale_stock_product" inherit_id="website_sale.product" priority="4">
+    <xpath expr="//a[@id='add_to_cart']" position="after">
+      <div class="availability_messages o_not_editable"/>
+    </xpath>
+  </template>
+
+<template id="website_sale_stock_payment" inherit_id="website_sale.cart_summary">
+     <xpath expr="//table[@id='cart_products']//td[hasclass('td-qty')]" position="inside">
+      <t t-if='line._get_stock_warning(clear=False)'>
+        <i class='fa fa-warning text-warning' t-att-title="line._get_stock_warning()" role="img" aria-label="Warning"/>
+      </t>
+    </xpath>
+    <xpath expr="//table[@id='cart_products']" position="after">
+        <t t-if='website_sale_order'>
+          <t t-set='warning' t-value='website_sale_order._get_stock_warning(clear=False)' />
+          <div t-if='warning' class="alert alert-warning" role="alert">
+            <strong>Warning!</strong> <t t-esc='website_sale_order._get_stock_warning()'/>
+          </div>
+        </t>
+    </xpath>
+  </template>
+
+
+THIS IS A HOVERING BUTTON (shoping cart)
+
+<template id="products_add_to_cart" inherit_id="website_sale.products_item" active="False" customize_show="True" name="Add to Cart">
+        <xpath expr="//div[hasclass('o_wsale_product_btn')]" position="inside">
+            <t t-set="product_variant_id" t-value="product._get_first_possible_variant_id()"/>
+            <input name="product_id" t-att-value="product_variant_id" type="hidden"/>
+            <t t-if="product_variant_id">
+                <a href="#" role="button" class="btn btn-secondary a-submit" aria-label="Shopping cart" title="Shopping cart">
+                    <span class="fa fa-shopping-cart"/>
+                </a>
+            </t>
+        </xpath>
+    </template>
+/////////////////////////////////////////
+
+static/src/js/website_sale.js
+
+////////////////////////////////////////
+Keywords
+
+var publicWidget = require('web.public.widget');
+
+_onClickAddCartJSON: function (ev){
+        this.onClickAddCartJSON(ev);
+    },
+
+popover
+
+            <a role="button" href="#" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" title="Search Contact" aria-label="Search Contact"><i class="fa fa-search"></i></a>
+
+ <t t-name="web_editor.many2one.button">
+        <div class="btn-group">
+            <a role="button" href="#" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" title="Search Contact" aria-label="Search Contact"><i class="fa fa-search"></i></a>
+            <ul class="dropdown-menu contact_menu" role="menu">
+                <li><a role="menuitem" class="dropdown-item"><input href="#" type="email" placeholder="Search"/></a></li>
+            </ul>
+        </div>
+    </t>
+
+widget
+<field name="sequence" widget="handle"/>
+popover.js
+
+///////////////////////////////////////////////////
+{
+        content: "Pay Now",
+        extra_trigger: '#payment_method label:contains("Wire Transfer") input:checked,#payment_method:not(:has("input:radio:visible"))',
+        trigger: 'button[id="o_payment_form_pay"]:visible:not(:disabled)',
+    },
+/////////////////////////////
+tests/tours/website_sale_complete_flow
+CODE
+
+publicWidget.registry.websiteSaleCartLink = publicWidget.Widget.extend({
+    selector: '#top_menu a[href$="/shop/cart"]',
+    events: {
+        'mouseenter': '_onMouseEnter',
+        'mouseleave': '_onMouseLeave',
+        'click': '_onClick',
+    },
+
+    /**
+     * @constructor
+     */
+    init: function () {
+        this._super.apply(this, arguments);
+        this._popoverRPC = null;
+    },
+    /**
+     * @override
+     */
+    start: function () {
+        this.$el.popover({
+            trigger: 'manual',
+            animation: true,
+            html: true,
+            title: function () {
+                return _t("My Cart");
+            },
+            container: 'body',
+            placement: 'auto',
+            template: '<div class="popover mycart-popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
+        });
+        return this._super.apply(this, arguments);
+    },
+
+    //--------------------------------------------------------------------------
+    // Handlers
+    //--------------------------------------------------------------------------
+
+    /**
+     * @private
+     * @param {Event} ev
+     */
+    _onMouseEnter: function (ev) {
+        var self = this;
+        clearTimeout(timeout);
+        $(this.selector).not(ev.currentTarget).popover('hide');
+        timeout = setTimeout(function () {
+            if (!self.$el.is(':hover') || $('.mycart-popover:visible').length) {
+                return;
+            }
+            self._popoverRPC = $.get("/shop/cart", {
+                type: 'popover',
+            }).then(function (data) {
+                self.$el.data("bs.popover").config.content = data;
+                self.$el.popover("show");
+                $('.popover').on('mouseleave', function () {
+                    self.$el.trigger('mouseleave');
+                });
+            });
+        }, 300);
+    },
+    /**
+     * @private
+     * @param {Event} ev
+     */
+    _onMouseLeave: function (ev) {
+        var self = this;
+        setTimeout(function () {
+            if ($('.popover:hover').length) {
+                return;
+            }
+            if (!self.$el.is(':hover')) {
+               self.$el.popover('hide');
+            }
+        }, 1000);
+    },
+    /**
+     * @private
+     * @param {Event} ev
+     */
+    _onClick: function (ev) {
+        // When clicking on the cart link, prevent any popover to show up (by
+        // clearing the related setTimeout) and, if a popover rpc is ongoing,
+        // wait for it to be completed before going to the link's href. Indeed,
+        // going to that page may perform the same computation the popover rpc
+        // is already doing.
+        clearTimeout(timeout);
+        if (this._popoverRPC && this._popoverRPC.state() === 'pending') {
+            ev.preventDefault();
+            var href = ev.currentTarget.href;
+            this._popoverRPC.then(function () {
+                window.location.href = href;
+            });
+        }
+    },
+});
+});

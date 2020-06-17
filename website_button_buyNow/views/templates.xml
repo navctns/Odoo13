@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--o_wsale_product_btn-->
+
+<!--<template id="products_item_buynow1" inherit_id="website_sale.products_item" active="False" customize_show="True" name="Buy Now Button">-->
+    <template id="products_item_buynow1" inherit_id="website_sale.products" active="False" customize_show="True" name="Buy Now Button">
+
+<!--        <xpath expr="//div[hasclass('card-body p-0 text-center o_wsale_product_information')]// div[hasclass('p-2 o_wsale_product_information_text']//div[@class='product_price']" position="inside">-->
+<!--            <xpath expr="//div[hasclass('product_price')]" position="after">-->
+<!--            <xpath expr="//div[hasclass('p-2 o_wsale_product_information_text')]" position="inside">-->
+<!--            <xpath expr="//div[hasclass('p-2 o_wsale_product_information_text')]" position="before">-->
+                <xpath expr="//form[hasclass('card oe_product_cart')]" position="inside">
+
+<!--        <xpath expr="//div[hasclass('o_wsale_product_btn')]" position="replace">-->
+
+                    <style>
+                        .buynow:hover .img-top {
+                             display: inline;
+                             }
+                    </style>
+                    <span><strong>Related Documents:</strong></span>
+                <i>abcd</i>
+                    <div class="buynow">
+                        <a role="button" id="buy_now" class="btn btn-secondary a-submit" href="#"><i class="fa fa-bolt"/> Buy Now</a>
+                    </div>
+        </xpath>
+</template>
+
+    <t t-extend="Products item">
+    <t t-jquery='.card-body p-0 text-center o_wsale_product_information' t-operation='replace'>
+            <div class="card-body p-0 text-center o_wsale_product_information">
+            <div class="p-2 o_wsale_product_information_text">
+                <h6 class="o_wsale_products_item_title">
+                    <a itemprop="name" t-att-href="product_href" t-att-content="product.name" t-field="product.name"/>
+                    <a role="button" t-if="not product.website_published" t-att-href="product_href" class="btn btn-sm btn-danger" title="This product is unpublished.">Unpublished</a>
+                </h6>
+                <div class="product_price" itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer">
+                    <del t-attf-class="text-danger mr-2 {{'' if combination_info['has_discounted_price'] else 'd-none'}}" style="white-space: nowrap;" t-esc="combination_info['list_price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                    <span t-if="combination_info['price']" t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                    <span itemprop="price" style="display:none;" t-esc="combination_info['price']"/>
+                    <span itemprop="priceCurrency" style="display:none;" t-esc="website.currency_id.name"/>
+                </div>
+                <div>abcd</div>
+                <div class="buynow">
+                        <a role="button" id="buy_now" class="btn btn-secondary a-submit" href="#"><i class="fa fa-bolt"/> Buy Now</a>
+                    </div>
+
+            <div class="o_wsale_product_btn"/></div>
+            </div>
+    </t>
+    </t>
+
+</odoo>

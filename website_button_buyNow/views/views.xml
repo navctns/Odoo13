@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+  <data>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">pos.config.settings.view.form.inherit.pos_add_discount</field>
+        <field name="model">pos.config</field>
+<!--        <field name="priority" eval="95"/>-->
+        <field name="inherit_id" ref="point_of_sale.pos_config_view_form" />
+        <field name="arch" type="xml">
+<!--          <xpath expr="//div[hasclass('app_settings_block')]" position="inside">-->
+<!--          <xpath expr="//div[hasclass('o_setting_right_pane')]" position="after">-->
+          <sheet>
+           <xpath expr="//div[@id='accounting_section']/.." position="after">
+                <div class="discouont_settings_block" data-string="pos add discount" string="Pos Add Discount" data-key="pos add discount" groups="point_of_sale.group_pos_manager">
+                    <h2>Discounts</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box" title="This discount is applied the pos order lines.">
+                            <div class="o_setting_right_pane">
+                                <div class="content-group">
+                                    <label string="Discount Type" for="discount_type_perc_amt"/>
+                                    <div class="text-muted">
+                                        Discount Percentage or amount
+                                    </div>
+                                    <div class ="mt16" >
+                                        <field name="discount_type_perc_amount" colspan="4" nolabel="1"  widget = 'radio' />
+                                        <field name="discount_perc_amount" invisible="True"/>
+                                    </div>
+                                </div>
+<!--                                <div class="mt8">-->
+<!--                                    <button name="%(account.action_tax_form)d" icon="fa-arrow-right" type="action" string="Taxes" class="btn-link"/>-->
+<!--                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+          </sheet>
+        </field>
+    </record>
+  </data>
+</odoo>

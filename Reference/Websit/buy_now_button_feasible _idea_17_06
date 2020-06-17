@@ -1,0 +1,89 @@
+How to change product image by module on mouse over
+
+
+How to change product image by module on mouse over
+Avatar
+Raitis
+15 May 2020
+pythonxmlevent
+
+I want to change the product image on hover(on mouse over) by module. I have the gifpath field which contains the image. How I could add some event listiner to the xml or python? Don't really want to use a javascript for that, because it would be hard to sync that with database image.
+
+
+
+templates.xml
+
+<odoo>
+
+    <data>
+    <record id="product_product_inherit" model="ir.ui.view">
+                <field name="name">product.template.inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <field name="default_code" position="after">
+                <field name="gifpath" widget="image"/>
+            </field>
+        </field>
+              </record>
+
+       <template id="website_sales_inh" name="webiste_sales_inherit" inherit_id="website_sale.products_item">
+
+          <xpath expr="//span[@class='d-flex h-100 justify-content-center align-items-center']" position="replace">
+            
+              <span t-field="product.image_1920"
+                        t-options="{'widget': 'image', 'preview_image': 'gifpath'}"
+                        class="d-flex h-100 justify-content-center align-items-center"/>
+          </xpath>
+
+       </template>
+
+    </data>
+
+</odoo>
+
+models.py
+
+
+# -*- coding: utf-8 -*-
+
+from odoo import models, fields, api
+
+
+class imgtogif_r(models.Model):
+    _inherit = ['product.template']
+    gifpath = fields.Binary('gifpath')
+
+ SOLUTION
+
+Hi Raitis,
+
+This example may help you.
+
+<style>
+    .card {
+        width: 130px;
+        height: 195px;
+        position: relative;
+        display: inline-block;
+        margin: 50px;
+    }
+    .card .img-top {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 99;
+    }
+    .card:hover .img-top {
+        display: inline;
+    }
+</style>
+ 
+ 
+<div class="card">
+     <img width="50" height="50" src="image1.jpg">
+     <img width="50" height="50" src="image2.jpg" 
+          class="img-top">
+</div>
+

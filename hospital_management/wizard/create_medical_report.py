@@ -20,6 +20,7 @@ class CreateMedicalReport(models.TransientModel):
         ('pdf','PDF'),
         ('xls','Excel')
     ],string = "Report Format", default='pdf')
+    company_id = fields.Many2one('res.company', string='Company', required=True, default=lambda self: self.env.company)
 
     # @api.model
     # def doctor_domain(self):
@@ -188,7 +189,8 @@ class CreateMedicalReport(models.TransientModel):
         doc_label =''
         data = {
             'model': 'create.medical.report',
-            'form': self.read()[0]
+            'form': self.read()[0],
+            # 'doc': self, #new modification
         }
         data['header_vals'] = {}
         ops_disease = '' #for disease filter only
@@ -364,6 +366,7 @@ class CreateMedicalReport(models.TransientModel):
 
 
                 # ops = ops_doc
+        # data['company'] = self.env['res.company'].search([('id','=',self.company_id.id)])[0]#add company
         if self.patient_id :
             header_values['patient'] = self.patient_id.patient_id.name
             label['patient'] = s
@@ -575,6 +578,7 @@ class CreateMedicalReport(models.TransientModel):
         data['header_vals'] = header_values
         header_values = {}  # empty end can add items(empty the previous)
         # data['header_vals'] = header_values
+        print('Data', data)
         #END SECOND METHOD
         if self.report_type == 'xls' :
             return self.env.ref('hospital_management.patient_medical_report_xls').report_action(self, data=data)

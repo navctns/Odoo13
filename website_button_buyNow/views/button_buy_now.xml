@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--o_wsale_product_btn-->
+
+<template id="products_item_buynow" inherit_id="website_sale.products_item" active="False" customize_show="True" name="Buy Now Button">
+<!--        <xpath expr="//div[hasclass('card-body p-0 text-center o_wsale_product_information')]// div[hasclass('p-2 o_wsale_product_information_text']//div[@class='product_price']" position="inside">-->
+<!--            <xpath expr="//div[hasclass('product_price')]" position="after">-->
+<!--        <xpath expr="//div[hasclass('o_wsale_product_btn')]" position="replace">-->
+            <xpath expr="//div[hasclass('card-body p-0 text-center o_wsale_product_information')]" position="after">
+
+                    <style>
+                        .buynow:hover .img-top {
+                             display: inline;
+                             }
+                    </style>
+                    <div class="buynow">
+                        <a role="button" id="buy_now" class="btn btn-secondary a-submit" href="#"><i class="fa fa-bolt"/> Buy Now</a>
+                    </div>
+        </xpath>
+</template>
+
+</odoo>
