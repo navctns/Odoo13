@@ -1,0 +1,50 @@
+.payment-screen .payment-buttons .button:hover {
+    background-color: #efefef;
+}
+
+
+img:hover {
+  filter: none;
+  -webkit-filter: grayscale(0%);
+  .button:hover {
+    display: inline-block;
+    }
+  }
+}
+
+
+.button {
+    display: none;
+}
+
+img:hover + .button, .button:hover {
+    display: inline-block;
+}
+
+////////////////////////////////////////
+
+.button {
+  display: none;
+}
+img:hover + .button {
+  display: inline-block;
+}
+
+
+<div class="small-4 columns">
+  <img src="http://placehold.it/350x150">
+  <a class="button" href="/jane/">View Jane's Profile</a>
+</div>
+
+//////////////////////////////////////////
+
+
+.img-container:hover .button {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+}
