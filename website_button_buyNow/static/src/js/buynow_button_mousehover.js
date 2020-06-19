@@ -7,32 +7,72 @@ var _t = core._t;
 
 var timeout;
 
-publicWidget.registry.BuyNowButton = publicWidget.Widget.extend({
+//publicWidget.registry.BuyNowButton = publicWidget.Widget.extend({
 //    selector: '#top_menu a[href$="/shop/cart"]',
 //card oe_product_cart  action="/shop/cart/update"
-    selector: '.card oe_product_cart',
+publicWidget.registry.WebsiteSale.include({
+
+//    selector: '.card oe_product_cart',
     events: {
-        'mouseenter': '_onMouseEnter',
-        'mouseleave': '_onMouseLeave',
+        'mouseenter .o_wsale_product_grid_wrapper': 'buynowButton',
+        'mouseleave .o_wsale_product_grid_wrapper': '_onMouseLeave',
 //        'click': '_onClick',
     },
 
-    this.$(".buynow").hide();
+//     start: function() {
+//            console.log("pet store home page loaded");
+//        },
+
+//    console.log('mousehover button script');
+//    this.$(".buynow").hide();
+
+//        $(".card oe_product_cart").mouseover(function(){
+//                $(".buynow").show();
+//            });
 
 //     _onMouseEnter: function (ev) {
 //        var self = this;
-//        if ($(ev.currentTarget).attr('class') === 'card oe_product_cart'){
+////        this.$("#buynow").hide()
+//          this.trigger(this.$("#buynow").style.display='inline');
+//          this.$("#buynow").set('display','inline');
+////        if ($(ev.currentTarget).attr('class') == 'card oe_product_cart'){
+////            this.$(".buynow").show();
+////            this.trigger('#products_item_buynow1', true);
+////            style="display: none;"
+//            alert();
+//            console.log('enter')
+////        }
+//
+//        },
+
+        buynowButton: function (ev) {
+        var self = this;
+//        this.$("#buynow").hide()
+//          this.trigger(this.$("#buynow").style.display='inline');
+//          this.$("#buynow").set('display','inline');
+//            this.$("#buynow").style.display='inline';
+//        if ($(ev.currentTarget).attr('class') == 'card oe_product_cart'){
 //            this.$(".buynow").show();
 //            this.trigger('#products_item_buynow1', true);
+//            style="display: none;"
+
+//            this.$el.find("#buynow").css('display':'inline');
+            this.$("#buy_now").css('display','inline');
+//            alert();
+            console.log('enter')
 //        }
-//        },
-//
-//        _onMouseLeave: function (ev) {
-//        var self = this;
-//        if ($(ev.currentTarget).attr('class') !== 'card oe_product_cart'){
+
+        },
+
+        _onMouseLeave: function (ev) {
+        var self = this;
+//        if ($(ev.currentTarget).attr('class') != 'card oe_product_cart'){
 //            this.$(".buynow").hide();
 //        }
-//        },
+            this.$("#buy_now").css('display','none');
+        },
+
+
 //          ////Sample
 //            * @param {MouseEvent} event
 //     * @private
@@ -43,7 +83,7 @@ publicWidget.registry.BuyNowButton = publicWidget.Widget.extend({
 //        });
         ////sample
 
-        _onMouseEnter
+//        _onMouseEnter
 //        clearTimeout(timeout);
 //        $(this.selector).not(ev.currentTarget).buynow('hide');
 //        timeout = setTimeout(function () {
@@ -60,8 +100,8 @@ publicWidget.registry.BuyNowButton = publicWidget.Widget.extend({
 //                });
 //            });
 //        }, 300);
-    },
+//    },
 
-
+});
 
 });

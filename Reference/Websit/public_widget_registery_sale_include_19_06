@@ -1,0 +1,15 @@
+publicWidget.registry.WebsiteSale.include({
+    /**
+     * Adds the stock checking to the regular _onChangeCombination method
+     * @override
+     */
+    _onChangeCombination: function (){
+        this._super.apply(this, arguments);
+        VariantMixin._onChangeCombinationStock.apply(this, arguments);
+    }
+});
+
+return VariantMixin;
+
+});
+

@@ -237,3 +237,29 @@ publicWidget.registry.websiteSaleCartLink = publicWidget.Widget.extend({
     },
 });
 });
+
+
+
+<template id="qunit_suite" inherit_id="web.qunit_suite">
+        <xpath expr="." position="inside">
+            <script type="text/javascript">
+                odoo.define('mass_mailing.FieldHtml.test', function (require) {
+                    'use strict';
+                    var MassMailingFieldHtml = require('mass_mailing.FieldHtml');
+                    MassMailingFieldHtml.include({jsLibs: []});
+                });
+            </script>
+            <script type="text/javascript" src="/mass_mailing/static/src/js/mass_mailing_snippets.js"/>
+            <script type="text/javascript" src="/mass_mailing/static/tests/mass_mailing_html_tests.js"/>
+        </xpath>
+    </template>
+
+
+
+ <template id="assets_frontend" inherit_id="website.assets_frontend">
+</xpath>
+        <xpath expr="script[last()]" position="after">
+            <script type="text/javascript" src="/website_button_buyNow/static/src/js/buynow_button_mousehover.js"></script>
+
+        </xpath>
+ </template>
