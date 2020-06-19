@@ -47,7 +47,7 @@
 # }
 
 {
-    'name': 'Buy Now Button on Website',
+    'name': 'website_button_buyNow',
     'version': '13.0.1.0.0',
     'summary': """This Module Allows Customer to Download Documents
     That Are Attached to the Products From Website""",

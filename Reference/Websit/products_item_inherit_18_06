@@ -43,3 +43,34 @@ publicWidget.registry.HelloWorldPopup = publicWidget.Widget.extend({
 })
 });
 */
+
+#get div with class value #if id value
+_renderUtmGraph: function() {
+        var self = this;
+        this.$(". ").html(this.btnName); // change drop-down button name
+        var utmDataType = this.utmType || 'campaign_id';
+        var graphData = this.utmGraphData[utmDataType];
+        if (graphData.length) {
+            this.$(".o_utm_no_data_img").hide();
+            this.$(".o_utm_data_graph").empty().show();
+            var $canvas = $('<canvas/>');
+            this.$(".o_utm_data_graph").append($canvas);
+            var context = $canvas[0].getContext('2d');
+            console.log(graphData);
+
+ON editor 
+
+so class 'oe_hover' has something with
+
+onTableMouseEnter: function (ev) {
+        $(ev.currentTarget).addClass('oe_hover');
+    },
+
+onClickAdd: function (ev) {
+        ev.preventDefault();
+        this.isBuyNow = $(ev.currentTarget).attr('id') === 'buy_now';
+        return this._handleAdd($(ev.currentTarget).closest('form'));
+    },
+
+
+

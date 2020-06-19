@@ -2,9 +2,14 @@
 <odoo>
     <data>
 <!--o_wsale_product_btn-->
+        <template id="assets_backend" name="project assets" inherit_id="web.assets_backend">
+                  <xpath expr="." position="inside">
+                        <script type="text/javascript" src="/website_button_buyNow/static/src/js/buynow_button_mousehover.js"></script>
+                  </xpath>
+            </template>
 
         <!--<template id="products_item_buynow1" inherit_id="website_sale.products_item" active="False" customize_show="True" name="Buy Now Button">-->
-            <template id="products_item_buynow1" inherit_id="website_sale.products_item" name="Buy Now Button">
+            <template id="products_item_buynow1" inherit_id="website_sale.products_item" active="False" name="Buy Now Button" customize_show="True">
 
         <!--        <xpath expr="//div[hasclass('card-body p-0 text-center o_wsale_product_information')]// div[hasclass('p-2 o_wsale_product_information_text']//div[@class='product_price']" position="inside">-->
 <!--                    <xpath expr="//div[hasclass('product_price')]" position="after">-->
@@ -35,8 +40,8 @@
                             </style>
 
 
-                            <span><strong>Related Documents:</strong></span>
-                                <i>abcd</i>
+<!--                            <span><strong>Related Documents:</strong></span>-->
+<!--                                <i>abcd</i>-->
                             <div class="buynow">
                                 <br></br>
                                 <a role="button" id="buy_now" class="btn btn-secondary a-submit" href="#"><i class="fa fa-bolt"/> Buy Now</a>
