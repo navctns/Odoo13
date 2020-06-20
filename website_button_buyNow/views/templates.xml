@@ -7,6 +7,7 @@
 <!--                        <script type="text/javascript" src="/website_button_buyNow/static/src/js/buynow_button_mousehover.js"></script>-->
 <!--                  </xpath>-->
 <!--            </template>-->
+
              <template id="assets_frontend" inherit_id="website.assets_frontend">
 
                 <xpath expr="script[last()]" position="after">
@@ -75,6 +76,7 @@
                             <div id="buynow" class="buynow" >
                                 <br></br>
                                 <a role="button" id="buy_now" class="btn btn-secondary a-submit" href="#" style="display: none;"><i class="fa fa-bolt"/> Buy Now</a>
+                                <br></br>
                             </div>
 
                         </xpath>
