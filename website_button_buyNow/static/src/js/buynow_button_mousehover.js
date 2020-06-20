@@ -10,7 +10,9 @@ var timeout;
 //publicWidget.registry.BuyNowButton = publicWidget.Widget.extend({
 //    selector: '#top_menu a[href$="/shop/cart"]',
 //card oe_product_cart  action="/shop/cart/update"
-publicWidget.registry.WebsiteSale.include({
+
+//publicWidget.registry.WebsiteSale.include({ //this will also work//
+publicWidget.registry.BuyNowButton= publicWidget.registry.WebsiteSale.extend({
 
 /////////Method 1/////////////////
 //    selector: '.card oe_product_cart',
@@ -79,8 +81,8 @@ publicWidget.registry.WebsiteSale.include({
             setTimeout(function (){
 //            this.$("#buy_now").css('display','inline');//Previous ver
 //            alert();
-            $(ev.currentTarget).find('#buy_now').css('display','inline');
-//            $(ev.currentTarget).find('.buynow').css('display','inline');
+//            $(ev.currentTarget).find('#buy_now').css('display','inline');
+            $(ev.currentTarget).find('#buynow').css('display','inline');
             console.log('enter')
 //        }
          }, 300);
@@ -93,8 +95,8 @@ publicWidget.registry.WebsiteSale.include({
     //            this.$(".buynow").hide();
     //        }
     //            this.$("#buy_now").css('display','none');//Prev ver
-                  $(ev.currentTarget).find('#buy_now').css('display','none');
-//                    $(ev.currentTarget).find('.buynow').css('display','none');
+//                  $(ev.currentTarget).find('#buy_now').css('display','none');
+                    $(ev.currentTarget).find('#buynow').css('display','none');
 
             },300);
         },

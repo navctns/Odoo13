@@ -73,9 +73,10 @@
 <!--                                    }-->
 
 <!--                    </script>-->
-                            <div id="buynow" class="buynow" >
+                            <div id="buynow" class="buynow" style="display: none;">
                                 <br></br>
-                                <a role="button" id="buy_now" class="btn btn-secondary a-submit" href="#" style="display: none;"><i class="fa fa-bolt"/> Buy Now</a>
+                                <a role="button" id="buy_now" class="btn btn-secondary a-submit" href="#" style="display: inline;"><i class="fa fa-bolt"/> Buy Now</a>
+                                <br></br>
                                 <br></br>
                             </div>
 
