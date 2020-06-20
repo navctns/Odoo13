@@ -1,0 +1,64 @@
+<odoo>
+<template id="portal_my_home_mrp" name="Portal My Home : Manufacturing entries" inherit_id="portal.portal_my_home" priority="20">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Manufacturing Orders</t>
+                <t t-set="url" t-value="'/my/mrporders'"/>
+             </t>
+<!--                <t t-set="count" t-value="quotation_count"/>-->
+
+<!--            <t t-if="order_count" t-call="portal.portal_docs_entry">-->
+<!--                <t t-set="title">Sales Orders</t>-->
+<!--                <t t-set="url" t-value="'/my/orders'"/>-->
+<!--                <t t-set="count" t-value="order_count"/>-->
+<!--            </t>-->
+        </xpath>
+    </template>
+
+<!--tables page-->
+    <template id="portal_my_mrp_orders" name="My Manufacturing Orders">
+         <t t-call="portal.portal_layout">
+              <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Manufacturing Orders</t>
+            </t>
+             <t t-if="orders" t-call="portal.portal_table">
+                 <thead>
+                        <tr class="active">
+                            <th>Manufacturing Orders #</th>
+                            <th class="text-right">Product</th>
+                            <th class="text-right">Deadline Date</th>
+                            <th class="text-center"/>
+                            <th class="text-right">State</th>
+                        </tr>
+                 </thead>
+                 <t t-foreach="orders" t-as="order">
+                    <tr>
+<!--                        <td><a t-att-href="quotation.get_portal_url()"><t t-esc="quotation.name"/></a></td>-->
+                        <td><t t-esc="order.name"/></td>
+                        <td class="text-right"><span t-field="order.product_id.name"/></td>
+                        <td class="text-right"><span t-field="order.date_deadline"/></td>
+                            <!--state shown this way-->
+<!--                        <td class="text-center">-->
+<!--                            <span t-if="quotation.state == 'cancel'" class="badge badge-pill badge-secondary"><i class="fa fa-fw fa-remove"/> Cancelled</span>-->
+<!--                            <span t-if="quotation.is_expired" class="badge badge-pill badge-secondary"><i class="fa fa-fw fa-clock-o"/> Expired</span>-->
+<!--                        </td>-->
+                        <td class="text-right">
+                            <span t-field="order.state"/>
+                        </td>
+<!--                        <t t-if="order.state == 'draft'" >-->
+
+<!--                                <a  t-att-href="#" title="Cancel">Cancel</a>-->
+<!--                        </t>-->
+
+                    </tr>
+
+                <span t-if="order.state == 'draft'"><a  href="#" title="Cancel">Cancel</a></span>
+
+                </t>
+             </t>
+<!--            <i>abcd</i>-->
+         </t>
+    </template>
+</odoo>

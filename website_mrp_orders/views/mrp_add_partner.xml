@@ -1,0 +1,21 @@
+<!--product.product_template_only_form_view-->
+<!--product.template-->
+
+<odoo>
+   <data>
+    <record id="mrp_production_form_view_add_partner" model="ir.ui.view">
+            <field name="name">mrp.order.form.inherit.add.partner</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+             <field name="arch" type="xml">
+
+
+                          <xpath expr="//field[@name='origin']" position="after">
+
+                            <field name="partner_id"/>
+
+                         </xpath>
+             </field>
+    </record>
+   </data>
+</odoo>

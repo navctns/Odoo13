@@ -13,8 +13,9 @@
 <!--        </template>-->
         <template id="assets" inherit_id="point_of_sale.assets">
             <xpath expr="." position="inside">
-                <script type="text/javascript" src = "/pos_add_discount/static/src/js/add_discount_button.js"></script>
+<!--                <script type="text/javascript" src = "/pos_add_discount/static/src/js/add_discount_button.js"></script>-->
                 <script type="text/javascript" src = "/pos_add_discount/static/src/js/product_grade.js"></script>
+                <script type="text/javascript" src = "/pos_add_discount/static/src/js/discount_with_product.js"></script>
 
             </xpath>
         </template>

@@ -26,6 +26,10 @@ class PosConfig(models.Model):
     discount_perc_amount = fields.Float(string='Discount Percentage amount',
                                         help='The Discount percentage amount to be subracted', )
 
+    discount_product_add = fields.Many2one('product.product', string='Discount Product',
+                                          domain="[('available_in_pos', '=', True), ('sale_ok', '=', True)]",
+                                          help='The product used to model the discount.')
+
     @api.onchange('model_id')
     def _onchange_discount_perc_amount(self):
         print('discount percentage amount', self.discount_perc_amount)

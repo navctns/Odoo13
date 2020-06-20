@@ -1,0 +1,93 @@
+Inherit portal/views/portal_templates .xml
+
+probably into the div class 'o_portal_docs list-group'
+
+<template id="portal_my_home" name="My Portal">
+        <t t-call="portal.portal_layout">
+            <t t-set="my_details" t-value="True"/>
+            <div class="o_portal_my_home">
+                <div class="oe_structure" id="oe_structure_portal_my_home_1"/>
+                <h3>Documents</h3>
+                <div class="o_portal_docs list-group">
+                </div>
+            </div>
+            <div class="oe_structure" id="oe_structure_portal_my_home_2"/>
+        </t>
+    </template>
+
+
+xml code to inherit the listing
+
+
+<template id="portal_my_home_sale" name="Portal My Home : sales entries" inherit_id="portal.portal_my_home" priority="20">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-if="quotation_count" t-call="portal.portal_docs_entry">
+                <t t-set="title">Quotations</t>
+                <t t-set="url" t-value="'/my/quotes'"/>
+                <t t-set="count" t-value="quotation_count"/>
+            </t>
+            <t t-if="order_count" t-call="portal.portal_docs_entry">
+                <t t-set="title">Sales Orders</t>
+                <t t-set="url" t-value="'/my/orders'"/>
+                <t t-set="count" t-value="order_count"/>
+            </t>
+        </xpath>
+    </template>
+
+
+Add it to controller
+
+sample in sale/controllers/portal.py
+
+@http.route(['/my/quotes', '/my/quotes/page/<int:page>'], type='http', auth="user", website=True)
+    def portal_my_quotes(self, page=1, date_begin=None, date_end=None, sortby=None, **kw):
+        values = self._prepare_portal_layout_values()
+        partner = request.env.user.partner_id
+        SaleOrder = request.env['sale.order']
+
+        domain = [
+            ('message_partner_ids', 'child_of', [partner.commercial_partner_id.id]),
+            ('state', 'in', ['sent', 'cancel'])
+        ]
+
+        searchbar_sortings = {
+            'date': {'label': _('Order Date'), 'order': 'date_order desc'},
+            'name': {'label': _('Reference'), 'order': 'name'},
+            'stage': {'label': _('Stage'), 'order': 'state'},
+        }
+
+        # default sortby order
+        if not sortby:
+            sortby = 'date'
+        sort_order = searchbar_sortings[sortby]['order']
+
+        archive_groups = self._get_archive_groups('sale.order', domain)
+        if date_begin and date_end:
+            domain += [('create_date', '>', date_begin), ('create_date', '<=', date_end)]
+
+        # count for pager
+        quotation_count = SaleOrder.search_count(domain)
+        # make pager
+        pager = portal_pager(
+            url="/my/quotes",
+            url_args={'date_begin': date_begin, 'date_end': date_end, 'sortby': sortby},
+            total=quotation_count,
+            page=page,
+            step=self._items_per_page
+        )
+        # search the count to display, according to the pager data
+        quotations = SaleOrder.search(domain, order=sort_order, limit=self._items_per_page, offset=pager['offset'])
+        request.session['my_quotations_history'] = quotations.ids[:100]
+
+        values.update({
+            'date': date_begin,
+            'quotations': quotations.sudo(),
+            'page_name': 'quote',
+            'pager': pager,
+            'archive_groups': archive_groups,
+            'default_url': '/my/quotes',
+            'searchbar_sortings': searchbar_sortings,
+            'sortby': sortby,
+        })
+        return request.render("sale.portal_my_quotations", values)
+
