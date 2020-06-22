@@ -15,7 +15,7 @@ from odoo.osv import expression
 
 # class PortalMrp(http.Controller):
 class PortalMrp(CustomerPortal):
-    orders_page = '/my/orders'
+    orders_page = '/my/mrporders'
 
     def _get_current_user(self):
         return request.env.user
@@ -75,10 +75,18 @@ class PortalMrp(CustomerPortal):
             #     'sortby': sortby,
             # })
             # return request.render("sale.portal_my_mrp_orders")
-    @http.route(['/my/mrporders/cancel', '/my/mrporders/page/<int:page>/cancel'], type='http', auth="user", website=True)
+    @http.route(['/my/mrporders/cancel', '/my/mrporders/page/<int:page>/cancel'], type='http', methods=['GET', 'POST'], auth="user", website=True, csrf=False)
     def portal_my_mrp_orders_cancel(self, page=1, date_begin=None, date_end=None, sortby=None, **kw):
         # values = self._prepare_portal_layout_values()
-        orders = request.env['mrp.production'].action_cancel()
+        user = self._get_current_user()
+
+        # request.env['mrp.production'].search([('partner_id', '=', user.id)]).action_cancel()
+
+        request.env['mrp.production'].search([('id', '=', self.id)]).action_cancel()
+
+        # for r in request.env['mrp.production'].search([('partner_id', '=', user.id)]) :
+        #     print(r.active_ids)
+        #
         # user = self._get_current_user()
         # orders = request.env['mrp.production'].search([('partner_id', '=', user.id)])
         # return request.render("website_mrp_orders.portal_my_mrp_orders",{'orders':orders.sudo()})
