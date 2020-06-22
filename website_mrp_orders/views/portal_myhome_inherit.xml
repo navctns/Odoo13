@@ -29,8 +29,9 @@
                             <th>Manufacturing Orders #</th>
                             <th class="text-right">Product</th>
                             <th class="text-right">Deadline Date</th>
-                            <th class="text-center"/>
+<!--                            <th class="text-center"/>-->
                             <th class="text-right">State</th>
+                            <th class="text-center"/>
                         </tr>
                  </thead>
                  <t t-foreach="orders" t-as="order">
@@ -46,15 +47,20 @@
 <!--                        </td>-->
                         <td class="text-right">
                             <span t-field="order.state"/>
+<!--                            <span t-if="order.state == 'draft'"><a  href="#" title="Cancel">Cancel</a></span>-->
+                        </td>
+                        <td>
+                            <span t-if="order.state == 'draft'"><a  href="/my/mrporders/cancel" class="btn btn-sm btn-secondary" title="Cancel">Cancel</a></span>
                         </td>
 <!--                        <t t-if="order.state == 'draft'" >-->
 
 <!--                                <a  t-att-href="#" title="Cancel">Cancel</a>-->
 <!--                        </t>-->
 
+
                     </tr>
 
-                <span t-if="order.state == 'draft'"><a  href="#" title="Cancel">Cancel</a></span>
+<!--                <span t-if="order.state == 'draft'"><a  href="#" title="Cancel">Cancel</a></span>-->
 
                 </t>
              </t>

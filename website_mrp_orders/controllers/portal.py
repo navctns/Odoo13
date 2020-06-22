@@ -9,12 +9,22 @@ from odoo.addons.portal.controllers.portal import CustomerPortal, pager as porta
 from odoo.osv import expression
 
 
-class PortalMrp(http.Controller):
+
+
+
+
+# class PortalMrp(http.Controller):
+class PortalMrp(CustomerPortal):
+    orders_page = '/my/orders'
+
+    def _get_current_user(self):
+        return request.env.user
 
     @http.route(['/my/mrporders', '/my/mrporders/page/<int:page>'], type='http', auth="user", website=True)
     def portal_my_mrp_orders(self, page=1, date_begin=None, date_end=None, sortby=None, **kw):
         # values = self._prepare_portal_layout_values()
-        orders = request.env['mrp.production'].search([])
+        user = self._get_current_user()
+        orders = request.env['mrp.production'].search([('partner_id', '=', user.id)])
         return request.render("website_mrp_orders.portal_my_mrp_orders",{'orders':orders.sudo()})
             # values = self._prepare_portal_layout_values()
             # partner = request.env.user.partner_id
@@ -65,3 +75,11 @@ class PortalMrp(http.Controller):
             #     'sortby': sortby,
             # })
             # return request.render("sale.portal_my_mrp_orders")
+    @http.route(['/my/mrporders/cancel', '/my/mrporders/page/<int:page>/cancel'], type='http', auth="user", website=True)
+    def portal_my_mrp_orders_cancel(self, page=1, date_begin=None, date_end=None, sortby=None, **kw):
+        # values = self._prepare_portal_layout_values()
+        orders = request.env['mrp.production'].action_cancel()
+        # user = self._get_current_user()
+        # orders = request.env['mrp.production'].search([('partner_id', '=', user.id)])
+        # return request.render("website_mrp_orders.portal_my_mrp_orders",{'orders':orders.sudo()})
+        return request.redirect(self.orders_page)

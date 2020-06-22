@@ -1,0 +1,7 @@
+class WebsiteSaleDigital(CustomerPortal):
+    orders_page = '/my/orders'
+
+
+
+ if order.partner_id.id == request.website.user_id.sudo().partner_id.id:
+            return request.redirect('/shop/address')
