@@ -75,14 +75,20 @@ class PortalMrp(CustomerPortal):
             #     'sortby': sortby,
             # })
             # return request.render("sale.portal_my_mrp_orders")
-    @http.route(['/my/mrporders/cancel', '/my/mrporders/page/<int:page>/cancel'], type='http', methods=['GET', 'POST'], auth="user", website=True, csrf=False)
-    def portal_my_mrp_orders_cancel(self, page=1, date_begin=None, date_end=None, sortby=None, **kw):
+    # @http.route(['/my/mrporders/cancel/<int:id>'], type='http', methods=['GET', 'POST'], auth="user", website=True, csrf=False)
+    @http.route(['/my/mrporders/cancel/<int:order_id>'],methods=['GET', 'POST'], type='http', auth="user", website=True, csrf=False)
+    def portal_my_mrp_orders_cancel(self, order_id, page=1, date_begin=None, date_end=None, sortby=None, **kw ):
         # values = self._prepare_portal_layout_values()
         user = self._get_current_user()
 
+        # data = request.jsonrequest
         # request.env['mrp.production'].search([('partner_id', '=', user.id)]).action_cancel()
+        print("order id",order_id)
+        request.env['mrp.production'].search([('id', '=', order_id)]).action_cancel()
 
-        request.env['mrp.production'].search([('id', '=', self.id)]).action_cancel()
+        # print('session',request.session)
+
+
 
         # for r in request.env['mrp.production'].search([('partner_id', '=', user.id)]) :
         #     print(r.active_ids)

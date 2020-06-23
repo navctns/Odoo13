@@ -49,3 +49,175 @@ node_name
                 <div class="o_wsale_product_btn"/>
             </div>
         </form>
+
+
+@http.route(['/shop/cart/update'], type='http', auth="public", methods=['GET', 'POST'], website=True, csrf=False)
+    def cart_update(self, product_id, add_qty=1, set_qty=0, **kw):
+        """This route is called when adding a product to cart (no options)."""
+        sale_order = request.website.sale_get_order(force_create=True)
+        if sale_order.state != 'draft':
+            request.session['sale_order_id'] = None
+            sale_order = request.website.sale_get_order(force_create=True)
+
+        product_custom_attribute_values = None
+        if kw.get('product_custom_attribute_values'):
+            product_custom_attribute_values = json.loads(kw.get('product_custom_attribute_values'))
+
+        no_variant_attribute_values = None
+        if kw.get('no_variant_attribute_values'):
+            no_variant_attribute_values = json.loads(kw.get('no_variant_attribute_values'))
+
+        sale_order._cart_update(
+            product_id=int(product_id),
+            add_qty=add_qty,
+            set_qty=set_qty,
+            product_custom_attribute_values=product_custom_attribute_values,
+            no_variant_attribute_values=no_variant_attribute_values
+        )
+
+        if kw.get('express'):
+            return request.redirect("/shop/checkout?express=1")
+
+        return request.redirect("/shop/cart")
+
+
+          <a t-att-href="record.website.raw_value" target="_blank" attrs="{'invisible':[('website', '=', '')]}" class="btn btn-sm btn-secondary float-right" role="button">Learn More</a>
+
+                    <a t-att-href="keep('/event', type=type['event_type_id'][0])" class="badge badge-secondary o_wevent_badge mb-2"><t t-esc="type['event_type_id'][1]"/></a>
+
+
+payment
+
+request.session[
+ request.session['form_builder_id'] = id_record
+
+# -*- coding: utf-8 -*-
+import logging
+import werkzeug
+
+from odoo import http
+from odoo.http import request
+
+_logger = logging.getLogger(__name__)
+
+
+class StripeController(http.Controller):
+    _success_url = '/payment/stripe/success'
+    _cancel_url = '/payment/stripe/cancel'
+
+    @http.route(['/payment/stripe/success', '/payment/stripe/cancel'], type='http', auth='public')
+    def stripe_success(self, **kwargs):
+        request.env['payment.transaction'].sudo().form_feedback(kwargs, 'stripe')
+        return werkzeug.utils.redirect('/payment/process')
+
+    @http.route(['/payment/stripe/s2s/create_json_3ds'], type='json', auth='public', csrf=False)
+    def stripe_s2s_create_json_3ds(self, verify_validity=False, **kwargs):
+        if not kwargs.get('partner_id'):
+            kwargs = dict(kwargs, partner_id=request.env.user.partner_id.id)
+        token = request.env['payment.acquirer'].browse(int(kwargs.get('acquirer_id'))).s2s_process(kwargs)
+
+        if not token:
+            res = {
+                'result': False,
+            }
+            return res
+
+        res = {
+            'result': True,
+            'id': token.id,
+            'short_name': token.short_name,
+            '3d_secure': False,
+            'verified': False,
+        }
+
+        if verify_validity != False:
+            token.validate()
+            res['verified'] = token.verified
+
+        return res
+
+    @http.route('/payment/stripe/s2s/create_setup_intent', type='json', auth='public', csrf=False)
+    def stripe_s2s_create_setup_intent(self, acquirer_id, **kwargs):
+        acquirer = request.env['payment.acquirer'].browse(int(acquirer_id))
+        res = acquirer._create_setup_intent(kwargs)
+        return res.get('client_secret')
+
+    @http.route('/payment/stripe/s2s/process_payment_intent', type='json', auth='public', csrf=False)
+    def stripe_s2s_process_payment_intent(self, **post):
+        return request.env['payment.transaction'].sudo().form_feedback(post, 'stripe')
+
+
+
+
+json req
+
+
+payment acquirer
+
+
+sale
+
+# note dbo: website_sale code
+    @http.route(['/my/orders/<int:order_id>/transaction/'], type='json', auth="public", website=True)
+    def payment_transaction_token(self, acquirer_id, order_id, save_token=False, access_token=None, **kwargs):
+        """ Json method that creates a payment.transaction, used to create a
+        transaction when the user clicks on 'pay now' button. After having
+        created the transaction, the event continues and the user is redirected
+        to the acquirer website.
+
+        :param int acquirer_id: id of a payment.acquirer record. If not set the
+                                user is redirected to the checkout page
+        """
+        # Ensure a payment acquirer is selected
+        if not acquirer_id:
+            return False
+
+        try:
+            acquirer_id = int(acquirer_id)
+        except:
+            return False
+
+        order = request.env['sale.order'].sudo().browse(order_id)
+        if not order or not order.order_line or not order.has_to_be_paid():
+            return False
+
+        # Create transaction
+        vals = {
+            'acquirer_id': acquirer_id,
+            'type': order._get_payment_type(),
+            'return_url': order.get_portal_url(),
+        }
+
+        transaction = order._create_payment_transaction(vals)
+        PaymentProcessing.add_payment_transaction(transaction)
+        return transaction.render_sale_button(
+            order,
+            submit_txt=_('Pay & Confirm'),
+            render_values={
+                'type': order._get_payment_type(),
+                'alias_usage': _('If we store your payment information on our server, subscription payments will be made automatically.'),
+            }
+        )
+
+
+
+<form id="decline" method="POST" t-attf-action="/my/orders/#{sale_order.id}/decline?access_token=#{sale_order.access_token}" class="modal-content">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                <header class="modal-header">
+                                    <h4 class="modal-title">Reject This Quotation</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">&amp;times;</button>
+                                </header>
+                                <main class="modal-body">
+                                    <p>
+                                        Tell us why you are refusing this quotation, this will help us improve our services.
+                                    </p>
+                                    <textarea rows="4" name="decline_message" required="" placeholder="Your feedback..." class="form-control" />
+                                </main>
+                                <footer class="modal-footer">
+                                    <button type="submit" t-att-id="sale_order.id" class="btn btn-danger"><i class="fa fa-times"></i> Reject</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                </footer>
+                            </form>
+
+
+

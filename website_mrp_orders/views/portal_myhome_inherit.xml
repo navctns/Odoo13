@@ -36,7 +36,8 @@
                  </thead>
 
                  <t t-foreach="orders" t-as="order">
-                     <form action="/my/mrporders/cancel" method="post" class="">
+<!--                     <form action="/my/mrporders/cancel" method="post" class="">-->
+                     <form action="/my/mrporders/cancel/#{order.id}" method="post">
                     <tr>
 <!--                        <td><a t-att-href="quotation.get_portal_url()"><t t-esc="quotation.name"/></a></td>-->
                         <td><t t-esc="order.name"/></td>
@@ -52,7 +53,15 @@
 <!--                            <span t-if="order.state == 'draft'"><a  href="#" title="Cancel">Cancel</a></span>-->
                         </td>
                         <td>
-                            <span t-if="order.state == 'draft'"><a  href="/my/mrporders/cancel" class="btn btn-sm btn-secondary" title="Cancel">Cancel</a></span>
+<!--                            <span t-if="order.state == 'draft'"><a href="/my/mrporders/cancel/#{order.id}" class="btn btn-sm btn-secondary" title="Cancel">Cancel</a></span>-->
+<!--                            <button type="submit" t-att-id="order.id" class="btn btn-danger"><i class="fa fa-times"></i>Cancel</button>-->
+                            <span t-if="order.state == 'draft'"><a t-attf-href="/my/mrporders/cancel/#{order.id}" >Cancel</a></span>
+<!--                            <a t-attf-href="/my/mrporders/cancel/?order_id=#{order.id}" >Cancel</a>-->
+
+
+<!--                                                <a t-attf-href="/event?country=#{country.id}" class="small"><b>See all events from <span t-esc="country.name"/></b></a>-->
+
+
                         </td>
 <!--                        <t t-if="order.state == 'draft'" >-->
 

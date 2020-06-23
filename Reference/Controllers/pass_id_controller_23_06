@@ -1,0 +1,59 @@
+<t t-name="portal.Chatter.Attachments">
+        <div t-if="attachments.length" class="row">
+            <div t-foreach="attachments" t-as="attachment" class="col-lg-2 col-md-3 col-sm-6">
+                <div class="o_portal_chatter_attachment mb-2 position-relative text-center" t-att-data-id="attachment.id">
+                    <button t-if="showDelete and attachment.state == 'pending'" class="o_portal_chatter_attachment_delete btn btn-sm btn-outline-danger" title="Delete">
+                        <i class="fa fa-times"/>
+                    </button>
+                    <a t-attf-href="/web/content/#{attachment.id}?download=true&amp;access_token=#{attachment.access_token}" target="_blank">
+                        <div class='oe_attachment_embedded o_image' t-att-title="attachment.name" t-att-data-mimetype="attachment.mimetype"/>
+                        <div class='o_portal_chatter_attachment_name'><t t-esc='attachment.name'/></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </t>
+
+
+
+@http.route(['/web/content',
+        '/web/content/<string:xmlid>',
+        '/web/content/<string:xmlid>/<string:filename>',
+        '/web/content/<int:id>',
+        '/web/content/<int:id>/<string:filename>',
+        '/web/content/<int:id>-<string:unique>',
+        '/web/content/<int:id>-<string:unique>/<string:filename>',
+        '/web/content/<int:id>-<string:unique>/<path:extra>/<string:filename>',
+        '/web/content/<string:model>/<int:id>/<string:field>',
+        '/web/content/<string:model>/<int:id>/<string:field>/<string:filename>'], type='http', auth="public")
+    def content_common(self, xmlid=None, model='ir.attachment', id=None, field='datas',
+                       filename=None, filename_field='name', unique=None, mimetype=None,
+                       download=None, data=None, token=None, access_token=None, **kw):
+
+        status, headers, content = request.env['ir.http'].binary_content(
+            xmlid=xmlid, model=model, id=id, field=field, unique=unique, filename=filename,
+            filename_field=filename_field, download=download, mimetype=mimetype, access_token=access_token)
+
+        if status != 200:
+            return request.env['ir.http']._response_by_status(status, headers, content)
+        else:
+            content_base64 = base64.b64decode(content)
+            headers.append(('Content-Length', len(content_base64)))
+            response = request.make_response(content_base64, headers)
+        if token:
+            response.set_cookie('fileToken', token)
+        return response
+
+    @http.route(['/web/partner_image',
+        '/web/partner_image/<int:rec_id>',
+        '/web/partner_image/<int:rec_id>/<string:field>',
+        '/web/partner_image/<int:rec_id>/<string:field>/<string:model>/'], type='http', auth="public")
+    def content_image_partner(self, rec_id, field='image_128', model='res.partner', **kwargs):
+        # other kwargs are ignored on purpose
+        return self._content_image(id=rec_id, model='res.partner', field=field,
+            placeholder='user_placeholder.jpg')
+
+
+
+                                        <a class="list-group-item list-group-item-action d-flex align-items-center oe_attachments py-1 px-2" t-foreach='task.attachment_ids' t-as='attachment' t-attf-href="/web/content/#{attachment.id}?download=true&amp;access_token=#{attachment.access_token}" target="_blank" data-no-post-process="">
+

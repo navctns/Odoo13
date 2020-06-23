@@ -1,0 +1,78 @@
+@http.route(['/shop/payment/transaction/<int:acquirer_id>'], type='json', auth="public", website=True)
+    def payment_transaction(self, acquirer_id):
+        cr, uid, context = request.cr, request.uid, request.context
+        transaction_obj = request.registry.get('payment.transaction')
+        order = request.website.sale_get_order(context=context)
+
+        if not order or not order.order_line or acquirer_id is None:
+            return request.redirect("/shop/checkout")
+
+        assert order.partner_id.id != request.website.partner_id.id
+
+        # find an already existing transaction
+        tx = request.website.sale_get_transaction()
+        if tx:
+            if tx.state == 'draft':  # button cliked but no more info -> rewrite on tx or create a new one ?
+                tx.write({
+                    'acquirer_id': acquirer_id,
+                    'amount': order.amount_total,
+                })
+            tx_id = tx.id
+        else:
+            tx_id = transaction_obj.create(cr, SUPERUSER_ID, {
+                'acquirer_id': acquirer_id,
+                'type': 'form',
+                'amount': order.amount_total,
+                'currency_id': order.pricelist_id.currency_id.id,
+                'partner_id': order.partner_id.id,
+                'partner_country_id': order.partner_id.country_id.id,
+                'reference': order.name,
+                'sale_order_id': order.id,
+            }, context=context)
+            request.session['sale_transaction_id'] = tx_id
+
+
+<div t-if="len(events) &gt; 5">
+                <t t-if="country">
+                    <a t-attf-href="/event?country=#{country.id}" class="small"><b>See all events from <span t-esc="country.name"/></b></a>
+                </t>
+                <t t-else="">
+                    <a href="/event" class="small"><b>View all</b></a>
+                </t>
+            </div>
+
+
+
+what is slut
+
+@api.depends('name')
+    def _compute_website_url(self):
+        super(Event, self)._compute_website_url()
+        for event in self:
+            if event.id:  # avoid to perform a slug on a not yet saved record in case of an onchange.
+                event.website_url = '/event/%s' % slug(event)
+
+@http.route(['''/event/<model("event.event", "[('website_id', 'in', (False, current_website_id))]"):event>/registration/confirm'''], type='http', auth="public", methods=['POST'], website=True)
+    def registration_confirm(self, event, **post):
+        if not event.can_access_from_current_website():
+            raise werkzeug.exceptions.NotFound()
+
+
+
+I too got this issue while making an ajax request to the controller.
+
+Please try making
+
+type:'POST',  in your .js ajax request
+
+and in controller decorater it should be something like...
+
+@http.route('/pproject/get_po_prices', methods=['POST'], type='json', auth="public", website=True)
+
+then you can access your data using
+
+data = request.jsonrequest
+
+under yourcontroller
+
+Hope it helps!    
