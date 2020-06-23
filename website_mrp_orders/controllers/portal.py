@@ -46,22 +46,35 @@ class PortalMrp(CustomerPortal):
     def portal_my_mrp_orders(self, page=1, date_begin=None, date_end=None, sortby=None, **kw):
         # values = self._prepare_portal_layout_values()
         user,mo_count = self._get_current_user_values()
-        orders = request.env['mrp.production'].search([('partner_id', '=', user.id)])
+
+        pager = request.website.pager(
+            url="/my/mrporders",
+            total=mo_count,
+            page=page,
+            step=self._items_per_page
+        )
+
+        orders = request.env['mrp.production'].search([('partner_id', '=', user.id),('state', '!=', 'cancel')],
+                                            limit=self._items_per_page, offset=pager['offset'])
 
         #sorting
         searchbar_sortings = {
-            'date_deadline': {'label': _('Deadline'), 'order': 'date_deadline desc'},
+            'date': {'label': _('Deadline'), 'order': 'date_deadline desc'},
             'name': {'label': _('Reference'), 'order': 'name'},
             'stage': {'label': _('Stage'), 'order': 'state'},
-            'product': {'label': _('Stage'), 'order': 'state'},
+            'product': {'label': _('Product'), 'order': 'product_id'},
         }
 
         if not sortby:
-            sortby = 'date_deadline'
+            sortby = 'product'
         sort_order = searchbar_sortings[sortby]['order']
 
+        sort_by = 'product'
+
+
+
         return request.render("website_mrp_orders.portal_my_mrp_orders",{'orders':orders.sudo(),'mo_count':mo_count,
-                    'searchbar_sortings':searchbar_sortings,'sortby': sortby,})
+                    'searchbar_sortings':searchbar_sortings,'sortby': sortby,'pager':pager})
             # values = self._prepare_portal_layout_values()
             # partner = request.env.user.partner_id
             # SaleOrder = request.env['mrp.production']

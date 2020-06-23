@@ -39,7 +39,7 @@
 
                  <t t-foreach="orders" t-as="order">
 <!--                     <form action="/my/mrporders/cancel" method="post" class="">-->
-                     <form action="/my/mrporders/cancel/#{order.id}" method="post">
+<!--                     <form action="/my/mrporders/cancel/#{order.id}" method="post">-->
                     <tr>
 <!--                        <td><a t-att-href="quotation.get_portal_url()"><t t-esc="quotation.name"/></a></td>-->
                         <td><t t-esc="order.name"/></td>
@@ -72,7 +72,7 @@
 
 
                     </tr>
-                     </form>
+<!--                     </form>-->
 
 <!--                <span t-if="order.state == 'draft'"><a  href="#" title="Cancel">Cancel</a></span>-->
 

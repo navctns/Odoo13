@@ -16,3 +16,30 @@ class CustomOnboardingController(OnboardingController):  # Inherit in your custo
         res = super(CustomOnboardingController, self).sale_quotation_onboarding()
         # Your code goes here
         return res
+
+
+
+    def _prepare_portal_layout_values(self):
+        values = super(CustomerPortal, self)._prepare_portal_layout_values()
+        partner = request.env.user.partner_id
+
+        SaleOrder = request.env['sale.order']
+        quotation_count = SaleOrder.search_count([
+            ('message_partner_ids', 'child_of', [partner.commercial_partner_id.id]),
+            ('state', 'in', ['sent', 'cancel'])
+        ])
+        order_count = SaleOrder.search_count([
+            ('message_partner_ids', 'child_of', [partner.commercial_partner_id.id]),
+            ('state', 'in', ['sale', 'done'])
+        ])
+
+        values.update({
+            'quotation_count': quotation_count,
+            'order_count': order_count,
+        })
+        return values
+
+
+
+
+breadcrumbs_searchbar
