@@ -19,7 +19,7 @@ class PortalMrp(CustomerPortal):
 
     def _get_current_user_values(self):
         user = request.env.user
-        mo_count = request.env['mrp.production'].search_count([('partner_id','=',user.id)])
+        mo_count = request.env['mrp.production'].search_count([('partner_id','=',user.id), ('state', '!=', 'cancel')])
         return (user,mo_count)
 
     #inherit controller function
@@ -56,6 +56,9 @@ class PortalMrp(CustomerPortal):
 
         orders = request.env['mrp.production'].search([('partner_id', '=', user.id),('state', '!=', 'cancel')],
                                             limit=self._items_per_page, offset=pager['offset'])
+
+        # order_count = orders = request.env['mrp.production'].search_count([('partner_id', '=', user.id),('state', '!=', 'cancel')],
+        #                                     limit=self._items_per_page, offset=pager['offset'])
 
         #sorting
         searchbar_sortings = {

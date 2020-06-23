@@ -1,0 +1,4 @@
+API in odoo
+
+
+Hi, whether the application has REST api? Anyway, If you are getting a json object, you can use "loads()" of json library to convert it as a dictionary. Then you can extract the required data from that dictionary and do whatever you need using a python function. 

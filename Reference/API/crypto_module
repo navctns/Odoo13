@@ -1,0 +1,8 @@
+pycrypto
+
+install pycrypto
+
+for this Error message:
+
+from Crypto.Cipher import AES
+ModuleNotFoundError: No module named 'Crypto'
