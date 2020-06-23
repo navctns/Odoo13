@@ -17,15 +17,51 @@ from odoo.osv import expression
 class PortalMrp(CustomerPortal):
     orders_page = '/my/mrporders'
 
-    def _get_current_user(self):
-        return request.env.user
+    def _get_current_user_values(self):
+        user = request.env.user
+        mo_count = request.env['mrp.production'].search_count([('partner_id','=',user.id)])
+        return (user,mo_count)
+
+    #inherit controller function
+    def _prepare_portal_layout_values(self):
+        values = super(PortalMrp, self)._prepare_portal_layout_values()
+        # values = super(CustomerPortal, self)._prepare_portal_layout_values()
+        # values = super(CustomerPortal, self)._prepare_portal_layout_values()
+        # Your code goes here
+        user,mo_count = self._get_current_user_values()
+
+        values.update({
+            'mo_order_count': mo_count
+         })
+
+        return values
+
+    @http.route(['/my'], type='http', auth="user", website=True)
+    def portal_my_mrp_orders_count(self, page=1, date_begin=None, date_end=None, sortby=None, **kw):
+        user,mo_order_count = self._get_current_user_values()
+        return request.render("portal.portal_my_home",{'mo_order_count':mo_order_count})
+
 
     @http.route(['/my/mrporders', '/my/mrporders/page/<int:page>'], type='http', auth="user", website=True)
     def portal_my_mrp_orders(self, page=1, date_begin=None, date_end=None, sortby=None, **kw):
         # values = self._prepare_portal_layout_values()
-        user = self._get_current_user()
+        user,mo_count = self._get_current_user_values()
         orders = request.env['mrp.production'].search([('partner_id', '=', user.id)])
-        return request.render("website_mrp_orders.portal_my_mrp_orders",{'orders':orders.sudo()})
+
+        #sorting
+        searchbar_sortings = {
+            'date_deadline': {'label': _('Deadline'), 'order': 'date_deadline desc'},
+            'name': {'label': _('Reference'), 'order': 'name'},
+            'stage': {'label': _('Stage'), 'order': 'state'},
+            'product': {'label': _('Stage'), 'order': 'state'},
+        }
+
+        if not sortby:
+            sortby = 'date_deadline'
+        sort_order = searchbar_sortings[sortby]['order']
+
+        return request.render("website_mrp_orders.portal_my_mrp_orders",{'orders':orders.sudo(),'mo_count':mo_count,
+                    'searchbar_sortings':searchbar_sortings,'sortby': sortby,})
             # values = self._prepare_portal_layout_values()
             # partner = request.env.user.partner_id
             # SaleOrder = request.env['mrp.production']
@@ -79,7 +115,7 @@ class PortalMrp(CustomerPortal):
     @http.route(['/my/mrporders/cancel/<int:order_id>'],methods=['GET', 'POST'], type='http', auth="user", website=True, csrf=False)
     def portal_my_mrp_orders_cancel(self, order_id, page=1, date_begin=None, date_end=None, sortby=None, **kw ):
         # values = self._prepare_portal_layout_values()
-        user = self._get_current_user()
+        user,order_count = self._get_current_user_values()
 
         # data = request.jsonrequest
         # request.env['mrp.production'].search([('partner_id', '=', user.id)]).action_cancel()

@@ -1,0 +1,18 @@
+ @route(['/my', '/my/home'], type='http', auth="user", website=True)
+    def home(self, **kw):
+        values = self._prepare_portal_layout_values()
+        return request.render("portal.portal_my_home", values)
+
+
+
+from odoo import http
+from odoo.addons.sale.controllers.onboarding import OnboardingController  # Import the class
+
+
+class CustomOnboardingController(OnboardingController):  # Inherit in your custom class
+
+    @http.route('/sales/sale_quotation_onboarding_panel', auth='user', type='json')
+    def sale_quotation_onboarding(self):
+        res = super(CustomOnboardingController, self).sale_quotation_onboarding()
+        # Your code goes here
+        return res

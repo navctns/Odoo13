@@ -4,6 +4,8 @@
             <t t-call="portal.portal_docs_entry">
                 <t t-set="title">Manufacturing Orders</t>
                 <t t-set="url" t-value="'/my/mrporders'"/>
+                <t t-set="count" t-value='mo_order_count'/>
+
              </t>
 <!--                <t t-set="count" t-value="quotation_count"/>-->
 
@@ -15,7 +17,7 @@
         </xpath>
     </template>
 
-<!--tables page-->
+<!--orders tables page-->
     <template id="portal_my_mrp_orders" name="My Manufacturing Orders">
          <t t-call="portal.portal_layout">
               <t t-set="breadcrumbs_searchbar" t-value="True"/>
@@ -55,7 +57,7 @@
                         <td>
 <!--                            <span t-if="order.state == 'draft'"><a href="/my/mrporders/cancel/#{order.id}" class="btn btn-sm btn-secondary" title="Cancel">Cancel</a></span>-->
 <!--                            <button type="submit" t-att-id="order.id" class="btn btn-danger"><i class="fa fa-times"></i>Cancel</button>-->
-                            <span t-if="order.state == 'draft'"><a t-attf-href="/my/mrporders/cancel/#{order.id}" >Cancel</a></span>
+                            <span t-if="order.state == 'draft'"><a class="btn btn-sm btn-secondary" t-attf-href="/my/mrporders/cancel/#{order.id}" >Cancel</a></span>
 <!--                            <a t-attf-href="/my/mrporders/cancel/?order_id=#{order.id}" >Cancel</a>-->
 
 
