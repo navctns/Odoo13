@@ -19,7 +19,7 @@ class PortalMrp(CustomerPortal):
 
     def _get_current_user_values(self):
         user = request.env.user
-        mo_count = request.env['mrp.production'].search_count([('partner_id','=',user.id), ('state', '!=', 'cancel')])
+        mo_count = request.env['mrp.production'].search_count([('partner_id','in',[user.partner_id.parent_id.id, user.partner_id.id]), ('state', '!=', 'cancel')])
         return (user,mo_count)
 
     #inherit controller function
@@ -36,13 +36,13 @@ class PortalMrp(CustomerPortal):
 
         return values
 
-    @http.route(['/my'], type='http', auth="user", website=True)
-    def portal_my_mrp_orders_count(self, page=1, date_begin=None, date_end=None, sortby=None, **kw):
-        user,mo_order_count = self._get_current_user_values()
-        return request.render("portal.portal_my_home",{'mo_order_count':mo_order_count})
+    # @http.route(['/my'], type='http', auth="user", website=True)
+    # def portal_my_mrp_orders_count(self, page=1, date_begin=None, date_end=None, sortby=None, **kw):
+    #     user,mo_order_count = self._get_current_user_values()
+    #     return request.render("portal.portal_my_home",{'mo_order_count':mo_order_count})
 
 
-    @http.route(['/my/mrporders', '/my/mrporders/page/<int:page>'], type='http', auth="user", website=True)
+    @http.route(['/my/mrporders', '/my/mrporders/page/<int:page>'], type='http', auth="public", website=True, csrf=True)
     def portal_my_mrp_orders(self, page=1, date_begin=None, date_end=None, sortby=None, **kw):
         # values = self._prepare_portal_layout_values()
         user,mo_count = self._get_current_user_values()
@@ -54,7 +54,7 @@ class PortalMrp(CustomerPortal):
             step=self._items_per_page
         )
 
-        orders = request.env['mrp.production'].search([('partner_id', '=', user.id),('state', '!=', 'cancel')],
+        orders = request.env['mrp.production'].search([('partner_id', 'in', [user.partner_id.parent_id.id, user.partner_id.id]),('state', '!=', 'cancel')],
                                             limit=self._items_per_page, offset=pager['offset'])
 
         # order_count = orders = request.env['mrp.production'].search_count([('partner_id', '=', user.id),('state', '!=', 'cancel')],
@@ -128,7 +128,7 @@ class PortalMrp(CustomerPortal):
             # })
             # return request.render("sale.portal_my_mrp_orders")
     # @http.route(['/my/mrporders/cancel/<int:id>'], type='http', methods=['GET', 'POST'], auth="user", website=True, csrf=False)
-    @http.route(['/my/mrporders/cancel/<int:order_id>'],methods=['GET', 'POST'], type='http', auth="user", website=True, csrf=False)
+    @http.route(['/my/mrporders/cancel/<int:order_id>'],methods=['GET', 'POST'], type='http', auth="public", website=True, csrf=True)
     def portal_my_mrp_orders_cancel(self, order_id, page=1, date_begin=None, date_end=None, sortby=None, **kw ):
         # values = self._prepare_portal_layout_values()
         user,order_count = self._get_current_user_values()

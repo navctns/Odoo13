@@ -1,0 +1,31 @@
+access_mrp_production,mrp.production user,model_mrp_production,mrp.group_mrp_user,1,1,1,1
+
+
+access_sale_order_portal,sale.order.portal,sale.model_sale_order,base.group_portal,1,0,0,0
+
+
+access_mrp_production_portal,mrp.production.portal,model_mrp_production,base.group_portal,1,1,1,1
+
+
+
+Solution:
+
+
+Hi,
+
+You can override that by inheritance by defining security file in your custom module, for that you have to do:-
+
+- create a 'security' folder and 'ir.model.access.csv' in your custom module.
+
+- make sure you added that file path in " openerp.py " file
+
+- For better understanding we can take an Example. Let us assume that you want to change security access right in 'hr' module
+
+access_hr_employee_user,hr.employee user,model_hr_employee,base.group_hr_user,1,1,1,1
+
+- for changing this you have to define new access right in your module like this:-
+
+hr.access_hr_employee_user,hr.employee user,model_hr_employee,base.group_hr_user,1,0,0,0 
+
+
+Hope this helps....

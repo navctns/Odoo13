@@ -1,0 +1,8 @@
+<odoo>
+    <record id="group_mrp_portal" model="res.groups">
+            <field name="name">Portal</field>
+            <field name="implied_ids" eval="[(4, ref('stock.group_stock_user'))]"/>
+            <field name="category_id" ref="base.module_category_manufacturing_manufacturing"/>
+    </record>
+
+</odoo>
