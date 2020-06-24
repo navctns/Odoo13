@@ -149,3 +149,16 @@ class PortalMrp(CustomerPortal):
         # orders = request.env['mrp.production'].search([('partner_id', '=', user.id)])
         # return request.render("website_mrp_orders.portal_my_mrp_orders",{'orders':orders.sudo()})
         return request.redirect(self.orders_page)
+
+    @http.route(['/my/mrporders/<int:order_id>', '/my/mrporders/page/<int:page>'], type='http', auth="public", website=True, csrf=True)
+    def portal_my_mrp_order_details(self, order_id, page=1, date_begin=None, date_end=None, sortby=None, **kw):
+
+        order = request.env['mrp.production'].search([('id', '=', order_id)])
+        values = {}
+        if order.move_raw_ids :
+            for r in order.move_raw_ids :
+                values.update({
+                    r.product_id.name:r.product_uom_qty,
+                })
+
+        return request.render("website_mrp_orders.portal_my_order", {'order':order,'values':values})

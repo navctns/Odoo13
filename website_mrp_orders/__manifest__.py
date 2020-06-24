@@ -15,6 +15,7 @@
     'depends': ['website_sale','mrp','portal','website_partner'],
     'data': ['views/mrp_add_partner.xml',
              'views/portal_myhome_inherit.xml',
+             'views/manufacturing_order_details_page.xml',
              'security/ir.model.access.csv',
              'security/mrp_security.xml',
             # 'views/button_buy_now.xml',

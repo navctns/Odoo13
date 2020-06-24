@@ -42,7 +42,9 @@
 <!--                     <form action="/my/mrporders/cancel/#{order.id}" method="post">-->
                     <tr>
 <!--                        <td><a t-att-href="quotation.get_portal_url()"><t t-esc="quotation.name"/></a></td>-->
-                        <td><t t-esc="order.name"/></td>
+<!--                        <a t-attf-href="/my/mrporders/#{order.id}"><td><t t-esc="order.name"/></td></a>-->
+<!--                         <td><a t-att-href="order.get_portal_url()"><t t-esc="order.name"/></a></td>-->
+                        <td><span ><a t-attf-href="/my/mrporders/#{order.id}"><t t-esc="order.name"/></a></span></td>
                         <td class="text-right"><span t-field="order.product_id.name"/></td>
                         <td class="text-right"><span t-field="order.date_deadline"/></td>
                             <!--state shown this way-->
