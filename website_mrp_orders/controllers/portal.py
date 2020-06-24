@@ -161,4 +161,4 @@ class PortalMrp(CustomerPortal):
                     r.product_id.name:r.product_uom_qty,
                 })
 
-        return request.render("website_mrp_orders.portal_my_order", {'order':order,'values':values})
+        return request.render("website_mrp_orders.portal_my_order", {'order':order.sudo(),'values':values})

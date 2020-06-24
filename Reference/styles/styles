@@ -1,0 +1,6 @@
+styles
+
+<header class="modal-header">
+                                    <h4 class="modal-title">Validate Order</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">&amp;times;</button>
+                                </header>

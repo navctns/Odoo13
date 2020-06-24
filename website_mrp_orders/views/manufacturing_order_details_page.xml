@@ -24,7 +24,8 @@
                 </t>
                 <t t-set="card_body">
                     <div class="row">
-                        <div t-if="order.partner_id" class="col-12 col-md-6 mb-2 mb-md-0">
+<!--                        <div t-if="order.partner_id" class="col-12 col-md-6 mb-2 mb-md-0">-->
+                        <div t-if="order.partner_id" class="col-06 col-md-6 mb-2 mb-md-0">
                             <h6>Customer</h6>
                             <div class="row">
                                 <div class="col flex-grow-0 pr-3">
@@ -36,6 +37,7 @@
                                 </div>
                             </div>
                         </div>
+<!--                    </div>-->
 <!--                        <div t-if="order.user_id" class="col-12 col-md-6">-->
 <!--                            <h6>Responsible Employee</h6>-->
 <!--                            <div class="row">-->
@@ -48,30 +50,50 @@
 <!--                                </div>-->
 <!--                            </div>-->
 <!--                        </div>-->
-                        <strong><h4>Product: <span t-field="order.product_id.name"/></h4></strong>
+<!--                        <strong><h4>Product: <span t-field="order.product_id"/></h4></strong>-->
+                        <div class="col-06 col-md-6 mb-2 mb-md-0">
+                            <strong><h4 class="text-center">Product: <span t-field="order.product_id"/></h4></strong>
+                            <br></br>
 
-                        <t t-if="order" t-call="portal.portal_table">
-                           <strong> <h5 class="text-center">Components</h5></strong>
-                            <thead>
-                                <tr class="active">
-                                    <center><th class="bg-100">Product</th></center>
-                                    <center><th class="bg-100">To Consume</th></center>
-<!--                                    <th class="bg-100">Product</th>-->
 
-                                </tr>
-                            </thead>
+                            <t t-if="order" t-call="portal.portal_table">
+    <!--                            <strong><h3 class="text-center">Product: <span t-field="order.product_id"/></h3></strong>-->
+                                <div class="bg-100"><strong> <h4 class="text-center">Components</h4></strong></div>
+<!--                                class="modal-title"-->
+                                <thead>
+                                    <tr class="active">
 
-                            <t t-foreach="order.move_raw_ids" t-as="raw">
+                                        <div class="bg-100"> <th class="text-center">Product</th></div>
+                                             <th class="text-center">To Consume</th>
+        <!--                                    <th class="bg-100">Product</th>-->
 
-                                <tr>
-<!--                                    <td><span ><a t-attf-href="/my/mrporders/#{order.id}"><t t-esc="order.name"/></a></span></td>-->
-                                    <td class="text-center"><span t-field="raw.product_id.name"/></td>
-                                    <td class="text-center"><span t-field="raw.product_uom_qty"/></td>
-                                </tr>
+
+                                    </tr>
+                                </thead>
+
+                                <t t-foreach="order.move_raw_ids" t-as="raw">
+
+                                    <tr>
+    <!--                                    <td><span ><a t-attf-href="/my/mrporders/#{order.id}"><t t-esc="order.name"/></a></span></td>-->
+                                        <td><span t-field="raw.product_id"/></td>
+<!--                                        <td class="text-center"><span t-field="raw.name"/></td>-->
+                                        <td class="text-center"><span t-field="raw.product_uom_qty"/></td>
+                                    </tr>
+                                </t>
+
+    <!--                            <t t-foreach="order.stock_move" t-as="raw">-->
+
+    <!--                                <tr>-->
+    <!--&lt;!&ndash;                                    <td><span ><a t-attf-href="/my/mrporders/#{order.id}"><t t-esc="order.name"/></a></span></td>&ndash;&gt;-->
+    <!--                                    <td class="text-center"><span t-field="raw.product_id"/></td>-->
+    <!--                                    <td class="text-center"><span t-field="raw.product_uom_qty"/></td>-->
+    <!--                                </tr>-->
+    <!--                            </t>-->
+
                             </t>
-
-                        </t>
+                        </div>
                     </div>
+
                 </t>
             </t>
         </t>
