@@ -131,22 +131,17 @@
                     </h5>
                 </t>
 
-
-<!--                <div class="col-06 col-md-4">-->
-        <!--                            <strong><h4 class="text-center">Product: <span t-field="order.product_id"/></h4></strong>-->
-        <!--                            <br></br>-->
-
-                <t t-set="card_body">
+                 <t t-set="card_body">
                     <div class="row">
-                                    <t t-if="order" t-call="portal.portal_table">
+                        <t t-if="order" t-call="portal.portal_table">
 <!--                                    <t t-if="order" >-->
 <!--                                    <table class="table rounded mb-0 bg-white o_portal_my_doc_table"></table>-->
-                                        <strong><h4>Product: <span t-field="order.product_id"/></h4></strong>
-                                        <br></br>
+                            <strong><h4>Product: <span t-field="order.product_id"/></h4></strong>
+                            <br></br>
             <!--                            <strong><h3 class="text-center">Product: <span t-field="order.product_id"/></h3></strong>-->
-                                        <div class="bg-100"><strong> <h4 class="text-center">Components</h4></strong></div>
+                            <div class="bg-100"><strong> <h4 class="text-center">Components</h4></strong></div>
         <!--                                class="modal-title"-->
-                                        <thead>
+                                    <thead>
                                             <tr class="active">
 
                                                 <div class="bg-100"> <th class="text-center">Product</th></div>
@@ -155,9 +150,9 @@
 
 
                                             </tr>
-                                        </thead>
+                                    </thead>
 
-                                        <t t-foreach="order.move_raw_ids" t-as="raw">
+                                    <t t-foreach="order.move_raw_ids" t-as="raw">
 
                                             <tr>
             <!--                                    <td><span ><a t-attf-href="/my/mrporders/#{order.id}"><t t-esc="order.name"/></a></span></td>-->
@@ -167,20 +162,11 @@
                                             </tr>
                                         </t>
 
-            <!--                            <t t-foreach="order.stock_move" t-as="raw">-->
+                        </t>
 
-            <!--                                <tr>-->
-            <!--&lt;!&ndash;                                    <td><span ><a t-attf-href="/my/mrporders/#{order.id}"><t t-esc="order.name"/></a></span></td>&ndash;&gt;-->
-            <!--                                    <td class="text-center"><span t-field="raw.product_id"/></td>-->
-            <!--                                    <td class="text-center"><span t-field="raw.product_uom_qty"/></td>-->
-            <!--                                </tr>-->
-            <!--                            </t>-->
-
-                                    </t>
-
-                                </div>
+                    </div>
                 </t>
-        </t>
+            </t>
         </t>
     </template>
 </odoo>
