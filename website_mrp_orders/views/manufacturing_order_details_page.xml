@@ -13,19 +13,28 @@
                 <t t-set="card_header">
                     <h5 class="mb-0">
                         <small class="text-muted">Manufacturing Order - </small><span t-field="order.name"/>
-<!--                        <span class="float-right">-->
-<!--                            <a role="button" t-attf-href="/my/tasks?filterby=#{project.id}" class="btn btn-sm btn-secondary">-->
+<!--t-if="order.move_raw_ids"-->
+<!--                        <div class="float-right">-->
+<!--                         <span t-if="order.move_raw_ids"><a role="button" t-attf-href="/my/mrporders/info/#{order.id}" class="btn btn-sm btn-secondary">-->
+<!--                         </a>-->
+<!--                    </span></div>-->
+
 <!--                                <span class="fa fa-tasks" role="img" aria-label="Tasks" title="Tasks"/>-->
 <!--                                <span t-esc="project.task_count"/>-->
 <!--                                <span t-field="project.label_tasks"/>-->
-<!--                            </a>-->
-<!--                        </span>-->
+
+<!--                        <span class="float-right" t-if="order.move_raw_ids"><a class="btn btn-sm btn-secondary" t-attf-href="/my/mrporders/info/#{order.id}" >Components</a></span>-->
+
                     </h5>
+                    <span class="float-right" t-if="order.move_raw_ids"><a class="btn btn-sm btn-secondary" t-attf-href="/my/mrporders/info/#{order.id}" >Components</a></span>
+
+
                 </t>
                 <t t-set="card_body">
                     <div class="row">
 <!--                        <div t-if="order.partner_id" class="col-12 col-md-6 mb-2 mb-md-0">-->
-                        <div t-if="order.partner_id" class="col-06 col-md-6 mb-2 mb-md-0">
+<!--                        <div t-if="order.partner_id" class="col-06 col-md-6 mb-2 mb-md-0">-->
+                        <div t-if="order.partner_id" class="col-06 col-md-4">
                             <h6>Customer</h6>
                             <div class="row">
                                 <div class="col flex-grow-0 pr-3">
@@ -37,65 +46,141 @@
                                 </div>
                             </div>
                         </div>
+
 <!--                    </div>-->
 <!--                        <div t-if="order.user_id" class="col-12 col-md-6">-->
-<!--                            <h6>Responsible Employee</h6>-->
-<!--                            <div class="row">-->
-<!--                                <div class="col flex-grow-0 pr-3">-->
-<!--                                    <img t-if="order.user_id.image_1024" class="rounded-circle mt-1 o_portal_contact_img" t-att-src="image_data_uri(order.user_id.image_1024)" alt="Contact"/>-->
-<!--                                    <img t-else="" class="rounded-circle mt-1 o_portal_contact_img" src="/web/static/src/img/user_menu_avatar.png" alt="Contact"/>-->
-<!--                                </div>-->
-<!--                                <div class="col pl-sm-0">-->
-<!--                                    <address t-field="order.user_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;name&quot;, &quot;email&quot;, &quot;phone&quot;]}"/>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <strong><h4>Product: <span t-field="order.product_id"/></h4></strong>-->
-                        <div class="col-06 col-md-6 mb-2 mb-md-0">
-                            <strong><h4 class="text-center">Product: <span t-field="order.product_id"/></h4></strong>
-                            <br></br>
-
-
-                            <t t-if="order" t-call="portal.portal_table">
-    <!--                            <strong><h3 class="text-center">Product: <span t-field="order.product_id"/></h3></strong>-->
-                                <div class="bg-100"><strong> <h4 class="text-center">Components</h4></strong></div>
-<!--                                class="modal-title"-->
-                                <thead>
-                                    <tr class="active">
-
-                                        <div class="bg-100"> <th class="text-center">Product</th></div>
-                                             <th class="text-center">To Consume</th>
-        <!--                                    <th class="bg-100">Product</th>-->
-
-
-                                    </tr>
-                                </thead>
-
-                                <t t-foreach="order.move_raw_ids" t-as="raw">
-
-                                    <tr>
-    <!--                                    <td><span ><a t-attf-href="/my/mrporders/#{order.id}"><t t-esc="order.name"/></a></span></td>-->
-                                        <td><span t-field="raw.product_id"/></td>
-<!--                                        <td class="text-center"><span t-field="raw.name"/></td>-->
-                                        <td class="text-center"><span t-field="raw.product_uom_qty"/></td>
-                                    </tr>
-                                </t>
-
-    <!--                            <t t-foreach="order.stock_move" t-as="raw">-->
-
-    <!--                                <tr>-->
-    <!--&lt;!&ndash;                                    <td><span ><a t-attf-href="/my/mrporders/#{order.id}"><t t-esc="order.name"/></a></span></td>&ndash;&gt;-->
-    <!--                                    <td class="text-center"><span t-field="raw.product_id"/></td>-->
-    <!--                                    <td class="text-center"><span t-field="raw.product_uom_qty"/></td>-->
-    <!--                                </tr>-->
-    <!--                            </t>-->
-
-                            </t>
+                        <div t-if="order.user_id" class="col-06 col-md-4">
+                            <h6>Responsible Employee</h6>
+                            <div class="row">
+                                <div class="col flex-grow-0 pr-3">
+                                    <img t-if="order.user_id.image_1024" class="rounded-circle mt-1 o_portal_contact_img" t-att-src="image_data_uri(order.user_id.image_1024)" alt="Contact"/>
+                                    <img t-else="" class="rounded-circle mt-1 o_portal_contact_img" src="/web/static/src/img/user_menu_avatar.png" alt="Contact"/>
+                                </div>
+                                <div class="col pl-sm-0">
+                                    <address t-field="order.user_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;name&quot;, &quot;email&quot;, &quot;phone&quot;]}"/>
+                                </div>
+                            </div>
                         </div>
+<!--                        <strong><h4>Product: <span t-field="order.product_id"/></h4></strong>-->
+                        <!-- components table-->
+<!--                        <div class="col-06 col-md-4">-->
+<!--&lt;!&ndash;                            <strong><h4 class="text-center">Product: <span t-field="order.product_id"/></h4></strong>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <br></br>&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;                            <t t-if="order" t-call="portal.portal_table">&ndash;&gt;-->
+<!--                            <t t-if="order" t-call="portal.portal_table">-->
+
+<!--                                <strong><h4 class="text-center">Product: <span t-field="order.product_id"/></h4></strong>-->
+<!--                                <br></br>-->
+<!--    &lt;!&ndash;                            <strong><h3 class="text-center">Product: <span t-field="order.product_id"/></h3></strong>&ndash;&gt;-->
+<!--                                <div class="bg-100"><strong> <h4 class="text-center">Components</h4></strong></div>-->
+<!--&lt;!&ndash;                                class="modal-title"&ndash;&gt;-->
+<!--                                <thead>-->
+<!--                                    <tr class="active">-->
+
+<!--                                        <div class="bg-100"> <th class="text-center">Product</th></div>-->
+<!--                                             <th class="text-center">To Consume</th>-->
+<!--        &lt;!&ndash;                                    <th class="bg-100">Product</th>&ndash;&gt;-->
+
+
+<!--                                    </tr>-->
+<!--                                </thead>-->
+
+<!--                                <t t-foreach="order.move_raw_ids" t-as="raw">-->
+
+<!--                                    <tr>-->
+<!--    &lt;!&ndash;                                    <td><span ><a t-attf-href="/my/mrporders/#{order.id}"><t t-esc="order.name"/></a></span></td>&ndash;&gt;-->
+<!--                                        <td><span t-field="raw.product_id"/></td>-->
+<!--&lt;!&ndash;                                        <td class="text-center"><span t-field="raw.name"/></td>&ndash;&gt;-->
+<!--                                        <td class="text-center"><span t-field="raw.product_uom_qty"/></td>-->
+<!--                                    </tr>-->
+<!--                                </t>-->
+
+<!--    &lt;!&ndash;                            <t t-foreach="order.stock_move" t-as="raw">&ndash;&gt;-->
+
+<!--    &lt;!&ndash;                                <tr>&ndash;&gt;-->
+<!--    &lt;!&ndash;&lt;!&ndash;                                    <td><span ><a t-attf-href="/my/mrporders/#{order.id}"><t t-esc="order.name"/></a></span></td>&ndash;&gt;&ndash;&gt;-->
+<!--    &lt;!&ndash;                                    <td class="text-center"><span t-field="raw.product_id"/></td>&ndash;&gt;-->
+<!--    &lt;!&ndash;                                    <td class="text-center"><span t-field="raw.product_uom_qty"/></td>&ndash;&gt;-->
+<!--    &lt;!&ndash;                                </tr>&ndash;&gt;-->
+<!--    &lt;!&ndash;                            </t>&ndash;&gt;-->
+
+<!--                            </t>-->
+<!--                        </div>-->
+                 <!-- components table-->
+
+<!--                        <div>-->
+<!--&lt;!&ndash;                            <t t-foreach="compval" t-as="comp">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <td><span><a href="${<t t-esc="comp['product']"/>}"><t t-esc="comp['product']"/></a></span></td>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </t>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>-->
                     </div>
 
                 </t>
             </t>
         </t>
 </template>
+    <!--components page-->
+    <template id="portal_my_order_components">
+        <t t-call="portal.portal_layout">
+             <t t-call="portal.portal_record_layout">
+                <t t-set="card_header">
+                    <h5 class="mb-0">
+                        <small class="text-muted">Components - </small><span t-field="order.name"/>
+                    </h5>
+                </t>
+
+
+<!--                <div class="col-06 col-md-4">-->
+        <!--                            <strong><h4 class="text-center">Product: <span t-field="order.product_id"/></h4></strong>-->
+        <!--                            <br></br>-->
+
+                <t t-set="card_body">
+                    <div class="row">
+                                    <t t-if="order" t-call="portal.portal_table">
+<!--                                    <t t-if="order" >-->
+<!--                                    <table class="table rounded mb-0 bg-white o_portal_my_doc_table"></table>-->
+                                        <strong><h4>Product: <span t-field="order.product_id"/></h4></strong>
+                                        <br></br>
+            <!--                            <strong><h3 class="text-center">Product: <span t-field="order.product_id"/></h3></strong>-->
+                                        <div class="bg-100"><strong> <h4 class="text-center">Components</h4></strong></div>
+        <!--                                class="modal-title"-->
+                                        <thead>
+                                            <tr class="active">
+
+                                                <div class="bg-100"> <th class="text-center">Product</th></div>
+                                                     <th class="text-center">To Consume</th>
+                <!--                                    <th class="bg-100">Product</th>-->
+
+
+                                            </tr>
+                                        </thead>
+
+                                        <t t-foreach="order.move_raw_ids" t-as="raw">
+
+                                            <tr>
+            <!--                                    <td><span ><a t-attf-href="/my/mrporders/#{order.id}"><t t-esc="order.name"/></a></span></td>-->
+                                                <td class="text-center"><span t-field="raw.product_id"/></td>
+        <!--                                        <td class="text-center"><span t-field="raw.name"/></td>-->
+                                                <td class="text-center"><span t-field="raw.product_uom_qty"/></td>
+                                            </tr>
+                                        </t>
+
+            <!--                            <t t-foreach="order.stock_move" t-as="raw">-->
+
+            <!--                                <tr>-->
+            <!--&lt;!&ndash;                                    <td><span ><a t-attf-href="/my/mrporders/#{order.id}"><t t-esc="order.name"/></a></span></td>&ndash;&gt;-->
+            <!--                                    <td class="text-center"><span t-field="raw.product_id"/></td>-->
+            <!--                                    <td class="text-center"><span t-field="raw.product_uom_qty"/></td>-->
+            <!--                                </tr>-->
+            <!--                            </t>-->
+
+                                    </t>
+
+                                </div>
+                </t>
+        </t>
+        </t>
+    </template>
 </odoo>

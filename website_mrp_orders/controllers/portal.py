@@ -42,7 +42,7 @@ class PortalMrp(CustomerPortal):
     #     return request.render("portal.portal_my_home",{'mo_order_count':mo_order_count})
 
 
-    @http.route(['/my/mrporders', '/my/mrporders/page/<int:page>'], type='http', auth="public", website=True, csrf=True)
+    @http.route(['/my/mrporders', '/my/mrporders/page/<int:page>'], type='http', auth="user", website=True, csrf=True)
     def portal_my_mrp_orders(self, page=1, date_begin=None, date_end=None, sortby=None, **kw):
         # values = self._prepare_portal_layout_values()
         user,mo_count = self._get_current_user_values()
@@ -128,7 +128,7 @@ class PortalMrp(CustomerPortal):
             # })
             # return request.render("sale.portal_my_mrp_orders")
     # @http.route(['/my/mrporders/cancel/<int:id>'], type='http', methods=['GET', 'POST'], auth="user", website=True, csrf=False)
-    @http.route(['/my/mrporders/cancel/<int:order_id>'],methods=['GET', 'POST'], type='http', auth="public", website=True, csrf=True)
+    @http.route(['/my/mrporders/cancel/<int:order_id>'],methods=['GET', 'POST'], type='http', auth="user", website=True, csrf=True)
     def portal_my_mrp_orders_cancel(self, order_id, page=1, date_begin=None, date_end=None, sortby=None, **kw ):
         # values = self._prepare_portal_layout_values()
         user,order_count = self._get_current_user_values()
@@ -150,15 +150,40 @@ class PortalMrp(CustomerPortal):
         # return request.render("website_mrp_orders.portal_my_mrp_orders",{'orders':orders.sudo()})
         return request.redirect(self.orders_page)
 
-    @http.route(['/my/mrporders/<int:order_id>', '/my/mrporders/page/<int:page>'], type='http', auth="public", website=True, csrf=True)
+    @http.route(['/my/mrporders/<int:order_id>', '/my/mrporders/page/<int:page>'], type='http', auth="user", website=True, csrf=True)
     def portal_my_mrp_order_details(self, order_id, page=1, date_begin=None, date_end=None, sortby=None, **kw):
 
         order = request.env['mrp.production'].search([('id', '=', order_id)])
-        values = {}
-        if order.move_raw_ids :
-            for r in order.move_raw_ids :
-                values.update({
-                    r.product_id.name:r.product_uom_qty,
-                })
+        comp_vals = {}
+        compval = []
+        user, order_count = self._get_current_user_values()
+        # if order.move_raw_ids :
+        #     for r in order.move_raw_ids :
+        #         # comp_vals.update({
+        #         #     # r.product_id.name:r.product_uom_qty,
+        #         #     'product':r.product_id,
+        #         #     'product_url':r.product_id.website_url,
+        #         #     'uom_qty':r.product_uom_qty,
+        #         # })
+        #         compval.append({
+        #             # r.product_id.name:r.product_uom_qty,
+        #             'product':r.product_id,
+        #             'product_url':r.product_id.website_url,
+        #             'uom_qty':r.product_uom_qty,
+        #         })
+        print(compval)
 
-        return request.render("website_mrp_orders.portal_my_order", {'order':order.sudo(),'values':values})
+        return request.render("website_mrp_orders.portal_my_order", {'order':order.sudo(),
+                                                                     'user':user,})
+
+    @http.route(['/my/mrporders/info/<int:order_id>', '/my/mrporders/page/<int:page>'], type='http', auth="user",
+                website=True, csrf=True)
+    def portal_my_mrp_order_components(self, order_id, page=1, date_begin=None, date_end=None, sortby=None, **kw):
+        order = request.env['mrp.production'].search([('id', '=', order_id)])
+        comp_vals = {}
+        compval = []
+        user, order_count = self._get_current_user_values()
+        print(compval)
+
+        return request.render("website_mrp_orders.portal_my_order_components", {'order': order.sudo(),
+                                                                     'user': user, })
