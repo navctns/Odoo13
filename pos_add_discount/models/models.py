@@ -28,7 +28,8 @@ class PosConfig(models.Model):
 
     discount_product_add = fields.Many2one('product.product', string='Discount Product',
                                           domain="[('available_in_pos', '=', True), ('sale_ok', '=', True)]",
-                                          help='The product used to model the discount.')
+                                          help='The product used to model the discount.',
+                                           default = lambda self:self.env['product.product'].search([('default_code','=','DISC')]))
 
     @api.onchange('model_id')
     def _onchange_discount_perc_amount(self):

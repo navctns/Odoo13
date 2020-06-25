@@ -117,12 +117,12 @@ var AddDiscountButton = screens.ActionButtonWidget.extend({
                                     // We add the price as manually set to avoid recomputation when changing customer.
                                     var base_to_discount = order.get_total_without_tax();
                                     ///avoiding the total with tax
-//                                    if (product.taxes_id.length){
-//                                        var first_tax = this.pos.taxes_by_id[product.taxes_id[0]];
-//                                        if (first_tax.price_include) {
-//                                            base_to_discount = order.get_total_with_tax();
-//                                        }
-//                                    }
+                                    if (product.taxes_id.length){
+                                        var first_tax = this.pos.taxes_by_id[product.taxes_id[0]];
+                                        if (first_tax.price_include) {
+                                            base_to_discount = order.get_total_with_tax();
+                                        }
+                                    }
                                       ///avoiding the total with tax
                         var discount_type = this.pos.config.discount_type_perc_amount;
                           if (discount_type=='perc'){

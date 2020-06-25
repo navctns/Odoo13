@@ -4,3 +4,17 @@ styles
                                     <h4 class="modal-title">Validate Order</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">&amp;times;</button>
                                 </header>
+
+
+
+
+<template id="portal_table" name="My Portal Table">
+        <div t-attf-class="table-responsive border rounded border-top-0 #{classes if classes else ''}">
+            <table class="table rounded mb-0 bg-white o_portal_my_doc_table">
+                <t t-raw="0"/>
+            </table>
+        </div>
+        <div t-if="pager" class="o_portal_pager text-center">
+            <t t-call="portal.pager"/>
+        </div>
+    </template>
