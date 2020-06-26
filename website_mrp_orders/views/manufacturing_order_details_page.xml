@@ -136,8 +136,9 @@
                         <t t-if="order" t-call="portal.portal_table">
 <!--                                    <t t-if="order" >-->
 <!--                                    <table class="table rounded mb-0 bg-white o_portal_my_doc_table"></table>-->
-                            <strong><h4>Product: <span t-field="order.product_id"/></h4></strong>
-                            <br></br>
+<!--                            <a t-att-href="wish.product_id.website_url">-->
+                            <strong><h4>Product: <span ><a t-att-href="order.product_id.website_url" t-field="order.product_id"/></span></h4></strong>
+<!--                            <br></br>-->
             <!--                            <strong><h3 class="text-center">Product: <span t-field="order.product_id"/></h3></strong>-->
                             <div class="bg-100"><strong> <h4 class="text-center">Components</h4></strong></div>
         <!--                                class="modal-title"-->
@@ -156,7 +157,7 @@
 
                                             <tr>
             <!--                                    <td><span ><a t-attf-href="/my/mrporders/#{order.id}"><t t-esc="order.name"/></a></span></td>-->
-                                                <td class="text-center"><span t-field="raw.product_id"/></td>
+                                                <td class="text-center"><span><a t-att-href="raw.product_id.website_url" t-field="raw.product_id"/></span></td>
         <!--                                        <td class="text-center"><span t-field="raw.name"/></td>-->
                                                 <td class="text-center"><span t-field="raw.product_uom_qty"/></td>
                                             </tr>

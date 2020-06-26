@@ -1,0 +1,3 @@
+product url
+
+<a t-att-href="wish.product_id.website_url">
