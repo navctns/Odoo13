@@ -59,9 +59,13 @@ models.Orderline = models.Orderline.extend({
         this.product_grade = this.product_grade || "";
     },
 
+    //changing
+//    var discount_type = this.pos.config.discount_type_perc_amount;
+
     export_for_printing: function(){
 //        this._super(this);
         return {
+//            discount_type: this.discount_type,
             quantity:           this.get_quantity(),
             unit_name:          this.get_unit().name,
             price:              this.get_unit_display_price(),

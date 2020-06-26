@@ -22,6 +22,7 @@ class PosConfig(models.Model):
     discount_type_perc_amount = fields.Selection([
         ('perc','Percentage'),
         ('amount','Amount'),
+        # ('none','None'),
     ])
     discount_perc_amount = fields.Float(string='Discount Percentage amount',
                                         help='The Discount percentage amount to be subracted', )
@@ -30,6 +31,8 @@ class PosConfig(models.Model):
                                           domain="[('available_in_pos', '=', True), ('sale_ok', '=', True)]",
                                           help='The product used to model the discount.',
                                            default = lambda self:self.env['product.product'].search([('default_code','=','DISC')]))
+    discount_inp = fields.Float(string='Discount Input', help='The Discount inputed', default=10.0)
+
 
     @api.onchange('model_id')
     def _onchange_discount_perc_amount(self):

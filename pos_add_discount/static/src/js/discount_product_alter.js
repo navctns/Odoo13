@@ -26,40 +26,40 @@ models.load_models([{
 
 var _super_orderline = models.Orderline.prototype;
 
-models.Orderline = models.Orderline.extend({
-    initialize: function(attr, options) {
-        _super_orderline.initialize.call(this,attr,options);
-        this.discount = this.discount || "";
-    },
-    set_discount: function(discount){
-        this.discount = discount;
-        this.trigger('change',this);
-    },
-    get_discount: function(discount){
-        return this.discount;
-    },
-     can_be_merged_with: function(orderline) {
-        if (orderline.get_discount() !== this.get_discount()) {
-            return false;
-        } else {
-            return _super_orderline.can_be_merged_with.apply(this,arguments);
-        }
-    },
-    clone: function(){
-        var orderline = _super_orderline.clone.call(this);
-        orderline.discount = this.discount;
-        return orderline;
-    },
-    export_as_JSON: function(){
-        var json = _super_orderline.export_as_JSON.call(this);
-        json.discount = this.discount;
-        return json;
-    },
-    init_from_JSON: function(json){
-        _super_orderline.init_from_JSON.apply(this,arguments);
-        this.discount = json.discount;
-    },
-});
+//models.Orderline = models.Orderline.extend({
+//    initialize: function(attr, options) {
+//        _super_orderline.initialize.call(this,attr,options);
+//        this.discount = this.discount || "";
+//    },
+//    set_discount: function(discount){
+//        this.discount = discount;
+//        this.trigger('change',this);
+//    },
+//    get_discount: function(discount){
+//        return this.discount;
+//    },
+//     can_be_merged_with: function(orderline) {
+//        if (orderline.get_discount() !== this.get_discount()) {
+//            return false;
+//        } else {
+//            return _super_orderline.can_be_merged_with.apply(this,arguments);
+//        }
+//    },
+//    clone: function(){
+//        var orderline = _super_orderline.clone.call(this);
+//        orderline.discount = this.discount;
+//        return orderline;
+//    },
+//    export_as_JSON: function(){
+//        var json = _super_orderline.export_as_JSON.call(this);
+//        json.discount = this.discount;
+//        return json;
+//    },
+//    init_from_JSON: function(json){
+//        _super_orderline.init_from_JSON.apply(this,arguments);
+//        this.discount = json.discount;
+//    },
+//});
 
 var AddDiscountButton = screens.ActionButtonWidget.extend({
     template: 'AddDiscountButton',
@@ -85,7 +85,7 @@ var AddDiscountButton = screens.ActionButtonWidget.extend({
     //        this.gui.show_popup('textarea',{
             this.gui.show_popup('number',{
                     'title': ('Add Discount'),
-                    'value': line.get_discount(),
+                    'value':  this.pos.config.discount_inp,
                     'body': 'Opening popup after clicking on the button',
                     confirm: function(discount) {
                         var value = this.$('#number-input').val();
@@ -165,7 +165,7 @@ var AddDiscountButton = screens.ActionButtonWidget.extend({
                                         });
                                     }
 
-                                    line.set_discount(0);//reset value afterwards
+//                                    line.set_discount(0);//reset value afterwards
 
                           }else if (discount_type=='amount'){
 //                            line.price = 10;
@@ -193,7 +193,7 @@ var AddDiscountButton = screens.ActionButtonWidget.extend({
                                             },
                                         });
                                     }
-                                    line.set_discount(0);//reset value afterwards
+//                                    line.set_discount(0);//reset value afterwards
                           }
 //                        console.log('orderline',line)
 //                        console.log('subtotal',order.price_subtotal)
