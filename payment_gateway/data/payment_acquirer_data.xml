@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="payment_acquirer_razorpay" model="payment.acquirer">
+        <field name="provider">paytrail</field>
+        <field name="name">Paytrail</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="image_128" type="base64" file="payment_gateway/static/src/img/paytrail.png"/>
+        <field name="view_template_id" ref="paytrail_form"/>
+        <field name="state">test</field>
+        <field name="pre_msg"><![CDATA[
+            <p>You will be prompted with Paytrail Payment page for payment information.</p>]]>
+        </field>
+        <field name="paytrail_key_id">dummy</field>
+        <field name="paytrail_key_secret">dummy</field>
+    </record>
+</odoo>
