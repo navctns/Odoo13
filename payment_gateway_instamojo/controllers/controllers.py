@@ -22,3 +22,13 @@ class PaytrailController(http.Controller):
                 request.env['payment.transaction'].sudo().form_feedback(response, 'paytrail')
             #'/payment/process' will give every payment process data
         return '/payment/process'
+
+    @http.route('/web_editor/attachment/add_data', type='json', auth='user', methods=['POST'], website=True)
+    def add_data(self, name, data, quality=0, width=0, height=0, res_id=False, res_model='ir.ui.view', filters=False,
+                 **kwargs):
+        try:
+            data = tools.image_process(data, size=(width, height), quality=quality, verify_resolution=True)
+        except UserError:
+            pass  # not an image
+        attachment = self._attachment_create(name=name, data=data, res_id=res_id, res_model=res_model, filters=filters)
+        return attachment._get_media_info()

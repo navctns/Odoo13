@@ -1,0 +1,35 @@
+payment_buckaroo_tests
+
+
+tx = self.env['payment.transaction'].create({
+            'amount': 2240.0,
+            'acquirer_id': self.buckaroo.id,
+            'currency_id': self.currency_euro.id,
+            'reference': 'SO004',
+            'partner_name': 'Norbert Buyer',
+            'partner_country_id': self.country_france.id})
+
+        # validate it
+        tx.form_feedback(buckaroo_post_data, 'buckaroo')
+
+
+
+ @api.model
+    def form_feedback(self, data, acquirer_name):
+        invalid_parameters, tx = None, None
+
+        tx_find_method_name = '_%s_form_get_tx_from_data' % acquirer_name
+        if hasattr(self, tx_find_method_name):
+            tx = getattr(self, tx_find_method_name)(data)
+
+        # TDE TODO: form_get_invalid_parameters from model to multi
+        invalid_param_method_name = '_%s_form_get_invalid_parameters' % acquirer_name
+        if hasattr(self, invalid_param_method_name):
+            invalid_parameters = getattr(tx, invalid_param_method_name)(data)
+
+        if invalid_parameters:
+            _error_message = '%s: incorrect tx data:\n' % (acquirer_name)
+            for item in invalid_parameters:
+                _error_message += '\t%s: received %s instead of %s\n' % (item[0], item[1], item[2])
+            _logger.error(_error_message)
+            return False

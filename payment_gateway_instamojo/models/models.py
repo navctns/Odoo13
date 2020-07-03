@@ -17,6 +17,29 @@ class PaymentAcquirer(models.Model):
 
     paytrail_key_secret = fields.Char(string='Merchant Key', required_if_provider='paytrail', groups='base.group_user')
 
+    def stripe_form_generate_values(self, tx_values):
+        self.ensure_one()
+
+        base_url = self.get_base_url()
+        stripe_session_data = {
+            # 'payment_method_types[]': 'card',
+            # 'line_items[][amount]': int(
+            #     tx_values['amount'] if tx_values['currency'].name in INT_CURRENCIES else float_round(
+            #         tx_values['amount'] * 100, 2)),
+            # 'line_items[][currency]': tx_values['currency'].name,
+            # 'line_items[][quantity]': 1,
+            # 'line_items[][name]': tx_values['reference'],
+            # 'client_reference_id': tx_values['reference'],
+            'success_url': 'url/success',
+            'cancel_url': 'url/cancel',
+            'merchant_id': '13466',
+            'order_number':'123456',
+            'params_in':
+        }
+        tx_values['session_id'] = self._create_stripe_session(stripe_session_data)
+
+        return tx_values
+
 
 class PaymentTransaction(models.Model):
     _inherit = 'payment.transaction'
