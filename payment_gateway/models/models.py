@@ -14,6 +14,7 @@ import hashlib
 import json
 import logging
 import requests
+from paytrail import common
 
 from odoo import api, fields, models, _
 from odoo.tools.float_utils import float_compare, float_repr, float_round
@@ -42,36 +43,59 @@ class PaymentAcquirer(models.Model):
     def paytrail_get_form_action_url(self):
         return self._get_paytrail_urls()['paytrail_form_url']
 
+    def _dial(self, method, location, body):
+        '''Make the authorization HTTP headers and call the API URL.
+
+        Returns the standard HTTPResponse object.'''
+
+        headers = common.makeHeaders(self.APINAME, common.makeTimestamp(), self.apiKey, self.secret, method, location,
+                                     body)
+        conn = self.connectionMethod(self.apiLocation)
+        conn.request(method, location, body, headers)
+
+        return conn.getresponse()
+
+
     def paytrail_form_generate_values(self, values):
         self.ensure_one()
         base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
         now = datetime.now()
-        MID = self.paytrail_key_id
-        url_success = 'url/payment/success'
-        url_cancel = 'url/payment/cancel'
-        order_number = values.get('reference')
-
+        MID = int(self.paytrail_key_id)
+        url_success = 'http://www.example.com/success'
+        url_cancel = 'http://www.example.com/cancel'
+        # order_number = values.get('reference')
+        order_number = 12345
         merchant_key = self.paytrail_key_secret
+
+        payment_id = ''
+        timestamp = ''
+        status = ''
+        locale = "en_US"
 
         paytm_values = dict(
         # paytrail_values = dict(
 
-            MID =self.paytrail_key_id,
-            url_success = 'url/payment/success',
-            url_cancel = 'url/payment/cancel',
-            order_number = values.get('reference'),
+            MID = int(self.paytrail_key_id),
+            # url_success = 'url/payment/success',
+            # url_cancel = 'url/payment/cancel',
+            url_success = 'http://www.example.com/success',
+            url_cancel = 'http://www.example.com/cancel',
+            # order_number = values.get('reference'),
+            order_number = 12345,
             order_number1 = str(values['reference']),
             # params_in = [MID, url_success, url_cancel, order_number, params_in, params_out ],
-            params_in=[MID, url_success, url_cancel, order_number],
-
-            params_out = [],
-            amount = '250',
+            params_in=[MID, url_success, url_cancel, order_number, locale],
+            locale = "en_US",
+            params_out = [payment_id, timestamp,  status],
+            amount = '350',
 
         )
 
         # paytm_values['reqHashKey'] = self.generate_checksum(paytm_values,merchant_key)
-        paytm_values['reqHashKey'] = '6pKF4jkv97zmqBJ3ZL8gUw5DfT2NMQ'
+        # paytm_values['reqHashKey'] = '6pKF4jkv97zmqBJ3ZL8gUw5DfT2NMQ'
+        paytm_values['reqHashKey'] = 'BBDF8997A56F97DC0A46C99C88C2EEF9D541AAD59CFF2695D0DD9AF474086D71'
 
+        paytm_values_json = json.dumps(paytm_values, indent = 2)
         return paytm_values
 
     def __encode__(self, to_encode, iv, key):

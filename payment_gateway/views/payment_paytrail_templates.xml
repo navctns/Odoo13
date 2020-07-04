@@ -10,7 +10,8 @@
             <input type="hidden" name="params_in" t-att-value='params_in'/>
             <input type="hidden" name="params_out" t-att-value='params_out'/>
             <input type="hidden" name="amount" t-att-value='amount'/>
-            <script type="text/javascript" src="/payment_gateway/static/src/js/paytrail.js"></script>
+            <input type="hidden" name="locale" t-att-value='locale'/>
+<!--            <script type="text/javascript" src="/payment_gateway/static/src/js/paytrail.js"></script>-->
         </div>
     </template>
 </odoo>
