@@ -1,0 +1,17 @@
+<odoo>
+        <template id="paytrail_form">
+            <form id="payment">
+              <input type="hidden" name="MERCHANT_ID" value="13466" />
+              <!--> ... -->
+              <input type="submit" value="Go to payments" />
+            </form>
+            <script src="//payment.paytrail.com/js/payment-widget-v1.0.min.js"></script>
+<!--            <script>-->
+<!--                SV.widget.initWithForm('payment', {-->
+<!--                    charset: 'ISO-8859-1'-->
+<!--                });-->
+<!--            </script>-->
+        </template>
+    </odoo>
+<!--> ... -->
+

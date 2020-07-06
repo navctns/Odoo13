@@ -1,3 +1,13 @@
+I cant't pass form to Paytrail Payment gateway ?
+
+I am integrating Paytrail Payment gateway, i have inherited the acquirer model to access to the gateway. And created a template for passing fields to gateway. But still no response. I can't find the problem. I can't find find how the value is passed..
+
+
+Code:
+
+
+models/models.py
+
 
 import base64
 import string
@@ -38,7 +48,6 @@ class PaymentAcquirer(models.Model):
         """ Atom URLS """
         return {
             'paytrail_form_url': 'https://payment.paytrail.com/e2'
-            # 'paytrail_form_url':'https://payment.paytrail.com/api-payment/create'
         }
 
     def paytrail_get_form_action_url(self):
@@ -62,12 +71,8 @@ class PaymentAcquirer(models.Model):
         base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
         now = datetime.now()
         MID = int(self.paytrail_key_id)
-        # url_success = 'http://www.example.com/success'
-        url_success = 'http://naveen-vostro-2520:8069/success',
-        url_cancel = 'http://naveen-vostro-2520:8069/cancel'
-        # url_cancel = 'http://www.example.com/cancel'
-        params_in = 'MERCHANT_ID,URL_SUCCESS,URL_CANCEL,ORDER_NUMBER,PARAMS_IN,LOCALE'
-
+        url_success = 'http://www.example.com/success'
+        url_cancel = 'http://www.example.com/cancel'
         # order_number = values.get('reference')
         order_number = 12345
         merchant_key = self.paytrail_key_secret
@@ -176,45 +181,45 @@ class PaymentTransaction(models.Model):
         #         raise e
         return payment_response
 
-    paytrail_txn_type = fields.Char('Transaction type')
 
-    @api.model
-    def _paytrail_form_get_tx_from_data(self, data):
-        reference = data.get('ORDERID')
-        if not reference:
-            error_msg = _('Paytm: received data with missing reference (%s)') % (reference)
-            _logger.info(error_msg)
-            raise ValidationError(error_msg)
+views/payment_paytrail_template.xml
 
-        txs = self.env['payment.transaction'].search([('reference', '=', reference)])
-        if not txs or len(txs) > 1:
-            error_msg = 'Paytm: received data for reference %s' % (reference)
-            if not txs:
-                error_msg += '; no order found'
-            else:
-                error_msg += '; multiple order found'
-            _logger.info(error_msg)
-            raise ValidationError(error_msg)
-        return txs[0]
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="paytrail_form">
+        <div>
+<input type="hidden" name="data_set" t-att-data-action-url="tx_url" data-remove-me=""/>
+            <input type="hidden" name="MID" t-att-value='MID'/>
+<input type="hidden" name="URL_SUCCESS" t-att-value='url_success'/><input type="hidden" name="URL_CANCEL" t-att-value='url_cancel'/>
+<input type="hidden" name="order_number" t-att-value='order_number'/>
+<input type="hidden" name="params_in" t-att-value='params_in'/> 
+<input type="hidden" name="params_out" t-att-value='params_out'/>
+            <input type="hidden" name="amount" t-att-value='amount'/>
+            <input type="hidden" name="locale" t-att-value='locale'/>
+            <script type="text/javascript" src="/payment_gateway/static/src/js/paytrail.js"></script>
+        </div>
+    </template>
+</odoo>
 
-    def _paytrail_form_get_invalid_parameters(self, data):
-        invalid_parameters = []
-        if self.acquirer_reference and data.get('mmp_txn') != self.acquirer_reference:
-            invalid_parameters.append(('ORDERID', data.get('ORDERID'), self.acquirer_reference))
+controllers/controllers.py
 
-        return invalid_parameters
+import logging
+import pprint
+import werkzeug
+from werkzeug.utils import redirect
+from odoo import http
+from odoo.http import request
+_logger = logging.getLogger(__name__)
 
-    def _paytrail_form_validate(self, data):
-        status = data.get('STATUS')
-        result = self.write({
-            'acquirer_reference': self.env['payment.acquirer'].search([]),
-            'date': fields.Datetime.now(),
 
-        })
-        if status == 'TXN_SUCCESS':
-            self._set_transaction_done()
-        elif status != 'TXN_FAILED':
-            self._set_transaction_cancel()
-        else:
-            self._set_transaction_pending()
-        return result
+class AtomController(http.Controller):
+    @http.route(['/payment/paytrail/return/', '/payment/paytrail/cancel/', '/payment/paytrail/error/'],
+                type='http', auth='public', csrf=False)
+    def paytm_return(self, **post):
+        """ Paytm."""
+
+        _logger.info(
+            'Paytrail: entering form_feedback with post data %s', pprint.pformat(post))
+        if post:
+            request.env['payment.transaction'].sudo().form_feedback(post, 'paytrail')
+        return werkzeug.utils.redirect('/payment/process')
