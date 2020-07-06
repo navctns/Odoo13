@@ -2,19 +2,24 @@
 <odoo>
     <template id="paytrail_form">
         <div>
-            <form action="https://payment.paytrail.com/e2" method="post">
+<!--            <form action="https://payment.paytrail.com/e2" method="post">-->
                 <input type="hidden" name="data_set" t-att-data-action-url="tx_url" data-remove-me=""/>
                 <input type="hidden" name="MERCHANT_ID" t-att-value='MID'/>
                 <input type="hidden" name="URL_SUCCESS" t-att-value='url_success'/>
                 <input type="hidden" name="URL_CANCEL" t-att-value='url_cancel'/>
                 <input type="hidden" name="ORDER_NUMBER" t-att-value='order_number'/>
-                <input type="hidden" name="PARAMS_IN" t-att-value='params_in'/>
-                <input type="hidden" name="params_out" t-att-value='params_out'/>
-                <input type="hidden" name="amount" t-att-value='amount'/>
+<!--                <input type="hidden" name="PARAMS_IN" t-att-value='params_in'/>-->
+                <input name="PARAMS_IN" type="hidden" value="MERCHANT_ID,URL_SUCCESS,URL_CANCEL,ORDER_NUMBER,PARAMS_IN,PARAMS_OUT,AMOUNT,AUTHCODE,ITEM_TITLE[0],ITEM_UNIT_PRICE[0],ITEM_VAT_PERCENT[0]"/>
+                <input type="hidden" name="AMOUNT" t-att-value='amount'/>
                 <input type="hidden" name="LOCALE" t-att-value='locale'/>
+                <input type="hidden" name="AUTHCODE" t-att-value='reqHashKey'/>
+                <input name="ITEM_TITLE[0]" type="hidden" value="Product 202"/>
+                <input name="ITEM_UNIT_PRICE[0]" type="hidden" value="12.50"/>
+                <input name="ITEM_VAT_PERCENT[0]" type="hidden" value="0"/>
                 <input name="PAYMENT_METHODS" type="hidden" value="1"/>
-                <script type="text/javascript" src="/payment_gateway/static/src/js/paytrail.js"></script>
-            </form>
+
+<!--                <script type="text/javascript" src="/payment_gateway/static/src/js/paytrail.js"></script>-->
+<!--            </form>-->
         </div>
     </template>
 

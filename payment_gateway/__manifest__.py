@@ -29,7 +29,8 @@
         'views/templates.xml',
         'views/payment_paytrail_templates.xml',
         # 'views/paytrail_rest.xml',
-        'data/payment_acquirer_data.xml',
+        # 'views/rest_payment_connect.xml',
+        # 'data/payment_acquirer_data.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

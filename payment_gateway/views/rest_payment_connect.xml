@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="paytrail_form">
+  <div>
+    <orderNumber>12345678</orderNumber>
+    <currency>EUR</currency>
+    <locale>fi_FI</locale>
+    <urlSet>
+      <success>https://www.esimerkkikauppa.fi/sv/success</success>
+      <failure>https://www.esimerkkikauppa.fi/sv/failure</failure>
+      <pending></pending>
+      <notification>https://www.esimerkkikauppa.fi/sv/notify</notification>
+    </urlSet>
+    <orderDetails>
+      <includeVat>1</includeVat>
+      <contact>
+        <telephone>041234567</telephone>
+        <mobile>041234567</mobile>
+        <email>tester@esimerkkikauppa.fi</email>
+        <firstName>Simon</firstName>
+        <lastName>Seller</lastName>
+        <companyName></companyName>
+        <address>
+          <street>Test street 1</street>
+          <postalCode>12340</postalCode>
+          <postalOffice>Helsinki</postalOffice>
+          <country>FI</country>
+        </address>
+      </contact>
+      <products>
+        <product>
+          <title>Example product</title>
+          <code>XX-123</code>
+          <amount>1.00</amount>
+          <price>99.00</price>
+          <vat>23.00</vat>
+          <discount>0.00</discount>
+          <type>1</type>
+        </product>
+        <product>
+          <title>Example product 2</title>
+          <code>XX-456</code>
+          <amount>2.50</amount>
+          <price>19.90</price>
+          <vat>23.00</vat>
+          <discount>0.00</discount>
+          <type>1</type>
+        </product>
+      </products>
+    </orderDetails>
+  </div>
+   </template>
+</odoo>

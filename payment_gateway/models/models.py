@@ -39,6 +39,7 @@ class PaymentAcquirer(models.Model):
         return {
             'paytrail_form_url': 'https://payment.paytrail.com/e2'
             # 'paytrail_form_url':'https://payment.paytrail.com/api-payment/create'
+            # 'paytrail_form_url':  'https: // payment.paytrail.com / api - payment / create'
         }
 
     def paytrail_get_form_action_url(self):
@@ -56,7 +57,7 @@ class PaymentAcquirer(models.Model):
 
         return conn.getresponse()
 
-
+    @api.model
     def paytrail_form_generate_values(self, values):
         self.ensure_one()
         base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
@@ -68,6 +69,13 @@ class PaymentAcquirer(models.Model):
         # url_cancel = 'http://www.example.com/cancel'
         params_in = 'MERCHANT_ID,URL_SUCCESS,URL_CANCEL,ORDER_NUMBER,PARAMS_IN,LOCALE'
 
+        # < input
+        # name = "PARAMS_IN"
+        # type = "hidden"
+        # value = "MERCHANT_ID,URL_SUCCESS,URL_CANCEL,ORDER_NUMBER,PARAMS_IN,PARAMS_OUT,ITEM_TITLE[0],ITEM_ID[0],ITEM_QUANTITY[0],ITEM_UNIT_PRICE[0],ITEM_VAT_PERCENT[0],ITEM_DISCOUNT_PERCENT[0],ITEM_TYPE[0],ITEM_TITLE[1],ITEM_ID[1],ITEM_QUANTITY[1],ITEM_UNIT_PRICE[1],ITEM_VAT_PERCENT[1],ITEM_DISCOUNT_PERCENT[1],ITEM_TYPE[1],MSG_UI_MERCHANT_PANEL,URL_NOTIFY,LOCALE,CURRENCY,REFERENCE_NUMBER,PAYMENT_METHODS,PAYER_PERSON_PHONE,PAYER_PERSON_EMAIL,PAYER_PERSON_FIRSTNAME,PAYER_PERSON_LASTNAME,PAYER_COMPANY_NAME,PAYER_PERSON_ADDR_STREET,PAYER_PERSON_ADDR_POSTAL_CODE,PAYER_PERSON_ADDR_TOWN,PAYER_PERSON_ADDR_COUNTRY,VAT_IS_INCLUDED,ALG" >
+
+        # params_in =
+
         # order_number = values.get('reference')
         order_number = 12345
         merchant_key = self.paytrail_key_secret
@@ -76,11 +84,18 @@ class PaymentAcquirer(models.Model):
         timestamp = ''
         status = ''
         locale = "en_US"
+        params_out = [payment_id, timestamp, status]
+        amount = '350'
+        hash_key = 'BBDF8997A56F97DC0A46C99C88C2EEF9D541AAD59CFF2695D0DD9AF474086D71'
+        item_title = 'Product 101'
+        item_unit_price = "300"
+        item_vat_prec = '0'
 
-        paytm_values = dict(
+        paytrail_values = dict( values,
         # paytrail_values = dict(
 
-            MID = int(self.paytrail_key_id),
+            # MID = int(self.paytrail_key_id),
+            MID = 12345,
             # url_success = 'url/payment/success',
             # url_cancel = 'url/payment/cancel',
             url_success = 'http://www.example.com/success',
@@ -88,23 +103,38 @@ class PaymentAcquirer(models.Model):
             # order_number = values.get('reference'),
             order_number = 12345,
             order_number1 = str(values['reference']),
+
             # params_in = [MID, url_success, url_cancel, order_number, params_in, params_out ],
-            params_in=[MID, url_success, url_cancel, order_number, locale],
+
+                       # < input
+        # name = "PARAMS_IN"
+        # type = "hidden"
+        # value = "MERCHANT_ID,URL_SUCCESS,URL_CANCEL,ORDER_NUMBER,PARAMS_IN,PARAMS_OUT,ITEM_TITLE[0],ITEM_ID[0],ITEM_QUANTITY[0],ITEM_UNIT_PRICE[0],ITEM_VAT_PERCENT[0],ITEM_DISCOUNT_PERCENT[0],ITEM_TYPE[0],ITEM_TITLE[1],ITEM_ID[1],ITEM_QUANTITY[1],ITEM_UNIT_PRICE[1],ITEM_VAT_PERCENT[1],ITEM_DISCOUNT_PERCENT[1],ITEM_TYPE[1],MSG_UI_MERCHANT_PANEL,URL_NOTIFY,LOCALE,CURRENCY,REFERENCE_NUMBER,PAYMENT_METHODS,PAYER_PERSON_PHONE,PAYER_PERSON_EMAIL,PAYER_PERSON_FIRSTNAME,PAYER_PERSON_LASTNAME,PAYER_COMPANY_NAME,PAYER_PERSON_ADDR_STREET,PAYER_PERSON_ADDR_POSTAL_CODE,PAYER_PERSON_ADDR_TOWN,PAYER_PERSON_ADDR_COUNTRY,VAT_IS_INCLUDED,ALG" >
+            params_out = [payment_id, timestamp, status],
+            amount='350',
+            hash_key = 'BBDF8997A56F97DC0A46C99C88C2EEF9D541AAD59CFF2695D0DD9AF474086D71',
+            item_title = 'Product 101',
+            item_unit_price = "300",
+            item_vat_prec = '0',
+            params_in=[MID, url_success, url_cancel, order_number, params_in, params_out, amount, hash_key, item_title, item_unit_price, item_vat_prec],
+            # params_in= params_in,
             locale = "en_US",
-            params_out = [payment_id, timestamp,  status],
-            amount = '350',
+
+            currency = 'EUR',
+            return_address = 'http://www.example.com/cancel/return',
+
 
         )
 
         # paytm_values['reqHashKey'] = self.generate_checksum(paytm_values,merchant_key)
         # paytm_values['reqHashKey'] = '6pKF4jkv97zmqBJ3ZL8gUw5DfT2NMQ'
-        paytm_values['reqHashKey'] = 'BBDF8997A56F97DC0A46C99C88C2EEF9D541AAD59CFF2695D0DD9AF474086D71'
+        paytrail_values['reqHashKey'] = 'BBDF8997A56F97DC0A46C99C88C2EEF9D541AAD59CFF2695D0DD9AF474086D71'
 
-        r = requests.post(url=self.paytrail_get_form_action_url(), data=paytm_values)
+        r = requests.post(url=self.paytrail_get_form_action_url(), data=paytrail_values)
         print("rrrrrrrrrr :", r)
 
-        paytm_values_json = json.dumps(paytm_values, indent = 2)
-        return paytm_values
+        # paytm_values_json = json.dumps(paytm_values, indent = 2)
+        return paytrail_values
 
     # r = requests.post(url=paytrail_get_form_action_url(self), data=paytm_values)
     # print("rrrrrrrrrr :", r)
